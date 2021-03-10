@@ -1,0 +1,17 @@
+.profile__edit_btn {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  bottom: 34px;
+  background-color: var(--color__background);
+  background-image: url(../../../images/_edit_btn.svg);
+  box-sizing: border-box;
+  border: none;
+  padding: 12px 12px;
+  cursor: pointer;
+  transition: opacity 0.3s ease-in-out 0.3s;
+}
+
+.profile__edit_btn:hover {
+  opacity: 0.6;
+}

@@ -1,0 +1,16 @@
+.profile__submit_btn {
+  display: block;
+  padding: 0;
+  background-color: var(--color__background);
+  width: 150px;
+  height: 50px;
+  border: 2px solid #ffffff;
+  box-sizing: border-box;
+  border-radius: 2px;
+  margin-right: 0;
+  transition: opacity 0.3s ease-in-out 0.3s;
+}
+
+.profile__submit_btn:hover {
+  opacity: 0.6;
+}
