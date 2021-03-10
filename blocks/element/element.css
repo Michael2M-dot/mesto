@@ -1,0 +1,9 @@
+.element {
+  max-width: 100%;
+  background: #ffffff;
+  border-radius: 10px;
+  position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
