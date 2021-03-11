@@ -1,0 +1,6 @@
+.footer__copyright {
+  font-size: 18px;
+  line-height: 22px;
+  color: var(--color__main-text_footer);
+  margin: 0;
+}
