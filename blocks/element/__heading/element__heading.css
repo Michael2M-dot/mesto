@@ -1,4 +1,5 @@
 .element__heading {
+  width: 246px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
