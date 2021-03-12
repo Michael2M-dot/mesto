@@ -1,0 +1,23 @@
+.form__input-container {
+  position: relative;
+  min-height: 36px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom-width: 1px;
+  padding: 0;
+  z-index: 1;
+}
+
+.form__input-container::before {
+  content: "";
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  border-bottom: 1px solid #000000;
+  opacity: 0.2;
+}

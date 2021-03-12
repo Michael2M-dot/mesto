@@ -1,0 +1,9 @@
+.form__input-group_margin_bottom {
+  margin-bottom: 48px;
+}
+
+@media screen and (max-width: 767px) {
+  .form__input-group_margin_bottom {
+    margin-bottom: 45px;
+  }
+} */
