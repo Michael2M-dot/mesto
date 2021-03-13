@@ -1,5 +1,6 @@
 .form__container {
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: start;
   align-items: center;

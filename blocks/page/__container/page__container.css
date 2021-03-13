@@ -1,7 +1,4 @@
 .page__container {
-  margin: 0 auto;
-  padding-top: 45px;
-  padding-bottom: 60px;
   min-width: 320px;
   max-width: 880px;
 }

@@ -6,6 +6,12 @@
   font-size: 18px;
   color: #ffffff;
   padding: 15px 132px;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in 0.1s;
+}
+
+.form__submit_btn:hover {
+  opacity: 0.5;
 }
 
 @media screen and (max-width: 767px) {

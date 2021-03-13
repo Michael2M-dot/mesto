@@ -14,3 +14,9 @@
 .profile__submit_btn:hover {
   opacity: 0.6;
 }
+
+@media screen and (max-width: 767px) {
+  .profile__submit_btn {
+    width: 282px;
+  }
+}

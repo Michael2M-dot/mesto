@@ -1,0 +1,9 @@
+.header__logo_pos_margin-left {
+  margin-left: 0;
+}
+
+@media screen and (max-width: 1023px) {
+  .header__logo_pos_margin-left {
+    margin-left: 27px;
+  }
+}

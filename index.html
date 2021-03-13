@@ -11,27 +11,44 @@
   </head>
 
   <body class="page">
-    <div class="page__container">
-      <header class="header header__cover">
+    <div class="page__container page__container_pos_padding_top-bottom">
+      <header
+        class="header header__container header__container_pos_margin_bottom"
+      >
         <img
           src="./images/_mesto_logo.svg"
           alt="Логотип MESTO"
-          class="header__logo"
+          class="header__logo header__logo_pos_margin-left"
         />
       </header>
 
-      <main class="content">
-        <section class="profile">
+      <main
+        class="content content__container content__container_pos_margin-bottom"
+      >
+        <section
+          class="profile profile__container profile__container_pos_margin-bottom profile__container_pos_margin_left-right"
+        >
           <div class="profile__user-wrapper">
             <div class="profile__avatar"></div>
-            <div class="profile__info">
+            <div
+              class="profile__info profile__info-container profile__info-container_pos_margin_top-bottom profile__info-container_pos_margin_left-right"
+            >
               <h2 class="profile__user-name">Жак-Ив Кусто</h2>
               <p class="profile__user-position">Исследователь океана</p>
-              <button class="profile__edit_btn"></button>
+              <button
+                type="button"
+                class="profile__edit_btn profile__edit_btn_place"
+              >
+                <img
+                  src="./images/Edit Button.svg"
+                  alt=""
+                  class="profile__edit_btn_picture"
+                />
+              </button>
             </div>
           </div>
 
-          <button class="profile__submit_btn">
+          <button type="button" class="profile__submit_btn">
             <img
               src="./images/submit_btn_pic.svg"
               alt=""
@@ -48,7 +65,7 @@
             </div>
           </div>
           <div class="element">
-            <img src="./images/__item_7.jpg" alt="" class="element__image" />
+            <img src="./images/elm_3.png" alt="" class="element__image" />
             <div class="element__heading">
               <h3 class="element__title">Гора Эльбрус</h3>
               <button class="element__like"></button>
@@ -57,7 +74,7 @@
           <div class="element">
             <img src="./images/__item_5.jpg" alt="" class="element__image" />
             <div class="element__heading">
-              <h3 class="element__title">Байкал></h3>
+              <h3 class="element__title">Байкал</h3>
               <button class="element__like"></button>
             </div>
           </div>
@@ -84,15 +101,16 @@
           </div>
         </section>
       </main>
-      <footer class="footer">
+      <footer class="footer footer_pos_margin_left-right">
         <div class="footer__copyright">© 2020 Mesto Russia</div>
       </footer>
     </div>
 
-    <!-- <div class="form">
+    <div class="form">
       <form action="" class="form__container">
         <h1 class="form__title">Редактировать профиль</h1>
         <div class="form__input-group form__input-group_margin_bottom">
+          <img src="./images/_close_icon.svg" alt="" class="form__close_btn form__close_btn_place">
           <input
             type="text"
             id="user-name"
@@ -107,8 +125,9 @@
           />
         </div>
 
-        <button class="form__submit_btn">Сохранить</button>
+        <button type="submit" class="form__submit_btn">Сохранить</button>
+        </button>
       </form>
-    </div> -->
+    </div>
   </body>
 </html>

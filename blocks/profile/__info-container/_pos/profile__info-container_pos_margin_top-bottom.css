@@ -1,0 +1,11 @@
+.profile__info-container_pos_margin_top-bottom {
+  margin-top: 22px;
+  margin-bottom: 25px;
+}
+
+@media screen and (max-width: 767px) {
+  .profile__info-container_pos_margin_top-bottom {
+    margin-top: 26px;
+    margin-bottom: 36px;
+  }
+}

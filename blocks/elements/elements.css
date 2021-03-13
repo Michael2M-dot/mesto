@@ -1,7 +1,20 @@
 .elements {
-  /* width: 100%; */
-  width: 880px;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 282px);
   gap: 20px 17px;
+}
+
+@media screen and (max-width: 1024px) {
+  .elements {
+    width: calc(100% - 2 * 19px);
+    grid-template-columns: repeat(2, minmax(282px, 1fr));
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .elements {
+    /* width: calc(100% - 2 * 19px); */
+    grid-template-columns: repeat(1, minmax(282px, 1fr));
+  }
 }

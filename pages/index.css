@@ -3,18 +3,33 @@
 @import url(../blocks/vars/vars.css);
 @import url(../blocks/page/page.css);
 @import url(../blocks/page/__container/page__container.css);
+@import url(../blocks/page/__container/_pos/page__container_pos_padding_top-bottom.css);
 @import url(../blocks/header/header.css);
+@import url(../blocks/header/__container/header__container.css);
+@import url(../blocks/header/__container/_pos/header__container_pos_margin_bottom.css);
 @import url(../blocks/header/__logo/header__logo.css);
-@import url(../blocks/header/__cover/header__cover.css);
+@import url(../blocks/header/__logo/_pos/header__logo_pos_margin-left.css);
 
 @import url(../blocks/content/content.css);
+@import url(../blocks/content/__container/content__container.css);
+@import url(../blocks/content/__container/_pos/content__container_pos_margin-bottom.css);
+@import url(../blocks/content/__container/_pos/content__container_pos_margin_left-right.css);
+
 @import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__container/profile__container.css);
+@import url(../blocks/profile/__container/_pos/profile__container_pos_margin-bottom.css);
+@import url(../blocks/profile/__container/_pos/profile__container_pos_margin_left-right.css);
 @import url(../blocks/profile/__user-wrapper/profile__user-wraper.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
 @import url(../blocks/profile/__info/__info.css);
+@import url(../blocks/profile/__info-container/profile__info-container.css);
+@import url(../blocks/profile/__info-container/_pos/profile__info-container_pos_margin_top-bottom.css);
+@import url(../blocks/profile/__info-container/_pos/profile__info-container_pos_margin_left-right.css);
 @import url(../blocks/profile/__user-name/profile__user-name.css);
 @import url(../blocks/profile/__user-position/profile__user-position.css);
 @import url(../blocks/profile/__edit_btn/profile__edit_btn.css);
+@import url(../blocks/profile/__edit_btn/_place/profile__edit_btn_place.css);
+@import url(../blocks/profile/__edit_btn_picture/profile__edit_btn_picture.css);
 @import url(../blocks/profile/__submit_btn/profile__submit_btn.css);
 @import url(../blocks/profile/__submit_btn_picture/profile__submit_btn_picture.css);
 
@@ -26,6 +41,7 @@
 @import url(../blocks/element/__like/element__like.css);
 
 @import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/_pos/footer_pos_margin_left-right.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 
 @import url(../blocks/form/form.css);
@@ -36,3 +52,5 @@
 @import url(../blocks/form/__input-text/form__input-text.css);
 @import url(../blocks/form/__submit_btn/form__submit_btn.css);
 @import url(../blocks/form/__input-container/form__input-container.css);
+@import url(../blocks/form/__close_btn/form__close_btn.css);
+@import url(../blocks/form/__close_btn/_place/form__close_btn_place.css);

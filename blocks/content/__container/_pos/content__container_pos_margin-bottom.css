@@ -1,0 +1,9 @@
+.content__container_pos_margin-bottom {
+  margin-bottom: 67px;
+}
+
+@media screen and (max-width: 767px) {
+  .content__container_pos_margin-bottom {
+    margin-bottom: 48px;
+  }
+}
