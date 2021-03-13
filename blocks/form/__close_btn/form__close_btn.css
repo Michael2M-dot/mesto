@@ -1,5 +1,10 @@
 .form__close_btn {
   width: 50px;
+  transition: opacity 0.2s ease-in 0.1s;
+}
+
+.form__close_btn:hover {
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 767px) {
