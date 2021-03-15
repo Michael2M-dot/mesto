@@ -1,10 +1,10 @@
 .profile__info {
-  min-width: 336px;
+  width: 336px;
   color: var(--color__main-text_profile);
 }
 
 @media screen and (max-width: 767px) {
   .profile__info {
-    min-width: 282px;
+    width: 282px;
   }
 }
