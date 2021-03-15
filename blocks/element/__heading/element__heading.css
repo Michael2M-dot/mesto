@@ -1,5 +1,5 @@
 .element__heading {
-  width: 246px;
+  width: calc(100% - 2 * 21px);
   display: flex;
   flex-direction: row;
   justify-content: space-between;

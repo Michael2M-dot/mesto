@@ -54,3 +54,5 @@
 @import url(../blocks/form/__input-container/form__input-container.css);
 @import url(../blocks/form/__close_btn/form__close_btn.css);
 @import url(../blocks/form/__close_btn/_place/form__close_btn_place.css);
+
+@import url(../blocks/popup/popup.css);
