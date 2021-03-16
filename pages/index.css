@@ -20,7 +20,7 @@
 @import url(../blocks/profile/__container/_pos/profile__container_pos_margin-bottom.css);
 @import url(../blocks/profile/__container/_pos/profile__container_pos_margin_left-right.css);
 @import url(../blocks/profile/__user-card/profile__user-card.css);
-@import url(../blocks/profile/__user-avatar/profile__avatar.css);
+@import url(../blocks/profile/__user-avatar/profile__user-avatar.css);
 @import url(../blocks/profile/__user/__user.css);
 @import url(../blocks/profile/__user-container/profile__user-container.css);
 @import url(../blocks/profile/__user-container/_pos/profile__user-container_pos_margin_top-bottom.css);
