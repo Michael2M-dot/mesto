@@ -4,3 +4,10 @@
   color: var(--color__main-text_footer);
   margin: 0;
 }
+
+@media screen and (max-width: 767px) {
+  .footer__copyright {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

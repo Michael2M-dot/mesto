@@ -19,14 +19,15 @@
 @import url(../blocks/profile/__container/profile__container.css);
 @import url(../blocks/profile/__container/_pos/profile__container_pos_margin-bottom.css);
 @import url(../blocks/profile/__container/_pos/profile__container_pos_margin_left-right.css);
-@import url(../blocks/profile/__user-wrapper/profile__user-wraper.css);
+@import url(../blocks/profile/__user-wrapper/profile__user-wrapper.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
 @import url(../blocks/profile/__info/__info.css);
 @import url(../blocks/profile/__info-container/profile__info-container.css);
 @import url(../blocks/profile/__info-container/_pos/profile__info-container_pos_margin_top-bottom.css);
 @import url(../blocks/profile/__info-container/_pos/profile__info-container_pos_margin_left-right.css);
+@import url(../blocks/profile/__text/profile__text_narrow.css);
 @import url(../blocks/profile/__user-name/profile__user-name.css);
-@import url(../blocks/profile/__user-position/profile__user-position.css);
+@import url(../blocks/profile/__user-job/profile__user-job.css);
 @import url(../blocks/profile/__edit_btn/profile__edit_btn.css);
 @import url(../blocks/profile/__edit_btn/_place/profile__edit_btn_place.css);
 @import url(../blocks/profile/__edit_btn_picture/profile__edit_btn_picture.css);

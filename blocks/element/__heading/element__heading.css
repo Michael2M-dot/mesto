@@ -1,8 +1,8 @@
 .element__heading {
-  width: calc(100% - 2 * 21px);
+  width: calc(100% - 2 * 20px);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 0 20px 31px;
+  margin: 0 20px 25px; /*по макету нижинй отступ 31рх подогнал под размер Пикселя*/
 }

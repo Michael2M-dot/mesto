@@ -1,0 +1,6 @@
+.profile__text_narrow {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin: 0;
+}
