@@ -1,4 +1,4 @@
-.profile__info-container {
+.profile__user-container {
   display: flex;
   position: relative;
   flex-direction: column;
@@ -8,7 +8,7 @@
 }
 
 @media screen and (max-width: 767px) {
-  .profile__info-container {
+  .profile__user-container {
     justify-content: center;
     align-items: center;
   }
