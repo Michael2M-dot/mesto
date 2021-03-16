@@ -2,6 +2,6 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  gap: 30px;
+  gap: 20px;
 }
 /* Элемент создан на случа расширения полей для редактирования профиля пользователя */
