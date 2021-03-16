@@ -29,8 +29,6 @@ closePopupBtn.addEventListener('click', function(){
 
 
 
-
-
 // при вводе в сроке имени, меняем имя вывода на странице
 // при вовде текста в строке должности, менем текст на странице 
 
@@ -60,3 +58,36 @@ formElement.addEventListener('submit', formSubmitHandler);
 
 
 
+
+// делаем лайк на сердечке. По клику цвет становится черным, повторный клик делает опять белым.
+// по клику , менем рисунок бэкграунда в CSS element__like либо добавляем новый класс element__like_active в котором 
+// устанавливаем новый рисунок бэкграунда (черный). Мне кажется второй вариант интересней.
+// 
+
+// document.querySelectorAll('#like-btn').forEach(function(e) {
+//   e.addEventListener('click', function() {
+//     this.style.Color = "red";
+//   })
+// }); -это эксперемент со сменой цвета всего бэкграунда (взял из интернета), когда срабатывает то окрашивает весь бэкграунд, и
+//к тому же нет обратной смены фона.
+
+
+//это мой варинат изначальный. 
+let elementsCard = document.querySelector('.elements');//получили элемент родительского блока по идентификатору класса через метод querySelector и сохранили его в переменной 
+// console.log(elementCards);//проверили вывод переменной в конслоь - все найденные элементы выводятся
+
+let likeBtns = elementsCard.querySelectorAll('#like-btn');//получаю элемент из уже существующей переменной по id класса и сохранил в переменной - к этой переменной буду добавлять новый класс, где будет менятся изображение на черный фон.
+console.log(likeBtns);//проверил вывод, все выходит в консоль.
+
+function linkButton () {// функция должна добавлять новый класс element__like_active к переменной likeBtns в которой хранятся все элементы.
+  likeBtns.classList.toggle('.element__like_active'); //берем переменную и к ее классам добавляем новый класс - и вот здесь затык!!!
+}
+console.log(linkButton());
+// function clickHandler(){
+//   likeBtns.classList.add('element__like_active');
+//   // console.log(likeBtns.classList.contains('element__likr_active'));
+// }
+
+// likeBtns.addEventListener('click', clickHandler);
+
+// console.log(elmLikeBtns);
