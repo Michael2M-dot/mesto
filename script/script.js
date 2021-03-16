@@ -76,12 +76,12 @@ formElement.addEventListener('submit', formSubmitHandler);
 // let elementsCard = document.querySelector('.elements');//получили элемент родительского блока по идентификатору класса через метод querySelector и сохранили его в переменной 
 // console.log(elementCards);//проверили вывод переменной в конслоь - все найденные элементы выводятся
 
-let likeBtns = document.querySelectorAll('#like-btn');//получаю элементы из уже существующей переменной по id класса и сохранил в переменной - к этой переменной буду добавлять новый класс, где будет менятся изображение на черный фон.
-// console.log(likeBtns);//проверил вывод, все выходит в консоль.
+// let likeBtns = document.querySelectorAll('#like-btn');//получаю элементы из уже существующей переменной по id класса и сохранил в переменной - к этой переменной буду добавлять новый класс, где будет менятся изображение на черный фон.
+// // console.log(likeBtns);//проверил вывод, все выходит в консоль.
 
-function clickButton () {
-    likeBtns.classList.toggle('element__like_active');
-}
+// function clickButton () {
+//     likeBtns.classList.toggle('element__like_active');
+// }
 
  
 // function clickButton () {
@@ -90,8 +90,8 @@ function clickButton () {
 //   }
 // }
 
-likeBtns.addEventListener('click', clickButton);
-console.log(likeBtns);
+// likeBtns.addEventListener('click', clickButton);
+// console.log(likeBtns);
 
 // function linkButton () {// функция должна добавлять новый класс element__like_active к переменной likeBtns в которой хранятся все элементы.
 //   this.classList.add("element__like_active"); //берем переменную и к ее классам добавляем новый класс - и вот здесь затык!!!
@@ -114,11 +114,11 @@ console.log(likeBtns);
 // console.log(elmLikeBtns);
 
 
-document.querySelectorAll('#like-btn').forEach(function(e) {
-  e.addEventListener('click', function() {
-    this.classList.add('.element__like_active');
-  })
-}); 
+// document.querySelectorAll('#like-btn').forEach(function(e) {
+//   e.addEventListener('click', function() {
+//     this.classList.add('.element__like_active');
+//   })
+// }); 
 
 //-это эксперемент со сменой цвета всего бэкграунда (взял из интернета), когда срабатывает то окрашивает весь бэкграунд, и к тому же нет обратной смены фона.
 
