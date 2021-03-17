@@ -1,5 +1,8 @@
 .element__like {
+  appearance: none;
   border: none;
+  display: inline-block;
+  outline: none; /*убирает подводку контура после клика*/
   background-image: url(../../../images/element_like.svg);
   background-position: center;
   background-size: cover;
@@ -8,6 +11,8 @@
   cursor: pointer;
   height: 19px;
   width: 22px;
+  -webkit-transition: opacity 0.1s ease-in-out 0.1s;
+  -o-transition: opacity 0.1s ease-in-out 0.1s;
   transition: opacity 0.1s ease-in-out 0.1s;
 }
 
@@ -20,3 +25,4 @@
   background-image: url(../../../images/element__like_active.svg);
   opacity: 1;
 }
+
