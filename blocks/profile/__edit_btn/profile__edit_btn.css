@@ -1,27 +1,25 @@
 .profile__edit_btn {
   display: inline-block;
-  appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   border: 0;
   border-radius: 0;
   background-color: var(--color__background);
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   width: 24px;
   height: 24px;
   padding: 0;
   cursor: pointer;
+  -webkit-transition: opacity 0.3s ease-in-out 0.3s;
+  -o-transition: opacity 0.3s ease-in-out 0.3s;
   transition: opacity 0.3s ease-in-out 0.3s;
 }
 
 .profile__edit_btn:hover {
   opacity: 0.6;
 }
-
-/* @media screen and (max-width: 767px) {
-  .profile__edit_btn {
-    height: 28px;
-    width: 28px;
-  }
-} */
 
 @media screen and (max-width: 767px) {
   .profile__edit_btn {

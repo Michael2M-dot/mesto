@@ -1,5 +1,7 @@
 .form__close_btn {
   width: 54px;
+  -webkit-transition: opacity 0.2s ease-in 0.1s;
+  -o-transition: opacity 0.2s ease-in 0.1s;
   transition: opacity 0.2s ease-in 0.1s;
 }
 

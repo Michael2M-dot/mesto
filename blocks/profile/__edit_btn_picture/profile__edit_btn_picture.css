@@ -2,5 +2,7 @@
   background-size: contain;
   width: 100%;
   float: left;
-  align-self: center;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
 }

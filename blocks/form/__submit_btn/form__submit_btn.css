@@ -1,12 +1,17 @@
 .form__submit_btn {
-  appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   border: 0;
+  outline: none;
   border-radius: 2px;
   background-color: #000000;
   font-size: 18px;
   color: #ffffff;
   padding: 15px 132px;
   cursor: pointer;
+  -webkit-transition: opacity 0.2s ease-in 0.1s;
+  -o-transition: opacity 0.2s ease-in 0.1s;
   transition: opacity 0.2s ease-in 0.1s;
   margin: 0;
 }

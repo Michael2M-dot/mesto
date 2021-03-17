@@ -4,7 +4,8 @@
   line-height: 29px;
   margin: 0;
   margin-bottom: 38px;
-  align-self: flex-start;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
 }
 
 @media screen and (max-width: 767px) {
@@ -12,6 +13,8 @@
     font-size: 18px;
     line-height: 22px;
     margin-bottom: 65px;
-    align-self: center;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
   }
 }
