@@ -8,7 +8,6 @@
   background-position: center;
   background-size: cover;
   background-color: transparent;
-  background-size: 100%;
   cursor: pointer;
   height: 19px;
   width: 22px;
@@ -20,9 +19,11 @@
 
 .element__like:hover {
   opacity: 0.5;
+  outline: none;
 }
 
 .element__like:active {
   background-image: url(../../../images/element__like_active.svg);
   opacity: 1;
+  outline: none;
 }
