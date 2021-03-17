@@ -5,6 +5,11 @@
   line-height: 48px;
   margin-bottom: 8px; /*по макету 16рх подгонял под Пиксель Перфект*/
   padding-right: 30px;
+  white-space: nowrap;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
+  overflow: hidden;
+  margin: 0;
 }
 
 @media screen and (max-width: 767px) {
