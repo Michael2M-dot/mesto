@@ -1,4 +1,4 @@
-.elements__container {
+.elements__list {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 282px 17px 282px 17px 282px;
@@ -9,15 +9,15 @@
 }
 
 @media screen and (max-width: 1024px) {
-  .elements_container {
-    -ms-grid-columns: (minmax(282px, 1fr))[2];
+  .elements__list {
+    -ms-grid-columns: (minmax(282px, 1fr));
     grid-template-columns: repeat(2, minmax(282px, 1fr));
   }
 }
 
 @media screen and (max-width: 767px) {
-  .elements__container {
-    -ms-grid-columns: (minmax(282px, 1fr))[1];
+  .elements__list {
+    -ms-grid-columns: (minmax(282px, 1fr));
     grid-template-columns: repeat(1, minmax(282px, 1fr));
   }
 }

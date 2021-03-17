@@ -1,9 +1,12 @@
-.header__container_margins_top-bottom {
+.page__header{
+  width: 100%;
+  min-height: 74px;
   margin-bottom: 40px;
 }
 
 @media screen and (max-width: 767px) {
-  .header__container_margins_top-bottom {
+  .page__header {
+    min-height: 56px;
     margin-bottom: 42px;
   }
 }

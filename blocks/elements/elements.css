@@ -1,9 +1,5 @@
 .elements {
   width: 100%;
+  color: var(--color__main-text_elements);
 }
 
-@media screen and (max-width: 1024px) {
-  .elements {
-    width: calc(100% - 2 * 19px);
-  }
-}

@@ -12,23 +12,17 @@
   </head>
 
   <body class="page">
-    <div class="page__container page__container_paddings_top-bottom">
-      <header
-        class="header header__container header__container_margins_top-bottom"
-      >
+    <div class="page__container">
+      <header class="header page__header section">
         <img
           src="./images/_mesto_logo.svg"
           alt="Логотип MESTO"
-          class="header__logo header__logo_margins_left"
+          class="header__logo header__logo_place"
         />
       </header>
 
-      <main
-        class="content content__container content__container_margins_top-bottom"
-      >
-        <section
-          class="profile profile__container profile__container_margins_top-bottom profile__container_margins_left-right"
-        >
+      <main class="content page__content section section_size_narrow">
+        <section class="profile profile__container">
           <div class="profile__user-card">
             <div class="profile__user-avatar"></div>
             <div
@@ -62,8 +56,8 @@
           </button>
         </section>
         <section class="elements">
-          <ul class="elements__container">
-            <li class="element element__container">
+          <ul class="elements__list">
+            <li class="element elements__list-item">
               <img
                 src="./images/__place_1.jpg"
                 alt=" Фото залива Куршская Коса"
@@ -74,7 +68,7 @@
                 <button class="element__like"></button>
               </div>
             </li>
-            <li class="element element__container">
+            <li class="element elements__list-item">
               <img
                 src="./images/elm_3.png"
                 alt="Фото горы Эльбрус"
@@ -85,7 +79,7 @@
                 <button class="element__like"></button>
               </div>
             </li>
-            <li class="element element__container">
+            <li class="element elements__list-item">
               <img
                 src="./images/__item_5.jpg"
                 alt="Озеро Байкал. Зима. Фотография прозрачного льда озера Байкал"
@@ -96,7 +90,7 @@
                 <button class="element__like"></button>
               </div>
             </li>
-            <li class="element element__container">
+            <li class="element elements__list-item">
               <img
                 src="./images/__item_10.jpg"
                 alt="Фото вулкана на полуострове Камчатка"
@@ -107,7 +101,7 @@
                 <button class="element__like"></button>
               </div>
             </li>
-            <li class="element element__container">
+            <li class="element elements__list-item">
               <img
                 src="./images/__place_5.jpg"
                 alt="Карелия. Лето. Фото реки и леса"
@@ -118,7 +112,7 @@
                 <button class="element__like"></button>
               </div>
             </li>
-            <li class="element element__container">
+            <li class="element elements__list-item">
               <img
                 src="./images/elm_6.png"
                 alt="Фото древнего монастыря"
@@ -132,7 +126,7 @@
           </ul>
         </section>
       </main>
-      <footer class="footer footer_margins_left-right">
+      <footer class="footer page__footer">
         <div class="footer__copyright">© 2020 Mesto Russia</div>
       </footer>
     </div>
