@@ -1,0 +1,11 @@
+.page__container_paddings_top-bottom {
+  padding-top: 45px;
+  padding-bottom: 60px;
+}
+
+@media screen and (max-width: 767px) {
+  .page__container_paddings_top-bottom {
+    padding-top: 28px;
+    padding-bottom: 36px;
+  }
+}

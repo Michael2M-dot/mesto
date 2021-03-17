@@ -5,9 +5,9 @@
 
 let popup = document.querySelector('.popup');
 
-let openPopupBtn = document.querySelector('.profile__edit_btn');
+let openPopupBtn = document.querySelector('.profile__edit-btn');
 
-let closePopupBtn = document.querySelector('.form__close_btn')
+let closePopupBtn = document.querySelector('.form__close-btn')
 
 function openPopup() {
   popup.classList.add('popup_visible');

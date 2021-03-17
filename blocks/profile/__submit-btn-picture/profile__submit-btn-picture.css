@@ -1,0 +1,9 @@
+.profile__submit-btn-picture {
+  width: 22px;
+}
+
+@media screen and (max-width: 767px) {
+  .profile__submit-btn-picture {
+    width: 16px;
+  }
+}

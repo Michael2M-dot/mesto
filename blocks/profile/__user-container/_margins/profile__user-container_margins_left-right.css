@@ -1,0 +1,9 @@
+.profile__user-container_margins_left-right {
+  margin-left: 30px;
+}
+
+@media screen and (max-width: 767px) {
+  .profile__user-container_margins_left-right {
+    margin-left: 0;
+  }
+}

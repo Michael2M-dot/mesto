@@ -1,0 +1,13 @@
+.profile__edit-btn_place {
+  position: absolute;
+  top: 15px;
+  right: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .profile__edit-btn_place {
+    top: 8px;
+    right: 19px;
+    bottom: 28px;
+  }
+}

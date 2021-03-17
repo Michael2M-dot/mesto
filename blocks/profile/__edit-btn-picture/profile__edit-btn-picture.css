@@ -1,0 +1,8 @@
+.profile__edit-btn-picture {
+  background-size: contain;
+  width: 100%;
+  float: left;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}

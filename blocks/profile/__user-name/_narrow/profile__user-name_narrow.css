@@ -1,0 +1,7 @@
+.profile__user-name_narrow{
+  white-space: nowrap;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
+  overflow: hidden;
+  margin: 0;
+}

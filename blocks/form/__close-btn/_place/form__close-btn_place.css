@@ -1,0 +1,12 @@
+.form__close-btn_place {
+  position: absolute;
+  top: -47px;
+  right: -47px;
+}
+
+@media screen and (max-width: 767px) {
+  .form__close-btn_place {
+    top: -50px;
+    right: 0px;
+  }
+}
