@@ -1,0 +1,10 @@
+.profile__user-info_margins_left-right {
+  margin-left: 30px;
+  margin-right: 18px;
+}
+
+@media screen and (max-width: 767px) {
+  .profile__user-info_margins_left-right {
+    margin: 0;
+  }
+}

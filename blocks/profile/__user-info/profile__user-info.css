@@ -1,6 +1,5 @@
-.profile__user {
-  width: 336px;
-  color: var(--color__main-text_profile);
+.profile__user-info {
+  max-width: 294px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -21,8 +20,8 @@
 
 
 @media screen and (max-width: 767px) {
-  .profile__user {
-    width: 282px;
+  .profile__user-info {
+    max-width: 189px;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;

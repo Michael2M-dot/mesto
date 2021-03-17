@@ -3,18 +3,16 @@
   font-weight: 500;
   font-size: 42px;
   line-height: 48px;
-  margin-bottom: 8px; /*по макету 16рх подгонял под Пиксель Перфект*/
-  padding-right: 30px;
   white-space: nowrap;
   -o-text-overflow: ellipsis;
      text-overflow: ellipsis;
   overflow: hidden;
-  margin: 0;
+  margin:0;
+  margin-bottom: 8px;
 }
 
 @media screen and (max-width: 767px) {
   .profile__user-name {
-    width:75%;
     font-size: 27px;
     line-height: 33px;
     padding: 0;

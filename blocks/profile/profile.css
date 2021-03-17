@@ -1,5 +1,6 @@
 .profile {
   max-width: 100%;
+  color: var(--color__main-text_profile);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
