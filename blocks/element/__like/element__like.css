@@ -11,10 +11,12 @@
   transition: opacity 0.1s ease-in-out 0.1s;
 }
 
-.element__like:active {
-  background-image: url(../../../images/element__like_active.svg);
-}
 
 .element__like:hover {
   opacity: 0.5;
+}
+
+.element__like:active {
+  background-image: url(../../../images/element__like_active.svg);
+  opacity: 1;
 }

@@ -9,8 +9,10 @@
 
 @media screen and (max-width: 767px) {
   .profile__user-name {
+    width:75%;
     font-size: 27px;
     line-height: 33px;
     padding: 0;
+    text-align: center;
   }
 }

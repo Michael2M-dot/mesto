@@ -1,4 +1,5 @@
 .profile__user-job {
+  width: 100%;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
@@ -8,5 +9,6 @@
   .profile__user-job {
     font-size: 14px;
     line-height: 17px;
+    text-align: center;
   }
 }
