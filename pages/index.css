@@ -22,11 +22,10 @@
 @import url(../blocks/profile/__user-name/profile__user-name.css);
 @import url(../blocks/profile/__user-name/_narrow/profile__user-name_narrow.css);
 @import url(../blocks/profile/__user-job/profile__user-job.css);
+@import url(../blocks/button/button.css);
 @import url(../blocks/profile/__edit-btn/profile__edit-btn.css);
 @import url(../blocks/profile/__edit-btn/_place/profile__edit-btn_place.css);
-@import url(../blocks/profile/__edit-btn-picture/profile__edit-btn-picture.css);
 @import url(../blocks/profile/__submit-btn/profile__submit-btn.css);
-@import url(../blocks/profile/__submit-btn-picture/profile__submit-btn-picture.css);
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/elements/__list/elements__list.css);
 @import url(../blocks/elements/__list-item/elements__list-item.css);

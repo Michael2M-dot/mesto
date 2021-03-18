@@ -7,8 +7,7 @@
     <meta name="keywords" content="" />
     <meta name="author" content="Michael2M" />
     <link rel="stylesheet" href="./pages/index.css" />
-    <script src="./script/script.js" defer></script>
-    <title>MESTO-Russia</title>
+    <title>МЕСТО-Россия</title>
   </head>
 
   <body class="page">
@@ -35,23 +34,10 @@
             </div>
             <button
               type="button"
-              class="profile__edit-btn profile__edit-btn_place"
-            >
-              <img
-                src="./images/_edit_button.svg"
-                alt="Иконка с карандашом"
-                class="profile__edit-btn-picture"
-              />
-            </button>
+              class="button profile__edit-btn profile__edit-btn_place"
+            ></button>
           </div>
-
-          <button type="button" class="profile__submit-btn">
-            <img
-              src="./images/submit_btn_pic.svg"
-              alt="Иконка прямоугольной кнопки с крестиком внутри"
-              class="profile__submit-btn-picture"
-            />
-          </button>
+          <button type="button" class="button profile__submit-btn"></button>
         </section>
         <section class="elements">
           <ul class="elements__list">
@@ -63,7 +49,7 @@
               />
               <div class="element__heading">
                 <h2 class="element__title">Куршская коса</h2>
-                <button class="element__like"></button>
+                <button type="button" class="element__like"></button>
               </div>
             </li>
             <li class="element elements__list-item">
@@ -74,7 +60,7 @@
               />
               <div class="element__heading">
                 <h2 class="element__title">Гора Эльбрус</h2>
-                <button class="element__like"></button>
+                <button type="button" class="element__like"></button>
               </div>
             </li>
             <li class="element elements__list-item">
@@ -85,7 +71,7 @@
               />
               <div class="element__heading">
                 <h2 class="element__title">Байкал</h2>
-                <button class="element__like"></button>
+                <button type="button" class="element__like"></button>
               </div>
             </li>
             <li class="element elements__list-item">
@@ -96,7 +82,7 @@
               />
               <div class="element__heading">
                 <h2 class="element__title">Камчатка</h2>
-                <button class="element__like"></button>
+                <button type="button" class="element__like"></button>
               </div>
             </li>
             <li class="element elements__list-item">
@@ -107,7 +93,7 @@
               />
               <div class="element__heading">
                 <h2 class="element__title">Карелия</h2>
-                <button class="element__like"></button>
+                <button type="button" class="element__like"></button>
               </div>
             </li>
             <li class="element elements__list-item">
@@ -118,14 +104,14 @@
               />
               <div class="element__heading">
                 <h2 class="element__title">Карачаево-Черкесск</h2>
-                <button id="like-btn" class="element__like"></button>
+                <button type="button" class="element__like"></button>
               </div>
             </li>
           </ul>
         </section>
       </main>
       <footer class="footer page__footer">
-        <div class="footer__copyright">© 2020 Mesto Russia</div>
+        <p class="footer__copyright">© 2020 Mesto Russia</p>
       </footer>
     </div>
 
@@ -136,7 +122,7 @@
           <img
             src="./images/_close_icon.svg"
             alt="Иконка для закрытия окна"
-            class="form__close-btn form__close-btn_place"
+            class="button form__close-btn form__close-btn_place"
           />
           <input
             type="text"
@@ -151,8 +137,9 @@
             value="Исследователь океана"
           />
         </div>
-        <button type="submit" class="form__submit-btn">Сохранить</button>
+        <button type="submit" class="button form__submit-btn">Сохранить</button>
       </form>
     </div>
+    <script src="./script/script.js"></script>
   </body>
 </html>

@@ -1,22 +1,8 @@
 .profile__submit-btn {
-  display: block;
-  padding: 0;
-  background-color: var(--color__background);
   width: 150px;
   height: 50px;
-  border: 2px solid #ffffff;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  border-radius: 2px;
-  margin-right: 0;
-  cursor: pointer;
-  -webkit-transition: opacity 0.1s ease-in-out 0.1s;
-  -o-transition: opacity 0.1s ease-in-out 0.1s;
-  transition: opacity 0.1s ease-in-out 0.1s;
-}
-
-.profile__submit-btn:hover {
-  opacity: 0.6;
+  background-image: url(../../../images/Add_Button.svg);
+  background-size: cover;
 }
 
 @media screen and (max-width: 767px) {
