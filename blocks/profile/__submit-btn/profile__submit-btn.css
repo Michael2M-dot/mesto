@@ -9,9 +9,10 @@
           box-sizing: border-box;
   border-radius: 2px;
   margin-right: 0;
-  -webkit-transition: opacity 0.3s ease-in-out 0.3s;
-  -o-transition: opacity 0.3s ease-in-out 0.3s;
-  transition: opacity 0.3s ease-in-out 0.3s;
+  cursor: pointer;
+  -webkit-transition: opacity 0.1s ease-in-out 0.1s;
+  -o-transition: opacity 0.1s ease-in-out 0.1s;
+  transition: opacity 0.1s ease-in-out 0.1s;
 }
 
 .profile__submit-btn:hover {
