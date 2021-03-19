@@ -1,12 +1,10 @@
 .page__header{
   width: 100%;
-  min-height: 74px;
   margin-bottom: 40px;
 }
 
 @media screen and (max-width: 767px) {
   .page__header {
-    min-height: 56px;
     margin-bottom: 42px;
   }
 }

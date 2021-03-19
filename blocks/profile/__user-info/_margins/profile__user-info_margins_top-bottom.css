@@ -1,6 +1,6 @@
 .profile__user-info_margins_top-bottom {
   margin-top: 22px;
-  margin-bottom: 22px; /*по макету 25 рх - подгонял под макет Пиксель*/
+  margin-bottom: 20px; /*по макету 25 рх - подгонял под макет Пиксель*/
 }
 
 @media screen and (max-width: 767px) {

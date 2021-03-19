@@ -1,0 +1,9 @@
+.page__popup{
+  width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  visibility: hidden;
+  background: rgba(0, 0, 0, 0.5);
+}

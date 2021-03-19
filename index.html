@@ -17,14 +17,14 @@
           <img
             src="./images/_mesto_logo.svg"
             alt="Логотип MESTO"
-            class="header__logo header__logo_place"
+            class="header__logo"
           />
         </a>
       </header>
 
       <main class="content page__content section section_size_narrow">
         <section class="profile">
-          <div class="profile__user-card">
+          <div class="profile__user">
             <div class="profile__user-avatar"></div>
             <div
               class="profile__user-info profile__user-info_margins_top-bottom profile__user-info_margins_left-right"
@@ -32,12 +32,9 @@
               <h1 class="profile__user-name">Жак-Ив Кусто</h1>
               <p class="profile__user-job">Исследователь океана</p>
             </div>
-            <button
-              type="button"
-              class="button profile__edit-btn profile__edit-btn_place"
-            ></button>
+            <button type="button" class="button profile__button-edit"></button>
           </div>
-          <button type="button" class="button profile__submit-btn"></button>
+          <button type="button" class="button profile__button-add"></button>
         </section>
         <section class="elements">
           <ul class="elements__list">
@@ -54,7 +51,7 @@
             </li>
             <li class="element elements__list-item">
               <img
-                src="./images/elm_3.png"
+                src="./images/elm_5.jpg"
                 alt="Фото горы Эльбрус"
                 class="element__image"
               />
@@ -115,30 +112,32 @@
       </footer>
     </div>
 
-    <div class="popup">
-      <form class="form popup__form">
-        <h2 class="form__title">Редактировать профиль</h2>
-        <div class="form__input-group form__input-group_margin_bottom">
-          <img
-            src="./images/_close_icon.svg"
-            alt="Иконка для закрытия окна"
-            class="button form__close-btn form__close-btn_place"
+    <div class="popup page__popup section">
+      <div class="popup__window">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <button type="button" class="button popup__button-close"></button>
+        <form class="form">
+          <input
+            type="text"
+            id="user_name"
+            name="user_name"
+            maxlength="30"
+            minlength="2"
+            class="form__input"
           />
           <input
             type="text"
-            id="user-name"
-            class="form__input-text form__input-container"
-            value="Жак-Ив Кусто"
+            id="user_job"
+            name="user_job"
+            maxlength="40"
+            minlength="0"
+            class="form__input"
           />
-          <input
-            type="text"
-            id="user-job"
-            class="form__input-text form__input-container"
-            value="Исследователь океана"
-          />
-        </div>
-        <button type="submit" class="button form__submit-btn">Сохранить</button>
-      </form>
+          <button type="submit" class="button form__submit-btn">
+            Сохранить
+          </button>
+        </form>
+      </div>
     </div>
     <script src="./script/script.js"></script>
   </body>

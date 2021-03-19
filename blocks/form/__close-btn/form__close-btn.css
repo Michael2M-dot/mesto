@@ -1,9 +1,0 @@
-.form__close-btn {
-  width: 54px;
-}
-
-@media screen and (max-width: 767px) {
-  .form__close-btn {
-    width: 36px;
-  }
-}
