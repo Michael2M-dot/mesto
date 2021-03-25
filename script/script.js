@@ -43,3 +43,12 @@ function closePopup() {
 openPopupBtn.addEventListener('click', openPopup);
 closePopupBtn.addEventListener('click', closePopup);
 formElement.addEventListener('submit', formSubmitHandler); 
+
+
+const buttons = document.querySelectorAll('.element__like');
+
+buttons.forEach ((button) =>{
+  button.addEventListener('click', function(){
+    button.classList.toggle('element__like_active');
+  })
+});

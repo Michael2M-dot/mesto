@@ -1,9 +1,4 @@
-/* .element__like_active {
-  background-image: url(../../../images/element__like_active.svg);
-  background-position: center;
-  background-size: cover;
-  background-color: transparent;
-  background-size: 100%;
-} */
+.element__like_active {
+  background-image: url(../../../../images/element__like_active.svg);
+}
 
-/* заготовка под выделение цветом лайка */
