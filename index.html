@@ -141,6 +141,32 @@
       </div>
     </div>
 
+    <div class="popup page__popup section">
+      <div class="popup__window">
+        <h2 class="popup__title">Новое место</h2>
+        <button type="button" class="button popup__button-close"></button>
+        <form name="user_profile" class="form" autocomplete="off">
+          <input
+            type="text"
+            id="place-name"
+            name="place-name"
+            maxlength="30"
+            minlength="2"
+            class="form__input"
+            placeholder="Название"
+          />
+          <input
+            type="text"
+            id="place-link"
+            name="place-link"
+            class="form__input"
+            placeholder="Ссылка на картинку"
+          />
+          <button type="submit" class="button form__submit-btn">Создать</button>
+        </form>
+      </div>
+    </div>
+
     <template id="cards-template">
       <li class="element elements__list-item">
         <img class="element__image" src="" />

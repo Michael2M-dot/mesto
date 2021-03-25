@@ -30,7 +30,7 @@ function formSubmitHandler(evt){
   closePopup(); //используем уже готовую функцию для закрытия попапа
 } //функция кнопки Сохранить.
 
-function openPopup() {
+function openUserPopup() {
   popup.classList.add('page__popup_visible');
   currentUserName.value = nameInput.textContent;
   currentUserJob.value = jobInput.textContent;
@@ -40,7 +40,7 @@ function closePopup() {
   popup.classList.remove('page__popup_visible'); 
 }; //функция для закрытия попапа.
 
-openPopupBtn.addEventListener('click', openPopup);//слушатель для открытия попапа
+openPopupBtn.addEventListener('click', openUserPopup);//слушатель для открытия попапа
 closePopupBtn.addEventListener('click', closePopup);//слушатель для закрытия попапа
 formElement.addEventListener('submit', formSubmitHandler); //слушатель для сохрания формы.
 
