@@ -48,6 +48,7 @@
                 <h2 class="element__title">Куршская коса</h2>
                 <button type="button" class="element__like"></button>
               </div>
+              <button type="button" class="button element__trash"></button>
             </li>
             <li class="element elements__list-item">
               <img
@@ -139,6 +140,18 @@
         </form>
       </div>
     </div>
+
+    <template id="cards-template">
+      <li class="element elements__list-item">
+        <img class="element__image" />
+        <div class="element__heading">
+          <h2 class="element__title"></h2>
+          <button type="button" class="element__like"></button>
+        </div>
+        <button type="button" class="element__trash"></button>
+      </li>
+    </template>
+
     <script src="./script/script.js"></script>
   </body>
 </html>

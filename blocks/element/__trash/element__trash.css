@@ -1,0 +1,20 @@
+.element__trash{
+  background-image: url(../../../images/Trash.svg);
+  background-position: center;
+  background-size: cover;
+  background-color: transparent;
+  cursor: pointer;
+  height: 18px;
+  width: 19.3px;
+  -webkit-transition: opacity 0.1s ease-in-out 0.1s;
+  -o-transition: opacity 0.1s ease-in-out 0.1s;
+  transition: opacity 0.1s ease-in-out 0.1s;
+  position:absolute;
+  top:18px;
+  right: 17px;
+  z-index: 1;
+}
+
+.element__like:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+}

@@ -13,14 +13,14 @@ email: darak.ltd@yandex.ru
 // при вводе в сроке имени, меняем имя вывода на странице
 // при вовде текста в строке должности, менем текст на странице 
 
-let formElement = document.querySelector('.form');
-let nameInput = document.querySelector('.profile__user-name');
-let jobInput = document.querySelector('.profile__user-job');
-let currentUserName = document.getElementById('user_name'); //получаем и записываем значение переменной из поля по id user-name
-let currentUserJob = document.getElementById('user_job'); //получаем и записываем значение переменной из поля по id user-job
-let popup = document.querySelector('.page__popup');
-let openPopupBtn = document.querySelector('.profile__button-edit');
-let closePopupBtn = document.querySelector('.popup__button-close');
+const formElement = document.querySelector('.form');
+const nameInput = document.querySelector('.profile__user-name');
+const jobInput = document.querySelector('.profile__user-job');
+const currentUserName = document.getElementById('user_name'); //получаем и записываем значение переменной из поля по id user-name
+const currentUserJob = document.getElementById('user_job'); //получаем и записываем значение переменной из поля по id user-job
+const popup = document.querySelector('.page__popup');
+const openPopupBtn = document.querySelector('.profile__button-edit');
+const closePopupBtn = document.querySelector('.popup__button-close');
 
 
 function formSubmitHandler(evt){
@@ -28,21 +28,21 @@ function formSubmitHandler(evt){
   nameInput.textContent = currentUserName.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
   jobInput.textContent = currentUserJob.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
   closePopup(); //используем уже готовую функцию для закрытия попапа
-}
+} //функция кнопки Сохранить.
 
 function openPopup() {
   popup.classList.add('page__popup_visible');
   currentUserName.value = nameInput.textContent;
   currentUserJob.value = jobInput.textContent;
-};
+}; //функция открытия попапа
 
 function closePopup() {
   popup.classList.remove('page__popup_visible'); 
-};
+}; //функция для закрытия попапа.
 
-openPopupBtn.addEventListener('click', openPopup);
-closePopupBtn.addEventListener('click', closePopup);
-formElement.addEventListener('submit', formSubmitHandler); 
+openPopupBtn.addEventListener('click', openPopup);//слушатель для открытия попапа
+closePopupBtn.addEventListener('click', closePopup);//слушатель для закрытия попапа
+formElement.addEventListener('submit', formSubmitHandler); //слушатель для сохрания формы.
 
 
 const buttons = document.querySelectorAll('.element__like');
@@ -52,3 +52,19 @@ buttons.forEach ((button) =>{
     button.classList.toggle('element__like_active');
   })
 });
+
+// работем по карточкам
+
+// const cardsContainer = document.querySelector('.elements__list');//переменная для блока карточек.
+
+// оптимальный вариант
+function addCard (name, link) {
+  const cardTemplate = document.querySelector('#cards-template').content; //достаем шаблон из template
+
+  const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
+
+  cardElement.querySelector('.element__image').src = link;
+  cardElement.querySelector('.element__heading').textContent = name;
+
+  
+}
