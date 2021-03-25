@@ -94,7 +94,7 @@ initialCards.forEach(function(element){
   cardElement.querySelector('.element__title').textContent = element.name;
 
   const button = cardElement.querySelector('.element__like');
-  button.addEventListener('click', function(evt){
+  button.addEventListener('click', (evt) => {
     const eventTarget = evt.target;
     eventTarget.classList.toggle('element__like_active');
   });
