@@ -58,13 +58,42 @@ buttons.forEach ((button) =>{
 // const cardsContainer = document.querySelector('.elements__list');//переменная для блока карточек.
 
 // оптимальный вариант
-function addCard (name, link) {
-  const cardTemplate = document.querySelector('#cards-template').content; //достаем шаблон из template
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+]; 
 
-  const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
 
-  cardElement.querySelector('.element__image').src = link;
-  cardElement.querySelector('.element__heading').textContent = name;
+const cardTemplate = document.querySelector('#cards-template').content; //достаем шаблон из template
+const cardsList = document.querySelector('.elements__list');
 
-  
-}
+initialCards.forEach(function(element){
+  const cardElement = cardTemplate.cloneNode(true);
+
+  cardElement.querySelector('.element__image').src = element.link;
+  cardElement.querySelector('.element__title').textContent = element.name;
+
+  cardsList.append(cardElement);
+});
