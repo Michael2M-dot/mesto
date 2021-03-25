@@ -55,8 +55,6 @@ buttons.forEach ((button) =>{
 
 // работем по карточкам
 
-// const cardsContainer = document.querySelector('.elements__list');//переменная для блока карточек.
-
 // оптимальный вариант
 const initialCards = [
   {
@@ -94,6 +92,12 @@ initialCards.forEach(function(element){
 
   cardElement.querySelector('.element__image').src = element.link;
   cardElement.querySelector('.element__title').textContent = element.name;
+
+  const button = cardElement.querySelector('.element__like');
+  button.addEventListener('click', function(evt){
+    const eventTarget = evt.target;
+    eventTarget.classList.toggle('element__like_active');
+  });
 
   cardsList.append(cardElement);
 });
