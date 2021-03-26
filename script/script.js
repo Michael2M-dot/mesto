@@ -28,6 +28,7 @@ const placeName = document.querySelector('#place-name');
 const placeLink = document.querySelector('#place-link');
 const formPlace = document.querySelector('#place-form');
 
+
 // работем по карточкам
 
 // оптимальный вариант
@@ -74,8 +75,30 @@ initialCards.forEach(function(element){
     eventTarget.classList.toggle('element__like_active');
   });
 
+// const deleteButton = cardElement.querySelector('#delete-Btn');
+
+// deleteButton.addEventListener('click', function(evt){
+//     const eventTarget = evt.target;
+//     eventTarget.forEach((item) => {
+//       remove(item);
+//     });
+//   });
+
+const deleteButton = cardElement.querySelector('#delete-Btn');
+
+deleteButton.addEventListener('click', function(){
+  const placeItem = deleteButton.closest('.elements__list-item');
+    placeItem.remove();
+});
+
   cardsList.append(cardElement);
 });
+
+
+
+
+
+
 
 //передаем лайки на карточки - старый метод
 // const buttons = document.querySelectorAll('.element__like');
@@ -123,6 +146,19 @@ function addPlace (){
   cardElement.querySelector('.element__image').src= placeLink.value;
   cardElement.querySelector('.element__title').textContent = placeName.value;
 
+  const button = cardElement.querySelector('.element__like');
+  button.addEventListener('click', (evt) => {
+    const eventTarget = evt.target;
+    eventTarget.classList.toggle('element__like_active');
+  });
+
+  const deleteButton = cardElement.querySelector('#delete-Btn');
+
+  deleteButton.addEventListener('click', function(){
+    const placeItem = deleteButton.closest('.elements__list-item');
+      placeItem.remove();
+  });
+
   cardsList.prepend(cardElement);
 }
 
@@ -140,4 +176,5 @@ openPlacePopupBtn.addEventListener('click', openPlacePopup);
 closePlacePopupBtn.addEventListener('click', closePlacePopup);
 formPlace.addEventListener('submit', formPlaceSubmitHandler);
 
+// кнопка удаления рисунка
 
