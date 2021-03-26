@@ -32,7 +32,11 @@
               <h1 class="profile__user-name">Жак-Ив Кусто</h1>
               <p class="profile__user-job">Исследователь океана</p>
             </div>
-            <button type="button" class="button profile__button-edit"></button>
+            <button
+              type="button"
+              class="button profile__button-edit"
+              id="profile-editBtn"
+            ></button>
           </div>
           <button type="button" class="button profile__button-add"></button>
         </section>
@@ -53,10 +57,15 @@
           class="button popup__button-close"
           id="close-userPopup"
         ></button>
-        <form name="user_profile" class="form" autocomplete="off">
+        <form
+          name="user_profile"
+          class="form"
+          autocomplete="off"
+          id="user-profile"
+        >
           <input
             type="text"
-            id="user_name"
+            id="user-name"
             name="user_name"
             maxlength="30"
             minlength="2"
@@ -64,13 +73,17 @@
           />
           <input
             type="text"
-            id="user_job"
+            id="user-job"
             name="user_job"
             maxlength="40"
             minlength="0"
             class="form__input"
           />
-          <button type="submit" class="button form__submit-btn">
+          <button
+            type="submit"
+            class="button form__submit-btn"
+            id="user-submit"
+          >
             Сохранить
           </button>
         </form>
@@ -85,7 +98,7 @@
           class="button popup__button-close"
           id="close-placePopup"
         ></button>
-        <form name="user_profile" class="form" autocomplete="off">
+        <form name="place_form" class="form" autocomplete="off" id="place-form">
           <input
             type="text"
             id="place-name"
@@ -102,7 +115,13 @@
             class="form__input form__input-place"
             placeholder="Ссылка на картинку"
           />
-          <button type="submit" class="button form__submit-btn">Создать</button>
+          <button
+            type="submit"
+            class="button form__submit-btn"
+            id="place-submit"
+          >
+            Создать
+          </button>
         </form>
       </div>
     </div>
