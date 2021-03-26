@@ -6,14 +6,15 @@
   cursor: pointer;
   height: 18px;
   width: 19.3px;
-  -webkit-transition: opacity 0.1s ease-in-out 0.1s;
-  -o-transition: opacity 0.1s ease-in-out 0.1s;
-  transition: opacity 0.1s ease-in-out 0.1s;
+  -webkit-transition: opacity 0.1s ease-in-out 0.1s, scale 0.1s ease-in-out 0.1s;
+  -o-transition: opacity 0.1s ease-in-out 0.1s, scale 0.1s ease-in-out 0.1s;
+  transition: opacity 0.1s ease-in-out 0.1s, scale 0.1s ease-in-out 0.1s;
   position:absolute;
   top:18px;
   right: 17px;
 }
 
-.element__like:hover {
-  background-color: rgba(255, 255, 255, 0.6);
+.element__trash:hover {
+  opacity: .6;
+  transform: scale(1.2);
 }

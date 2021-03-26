@@ -59,7 +59,6 @@ const initialCards = [
   }
 ]; 
 
-
 const cardTemplate = document.querySelector('#cards-template').content; //достаем шаблон из template
 const cardsList = document.querySelector('.elements__list');
 
@@ -75,29 +74,15 @@ initialCards.forEach(function(element){
     eventTarget.classList.toggle('element__like_active');
   });
 
-// const deleteButton = cardElement.querySelector('#delete-Btn');
+  const deleteButton = cardElement.querySelector('#delete-Btn');
 
-// deleteButton.addEventListener('click', function(evt){
-//     const eventTarget = evt.target;
-//     eventTarget.forEach((item) => {
-//       remove(item);
-//     });
-//   });
-
-const deleteButton = cardElement.querySelector('#delete-Btn');
-
-deleteButton.addEventListener('click', function(){
-  const placeItem = deleteButton.closest('.elements__list-item');
-    placeItem.remove();
-});
+  deleteButton.addEventListener('click', function(){
+      const placeItem = deleteButton.closest('.elements__list-item');
+      placeItem.remove();
+  });
 
   cardsList.append(cardElement);
 });
-
-
-
-
-
 
 
 //передаем лайки на карточки - старый метод
@@ -131,15 +116,17 @@ function formUserSubmitHandler(evt){
 
 
 
-//popup places
+//открытие popup places
 function openPlacePopup() {
   popupPlace.classList.add('page__popup_visible');
 }
-
+//закрытие popup places
 function closePlacePopup() {
   popupPlace.classList.remove('page__popup_visible');
 }
 
+
+//функция добавления новой картинки на страницу
 function addPlace (){
   const cardElement = cardTemplate.cloneNode(true);
 
@@ -162,16 +149,19 @@ function addPlace (){
   cardsList.prepend(cardElement);
 }
 
+//функция обработчик нажатия кнопки Создать 
 function formPlaceSubmitHandler(evt) {
   evt.preventDefault();
   addPlace();
   closePlacePopup()
 }
 
+//слушатели для попапа редактирования пользователя
 openUserPopupBtn.addEventListener('click', openUserPopup);//слушатель для открытия попапа для редактирования профиля пользователя
 closeUserPopupBtn.addEventListener('click', closeUserPopup);//слушатель для закрытия попапа
 formUser.addEventListener('submit', formUserSubmitHandler); //слушатель для сохрания формы.
 
+//слушатели для попапа добавления контекста
 openPlacePopupBtn.addEventListener('click', openPlacePopup);
 closePlacePopupBtn.addEventListener('click', closePlacePopup);
 formPlace.addEventListener('submit', formPlaceSubmitHandler);

@@ -50,11 +50,11 @@
     </div>
 
     <div id="edit-profile" class="popup page__popup section">
-      <div class="popup__window">
+      <div class="popup__window popup__window_size_S">
         <h2 class="popup__title">Редактировать профиль</h2>
         <button
           type="button"
-          class="button popup__button-close"
+          class="button popup__button-close popup__button-close_pos_outside"
           id="close-userPopup"
         ></button>
         <form
@@ -91,11 +91,11 @@
     </div>
 
     <div id="add-place" class="popup page__popup section">
-      <div class="popup__window">
+      <div class="popup__window popup__window_size_S">
         <h2 class="popup__title">Новое место</h2>
         <button
           type="button"
-          class="button popup__button-close"
+          class="button popup__button-close popup__button-close_pos_outside"
           id="close-placePopup"
         ></button>
         <form name="place_form" class="form" autocomplete="off" id="place-form">
@@ -105,14 +105,14 @@
             name="place-name"
             maxlength="30"
             minlength="2"
-            class="form__input form__input-place"
+            class="form__input"
             placeholder="Название"
           />
           <input
             type="text"
             id="place-link"
             name="place-link"
-            class="form__input form__input-place"
+            class="form__input"
             placeholder="Ссылка на картинку"
           />
           <button
@@ -123,6 +123,20 @@
             Создать
           </button>
         </form>
+      </div>
+    </div>
+
+    <div id="picture" class="popup page__popup section page__popup_visible">
+      <div class="popup__window popup__window_size_L">
+        <button
+          type="button"
+          class="button popup__button-close popup__button-close_pos_inside"
+          id="close-PicturePopup"
+        ></button>
+        <figure class="popup__figure">
+          <img src="./images/arkhyz.jpg" alt="" class="popup__image" />
+          <figcaption class="popup__caption">Камчатка</figcaption>
+        </figure>
       </div>
     </div>
 
