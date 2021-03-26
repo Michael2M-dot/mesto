@@ -37,75 +37,7 @@
           <button type="button" class="button profile__button-add"></button>
         </section>
         <section class="elements">
-          <ul class="elements__list">
-            <!-- <li class="element elements__list-item">
-              <img
-                src="./images/__place_1.jpg"
-                alt=" Фото залива Куршская Коса"
-                class="element__image"
-              />
-              <div class="element__heading">
-                <h2 class="element__title">Куршская коса</h2>
-                <button type="button" class="element__like"></button>
-              </div>
-              <button type="button" class="button element__trash"></button>
-            </li>
-            <li class="element elements__list-item">
-              <img
-                src="./images/elm_5.jpg"
-                alt="Фото горы Эльбрус"
-                class="element__image"
-              />
-              <div class="element__heading">
-                <h2 class="element__title">Гора Эльбрус</h2>
-                <button type="button" class="element__like"></button>
-              </div>
-            </li>
-            <li class="element elements__list-item">
-              <img
-                src="./images/__item_5.jpg"
-                alt="Озеро Байкал. Зима. Фотография прозрачного льда озера Байкал"
-                class="element__image"
-              />
-              <div class="element__heading">
-                <h2 class="element__title">Байкал</h2>
-                <button type="button" class="element__like"></button>
-              </div>
-            </li>
-            <li class="element elements__list-item">
-              <img
-                src="./images/__item_10.jpg"
-                alt="Фото вулкана на полуострове Камчатка"
-                class="element__image"
-              />
-              <div class="element__heading">
-                <h2 class="element__title">Камчатка</h2>
-                <button type="button" class="element__like"></button>
-              </div>
-            </li>
-            <li class="element elements__list-item">
-              <img
-                src="./images/__place_5.jpg"
-                alt="Карелия. Лето. Фото реки и леса"
-                class="element__image"
-              />
-              <div class="element__heading">
-                <h2 class="element__title">Карелия</h2>
-                <button type="button" class="element__like"></button>
-              </div>
-            </li>
-            <li class="element elements__list-item">
-              <img
-                src="./images/elm_6.png"
-                alt="Фото древнего монастыря"
-                class="element__image"
-              />
-              <div class="element__heading">
-                <h2 class="element__title">Карачаево-Черкесск</h2>
-                <button type="button" class="element__like"></button>
-              </div>
-            </li> -->
-          </ul>
+          <ul class="elements__list"></ul>
         </section>
       </main>
       <footer class="footer page__footer">
@@ -113,10 +45,14 @@
       </footer>
     </div>
 
-    <div class="popup page__popup section">
+    <div id="edit-profile" class="popup page__popup section">
       <div class="popup__window">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <button type="button" class="button popup__button-close"></button>
+        <button
+          type="button"
+          class="button popup__button-close"
+          id="close-userPopup"
+        ></button>
         <form name="user_profile" class="form" autocomplete="off">
           <input
             type="text"
@@ -141,10 +77,14 @@
       </div>
     </div>
 
-    <div class="popup page__popup section">
+    <div id="add-place" class="popup page__popup section">
       <div class="popup__window">
         <h2 class="popup__title">Новое место</h2>
-        <button type="button" class="button popup__button-close"></button>
+        <button
+          type="button"
+          class="button popup__button-close"
+          id="close-placePopup"
+        ></button>
         <form name="user_profile" class="form" autocomplete="off">
           <input
             type="text"
@@ -152,14 +92,14 @@
             name="place-name"
             maxlength="30"
             minlength="2"
-            class="form__input"
+            class="form__input form__input-place"
             placeholder="Название"
           />
           <input
             type="text"
             id="place-link"
             name="place-link"
-            class="form__input"
+            class="form__input form__input-place"
             placeholder="Ссылка на картинку"
           />
           <button type="submit" class="button form__submit-btn">Создать</button>

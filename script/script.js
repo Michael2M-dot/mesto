@@ -18,9 +18,12 @@ const nameInput = document.querySelector('.profile__user-name');
 const jobInput = document.querySelector('.profile__user-job');
 const currentUserName = document.getElementById('user_name'); //получаем и записываем значение переменной из поля по id user-name
 const currentUserJob = document.getElementById('user_job'); //получаем и записываем значение переменной из поля по id user-job
-const popup = document.querySelector('.page__popup');
-const openPopupBtn = document.querySelector('.profile__button-edit');
-const closePopupBtn = document.querySelector('.popup__button-close');
+const popupUser = document.querySelector('#edit-profile');
+const popupPlace = document.querySelector('#add-place');
+const openUserPopupBtn = document.querySelector('.profile__button-edit');
+const closeUserPopupBtn = document.querySelector('#close-userPopup');
+const openPlacePopupBtn =document.querySelector('.profile__button-add');
+const closePlacePopupBtn = document.querySelector('#close-placePopup');
 
 
 function formSubmitHandler(evt){
@@ -31,17 +34,28 @@ function formSubmitHandler(evt){
 } //функция кнопки Сохранить.
 
 function openUserPopup() {
-  popup.classList.add('page__popup_visible');
+  popupUser.classList.add('page__popup_visible');
   currentUserName.value = nameInput.textContent;
   currentUserJob.value = jobInput.textContent;
 }; //функция открытия попапа
 
-function closePopup() {
-  popup.classList.remove('page__popup_visible'); 
-}; //функция для закрытия попапа.
+function closeUserPopup() {
+  popupUser.classList.remove('page__popup_visible'); 
+};
 
-openPopupBtn.addEventListener('click', openUserPopup);//слушатель для открытия попапа
-closePopupBtn.addEventListener('click', closePopup);//слушатель для закрытия попапа
+function openPlacePopup() {
+  popupPlace.classList.add('page__popup_visible');
+}
+
+function closePlacePopup() {
+  popupPlace.classList.remove('page__popup_visible');
+}
+
+
+openUserPopupBtn.addEventListener('click', openUserPopup);//слушатель для открытия попапа для редактирования профиля пользователя
+closeUserPopupBtn.addEventListener('click', closeUserPopup);//слушатель для закрытия попапа
+openPlacePopupBtn.addEventListener('click', openPlacePopup);
+closePlacePopupBtn.addEventListener('click', closePlacePopup);
 formElement.addEventListener('submit', formSubmitHandler); //слушатель для сохрания формы.
 
 
