@@ -27,6 +27,8 @@ const closePlacePopupBtn = document.querySelector('#close-placePopup');
 const placeName = document.querySelector('#place-name');
 const placeLink = document.querySelector('#place-link');
 const formPlace = document.querySelector('#place-form');
+const closePicturePopupBtn = document.querySelector('#close-PicturePopup');
+const popupPicture = document.querySelector('#picture-popup');
 
 
 // работем по карточкам
@@ -60,40 +62,53 @@ const initialCards = [
 ]; 
 
 const cardTemplate = document.querySelector('#cards-template').content; //достаем шаблон из template
-const cardsList = document.querySelector('.elements__list');
+const cardList = document.querySelector('.elements__list');
 
-initialCards.forEach(function(element){
+
+//функция создания новой карточек подгружает из массива
+function insertCard (item){
   const cardElement = cardTemplate.cloneNode(true);
+  const cardElementName = cardElement.querySelector('.element__title');
+  const cardElementLink = cardElement.querySelector('.element__image');
+  const likeButton = cardElement.querySelector('.element__like');
+  const deleteButton = cardElement.querySelector('#delete-Btn');
 
-  cardElement.querySelector('.element__image').src = element.link;
-  cardElement.querySelector('.element__title').textContent = element.name;
+  cardElementName.textContent = item.name;
+  cardElementLink.src = item.link;
 
-  const button = cardElement.querySelector('.element__like');
-  button.addEventListener('click', (evt) => {
+  addLike(likeButton);
+
+  deleteItemCard(deleteButton);
+
+  cardAppend(cardElement);
+
+}
+
+function addLike (elm){
+  elm.addEventListener('click', (evt) => {
     const eventTarget = evt.target;
     eventTarget.classList.toggle('element__like_active');
   });
+}//добавляем событие для like
 
-  const deleteButton = cardElement.querySelector('#delete-Btn');
-
-  deleteButton.addEventListener('click', function(){
-      const placeItem = deleteButton.closest('.elements__list-item');
-      placeItem.remove();
+function deleteItemCard (elm) {
+  elm.addEventListener('click', (evt) => { 
+    const placeItemCard = elm.closest('.elements__list-item');
+    placeItemCard.remove();
   });
+};//добавляем событие для удаления карточки
 
-  cardsList.append(cardElement);
-});
+function cardAppend (elm){
+  cardList.append(elm);
+};//добавляет карточку в конец
 
+function cardPrepend(elm){
+  cardList.prepend(elm)
+};//добавлет карточку в начало
 
-//передаем лайки на карточки - старый метод
-// const buttons = document.querySelectorAll('.element__like');
-
-// buttons.forEach ((button) =>{
-//   button.addEventListener('click', function(){
-//     button.classList.toggle('element__like_active');
-//   })
-// });
-
+initialCards.forEach(function(elm){
+  insertCard(elm);
+});//проходим по массиву и создаем карточки
 
 
 //popup user-profile
@@ -114,57 +129,76 @@ function formUserSubmitHandler(evt){
   closeUserPopup(); //используем уже готовую функцию для закрытия попапа
 } //функция кнопки Сохранить.
 
+//слушатели для попапа редактирования пользователя
+openUserPopupBtn.addEventListener('click', openUserPopup);//слушатель для открытия попапа для редактирования профиля пользователя
+closeUserPopupBtn.addEventListener('click', closeUserPopup);//слушатель для закрытия попапа
+formUser.addEventListener('submit', formUserSubmitHandler); //слушатель для сохрания формы.
 
 
+
+//заведение новой карточки места
 //открытие popup places
 function openPlacePopup() {
   popupPlace.classList.add('page__popup_visible');
+  placeName.value = '';
+  placeLink.value = '';
 }
+
 //закрытие popup places
 function closePlacePopup() {
   popupPlace.classList.remove('page__popup_visible');
-}
-
-
-//функция добавления новой картинки на страницу
-function addPlace (){
-  const cardElement = cardTemplate.cloneNode(true);
-
-  cardElement.querySelector('.element__image').src= placeLink.value;
-  cardElement.querySelector('.element__title').textContent = placeName.value;
-
-  const button = cardElement.querySelector('.element__like');
-  button.addEventListener('click', (evt) => {
-    const eventTarget = evt.target;
-    eventTarget.classList.toggle('element__like_active');
-  });
-
-  const deleteButton = cardElement.querySelector('#delete-Btn');
-
-  deleteButton.addEventListener('click', function(){
-    const placeItem = deleteButton.closest('.elements__list-item');
-      placeItem.remove();
-  });
-
-  cardsList.prepend(cardElement);
 }
 
 //функция обработчик нажатия кнопки Создать 
 function formPlaceSubmitHandler(evt) {
   evt.preventDefault();
   addPlace();
-  closePlacePopup()
+  closePlacePopup();
+};
+
+//функция добавления новой картинки на страницу
+function addPlace (){
+  const cardElement = cardTemplate.cloneNode(true);
+  const likeButton = cardElement.querySelector('.element__like');
+  const deleteButton = cardElement.querySelector('#delete-Btn');
+
+  cardElement.querySelector('.element__image').src= placeLink.value;
+  cardElement.querySelector('.element__title').textContent = placeName.value;
+
+  addLike(likeButton);
+
+  deleteItemCard(deleteButton);
+
+  cardPrepend(cardElement);
 }
 
-//слушатели для попапа редактирования пользователя
-openUserPopupBtn.addEventListener('click', openUserPopup);//слушатель для открытия попапа для редактирования профиля пользователя
-closeUserPopupBtn.addEventListener('click', closeUserPopup);//слушатель для закрытия попапа
-formUser.addEventListener('submit', formUserSubmitHandler); //слушатель для сохрания формы.
-
-//слушатели для попапа добавления контекста
+//слушатели для попапа добавления карточек
 openPlacePopupBtn.addEventListener('click', openPlacePopup);
 closePlacePopupBtn.addEventListener('click', closePlacePopup);
 formPlace.addEventListener('submit', formPlaceSubmitHandler);
 
-// кнопка удаления рисунка
 
+
+// const oppenPictirePopupBtn = document.querySelector('.element__image');
+
+
+//слушателя для попапа картинки
+// oppenPictirePopupBtn.addEventListener('click',oppenPlacePopup);
+closePicturePopupBtn.addEventListener('click', closePlacePopup);
+
+
+
+
+
+
+//передаем лайки на карточки - старый метод
+// const buttons = document.querySelectorAll('.element__like');
+
+// buttons.forEach ((button) =>{
+//   button.addEventListener('click', function(){
+//     button.classList.toggle('element__like_active');
+//   })
+// });
+
+
+ // // deleteButton.addEventListener('click', () => cardElement.remove()); /*упрощеный вариант т.к. сразу нахоодимся в функции создания карточки, то обращеемся здесь же сразу к создаваемому элементу.*/
