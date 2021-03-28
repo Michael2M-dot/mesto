@@ -27,12 +27,13 @@ const closePlacePopupBtn = document.querySelector('#close-placePopup');
 const placeName = document.querySelector('#place-name');
 const placeLink = document.querySelector('#place-link');
 const formPlace = document.querySelector('#place-form');
-const closePicturePopupBtn = document.querySelector('#close-PicturePopup');
-const popupPicture = document.querySelector('#picture-popup');
+const closePreviewPicturePopupBtn = document.querySelector('#close-PicturePopup');
+const popupPicturePreview = document.querySelector('#picture-popup');
+const currentPicture = document.querySelector('.popup__image');
+const currentTitle = document.querySelector('.popup__caption');
 
 
 // работем по карточкам
-
 // оптимальный вариант
 const initialCards = [
   {
@@ -64,38 +65,37 @@ const initialCards = [
 const cardTemplate = document.querySelector('#cards-template').content; //достаем шаблон из template
 const cardList = document.querySelector('.elements__list');
 
-
 //функция создания новой карточек подгружает из массива
 function insertCard (item){
   const cardElement = cardTemplate.cloneNode(true);
   const cardElementName = cardElement.querySelector('.element__title');
   const cardElementLink = cardElement.querySelector('.element__image');
   const likeButton = cardElement.querySelector('.element__like');
-  const deleteButton = cardElement.querySelector('#delete-Btn');
+  const deleteButton = cardElement.querySelector('.element__trash');
+  const openPreviewPicturePopupBtn = cardElement.querySelector('.element__image');
 
   cardElementName.textContent = item.name;
   cardElementLink.src = item.link;
 
-  addLike(likeButton);
+  likeButton.addEventListener('click', addLike);
 
-  deleteItemCard(deleteButton);
+  deleteButton.addEventListener('click', deleteItemCard);
+
+  openPreviewPicturePopupBtn.addEventListener('click', () => openPreviewPicturePopop(item));
 
   cardAppend(cardElement);
-
 }
 
-function addLike (elm){
-  elm.addEventListener('click', (evt) => {
+function addLike (evt){
     const eventTarget = evt.target;
     eventTarget.classList.toggle('element__like_active');
-  });
-}//добавляем событие для like
+}//добавляем like
 
-function deleteItemCard (elm) {
-  elm.addEventListener('click', (evt) => { 
-    const placeItemCard = elm.closest('.elements__list-item');
-    placeItemCard.remove();
-  });
+
+function deleteItemCard (evt) { 
+  const eventTarget = evt.target;
+  const placeItemCard = eventTarget.closest('.elements__list-item');
+  placeItemCard.remove();
 };//добавляем событие для удаления карточки
 
 function cardAppend (elm){
@@ -110,6 +110,11 @@ initialCards.forEach(function(elm){
   insertCard(elm);
 });//проходим по массиву и создаем карточки
 
+//универсальная функция закрытия попапа
+function closePopup (elm){
+  elm.classList.remove('page__popup_visible')
+}
+
 
 //popup user-profile
 function openUserPopup() {
@@ -118,73 +123,67 @@ function openUserPopup() {
   currentUserJob.value = jobInput.textContent;
 }; //функция открытия попапа
 
-function closeUserPopup() {
-  popupUser.classList.remove('page__popup_visible'); 
-};
 
 function formUserSubmitHandler(evt){
   evt.preventDefault();
   nameInput.textContent = currentUserName.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
   jobInput.textContent = currentUserJob.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
-  closeUserPopup(); //используем уже готовую функцию для закрытия попапа
+  closePopup(popupUser); //используем уже готовую функцию для закрытия попапа
 } //функция кнопки Сохранить.
 
 //слушатели для попапа редактирования пользователя
 openUserPopupBtn.addEventListener('click', openUserPopup);//слушатель для открытия попапа для редактирования профиля пользователя
-closeUserPopupBtn.addEventListener('click', closeUserPopup);//слушатель для закрытия попапа
+closeUserPopupBtn.addEventListener('click', () => closePopup(popupUser));//слушатель для закрытия попапа
 formUser.addEventListener('submit', formUserSubmitHandler); //слушатель для сохрания формы.
-
 
 
 //заведение новой карточки места
 //открытие popup places
-function openPlacePopup() {
+function openNewCardPopup() {
   popupPlace.classList.add('page__popup_visible');
   placeName.value = '';
   placeLink.value = '';
 }
 
-//закрытие popup places
-function closePlacePopup() {
-  popupPlace.classList.remove('page__popup_visible');
-}
-
 //функция обработчик нажатия кнопки Создать 
 function formPlaceSubmitHandler(evt) {
   evt.preventDefault();
-  addPlace();
-  closePlacePopup();
+  addNewCard();
+  closePopup(popupPlace);
 };
 
 //функция добавления новой картинки на страницу
-function addPlace (){
+function addNewCard (){
   const cardElement = cardTemplate.cloneNode(true);
   const likeButton = cardElement.querySelector('.element__like');
-  const deleteButton = cardElement.querySelector('#delete-Btn');
+  const deleteButton = cardElement.querySelector('.element__trash');
 
   cardElement.querySelector('.element__image').src= placeLink.value;
   cardElement.querySelector('.element__title').textContent = placeName.value;
 
-  addLike(likeButton);
+  likeButton.addEventListener('click', addLike);
 
-  deleteItemCard(deleteButton);
+  deleteButton.addEventListener('click', deleteItemCard);
 
   cardPrepend(cardElement);
 }
 
+
 //слушатели для попапа добавления карточек
-openPlacePopupBtn.addEventListener('click', openPlacePopup);
-closePlacePopupBtn.addEventListener('click', closePlacePopup);
+openPlacePopupBtn.addEventListener('click', openNewCardPopup);
+closePlacePopupBtn.addEventListener('click', () => closePopup(popupPlace));
 formPlace.addEventListener('submit', formPlaceSubmitHandler);
 
 
-
-// const oppenPictirePopupBtn = document.querySelector('.element__image');
-
+//функция добавляет адресс картинки и название в дом
+function openPreviewPicturePopop (elm){
+  popupPicturePreview.classList.add('page__popup_visible');
+  currentPicture.src = elm.link;
+  currentTitle.textContent = elm.name;
+}
 
 //слушателя для попапа картинки
-// oppenPictirePopupBtn.addEventListener('click',oppenPlacePopup);
-closePicturePopupBtn.addEventListener('click', closePlacePopup);
+closePreviewPicturePopupBtn.addEventListener('click', () => closePopup(popupPicturePreview));
 
 
 
