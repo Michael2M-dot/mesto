@@ -1,10 +1,19 @@
 /*
 Project Mesto-Russia
-Version 0.02a - 19.03.2021
+Version 0.03a - 19.03.2021
 
-Description: Скрипт отвечает за форму заполнения данных пользователя на сайте
+Description: Скрипт запускает:
+1. Форму заполнения данных пользователя на сайте
 По клику на иконке редактирования, открывается попап-форма, где доступны к заполнению поля Имени пользователя и его профессии
 Нажатие на кнопку Сохранить, перезаписывает введеные значения в карточку пользователя на сайте
+
+2. По умолчанию подгружате карточки с картинкой и названием. Исходный ряд в 6 карточек подгружается из массива в JS.
+
+3. Добавляет слушателей на лайки и удаление карточек. На каждой карточке есть возможность ставить лайки и удалать карточку при нажатии на корзину.
+
+4. Добавляет карточки пользователя на страницу. При клике на иконку добавления картинки, открывает попап и форму для добавления карточки на страницу. Карточка добавляется в начало ряда. Для добавления карточки в поля вводим название и URL (в теге <input>  установлени атрибуту url)
+
+5. Открывает попап с превью на картинку. По клику на изображение открывает попап с полноформатным фото и подписью к нему. 
 
 Michael2M (c) 2021
 email: darak.ltd@yandex.ru
@@ -72,7 +81,7 @@ function insertCard (item){
   const cardElementLink = cardElement.querySelector('.element__image');
   const likeButton = cardElement.querySelector('.element__like');
   const deleteButton = cardElement.querySelector('.element__trash');
-  const openPreviewPicturePopupBtn = cardElement.querySelector('.element__image');
+  const openPreviewBtn = cardElement.querySelector('.element__image');
 
   cardElementName.textContent = item.name;
   cardElementLink.src = item.link;
@@ -81,7 +90,7 @@ function insertCard (item){
 
   deleteButton.addEventListener('click', deleteItemCard);
 
-  openPreviewPicturePopupBtn.addEventListener('click', () => openPreviewPicturePopop(item));
+  openPreviewBtn.addEventListener('click', e => openPreviewPicturePopop(item));
 
   cardAppend(cardElement);
 }
@@ -90,7 +99,6 @@ function addLike (evt){
     const eventTarget = evt.target;
     eventTarget.classList.toggle('element__like_active');
 }//добавляем like
-
 
 function deleteItemCard (evt) { 
   const eventTarget = evt.target;
@@ -115,14 +123,17 @@ function closePopup (elm){
   elm.classList.remove('page__popup_visible')
 }
 
+//универсальная функция открытия попапа
+function openPopup(elm) {
+  elm.classList.add('page__popup_visible');
+}
 
 //popup user-profile
 function openUserPopup() {
-  popupUser.classList.add('page__popup_visible');
+  openPopup(popupUser);
   currentUserName.value = nameInput.textContent;
   currentUserJob.value = jobInput.textContent;
-}; //функция открытия попапа
-
+}; //функция открытия попапа c заполнение полей
 
 function formUserSubmitHandler(evt){
   evt.preventDefault();
@@ -131,21 +142,20 @@ function formUserSubmitHandler(evt){
   closePopup(popupUser); //используем уже готовую функцию для закрытия попапа
 } //функция кнопки Сохранить.
 
-//слушатели для попапа редактирования пользователя
+//слушатели для попапа редактирования данных пользователя
 openUserPopupBtn.addEventListener('click', openUserPopup);//слушатель для открытия попапа для редактирования профиля пользователя
-closeUserPopupBtn.addEventListener('click', () => closePopup(popupUser));//слушатель для закрытия попапа
+closeUserPopupBtn.addEventListener('click', e => closePopup(popupUser));//слушатель для закрытия попапа
 formUser.addEventListener('submit', formUserSubmitHandler); //слушатель для сохрания формы.
 
-
 //заведение новой карточки места
-//открытие popup places
+//открытие popup places с обнулением полей
 function openNewCardPopup() {
-  popupPlace.classList.add('page__popup_visible');
+  openPopup(popupPlace);
   placeName.value = '';
   placeLink.value = '';
 }
 
-//функция обработчик нажатия кнопки Создать 
+//функция обработчик нажатия кнопки Создать карточку
 function formPlaceSubmitHandler(evt) {
   evt.preventDefault();
   addNewCard();
@@ -157,13 +167,18 @@ function addNewCard (){
   const cardElement = cardTemplate.cloneNode(true);
   const likeButton = cardElement.querySelector('.element__like');
   const deleteButton = cardElement.querySelector('.element__trash');
+  const openPreviewBtn = cardElement.querySelector('.element__image');
+  const newPlacePicture = cardElement.querySelector('.element__image');
+  const newPlaceName = cardElement.querySelector('.element__title');
 
-  cardElement.querySelector('.element__image').src= placeLink.value;
-  cardElement.querySelector('.element__title').textContent = placeName.value;
+  newPlacePicture.src= placeLink.value;
+  newPlaceName.textContent = placeName.value;
 
   likeButton.addEventListener('click', addLike);
 
   deleteButton.addEventListener('click', deleteItemCard);
+
+  openPreviewBtn.addEventListener('click', e => openPreviewPicturePopop(item));
 
   cardPrepend(cardElement);
 }
@@ -171,22 +186,19 @@ function addNewCard (){
 
 //слушатели для попапа добавления карточек
 openPlacePopupBtn.addEventListener('click', openNewCardPopup);
-closePlacePopupBtn.addEventListener('click', () => closePopup(popupPlace));
+closePlacePopupBtn.addEventListener('click', e => closePopup(popupPlace));
 formPlace.addEventListener('submit', formPlaceSubmitHandler);
 
 
-//функция добавляет адресс картинки и название в дом
+//функция добавляет в превью фото картинки и название в попап просмотра изображения
 function openPreviewPicturePopop (elm){
-  popupPicturePreview.classList.add('page__popup_visible');
+  openPopup(popupPicturePreview);
   currentPicture.src = elm.link;
   currentTitle.textContent = elm.name;
 }
 
 //слушателя для попапа картинки
-closePreviewPicturePopupBtn.addEventListener('click', () => closePopup(popupPicturePreview));
-
-
-
+closePreviewPicturePopupBtn.addEventListener('click', e => closePopup(popupPicturePreview));
 
 
 
