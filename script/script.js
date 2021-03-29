@@ -163,22 +163,26 @@ function formPlaceSubmitHandler(evt) {
 };
 
 //функция добавления новой картинки на страницу
-function addNewCard (){
+function addNewCard (item){
   const cardElement = cardTemplate.cloneNode(true);
   const likeButton = cardElement.querySelector('.element__like');
   const deleteButton = cardElement.querySelector('.element__trash');
   const openPreviewBtn = cardElement.querySelector('.element__image');
-  const newPlacePicture = cardElement.querySelector('.element__image');
-  const newPlaceName = cardElement.querySelector('.element__title');
+  // const newPlacePicture = cardElement.querySelector('.element__image');
+  // const newPlaceName = cardElement.querySelector('.element__title');
 
-  newPlacePicture.src= placeLink.value;
-  newPlaceName.textContent = placeName.value;
+  // newPlacePicture.src= placeLink.value;
+  // newPlaceName.textContent = placeName.value;
+
+  item.link= placeLink.value;
+  item.name = placeName.value;
+
 
   likeButton.addEventListener('click', addLike);
 
   deleteButton.addEventListener('click', deleteItemCard);
 
-  openPreviewBtn.addEventListener('click', e => openPreviewPicturePopop());
+  openPreviewBtn.addEventListener('click', e => openPreviewPicturePopop(item));// не срабатывает обработчик на выведение фото из картинки.
 
   cardPrepend(cardElement);
 }
