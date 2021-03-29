@@ -1,6 +1,6 @@
 .element {
   width: 100%;
-  background: #ffffff;
+  background: var( --color__background_window);
   border-radius: 10px;
   position: relative;
   -webkit-box-sizing: border-box;

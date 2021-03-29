@@ -32,79 +32,16 @@
               <h1 class="profile__user-name">Жак-Ив Кусто</h1>
               <p class="profile__user-job">Исследователь океана</p>
             </div>
-            <button type="button" class="button profile__button-edit"></button>
+            <button
+              type="button"
+              class="button profile__button-edit"
+              id="profile-editBtn"
+            ></button>
           </div>
           <button type="button" class="button profile__button-add"></button>
         </section>
         <section class="elements">
-          <ul class="elements__list">
-            <li class="element elements__list-item">
-              <img
-                src="./images/__place_1.jpg"
-                alt=" Фото залива Куршская Коса"
-                class="element__image"
-              />
-              <div class="element__heading">
-                <h2 class="element__title">Куршская коса</h2>
-                <button type="button" class="element__like"></button>
-              </div>
-            </li>
-            <li class="element elements__list-item">
-              <img
-                src="./images/elm_5.jpg"
-                alt="Фото горы Эльбрус"
-                class="element__image"
-              />
-              <div class="element__heading">
-                <h2 class="element__title">Гора Эльбрус</h2>
-                <button type="button" class="element__like"></button>
-              </div>
-            </li>
-            <li class="element elements__list-item">
-              <img
-                src="./images/__item_5.jpg"
-                alt="Озеро Байкал. Зима. Фотография прозрачного льда озера Байкал"
-                class="element__image"
-              />
-              <div class="element__heading">
-                <h2 class="element__title">Байкал</h2>
-                <button type="button" class="element__like"></button>
-              </div>
-            </li>
-            <li class="element elements__list-item">
-              <img
-                src="./images/__item_10.jpg"
-                alt="Фото вулкана на полуострове Камчатка"
-                class="element__image"
-              />
-              <div class="element__heading">
-                <h2 class="element__title">Камчатка</h2>
-                <button type="button" class="element__like"></button>
-              </div>
-            </li>
-            <li class="element elements__list-item">
-              <img
-                src="./images/__place_5.jpg"
-                alt="Карелия. Лето. Фото реки и леса"
-                class="element__image"
-              />
-              <div class="element__heading">
-                <h2 class="element__title">Карелия</h2>
-                <button type="button" class="element__like"></button>
-              </div>
-            </li>
-            <li class="element elements__list-item">
-              <img
-                src="./images/elm_6.png"
-                alt="Фото древнего монастыря"
-                class="element__image"
-              />
-              <div class="element__heading">
-                <h2 class="element__title">Карачаево-Черкесск</h2>
-                <button type="button" class="element__like"></button>
-              </div>
-            </li>
-          </ul>
+          <ul class="elements__list"></ul>
         </section>
       </main>
       <footer class="footer page__footer">
@@ -112,14 +49,23 @@
       </footer>
     </div>
 
-    <div class="popup page__popup section">
-      <div class="popup__window">
+    <div id="edit-profile" class="popup page__popup section">
+      <div class="popup__window popup__window_size_S">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <button type="button" class="button popup__button-close"></button>
-        <form name="user_profile" class="form" autocomplete="off">
+        <button
+          type="button"
+          class="button popup__button-close popup__button-close_pos_outside"
+          id="close-userPopup"
+        ></button>
+        <form
+          name="user_profile"
+          class="form"
+          autocomplete="off"
+          id="user-profile"
+        >
           <input
             type="text"
-            id="user_name"
+            id="user-name"
             name="user_name"
             maxlength="30"
             minlength="2"
@@ -127,18 +73,90 @@
           />
           <input
             type="text"
-            id="user_job"
+            id="user-job"
             name="user_job"
             maxlength="40"
             minlength="0"
             class="form__input"
           />
-          <button type="submit" class="button form__submit-btn">
+          <button
+            type="submit"
+            class="button form__submit-btn"
+            id="user-submit"
+          >
             Сохранить
           </button>
         </form>
       </div>
     </div>
+
+    <div id="add-place" class="popup page__popup section">
+      <div class="popup__window popup__window_size_S">
+        <h2 class="popup__title">Новое место</h2>
+        <button
+          type="button"
+          class="button popup__button-close popup__button-close_pos_outside"
+          id="close-placePopup"
+        ></button>
+        <form name="place_form" class="form" autocomplete="off" id="place-form">
+          <input
+            type="text"
+            id="place-name"
+            name="place-name"
+            maxlength="30"
+            minlength="2"
+            class="form__input"
+            placeholder="Название (обязательно)"
+            required
+          />
+          <input
+            type="url"
+            id="place-link"
+            name="place-link"
+            class="form__input"
+            placeholder="Ссылка на картинку (обязательно)"
+            required
+          />
+          <button
+            type="submit"
+            class="button form__submit-btn"
+            id="place-submit"
+          >
+            Создать
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div id="picture-popup" class="popup page__popup section">
+      <div class="popup__window popup__window_size_L">
+        <button
+          type="button"
+          class="button popup__button-close popup__button-close_pos_inside"
+          id="close-PicturePopup"
+        ></button>
+        <figure class="popup__figure">
+          <img src="" alt="" class="popup__image" />
+          <figcaption class="popup__caption"></figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <template id="cards-template">
+      <li class="element elements__list-item">
+        <img class="element__image" src="" />
+        <div class="element__heading">
+          <h2 class="element__title"></h2>
+          <button type="button" class="element__like"></button>
+        </div>
+        <button
+          type="button"
+          class="button element__trash"
+          id="delete-Btn"
+        ></button>
+      </li>
+    </template>
+
     <script src="./script/script.js"></script>
   </body>
 </html>

@@ -7,6 +7,7 @@
   font-size: 18px;
   color: #ffffff;
   padding: 15px 132px;
+  width: 100%;
 }
 
 .form__submit-btn:hover {

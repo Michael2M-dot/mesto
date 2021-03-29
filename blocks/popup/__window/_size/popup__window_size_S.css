@@ -1,0 +1,13 @@
+.popup__window_size_S{
+  width: 430px;
+  min-width: 282px;
+  padding: 34px 36px 37px;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 767px) {
+  .popup__window_size_S {
+    width: 282px;
+    padding: 25px 22px;
+  }
+}
