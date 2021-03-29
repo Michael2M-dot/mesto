@@ -7,5 +7,5 @@
   visibility: hidden;
   opacity: 0;
   background: rgba(0, 0, 0, 0.5);
-  transition: visibility .7s ease-out .3s, opacity 0.7s ease-out .3s;
+  transition: visibility .4s ease-out, opacity 0.4s ease-out;
 }
