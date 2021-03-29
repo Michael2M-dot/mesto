@@ -200,16 +200,3 @@ function openPreviewPicturePopop (elm){
 //слушателя для попапа картинки
 closePreviewPicturePopupBtn.addEventListener('click', e => closePopup(popupPicturePreview));
 
-
-
-//передаем лайки на карточки - старый метод
-// const buttons = document.querySelectorAll('.element__like');
-
-// buttons.forEach ((button) =>{
-//   button.addEventListener('click', function(){
-//     button.classList.toggle('element__like_active');
-//   })
-// });
-
-
- // // deleteButton.addEventListener('click', () => cardElement.remove()); /*упрощеный вариант т.к. сразу нахоодимся в функции создания карточки, то обращеемся здесь же сразу к создаваемому элементу.*/
