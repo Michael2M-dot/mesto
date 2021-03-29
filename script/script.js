@@ -178,7 +178,7 @@ function addNewCard (){
 
   deleteButton.addEventListener('click', deleteItemCard);
 
-  openPreviewBtn.addEventListener('click', e => openPreviewPicturePopop(item));
+  openPreviewBtn.addEventListener('click', e => openPreviewPicturePopop());
 
   cardPrepend(cardElement);
 }
