@@ -33,8 +33,6 @@ const openUserPopupBtn = document.querySelector('#profile-editBtn');
 const closeUserPopupBtn = document.querySelector('#close-userPopup');
 const openPlacePopupBtn =document.querySelector('.profile__button-add');
 const closePlacePopupBtn = document.querySelector('#close-placePopup');
-const placeName = document.querySelector('#place-name');
-const placeLink = document.querySelector('#place-link');
 const formPlace = document.querySelector('#place-form');
 const closePreviewPicturePopupBtn = document.querySelector('#close-PicturePopup');
 const popupPicturePreview = document.querySelector('#picture-popup');
@@ -156,8 +154,6 @@ function formUserSubmitHandler(evt){
 openUserPopupBtn.addEventListener('click', openUserPopup);//слушатель для открытия попапа для редактирования профиля пользователя
 closeUserPopupBtn.addEventListener('click', e => closePopup(popupUser));//слушатель для закрытия попапа
 formUser.addEventListener('submit', formUserSubmitHandler); //слушатель для сохрания формы.
-
-
 
 
 //заведение новой карточки места
