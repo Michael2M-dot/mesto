@@ -162,7 +162,7 @@ formUser.addEventListener('submit', formUserSubmitHandler); //слушатель
 //заведение новой карточки места
 //добавлем карточки от пользователя.
 function renderUserCard (){
-let item = {
+const item = {
     name: placeName.value,
     link: placeLink.value
   };
