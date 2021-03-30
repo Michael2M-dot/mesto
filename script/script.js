@@ -38,6 +38,8 @@ const closePreviewPicturePopupBtn = document.querySelector('#close-PicturePopup'
 const popupPicturePreview = document.querySelector('#picture-popup');
 const currentPicture = document.querySelector('.popup__image');
 const currentTitle = document.querySelector('.popup__caption');
+const placeName = document.querySelector('#place-name');
+const placeLink = document.querySelector('#place-link');
 
 
 // работем по карточкам
@@ -159,15 +161,13 @@ formUser.addEventListener('submit', formUserSubmitHandler); //слушатель
 //заведение новой карточки места
 //добавлем карточки от пользователя.
 function addUserCard (){
-  const placeName = document.querySelector('#place-name');
-  const placeLink = document.querySelector('#place-link');
-
   insertCard(placeName.value, placeLink.value);
 }
 
 //открытие popup places с обнулением полей
 function openUserCardPopup() {
   openPopup(popupPlace);
+
   placeName.value = '';
   placeLink.value = '';
 }
