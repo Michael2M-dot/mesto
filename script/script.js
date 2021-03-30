@@ -71,17 +71,15 @@ const initialCards = [
   }
 ]; 
 
-
+//функция создания новой карточек подгружает из массива
 const cardList = document.querySelector('.elements__list');// место куда добавляем карточку
 
-//функция создания новой карточек подгружает из массива
-
-function insertCard (itemName, itemLink){
+function insertCard (item){
   const cardTemplate = document.querySelector('#cards-template').content; //достаем шаблон из template
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
 
-  cardElement.querySelector('.element__title').textContent = itemName;
-  cardElement.querySelector('.element__image').src = itemLink;
+  cardElement.querySelector('.element__title').textContent = item.name;
+  cardElement.querySelector('.element__image').src = item.link;
 
   const likeButton = cardElement.querySelector('.element__like');
   likeButton.addEventListener('click', addLike);
@@ -90,20 +88,24 @@ function insertCard (itemName, itemLink){
   deleteButton.addEventListener('click', deleteItemCard);
 
   const openPreviewBtn = cardElement.querySelector('.element__image');
-  openPreviewBtn.addEventListener('click', e => openPreviewPicturePopop(itemName, itemLink));
+  openPreviewBtn.addEventListener('click', e => openPreviewPicturePopop(item));
 
-  cardList.prepend(cardElement);
+  return cardElement;
+}
+
+function renderCard(item, isPrepend) {
+  const element = insertCard(item);
+  isPrepend ? cardList.prepend(element) : cardList.append(element);
 }
 
 initialCards.forEach(function(item){
-  insertCard(item.name, item.link);
+  renderCard(item);
 });//проходим по массиву и создаем карточки
-
 
 //сабмит для добавления карточек пользователя
 function formPlaceSubmitHandler(evt) {
   evt.preventDefault();
-  addUserCard();
+  renderUserCard();
   closePopup(popupPlace);
 };
 
@@ -121,10 +123,10 @@ function deleteItemCard (evt) {
 };
 
 //функция добавляет в превью фото картинки и название в попап просмотра изображения
-function openPreviewPicturePopop (itemName, itemLink){
+function openPreviewPicturePopop (item){
   openPopup(popupPicturePreview);
-  currentPicture.src = itemLink;
-  currentTitle.textContent = itemName;
+  currentPicture.src = item.link;
+  currentTitle.textContent = item.name;
 }
 
 //универсальная функция закрытия попапа
@@ -157,11 +159,14 @@ openUserPopupBtn.addEventListener('click', openUserPopup);//слушатель �
 closeUserPopupBtn.addEventListener('click', e => closePopup(popupUser));//слушатель для закрытия попапа
 formUser.addEventListener('submit', formUserSubmitHandler); //слушатель для сохрания формы.
 
-
 //заведение новой карточки места
 //добавлем карточки от пользователя.
-function addUserCard (){
-  insertCard(placeName.value, placeLink.value);
+function renderUserCard (){
+let item = {
+    name: placeName.value,
+    link: placeLink.value
+  };
+  renderCard(item, true);
 }
 
 //открытие popup places с обнулением полей
@@ -179,3 +184,27 @@ formPlace.addEventListener('submit', formPlaceSubmitHandler);
 
 //слушателя для попапа картинки
 closePreviewPicturePopupBtn.addEventListener('click', e => closePopup(popupPicturePreview));
+
+
+// function insertCard (itemName, itemLink){
+//   const cardTemplate = document.querySelector('#cards-template').content; //достаем шаблон из template
+//   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
+
+//   cardElement.querySelector('.element__title').textContent = itemName;
+//   cardElement.querySelector('.element__image').src = itemLink;
+
+//   const likeButton = cardElement.querySelector('.element__like');
+//   likeButton.addEventListener('click', addLike);
+
+//   const deleteButton = cardElement.querySelector('.element__trash');
+//   deleteButton.addEventListener('click', deleteItemCard);
+
+//   const openPreviewBtn = cardElement.querySelector('.element__image');
+//   openPreviewBtn.addEventListener('click', e => openPreviewPicturePopop(itemName, itemLink));
+
+//   cardList.prepend(cardElement);
+// }
+
+// initialCards.forEach(function(item){
+//   insertCard(item.name, item.link);
+// });//проходим по массиву и создаем карточки
