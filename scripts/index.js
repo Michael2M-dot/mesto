@@ -51,9 +51,10 @@ const placeLink = document.querySelector('.form__place-link');
 function createCard(item) {
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
 
+  const placeImage = cardElement.querySelector('.element__image'); //это моя ошибка, alt я добавлял после ревью, ну и надо было самому додуматься, что строчка дублируется. 
   cardElement.querySelector('.element__title').textContent = item.name;
-  cardElement.querySelector('.element__image').src = item.link;
-  cardElement.querySelector('.element__image').alt = item.name;
+  placeImage.src = item.link;
+  placeImage.alt = item.name;
 
   const likeButton = cardElement.querySelector('.element__like');
   likeButton.addEventListener('click', handleLikeElement);
