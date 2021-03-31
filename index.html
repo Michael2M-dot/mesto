@@ -1,167 +1,102 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <meta name="author" content="Michael2M" />
-    <link rel="stylesheet" href="./pages/index.css" />
-    <title>МЕСТО-Россия</title>
-  </head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <meta name="author" content="Michael2M" />
+        <link rel="stylesheet" href="./pages/index.css" />
+        <title>МЕСТО-Россия</title>
+    </head>
 
-  <body class="page">
-    <div class="page__container">
-      <header class="header page__header section">
-        <a href="#" class="logo" target="_self">
-          <img
-            src="./images/_mesto_logo.svg"
-            alt="Логотип MESTO"
-            class="header__logo"
-          />
-        </a>
-      </header>
+    <body class="page">
+        <div class="page__container">
+            <header class="header page__header section">
+                <a href="#" class="logo" target="_self">
+                    <img src="./images/_mesto_logo.svg" alt="Логотип MESTO" class="header__logo" />
+                </a>
+            </header>
 
-      <main class="content page__content section section_size_narrow">
-        <section class="profile">
-          <div class="profile__user">
-            <div class="profile__user-avatar"></div>
-            <div
-              class="profile__user-info profile__user-info_margins_top-bottom profile__user-info_margins_left-right"
-            >
-              <h1 class="profile__user-name">Жак-Ив Кусто</h1>
-              <p class="profile__user-job">Исследователь океана</p>
-            </div>
-            <button
-              type="button"
-              class="button profile__button-edit"
-              id="profile-editBtn"
-            ></button>
-          </div>
-          <button type="button" class="button profile__button-add"></button>
-        </section>
-        <section class="elements">
-          <ul class="elements__list"></ul>
-        </section>
-      </main>
-      <footer class="footer page__footer">
-        <p class="footer__copyright">© 2020 Mesto Russia</p>
-      </footer>
-    </div>
-
-    <div id="edit-profile" class="popup page__popup section">
-      <div class="popup__window popup__window_size_S">
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <button
-          type="button"
-          class="button popup__button-close popup__button-close_pos_outside"
-          id="close-userPopup"
-        ></button>
-        <form
-          name="user_profile"
-          class="form"
-          autocomplete="off"
-          id="user-profile"
-        >
-          <input
-            type="text"
-            id="user-name"
-            name="user_name"
-            maxlength="30"
-            minlength="2"
-            class="form__input"
-          />
-          <input
-            type="text"
-            id="user-job"
-            name="user_job"
-            maxlength="40"
-            minlength="0"
-            class="form__input"
-          />
-          <button
-            type="submit"
-            class="button form__submit-btn"
-            id="user-submit"
-          >
-            Сохранить
-          </button>
-        </form>
-      </div>
-    </div>
-
-    <div id="add-place" class="popup page__popup section">
-      <div class="popup__window popup__window_size_S">
-        <h2 class="popup__title">Новое место</h2>
-        <button
-          type="button"
-          class="button popup__button-close popup__button-close_pos_outside"
-          id="close-placePopup"
-        ></button>
-        <form name="place_form" class="form" autocomplete="off" id="place-form">
-          <input
-            type="text"
-            id="place-name"
-            name="place-name"
-            maxlength="30"
-            minlength="2"
-            class="form__input"
-            placeholder="Название (обязательно)"
-            required
-          />
-          <input
-            type="url"
-            id="place-link"
-            name="place-link"
-            class="form__input"
-            placeholder="Ссылка на картинку (обязательно)"
-            required
-          />
-          <button
-            type="submit"
-            class="button form__submit-btn"
-            id="place-submit"
-          >
-            Создать
-          </button>
-        </form>
-      </div>
-    </div>
-
-    <div id="picture-popup" class="popup page__popup section">
-      <div class="popup__window popup__window_size_L">
-        <button
-          type="button"
-          class="button popup__button-close popup__button-close_pos_inside"
-          id="close-PicturePopup"
-        ></button>
-        <figure class="popup__figure">
-          <img
-            src="#"
-            alt="Здесь очень красивое фото. Если вы видете это сообщение, то
-          что-то пошло не так."
-            class="popup__image"
-          />
-          <figcaption class="popup__caption"></figcaption>
-        </figure>
-      </div>
-    </div>
-
-    <template id="cards-template">
-      <li class="element elements__list-item">
-        <img class="element__image" src="#" />
-        <div class="element__heading">
-          <h2 class="element__title"></h2>
-          <button type="button" class="element__like"></button>
+            <main class="content page__content section section_size_narrow">
+                <section class="profile">
+                    <div class="profile__user">
+                        <div class="profile__user-avatar"></div>
+                        <div class="profile__user-info profile__user-info_margins_top-bottom profile__user-info_margins_left-right">
+                            <h1 class="profile__user-name">Жак-Ив Кусто</h1>
+                            <p class="profile__user-job">Исследователь океана</p>
+                        </div>
+                        <button arial-lable="Открыть форму для изменения данных о пользователе" tittle="Открыть" type="button" class="button profile__button-edit" id="profile-editBtn"></button>
+                    </div>
+                    <button arial-lable="Открыть форму для добавлениия фотографий на страницу" tittle="Добавить" type="button" class="button profile__button-add"></button>
+                </section>
+                <section class="elements">
+                    <ul class="elements__list"></ul>
+                </section>
+            </main>
+            <footer class="footer page__footer">
+                <p class="footer__copyright">© 2020 Mesto Russia</p>
+            </footer>
         </div>
-        <button
-          type="button"
-          class="button element__trash"
-          id="delete-Btn"
-        ></button>
-      </li>
-    </template>
 
-    <script src="./script/script.js"></script>
-  </body>
+        <!-- Секция DOM дерева для попапа редактирования данных о пользователе. По умолчанию скрыта. Выводится в видимую область путем создания микса добавлением модификатора page__popup_visible -->
+        <div id="edit-profile" class="popup page__popup section popup__edit-profile">
+            <div class="popup__window popup__window_size_s">
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <button arial-lable="Закрыть форму для изменения данных о пользователе" tittle="Закрыть" type="button" class="button popup__button-close" id="close-userPopup"></button>
+                <form name="user-profile" class="form form__user" autocomplete="off" id="user-profile">
+                    <input type="text" id="user-name" name="user-name" maxlength="30" minlength="2" class="form__input from__user-name" />
+                    <input type="text" id="user-job" name="user-job" maxlength="40" minlength="0" class="form__input form__user-job" />
+                    <button arial-lable="Сохранить изменения данных о пользователе" type="submit" class="button form__submit-btn" id="user-submit">
+                        Сохранить
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Секция DOM дерева для попапа формы добавления новой карточки на страницу. Становиться путем добавления модификатора page__popup_visible -->
+        <div id="add-place" class="popup page__popup section popup__add-place">
+            <div class="popup__window popup__window_size_s">
+                <h2 class="popup__title">Новое место</h2>
+                <button arial-lable="Закрыть форму для добавлениия фотографий на страницу" tittle="Закрыть" type="button" class="button popup__button-close" id="close-placePopup"></button>
+                <form name="place-form" class="form form__place" autocomplete="off" id="place-form">
+                    <input type="text" id="place-name" name="place-name" maxlength="30" minlength="2" class="form__input form__place-name" placeholder="Название (обязательно)" required />
+                    <input type="url" id="place-link" name="place-link" class="form__input form__place-link" placeholder="Ссылка на картинку (обязательно)" required />
+                    <button arial-lable="Создать карточку нового места" type="submit" class="button form__submit-btn" id="place-submit">
+                        Создать
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Секция DOM дерева для попапа полноформатного просмотра картинки на экране. Становиться путем добавления модификатора page__popup_visible. Есть ограничение 75% по высоте и ширине. Ограничение устанавливается через модификатор popup__window_size_l -->
+        <div id="picture-popup" class="popup page__popup section popup__picture">
+            <div class="popup__window popup__window_size_l">
+                <button arial-lable="Закрыть окно просмотра фотографии" tittle="Закрыть" type="button" class="button popup__button-close popup__button-close_pos_inside" id="close-PicturePopup"></button>
+                <figure class="popup__figure">
+                    <img
+                        src="#"
+                        alt=""
+                        class="popup__image"
+                    />
+                    <figcaption class="popup__caption"></figcaption>
+                </figure>
+            </div>
+        </div>
+
+        <!-- Шаблон карточки, которая добавлется в DOM дерево через JS. -->
+        <template class="element__template" id="cards-template">
+            <li class="element elements__list-item">
+                <img class="element__image" src="#" />
+                <div class="element__heading">
+                    <h2 class="element__title"></h2>
+                    <button arial-lable="Поставить/снять лайк на карточке" tittle="Поставить/снять лайк" type="button" class="element__like"></button>
+                </div>
+                <button arial-lable="Удалить карточку со страницы" tittle="Удалить" type="button" class="button element__trash" id="delete-Btn"></button>
+            </li>
+        </template>
+
+        <script src="./scripts/initial-cards.js" type="text/javascript"></script>
+        <script src="./scripts/index.js" type="text/javascript"></script>
+    </body>
 </html>
