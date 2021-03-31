@@ -22,18 +22,18 @@ email: darak.ltd@yandex.ru
 // при вводе в сроке имени, меняем имя вывода на странице
 // при вовде текста в строке должности, менем текст на странице 
 
-const formUser = document.querySelector('.form__user');
+const formUser = document.querySelector('#user-profile');
 const nameInput = document.querySelector('.profile__user-name');
 const jobInput = document.querySelector('.profile__user-job');
-const currentUserName = document.querySelector('.from__user-name'); //получаем и записываем значение переменной из поля по id user-name
-const currentUserJob = document.querySelector('.form__user-job'); //получаем и записываем значение переменной из поля по id user-job
-const popupUser = document.querySelector('.popup__edit-profile');
-const popupPlace = document.querySelector('.popup__add-place');
+const currentUserName = document.querySelector('#user-name'); //получаем и записываем значение переменной из поля по id user-name
+const currentUserJob = document.querySelector('#user-job'); //получаем и записываем значение переменной из поля по id user-job
+const popupUser = document.querySelector('#edit-profile');
+const popupPlace = document.querySelector('#add-place');
 const openUserPopupBtn = document.querySelector('.profile__button-edit');
 const closeUserPopupBtn = document.querySelector('#close-userPopup');
 const openPlacePopupBtn = document.querySelector('.profile__button-add');
 const closePlacePopupBtn = document.querySelector('#close-placePopup');
-const formPlace = document.querySelector('.form__place');
+const formPlace = document.querySelector('#place-form');
 const cardList = document.querySelector('.elements__list');// место куда добавляем карточку
 const cardTemplate = document.querySelector('.element__template').content; //достаем шаблон из template
 const closePreviewPicturePopupBtn = document.querySelector('#close-PicturePopup');
