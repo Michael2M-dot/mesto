@@ -48,7 +48,7 @@ const placeLink = document.querySelector('.form__place-link');
 // оптимальный вариант
 
 //функция создания новой карточек подгружает из массива
-function insertCard(item) {
+function createCard(item) {
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
 
   cardElement.querySelector('.element__title').textContent = item.name;
@@ -68,7 +68,7 @@ function insertCard(item) {
 }
 
 function renderCard(item, isPrepend) {
-  const element = insertCard(item);
+  const element = createCard(item);
   isPrepend ? cardList.prepend(element) : cardList.append(element);
 }
 
