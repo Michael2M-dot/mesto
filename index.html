@@ -40,13 +40,13 @@
         </div>
 
         <!-- Секция DOM дерева для попапа редактирования данных о пользователе. По умолчанию скрыта. Выводится в видимую область путем создания микса добавлением модификатора page__popup_visible -->
-        <div id="edit-profile" class="popup page__popup section popup__edit-profile">
+        <div id="edit-profile" class="popup page__popup section">
             <div class="popup__window popup__window_size_s">
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <button arial-lable="Закрыть форму для изменения данных о пользователе" tittle="Закрыть" type="button" class="button popup__button-close" id="close-userPopup"></button>
-                <form name="user-profile" class="form form__user" autocomplete="off" id="user-profile">
-                    <input type="text" id="user-name" name="user-name" maxlength="30" minlength="2" class="form__input from__user-name" />
-                    <input type="text" id="user-job" name="user-job" maxlength="40" minlength="0" class="form__input form__user-job" />
+                <form name="user-profile" class="form" autocomplete="off" id="user-profile">
+                    <input type="text" id="user-name" name="user-name" maxlength="30" minlength="2" class="form__input" />
+                    <input type="text" id="user-job" name="user-job" maxlength="40" minlength="0" class="form__input" />
                     <button arial-lable="Сохранить изменения данных о пользователе" type="submit" class="button form__submit-btn" id="user-submit">
                         Сохранить
                     </button>
@@ -55,11 +55,11 @@
         </div>
 
         <!-- Секция DOM дерева для попапа формы добавления новой карточки на страницу. Становиться путем добавления модификатора page__popup_visible -->
-        <div id="add-place" class="popup page__popup section popup__add-place">
+        <div id="add-place" class="popup page__popup section">
             <div class="popup__window popup__window_size_s">
                 <h2 class="popup__title">Новое место</h2>
                 <button arial-lable="Закрыть форму для добавлениия фотографий на страницу" tittle="Закрыть" type="button" class="button popup__button-close" id="close-placePopup"></button>
-                <form name="place-form" class="form form__place" autocomplete="off" id="place-form">
+                <form name="place-form" class="form" autocomplete="off" id="place-form">
                     <input type="text" id="place-name" name="place-name" maxlength="30" minlength="2" class="form__input form__place-name" placeholder="Название (обязательно)" required />
                     <input type="url" id="place-link" name="place-link" class="form__input form__place-link" placeholder="Ссылка на картинку (обязательно)" required />
                     <button arial-lable="Создать карточку нового места" type="submit" class="button form__submit-btn" id="place-submit">
@@ -70,7 +70,7 @@
         </div>
 
         <!-- Секция DOM дерева для попапа полноформатного просмотра картинки на экране. Становиться путем добавления модификатора page__popup_visible. Есть ограничение 75% по высоте и ширине. Ограничение устанавливается через модификатор popup__window_size_l -->
-        <div id="picture-popup" class="popup page__popup section popup__picture">
+        <div id="picture-popup" class="popup popup__picture page__popup section">
             <div class="popup__window popup__window_size_l">
                 <button arial-lable="Закрыть окно просмотра фотографии" tittle="Закрыть" type="button" class="button popup__button-close popup__button-close_pos_inside" id="close-PicturePopup"></button>
                 <figure class="popup__figure">
