@@ -30,19 +30,20 @@ const currentUserJob = document.querySelector('.form__user-job'); //получа
 const popupUser = document.querySelector('.popup__edit-profile');
 const popupPlace = document.querySelector('.popup__add-place');
 const openUserPopupBtn = document.querySelector('.profile__button-edit');
-const closeUserPopupBtn = document.querySelector('#close-userPopup');
+// const closeUserPopupBtn = document.querySelector('#close-userPopup');
 const openPlacePopupBtn = document.querySelector('.profile__button-add');
-const closePlacePopupBtn = document.querySelector('#close-placePopup');
+// const closePlacePopupBtn = document.querySelector('#close-placePopup');
 const formPlace = document.querySelector('.form__place');
 const cardList = document.querySelector('.elements__list');// место куда добавляем карточку
 const cardTemplate = document.querySelector('.element__template').content; //достаем шаблон из template
-const closePreviewPicturePopupBtn = document.querySelector('#close-PicturePopup');
+// const closePreviewPicturePopupBtn = document.querySelector('#close-PicturePopup');
 const popupPicturePreview = document.querySelector('.popup__picture');
 const currentPicture = document.querySelector('.popup__image');
 const currentTitle = document.querySelector('.popup__caption');
 const placeName = document.querySelector('.form__place-name');
 const placeLink = document.querySelector('.form__place-link');
 
+const popupWindow = document.querySelector('.popup__picture', '.popup__edit-profile', '.popup__add-place');
 
 // работем по карточкам
 // оптимальный вариант
@@ -106,6 +107,14 @@ function closePopup(popup) {
   popup.classList.remove('page__popup_visible')
 }
 
+function handleCloseWindow(popup, evt) {
+  const eventTarget = evt.target;
+  if (eventTarget.classList.contains('popup') ||
+    eventTarget.classList.contains('popup__button-close')) {
+    closePopup(popup);
+  }
+};//функция для обработчика закрытия попапов для всех кнопок закрытия и для все поапов
+
 //универсальная функция открытия попапа
 function openPopup(popup) {
   popup.classList.add('page__popup_visible');
@@ -126,10 +135,12 @@ function handleFormUserSubmit(evt) {
   closePopup(popupUser); //используем уже готовую функцию для закрытия попапа
 }
 
+
 //слушатели для попапа редактирования данных пользователя
 openUserPopupBtn.addEventListener('click', openUserPopup);//слушатель для открытия попапа для редактирования профиля пользователя
-closeUserPopupBtn.addEventListener('click', e => closePopup(popupUser));//слушатель для закрытия попапа
+popupUser.addEventListener('click', e => (handleCloseWindow(popupUser, e)));
 formUser.addEventListener('submit', handleFormUserSubmit); //слушатель для сохранеия формы.
+
 
 //заведение новой карточки места
 //добавлем карточки от пользователя.
@@ -150,8 +161,10 @@ function openUserCardPopup() {
 
 //слушатели для попапа добавления карточек
 openPlacePopupBtn.addEventListener('click', openUserCardPopup);
-closePlacePopupBtn.addEventListener('click', e => closePopup(popupPlace));
+popupPlace.addEventListener('click', e => (handleCloseWindow(popupPlace, e)));
 formPlace.addEventListener('submit', handleFormPlaceSubmit);
 
+
 //слушателя для попапа картинки
-closePreviewPicturePopupBtn.addEventListener('click', e => closePopup(popupPicturePreview));
+popupPicturePreview.addEventListener('click', e => (handleCloseWindow(popupPicturePreview, e)));
+// popupWindow.addEventListener('click', e => (handleCloseWindow(popupWindow, e)));
