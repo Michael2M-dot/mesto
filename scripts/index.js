@@ -56,17 +56,32 @@ function insertCard(item) {
   cardElement.querySelector('.element__image').src = item.link;
   cardElement.querySelector('.element__image').alt = item.name;
 
-  const likeButton = cardElement.querySelector('.element__like');
-  likeButton.addEventListener('click', handleLikeElement);
+  // const likeButton = cardElement.querySelector('.element__like');
+  // likeButton.addEventListener('click', handleLikeElement);
 
-  const deleteButton = cardElement.querySelector('.element__trash');
-  deleteButton.addEventListener('click', handleDeleteCard);
+  // const deleteButton = cardElement.querySelector('.element__trash');
+  // deleteButton.addEventListener('click', handleDeleteCard);
 
-  const openPreviewBtn = cardElement.querySelector('.element__image');
-  openPreviewBtn.addEventListener('click', e => handlePreviewPicture(item));
+  // const openPreviewBtn = cardElement.querySelector('.element__image');
+  // openPreviewBtn.addEventListener('click', e => handlePreviewPicture(item));
 
   return cardElement;
 }
+
+// универсальный обработчик добавления лайка через делегирование и всплытие
+cardList.addEventListener('click', function (evt, item) {
+  const eventTarget = evt.target;
+  if (eventTarget.classList.contains('element__like')) {
+    eventTarget.classList.toggle('element__like_active');
+  }
+  if (eventTarget.classList.contains('element__trash')) {
+    eventTarget.closest('.elements__list-item').remove();
+  }
+  if (eventTarget.classList.contains('element__image')) {
+    handlePreviewPicture(evt, item);
+  }
+})
+
 
 function renderCard(item, isPrepend) {
   const element = insertCard(item);
@@ -84,15 +99,15 @@ function handleFormPlaceSubmit(evt) {
   closePopup(popupPlace);
 };
 
-//добавляем событие like
-function handleLikeElement(evt) {
-  evt.target.classList.toggle('element__like_active');
-}
+//добавляем событие like - перенесена в универсальное делегирование и всплытие
+// function handleLikeElement(evt) {
+//   evt.target.classList.toggle('element__like_active');
+// }
 
 //добавляем событие для удаления карточки
-function handleDeleteCard(evt) {
-  evt.target.closest('.elements__list-item').remove();
-};
+// function handleDeleteCard(evt) {
+//   evt.target.closest('.elements__list-item').remove();
+// };
 
 //функция добавляет в превью фото картинки и название в попап просмотра изображения
 function handlePreviewPicture(item) {
