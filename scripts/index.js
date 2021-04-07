@@ -22,9 +22,12 @@ email: darak.ltd@yandex.ru
 // при вводе в сроке имени, меняем имя вывода на странице
 // при вовде текста в строке должности, менем текст на странице 
 
-const formUser = document.querySelector('.form__user');
-const nameInput = document.querySelector('.profile__user-name');
-const jobInput = document.querySelector('.profile__user-job');
+// const formUser = document.querySelector('.form__user');
+const formUser = document.forms.userProfileForm;
+// const nameInput = document.querySelector('.profile__user-name');
+const nameInput = formUser.elements.userNameInput;
+// const jobInput = document.querySelector('.profile__user-job');
+const jobInput = formUser.elements.userJobInput;
 const currentUserName = document.querySelector('.from__user-name'); //получаем и записываем значение переменной из поля по id user-name
 const currentUserJob = document.querySelector('.form__user-job'); //получаем и записываем значение переменной из поля по id user-job
 const popupUser = document.querySelector('.popup__edit-profile');
@@ -62,8 +65,8 @@ function insertCard(item) {
   // const deleteButton = cardElement.querySelector('.element__trash');
   // deleteButton.addEventListener('click', handleDeleteCard);
 
-  // const openPreviewBtn = cardElement.querySelector('.element__image');
-  // openPreviewBtn.addEventListener('click', e => handlePreviewPicture(item));
+  const openPreviewBtn = cardElement.querySelector('.element__image');
+  openPreviewBtn.addEventListener('click', e => handlePreviewPicture(item));
 
   return cardElement;
 }
@@ -77,9 +80,9 @@ cardList.addEventListener('click', function (evt, item) {
   if (eventTarget.classList.contains('element__trash')) {
     eventTarget.closest('.elements__list-item').remove();
   }
-  if (eventTarget.classList.contains('element__image')) {
-    handlePreviewPicture(evt, item);
-  }
+  // if (eventTarget.classList.contains('element__image')) {
+  //   handlePreviewPicture(evt, item);
+  // } - дописать слушатель для делегирования по картинке
 })
 
 
