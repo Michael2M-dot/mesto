@@ -108,8 +108,8 @@ function closePopup(popup) {
 }
 
 function handleCloseWindow(popup, evt) {
-  const eventTarget = evt.target || evt.;
-  const escTarget = evt.ketDown;
+  const eventTarget = evt.target;
+  // const escTarget = evt.ketDown;
   if (eventTarget.classList.contains('popup') ||
     eventTarget.classList.contains('popup__button-close')) {
     closePopup(popup);
