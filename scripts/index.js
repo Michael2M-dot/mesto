@@ -43,7 +43,7 @@ const currentTitle = document.querySelector('.popup__caption');
 const placeName = document.querySelector('.form__place-name');
 const placeLink = document.querySelector('.form__place-link');
 
-const popupWindow = document.querySelector('.popup__picture', '.popup__edit-profile', '.popup__add-place');
+const popupWindows = document.querySelectorAll('.popup');
 
 // работем по карточкам
 // оптимальный вариант
@@ -108,7 +108,8 @@ function closePopup(popup) {
 }
 
 function handleCloseWindow(popup, evt) {
-  const eventTarget = evt.target;
+  const eventTarget = evt.target || evt.;
+  const escTarget = evt.ketDown;
   if (eventTarget.classList.contains('popup') ||
     eventTarget.classList.contains('popup__button-close')) {
     closePopup(popup);
@@ -138,7 +139,6 @@ function handleFormUserSubmit(evt) {
 
 //слушатели для попапа редактирования данных пользователя
 openUserPopupBtn.addEventListener('click', openUserPopup);//слушатель для открытия попапа для редактирования профиля пользователя
-popupUser.addEventListener('click', e => (handleCloseWindow(popupUser, e)));
 formUser.addEventListener('submit', handleFormUserSubmit); //слушатель для сохранеия формы.
 
 
@@ -161,10 +161,15 @@ function openUserCardPopup() {
 
 //слушатели для попапа добавления карточек
 openPlacePopupBtn.addEventListener('click', openUserCardPopup);
-popupPlace.addEventListener('click', e => (handleCloseWindow(popupPlace, e)));
 formPlace.addEventListener('submit', handleFormPlaceSubmit);
 
 
+popupWindows.forEach((popup) => {
+  popup.addEventListener('click', e => (handleCloseWindow(popup, e)))
+});//универсальная функция которая запускает все закрытия попапов 
+
+
 //слушателя для попапа картинки
-popupPicturePreview.addEventListener('click', e => (handleCloseWindow(popupPicturePreview, e)));
-// popupWindow.addEventListener('click', e => (handleCloseWindow(popupWindow, e)));
+// popupPicturePreview.addEventListener('click', e => (handleCloseWindow(popupPicturePreview, e)));
+// popupPlace.addEventListener('click', e => (handleCloseWindow(popupPlace, e)));
+// popupUser.addEventListener('click', e => (handleCloseWindow(popupUser, e)));
