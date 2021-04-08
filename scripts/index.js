@@ -24,18 +24,18 @@ email: darak.ltd@yandex.ru
 
 // const formUser = document.querySelector('.form__user');
 const formUser = document.forms.userProfileForm;//форма для редактирования данных пользоватля
-// const nameInput = document.querySelector('.profile__user-name');
-const nameInput = formUser.elements.userNameInput;//переменная поля ввода имени для формы редактирования профиля пользователя
-// const jobInput = document.querySelector('.profile__user-job');
-const jobInput = formUser.elements.userJobInput;//переменная поля ввода професси для формы редактирования профиля пользователя
-const currentUserName = document.querySelector('.from__user-name'); //получаем и записываем значение переменной из поля по id user-name
-const currentUserJob = document.querySelector('.form__user-job'); //получаем и записываем значение переменной из поля по id user-job
+const nameInput = document.querySelector('.profile__user-name');
+const jobInput = document.querySelector('.profile__user-job');
+const userNameInput = formUser.elements.userNameInput;//переменная поля ввода имени для формы редактирования профиля пользователя
+const userJobInput = formUser.elements.userJobInput;//переменная поля ввода професси для формы редактирования профиля пользователя
+// const currentUserName = document.querySelector('.from__user-name'); //получаем и записываем значение переменной из поля по id user-name
+// const currentUserJob = document.querySelector('.form__user-job'); //получаем и записываем значение переменной из поля по id user-job
 const popupUser = document.querySelector('.popup__edit-profile');
 const popupPlace = document.querySelector('.popup__add-place');
 const openUserPopupBtn = document.querySelector('.profile__button-edit');
 // const closeUserPopupBtn = document.querySelector('#close-userPopup');
 const submitButton = document.querySelector('.form__submit-btn');//кнопка форм для формы пользователя "Сохранить" и для формы добавления карты "Создать"
-
+console.log(submitButton)
 
 const openPlacePopupBtn = document.querySelector('.profile__button-add');
 // const closePlacePopupBtn = document.querySelector('#close-placePopup');
@@ -154,19 +154,15 @@ function openPopup(popup) {
 //popup user-profile //функция открытия попапа c заполнение полей
 function openUserPopup() {
   openPopup(popupUser);
-  // currentUserName.value = nameInput.textContent;
-  // currentUserJob.value = jobInput.textContent;
-  nameInput.textContent = currentUserName.value;
-  currentUserJob.value = jobInput.value;
+  userNameInput.value = nameInput.textContent;
+  userJobInput.value = jobInput.textContent;
 };
 
 //функция кнопки Сохранить информацию о пользователе
 function handleFormUserSubmit(evt) {
   evt.preventDefault();
-  // nameInput.textContent = currentUserName.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
-  // jobInput.textContent = currentUserJob.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
-  nameInput.value = currentUserName; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
-  jobInput.value = currentUserJob;
+  nameInput.textContent = userNameInput.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
+  jobInput.textContent = userJobInput.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
   closePopup(popupUser); //используем уже готовую функцию для закрытия попапа
 }
 
