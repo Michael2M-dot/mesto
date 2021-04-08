@@ -44,9 +44,9 @@
             <div class="popup__window popup__window_size_s">
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <button arial-lable="Закрыть форму для изменения данных о пользователе" tittle="Закрыть" type="button" class="button popup__button-close" id="close-userPopup"></button>
-                <form name="user-profile" class="form form__user" autocomplete="off" id="user-profile">
-                    <input type="text" id="user-name" name="user-name" maxlength="30" minlength="2" class="form__input from__user-name" />
-                    <input type="text" id="user-job" name="user-job" maxlength="40" minlength="0" class="form__input form__user-job" />
+                <form name="userProfileForm" class="form form__user" autocomplete="off" id="user-profile">
+                    <input type="text" id="user-name" name="userNameInput" maxlength="30" minlength="2" class="form__input from__user-name" />
+                    <input type="text" id="user-job" name="userJobInput" maxlength="40" minlength="0" class="form__input form__user-job" />
                     <button arial-lable="Сохранить изменения данных о пользователе" type="submit" class="button form__submit-btn" id="user-submit">
                         Сохранить
                     </button>
@@ -59,9 +59,9 @@
             <div class="popup__window popup__window_size_s">
                 <h2 class="popup__title">Новое место</h2>
                 <button arial-lable="Закрыть форму для добавлениия фотографий на страницу" tittle="Закрыть" type="button" class="button popup__button-close" id="close-placePopup"></button>
-                <form name="place-form" class="form form__place" autocomplete="off" id="place-form">
-                    <input type="text" id="place-name" name="place-name" maxlength="30" minlength="2" class="form__input form__place-name" placeholder="Название (обязательно)" required />
-                    <input type="url" id="place-link" name="place-link" class="form__input form__place-link" placeholder="Ссылка на картинку (обязательно)" required />
+                <form name="placeCardForm" class="form form__place" autocomplete="off" id="place-form">
+                    <input type="text" id="place-name" name="placeNameInput" maxlength="30" minlength="2" class="form__input form__place-name" placeholder="Название (обязательно)" required />
+                    <input type="url" id="place-link" name="placeLinkInput" class="form__input form__place-link" placeholder="Ссылка на картинку (обязательно)" required />
                     <button arial-lable="Создать карточку нового места" type="submit" class="button form__submit-btn" id="place-submit">
                         Создать
                     </button>

@@ -23,20 +23,27 @@ email: darak.ltd@yandex.ru
 // при вовде текста в строке должности, менем текст на странице 
 
 // const formUser = document.querySelector('.form__user');
-const formUser = document.forms.userProfileForm;
+const formUser = document.forms.userProfileForm;//форма для редактирования данных пользоватля
 // const nameInput = document.querySelector('.profile__user-name');
-const nameInput = formUser.elements.userNameInput;
+const nameInput = formUser.elements.userNameInput;//переменная поля ввода имени для формы редактирования профиля пользователя
 // const jobInput = document.querySelector('.profile__user-job');
-const jobInput = formUser.elements.userJobInput;
+const jobInput = formUser.elements.userJobInput;//переменная поля ввода професси для формы редактирования профиля пользователя
 const currentUserName = document.querySelector('.from__user-name'); //получаем и записываем значение переменной из поля по id user-name
 const currentUserJob = document.querySelector('.form__user-job'); //получаем и записываем значение переменной из поля по id user-job
 const popupUser = document.querySelector('.popup__edit-profile');
 const popupPlace = document.querySelector('.popup__add-place');
 const openUserPopupBtn = document.querySelector('.profile__button-edit');
 // const closeUserPopupBtn = document.querySelector('#close-userPopup');
+
 const openPlacePopupBtn = document.querySelector('.profile__button-add');
 // const closePlacePopupBtn = document.querySelector('#close-placePopup');
-const formPlace = document.querySelector('.form__place');
+// const formPlace = document.querySelector('.form__place');
+const formPlace = document.forms.placeCardForm;//форма для добавления карточки
+// const placeName = document.querySelector('.form__place-name');
+const placeName = formPlace.elements.placeNameInput;//поле формы добавления карточки, нзвание места
+const placeLink = document.querySelector('.form__place-link');
+const placeLink = formPlace.elements.placeLinkInput;//поле формы карточки, ссылка на фотографию места
+
 const cardList = document.querySelector('.elements__list');// место куда добавляем карточку
 const cardTemplate = document.querySelector('.element__template').content; //достаем шаблон из template
 // const closePreviewPicturePopupBtn = document.querySelector('#close-PicturePopup');
@@ -46,7 +53,8 @@ const currentTitle = document.querySelector('.popup__caption');
 const placeName = document.querySelector('.form__place-name');
 const placeLink = document.querySelector('.form__place-link');
 
-const popupWindows = document.querySelectorAll('.popup');
+
+const popupWindows = document.querySelectorAll('.popup');//универсальная переменная всех поапов на старнице
 
 // работем по карточкам
 // оптимальный вариант
@@ -85,12 +93,13 @@ cardList.addEventListener('click', function (evt, item) {
   // } - дописать слушатель для делегирования по картинке
 })
 
-
+//функция добавления карточки на страницу
 function renderCard(item, isPrepend) {
   const element = insertCard(item);
   isPrepend ? cardList.prepend(element) : cardList.append(element);
 }
 
+//функция автоматического рендеринга карточек на старнице
 initialCards.forEach(function (item) {
   renderCard(item);
 });//проходим по массиву и создаем карточки
@@ -125,6 +134,7 @@ function closePopup(popup) {
   popup.classList.remove('page__popup_visible')
 }
 
+//функция для обработчика закрытия попапов для всех кнопок закрытия и для все поапов
 function handleCloseWindow(popup, evt) {
   const eventTarget = evt.target;
   // const escTarget = evt.ketDown;
@@ -132,7 +142,7 @@ function handleCloseWindow(popup, evt) {
     eventTarget.classList.contains('popup__button-close')) {
     closePopup(popup);
   }
-};//функция для обработчика закрытия попапов для всех кнопок закрытия и для все поапов
+};
 
 //универсальная функция открытия попапа
 function openPopup(popup) {
@@ -142,17 +152,33 @@ function openPopup(popup) {
 //popup user-profile //функция открытия попапа c заполнение полей
 function openUserPopup() {
   openPopup(popupUser);
-  currentUserName.value = nameInput.textContent;
-  currentUserJob.value = jobInput.textContent;
+  // currentUserName.value = nameInput.textContent;
+  // currentUserJob.value = jobInput.textContent;
+  nameInput.textContent = currentUserName.value;
+  currentUserJob.value = jobInput.value;
 };
 
 //функция кнопки Сохранить информацию о пользователе
 function handleFormUserSubmit(evt) {
   evt.preventDefault();
-  nameInput.textContent = currentUserName.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
-  jobInput.textContent = currentUserJob.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
+  // nameInput.textContent = currentUserName.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
+  // jobInput.textContent = currentUserJob.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
+  nameInput.value = currentUserName; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
+  jobInput.value = currentUserJob;
   closePopup(popupUser); //используем уже готовую функцию для закрытия попапа
 }
+
+//универсальная функция проверки состояния валидности формы для активации кнопки сохранить
+function setSubmitButtonState(isFormValid){
+  if (isFormValid){
+    addButton.removeAttribute('disabled');
+    addButton.classList.remove('input__btn_disabled')
+  } else {
+    addButton.setAttribute('disabled', true);
+    addButton.classList.add('input__btn_disabled');
+  }
+}
+
 
 
 //слушатели для попапа редактирования данных пользователя
