@@ -34,6 +34,8 @@ const popupUser = document.querySelector('.popup__edit-profile');
 const popupPlace = document.querySelector('.popup__add-place');
 const openUserPopupBtn = document.querySelector('.profile__button-edit');
 // const closeUserPopupBtn = document.querySelector('#close-userPopup');
+const submitButton = document.querySelector('.form__submit-btn');//кнопка форм для формы пользователя "Сохранить" и для формы добавления карты "Создать"
+
 
 const openPlacePopupBtn = document.querySelector('.profile__button-add');
 // const closePlacePopupBtn = document.querySelector('#close-placePopup');
@@ -41,7 +43,7 @@ const openPlacePopupBtn = document.querySelector('.profile__button-add');
 const formPlace = document.forms.placeCardForm;//форма для добавления карточки
 // const placeName = document.querySelector('.form__place-name');
 const placeName = formPlace.elements.placeNameInput;//поле формы добавления карточки, нзвание места
-const placeLink = document.querySelector('.form__place-link');
+// const placeLink = document.querySelector('.form__place-link');
 const placeLink = formPlace.elements.placeLinkInput;//поле формы карточки, ссылка на фотографию места
 
 const cardList = document.querySelector('.elements__list');// место куда добавляем карточку
@@ -50,8 +52,8 @@ const cardTemplate = document.querySelector('.element__template').content; //д�
 const popupPicturePreview = document.querySelector('.popup__picture');
 const currentPicture = document.querySelector('.popup__image');
 const currentTitle = document.querySelector('.popup__caption');
-const placeName = document.querySelector('.form__place-name');
-const placeLink = document.querySelector('.form__place-link');
+// const placeName = document.querySelector('.form__place-name');
+// const placeLink = document.querySelector('.form__place-link');
 
 
 const popupWindows = document.querySelectorAll('.popup');//универсальная переменная всех поапов на старнице
@@ -171,15 +173,21 @@ function handleFormUserSubmit(evt) {
 //универсальная функция проверки состояния валидности формы для активации кнопки сохранить
 function setSubmitButtonState(isFormValid){
   if (isFormValid){
-    addButton.removeAttribute('disabled');
-    addButton.classList.remove('input__btn_disabled')
+    submitButton.removeAttribute('disabled');
+    submitButton.classList.remove('form__submit-btn_disabled')
   } else {
-    addButton.setAttribute('disabled', true);
-    addButton.classList.add('input__btn_disabled');
+    submitButton.setAttribute('disabled', true);
+    submitButton.classList.add('form__submit-btn_disabled');
   }
 }
 
-
+//универсальная функция проверки заполнения полей в формах
+function setInpitState (input, i) {
+  const isValid = input[i].value;
+  if(isValid.length > 0) {
+    setSubmitButtonState(isValid)
+  }
+}
 
 //слушатели для попапа редактирования данных пользователя
 openUserPopupBtn.addEventListener('click', openUserPopup);//слушатель для открытия попапа для редактирования профиля пользователя

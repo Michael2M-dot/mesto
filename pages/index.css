@@ -50,4 +50,4 @@
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__input/form__input.css);
 @import url(../blocks/form/__submit-btn/form__submit-btn.css);
-@import url(../blocks/form/__submit-btn/_disabled/form__submit-btn_diasabled.css);
+@import url(../blocks/form/__submit-btn/_disabled/form__submit-btn_disabled.css);
