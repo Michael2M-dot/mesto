@@ -34,8 +34,7 @@ const popupUser = document.querySelector('.popup__edit-profile');
 const popupPlace = document.querySelector('.popup__add-place');
 const openUserPopupBtn = document.querySelector('.profile__button-edit');
 // const closeUserPopupBtn = document.querySelector('#close-userPopup');
-const submitButton = document.querySelector('.form__submit-btn');//кнопка форм для формы пользователя "Сохранить" и для формы добавления карты "Создать"
-console.log(submitButton)
+const userFormSubmitButton = formUser.querySelector('#user-submit');//кнопка форм для формы пользователя "Сохранить" и для формы добавления карты "Создать"
 
 const openPlacePopupBtn = document.querySelector('.profile__button-add');
 // const closePlacePopupBtn = document.querySelector('#close-placePopup');
@@ -45,6 +44,7 @@ const formPlace = document.forms.placeCardForm;//форма для добавл�
 const placeName = formPlace.elements.placeNameInput;//поле формы добавления карточки, нзвание места
 // const placeLink = document.querySelector('.form__place-link');
 const placeLink = formPlace.elements.placeLinkInput;//поле формы карточки, ссылка на фотографию места
+const placeFromSubmitButton = formPlace.querySelector('#place-submit');
 
 const cardList = document.querySelector('.elements__list');// место куда добавляем карточку
 const cardTemplate = document.querySelector('.element__template').content; //достаем шаблон из template
@@ -54,9 +54,9 @@ const currentPicture = document.querySelector('.popup__image');
 const currentTitle = document.querySelector('.popup__caption');
 // const placeName = document.querySelector('.form__place-name');
 // const placeLink = document.querySelector('.form__place-link');
-
-
 const popupWindows = document.querySelectorAll('.popup');//универсальная переменная всех поапов на старнице
+
+
 
 // работем по карточкам
 // оптимальный вариант
@@ -167,7 +167,7 @@ function handleFormUserSubmit(evt) {
 }
 
 //универсальная функция проверки состояния валидности формы для активации кнопки сохранить
-function setSubmitButtonState(isFormValid){
+function setSubmitButtonState(submitButton, isFormValid){
   if (isFormValid){
     submitButton.removeAttribute('disabled');
     submitButton.classList.remove('form__submit-btn_disabled')
@@ -177,17 +177,46 @@ function setSubmitButtonState(isFormValid){
   }
 }
 
-//универсальная функция проверки заполнения полей в формах
-function setInpitState (input, i) {
-  const isValid = input[i].value;
-  if(isValid.length > 0) {
-    setSubmitButtonState(isValid)
-  }
-}
+// слушатель для инпутов попапа добавления карточки пользователя
+formUser.addEventListener('input', function (evt){
+  const isValid = userNameInput.value.length > 2 && userNameInput.value.length < 40  && userJobInput.value.length > 2 && userJobInput.value.length < 200;
+  setSubmitButtonState(userFormSubmitButton, isValid);
+});
 
-//слушатели для попапа редактирования данных пользователя
-openUserPopupBtn.addEventListener('click', openUserPopup);//слушатель для открытия попапа для редактирования профиля пользователя
-formUser.addEventListener('submit', handleFormUserSubmit); //слушатель для сохранеия формы.
+//слушатель для инпута картинки
+formPlace.addEventListener('input', function (evt) {
+  const isValid = placeName.value.length > 1 && placeName.value.length < 30 && placeLink.value.length > 2
+  setSubmitButtonState(placeFromSubmitButton, isValid);
+  console.log('ура')
+});
+
+
+
+// function setSubmitButtonState(elm, isFormValid){
+//   if (isFormValid){
+//     elm.removeAttribute('disabled');
+//     elm.classList.remove('form__submit-btn_disabled')
+//   } else {
+//     elm.setAttribute('disabled', true);
+//     elm.classList.add('form__submit-btn_disabled');
+//   }
+// }
+//
+// submitButtons.forEach(function (elm){
+//   formPlace.addEventListener('input', function (evt){
+//     const isValid = elm.value.length > 0 && elm.value.length > 0
+//     setSubmitButtonState(isValid);
+//   });
+// });
+
+
+
+
+
+//универсальная функция которая запускает все закрытия попапов
+popupWindows.forEach((popup) => {
+  popup.addEventListener('click', e => (handleCloseWindow(popup, e)))
+});
 
 
 //заведение новой карточки места
@@ -203,18 +232,18 @@ function renderUserCard() {
 //открытие popup places с обнулением полей
 function openUserCardPopup() {
   openPopup(popupPlace);
-
   formPlace.reset();
 }
+
+//слушатели для попапа редактирования данных пользователя
+openUserPopupBtn.addEventListener('click', openUserPopup);//слушатель для открытия попапа для редактирования профиля пользователя
+formUser.addEventListener('submit', handleFormUserSubmit); //слушатель для сохранеия формы.
 
 //слушатели для попапа добавления карточек
 openPlacePopupBtn.addEventListener('click', openUserCardPopup);
 formPlace.addEventListener('submit', handleFormPlaceSubmit);
 
 
-popupWindows.forEach((popup) => {
-  popup.addEventListener('click', e => (handleCloseWindow(popup, e)))
-});//универсальная функция которая запускает все закрытия попапов 
 
 
 //слушателя для попапа картинки
