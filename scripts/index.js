@@ -177,6 +177,7 @@ function setSubmitButtonState(submitButton, isFormValid){
   }
 }
 
+
 // слушатель для инпутов попапа добавления карточки пользователя
 formUser.addEventListener('input', function (evt){
   const isValid = userNameInput.value.length > 2 && userNameInput.value.length < 40  && userJobInput.value.length > 2 && userJobInput.value.length < 200;
@@ -189,28 +190,6 @@ formPlace.addEventListener('input', function (evt) {
   setSubmitButtonState(placeFromSubmitButton, isValid);
   console.log('ура')
 });
-
-
-
-// function setSubmitButtonState(elm, isFormValid){
-//   if (isFormValid){
-//     elm.removeAttribute('disabled');
-//     elm.classList.remove('form__submit-btn_disabled')
-//   } else {
-//     elm.setAttribute('disabled', true);
-//     elm.classList.add('form__submit-btn_disabled');
-//   }
-// }
-//
-// submitButtons.forEach(function (elm){
-//   formPlace.addEventListener('input', function (evt){
-//     const isValid = elm.value.length > 0 && elm.value.length > 0
-//     setSubmitButtonState(isValid);
-//   });
-// });
-
-
-
 
 
 //универсальная функция которая запускает все закрытия попапов
