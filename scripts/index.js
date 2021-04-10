@@ -1,5 +1,4 @@
-/*
-Project Mesto-Russia
+/* Project Mesto-Russia
 Version 0.04a - 30.03.2021
 
 Description: Скрипт запускает:
@@ -13,7 +12,7 @@ Description: Скрипт запускает:
 
 4. Добавляет карточки пользователя на страницу. При клике на иконку добавления картинки, открывает попап и форму для добавления карточки на страницу. Карточка добавляется в начало ряда. Для добавления карточки в поля вводим название и URL (в теге <input>  установлени атрибуту url)
 
-5. Открывает попап с превью на картинку. По клику на изображение открывает попап с полноформатным фото и подписью к нему. 
+5. Открывает попап с превью на картинку. По клику на изображение открывает попап с полноформатным фото и подписью к нему.
 
 Michael2M (c) 2021
 email: darak.ltd@yandex.ru
@@ -188,7 +187,6 @@ formUser.addEventListener('input', function (evt){
 formPlace.addEventListener('input', function (evt) {
   const isValid = placeName.value.length > 1 && placeName.value.length < 30 && placeLink.value.length > 2
   setSubmitButtonState(placeFromSubmitButton, isValid);
-  console.log('ура')
 });
 
 
