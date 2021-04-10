@@ -3,9 +3,9 @@
      -moz-appearance: none;
           appearance: none;
   border-radius: 2px;
-  background-color: #000000;
+  background-color: var(--color__background);
   font-size: 18px;
-  color: #ffffff;
+  color: var(--color__main-text_profile);
   padding: 15px 132px;
   width: 100%;
 }
