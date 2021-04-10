@@ -46,12 +46,12 @@
                 <button arial-lable="Закрыть форму для изменения данных о пользователе" tittle="Закрыть" type="button" class="button popup__button-close" id="close-userPopup"></button>
                 <form name="userProfileForm" class="form form__user" autocomplete="off" id="user-profile" novalidate>
                     <label class="form__fieldset">
-                        <input type="text" class="form__input from__user-name" id="user-name-input" placeholder="Имя" required maxlength="40" minlength="2"/>
+                        <input type="text" class="form__input from__user-name" id="user-name-input" name="userNameInput" placeholder="Имя" required maxlength="40" minlength="2"/>
                         <!--                    <span class="form__placeholder">Имя</span>-->
                         <span class="form__input-error user-name-input-error"></span>
                     </label>
                     <label class="form__fieldset">
-                        <input type="text" class="form__input form__user-job" id="user-job-input" placeholder="О себе" required maxlength="200" minlength="2"/>
+                        <input type="text" class="form__input form__user-job" id="user-job-input" name="userJobInput" placeholder="О себе" required maxlength="200" minlength="2"/>
                         <!--                    <span class="form__placeholder">О себе</span>-->
                         <span class="form__input-error user-job-input-error"></span>
                     </label>
@@ -69,11 +69,11 @@
                 <button arial-lable="Закрыть форму для добавлениия фотографий на страницу" tittle="Закрыть" type="button" class="button popup__button-close" id="close-placePopup"></button>
                 <form name="placeCardForm" class="form form__place" autocomplete="off" id="place-form" novalidate>
                     <label class="form__fieldset">
-                        <input type="text" class="form__input form__place-name" id="place-name-input" placeholder="Название (обязательно)" required maxlength="30" minlength="2"/>
+                        <input type="text" class="form__input form__place-name" id="place-name-input" name="placeNameInput" placeholder="Название (обязательно)" required maxlength="30" minlength="2"/>
                         <span class="form__input-error place-name-input-error"></span>
                     </label>
                     <label class="form__fieldset">
-                        <input type="url" class="form__input form__place-link" id="place-link-input" placeholder="Ссылка на картинку (обязательно)" required />
+                        <input type="url" class="form__input form__place-link" id="place-link-input" nmae="placeLinkInput" placeholder="Ссылка на картинку (обязательно)" required />
                         <span class="form__input-error place-link-input-error"></span>
                     </label>
                     <button arial-lable="Создать карточку нового места" type="submit" class="button form__submit-btn form__submit-btn_disabled" id="place-submit" disabled>
