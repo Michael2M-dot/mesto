@@ -44,10 +44,20 @@
             <div class="popup__window popup__window_size_s">
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <button arial-lable="Закрыть форму для изменения данных о пользователе" tittle="Закрыть" type="button" class="button popup__button-close" id="close-userPopup"></button>
-                <form name="user-profile" class="form" autocomplete="off" id="user-profile">
-                    <input type="text" id="user-name" name="user-name" maxlength="30" minlength="2" class="form__input" />
-                    <input type="text" id="user-job" name="user-job" maxlength="40" minlength="0" class="form__input" />
-                    <button arial-lable="Сохранить изменения данных о пользователе" type="submit" class="button form__submit-btn" id="user-submit">
+
+                <form name="userProfileForm" class="form form__user" autocomplete="off" id="user-profile" novalidate>
+                    <label class="form__fieldset">
+                        <input type="text" class="form__input from__user-name" id="user-name-input" placeholder="Имя" required maxlength="40" minlength="2"/>
+                        <!--                    <span class="form__placeholder">Имя</span>-->
+                        <span class="form__input-error user-name-input-error"></span>
+                    </label>
+                    <label class="form__fieldset">
+                        <input type="text" class="form__input form__user-job" id="user-job-input" placeholder="О себе" required maxlength="200" minlength="2"/>
+                        <!--                    <span class="form__placeholder">О себе</span>-->
+                        <span class="form__input-error user-job-input-error"></span>
+                    </label>
+                    <button arial-lable="Сохранить изменения данных о пользователе" type="submit" class="button form__submit-btn" id="user-submit" >
+
                         Сохранить
                     </button>
                 </form>
@@ -59,10 +69,18 @@
             <div class="popup__window popup__window_size_s">
                 <h2 class="popup__title">Новое место</h2>
                 <button arial-lable="Закрыть форму для добавлениия фотографий на страницу" tittle="Закрыть" type="button" class="button popup__button-close" id="close-placePopup"></button>
-                <form name="place-form" class="form" autocomplete="off" id="place-form">
-                    <input type="text" id="place-name" name="place-name" maxlength="30" minlength="2" class="form__input form__place-name" placeholder="Название (обязательно)" required />
-                    <input type="url" id="place-link" name="place-link" class="form__input form__place-link" placeholder="Ссылка на картинку (обязательно)" required />
-                    <button arial-lable="Создать карточку нового места" type="submit" class="button form__submit-btn" id="place-submit">
+
+                <form name="placeCardForm" class="form form__place" autocomplete="off" id="place-form" novalidate>
+                    <label class="form__fieldset">
+                        <input type="text" class="form__input form__place-name" id="place-name-input" placeholder="Название (обязательно)" required maxlength="30" minlength="2"/>
+                        <span class="form__input-error place-name-input-error"></span>
+                    </label>
+                    <label class="form__fieldset">
+                        <input type="url" class="form__input form__place-link" id="place-link-input" placeholder="Ссылка на картинку (обязательно)" required />
+                        <span class="form__input-error place-link-input-error"></span>
+                    </label>
+                    <button arial-lable="Создать карточку нового места" type="submit" class="button form__submit-btn form__submit-btn_disabled" id="place-submit" disabled>
+
                         Создать
                     </button>
                 </form>
@@ -97,6 +115,7 @@
         </template>
 
         <script src="./scripts/initial-cards.js" type="text/javascript"></script>
+        <script src="./scripts/validate.js" type="text/javascript"></script>
         <script src="./scripts/index.js" type="text/javascript"></script>
     </body>
 </html>
