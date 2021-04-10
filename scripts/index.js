@@ -21,6 +21,7 @@ email: darak.ltd@yandex.ru
 // при вводе в сроке имени, меняем имя вывода на странице
 // при вовде текста в строке должности, менем текст на странице 
 
+
 // const formUser = document.querySelector('.form__user');
 const formUser = document.forms.userProfileForm;//форма для редактирования данных пользоватля
 const nameInput = document.querySelector('.profile__user-name');
@@ -31,11 +32,13 @@ const userJobInput = formUser.elements.userJobInput;//переменная по�
 // const currentUserJob = document.querySelector('.form__user-job'); //получаем и записываем значение переменной из поля по id user-job
 const popupUser = document.querySelector('.popup__edit-profile');
 const popupPlace = document.querySelector('.popup__add-place');
+
 const openUserPopupBtn = document.querySelector('.profile__button-edit');
 // const closeUserPopupBtn = document.querySelector('#close-userPopup');
 const userFormSubmitButton = formUser.querySelector('#user-submit');//кнопка форм для формы пользователя "Сохранить" и для формы добавления карты "Создать"
 
 const openPlacePopupBtn = document.querySelector('.profile__button-add');
+
 // const closePlacePopupBtn = document.querySelector('#close-placePopup');
 // const formPlace = document.querySelector('.form__place');
 const formPlace = document.forms.placeCardForm;//форма для добавления карточки
@@ -49,6 +52,7 @@ const cardList = document.querySelector('.elements__list');// место куд�
 const cardTemplate = document.querySelector('.element__template').content; //достаем шаблон из template
 // const closePreviewPicturePopupBtn = document.querySelector('#close-PicturePopup');
 const popupPicturePreview = document.querySelector('.popup__picture');
+
 const currentPicture = document.querySelector('.popup__image');
 const currentTitle = document.querySelector('.popup__caption');
 // const placeName = document.querySelector('.form__place-name');
@@ -61,12 +65,13 @@ const popupWindows = document.querySelectorAll('.popup');//универсаль�
 // оптимальный вариант
 
 //функция создания новой карточек подгружает из массива
-function insertCard(item) {
+function createCard(item) {
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
 
+  const placeImage = cardElement.querySelector('.element__image'); //это моя ошибка, alt я добавлял после ревью, ну и надо было самому додуматься, что строчка дублируется. 
   cardElement.querySelector('.element__title').textContent = item.name;
-  cardElement.querySelector('.element__image').src = item.link;
-  cardElement.querySelector('.element__image').alt = item.name;
+  placeImage.src = item.link;
+  placeImage.alt = item.name;
 
   // const likeButton = cardElement.querySelector('.element__like');
   // likeButton.addEventListener('click', handleLikeElement);
@@ -96,7 +101,7 @@ cardList.addEventListener('click', function (evt, item) {
 
 //функция добавления карточки на страницу
 function renderCard(item, isPrepend) {
-  const element = insertCard(item);
+  const element = createCard(item);
   isPrepend ? cardList.prepend(element) : cardList.append(element);
 }
 
