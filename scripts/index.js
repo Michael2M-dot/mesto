@@ -36,7 +36,7 @@ const popupPlace = document.querySelector('.popup__add-place');
 const openUserPopupBtn = document.querySelector('.profile__button-edit');
 const closeUserPopupBtn = document.querySelector('#close-userPopup');
 const openPlacePopupBtn = document.querySelector('.profile__button-add');
-
+const userFormSubmitButton = document.querySelector('#place-submit');
 const closePlacePopupBtn = document.querySelector('#close-placePopup');
 // const formPlace = document.querySelector('.form__place');
 const formPlace = document.forms.placeCardForm;//форма для добавления карточки
@@ -188,7 +188,7 @@ formUser.addEventListener('input', function (evt){
 
 //слушатель для инпута картинки
 formPlace.addEventListener('input', function (evt) {
-  const isValid = placeName.value.length > 1 && placeName.value.length < 30 && placeLink.value.length > 2
+  const isValid = placeName.value.length > 1 && placeName.value.length < 30 && placeLink.value.length > 2;
   setSubmitButtonState(placeFromSubmitButton, isValid);
 });
 
