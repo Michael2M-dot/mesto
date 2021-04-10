@@ -22,22 +22,35 @@ email: darak.ltd@yandex.ru
 // при вводе в сроке имени, меняем имя вывода на странице
 // при вовде текста в строке должности, менем текст на странице 
 
-const formUser = document.querySelector('#user-profile');
+// const formUser = document.querySelector('.form__user');
+const formUser = document.forms.userProfileForm;//форма для редактирования данных пользоватля
 const nameInput = document.querySelector('.profile__user-name');
 const jobInput = document.querySelector('.profile__user-job');
-const currentUserName = document.querySelector('#user-name'); //получаем и записываем значение переменной из поля по id user-name
-const currentUserJob = document.querySelector('#user-job'); //получаем и записываем значение переменной из поля по id user-job
-const popupUser = document.querySelector('#edit-profile');
-const popupPlace = document.querySelector('#add-place');
+const userNameInput = formUser.elements.userNameInput;//переменная поля ввода имени для формы редактирования профиля пользователя
+const userJobInput = formUser.elements.userJobInput;//переменная поля ввода професси для формы редактирования профиля пользователя
+// const currentUserName = document.querySelector('.from__user-name'); //получаем и записываем значение переменной из поля по id user-name
+// const currentUserJob = document.querySelector('.form__user-job'); //получаем и записываем значение переменной из поля по id user-job
+const popupUser = document.querySelector('.popup__edit-profile');
+const popupPlace = document.querySelector('.popup__add-place');
+
 const openUserPopupBtn = document.querySelector('.profile__button-edit');
 const closeUserPopupBtn = document.querySelector('#close-userPopup');
 const openPlacePopupBtn = document.querySelector('.profile__button-add');
-const closePlacePopupBtn = document.querySelector('#close-placePopup');
-const formPlace = document.querySelector('#place-form');
+
+// const closePlacePopupBtn = document.querySelector('#close-placePopup');
+// const formPlace = document.querySelector('.form__place');
+const formPlace = document.forms.placeCardForm;//форма для добавления карточки
+// const placeName = document.querySelector('.form__place-name');
+const placeName = formPlace.elements.placeNameInput;//поле формы добавления карточки, нзвание места
+// const placeLink = document.querySelector('.form__place-link');
+const placeLink = formPlace.elements.placeLinkInput;//поле формы карточки, ссылка на фотографию места
+const placeFromSubmitButton = formPlace.querySelector('#place-submit');
+
 const cardList = document.querySelector('.elements__list');// место куда добавляем карточку
 const cardTemplate = document.querySelector('.element__template').content; //достаем шаблон из template
-const closePreviewPicturePopupBtn = document.querySelector('#close-PicturePopup');
-const popupPicturePreview = document.querySelector('#popup-picture');
+// const closePreviewPicturePopupBtn = document.querySelector('#close-PicturePopup');
+const popupPicturePreview = document.querySelector('.popup__picture');
+
 const currentPicture = document.querySelector('.popup__image');
 const currentTitle = document.querySelector('.popup__caption');
 const placeName = document.querySelector('.form__place-name');
