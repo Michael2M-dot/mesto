@@ -44,7 +44,8 @@ const formPlace = document.forms.placeCardForm;//форма для добавл�
 const placeName = formPlace.elements.placeNameInput;//поле формы добавления карточки, нзвание места
 // const placeLink = document.querySelector('.form__place-link');
 const placeLink = formPlace.elements.placeLinkInput;//поле формы карточки, ссылка на фотографию места
-const placeFromSubmitButton = formPlace.querySelector('#place-submit');
+// const placeFromSubmitButton = formPlace.querySelector('#place-submit');
+const formInputErrors = document.querySelectorAll('.form__input-error');
 
 const cardList = document.querySelector('.elements__list');// место куда добавляем карточку
 const cardTemplate = document.querySelector('.element__template').content; //достаем шаблон из template
@@ -141,7 +142,7 @@ function closePopup(popup) {
 //функция для обработчика закрытия попапов для всех кнопок закрытия и для все поапов
 function handleCloseWindow(popup, evt) {
   const eventTarget = evt.target;
-  // const escTarget = evt.ketDown;
+  // const escTarget = evt.keyDown;
   if (eventTarget.classList.contains('popup') ||
     eventTarget.classList.contains('popup__button-close')) {
     closePopup(popup);
@@ -169,28 +170,28 @@ function handleFormUserSubmit(evt) {
 }
 
 //универсальная функция проверки состояния валидности формы для активации кнопки сохранить
-function setSubmitButtonState(submitButton, isFormValid){
-  if (isFormValid){
-    submitButton.removeAttribute('disabled');
-    submitButton.classList.remove('form__submit-btn_disabled')
-  } else {
-    submitButton.setAttribute('disabled', true);
-    submitButton.classList.add('form__submit-btn_disabled');
-  }
-}
+// function setSubmitButtonState(submitButton, isFormValid){
+//   if (isFormValid){
+//     submitButton.removeAttribute('disabled');
+//     submitButton.classList.remove('form__submit-btn_disabled')
+//   } else {
+//     submitButton.setAttribute('disabled', true);
+//     submitButton.classList.add('form__submit-btn_disabled');
+//   }
+// }
 
-
-// слушатель для инпутов попапа добавления карточки пользователя
-formUser.addEventListener('input', function (evt){
-  const isValid = userNameInput.value.length > 2 && userNameInput.value.length < 40  && userJobInput.value.length > 2 && userJobInput.value.length < 200;
-  setSubmitButtonState(userFormSubmitButton, isValid);
-});
-
-//слушатель для инпута картинки
-formPlace.addEventListener('input', function (evt) {
-  const isValid = placeName.value.length > 1 && placeName.value.length < 30 && placeLink.value.length > 2;
-  setSubmitButtonState(placeFromSubmitButton, isValid);
-});
+//
+// // слушатель для инпутов попапа добавления карточки пользователя
+// formUser.addEventListener('input', function (evt){
+//   const isValid = userNameInput.value.length > 2 && userNameInput.value.length < 40  && userJobInput.value.length > 2 && userJobInput.value.length < 200;
+//   setSubmitButtonState(userFormSubmitButton, isValid);
+// });
+//
+// //слушатель для инпута картинки
+// formPlace.addEventListener('input', function (evt) {
+//   const isValid = placeName.value.length > 1 && placeName.value.length < 30 && placeLink.value.length > 2;
+//   setSubmitButtonState(placeFromSubmitButton, isValid);
+// });
 
 
 //универсальная функция которая запускает все закрытия попапов
@@ -214,7 +215,9 @@ function openUserCardPopup() {
   openPopup(popupPlace);
 
   formPlace.reset();
+
 }
+
 
 //слушатели для попапа редактирования данных пользователя
 openUserPopupBtn.addEventListener('click', openUserPopup);//слушатель для открытия попапа для редактирования профиля пользователя
