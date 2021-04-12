@@ -62,12 +62,11 @@ const popupWindows = document.querySelectorAll('.popup');//универсаль�
 
 // работем по карточкам
 // оптимальный вариант
-
 //функция создания новой карточек подгружает из массива
 function createCard(item) {
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
-
   const placeImage = cardElement.querySelector('.element__image'); //это моя ошибка, alt я добавлял после ревью, ну и надо было самому додуматься, что строчка дублируется. 
+
   cardElement.querySelector('.element__title').textContent = item.name;
   placeImage.src = item.link;
   placeImage.alt = item.name;
@@ -143,7 +142,7 @@ function closePopup(popup) {
 function handleCloseWindow(popup, evt) {
   const eventTarget = evt.target;
   // const escTarget = evt.keyDown;
-  if (eventTarget.classList.contains('popup') ||
+  if (eventTarget.classList.contains('page__popup') ||
     eventTarget.classList.contains('popup__button-close')) {
     closePopup(popup);
   }
