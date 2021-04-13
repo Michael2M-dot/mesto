@@ -72,15 +72,15 @@ const checkInputValidity =  (inputElement, selectors) => {
 }
 
 //функция добавляет классы и атрибуты на кнопку и делает ее неактивной
-const handleSubmitButtonDisabled = (btnElement, selectors) => {
-    btnElement.setAttribute('disabled', true,)
-    btnElement.classList.add(selectors.disabledBtnSelector);
+const handleSubmitButtonDisabled = (buttonElement, selectors) => {
+    buttonElement.setAttribute('disabled', true,);
+    buttonElement.classList.add(selectors.disabledBtnSelector);
 }
 
 // функция делающая кнопку активной убирает классы и атрибуты
-const handleSubmitButtonEnabled = (btnElement, selectors) => {
-    btnElement.removeAttribute('disabled')
-    btnElement.classList.remove(selectors.disabledBtnSelector);
+const handleSubmitButtonEnabled = (buttonElement, selectors) => {
+    buttonElement.removeAttribute('disabled');
+    buttonElement.classList.remove(selectors.disabledBtnSelector);
 }
 
 
@@ -97,7 +97,7 @@ const toggleButtonState = (inputList, buttonElement, selectors) => {
     * массива inputList  и проверяет каждый элемент на валидность его полей, но в отличие от every останавливаетс
     * когда находит невалидное значениев совйстве validity.valid - и возвращает true если
     * хотябы один из атрибутов формы не прошел валидацию и false если все атрибуты формы прошли валадицюи*/
-    const hasInvalidInput = inputList.some(findInvalidInput)
+    const hasInvalidInput = inputList.some(findInvalidInput);
 
     //задаем усоловие, если есть невалидное поле, то меняем состояние кнопки и делаем ее не активной.
     if(hasInvalidInput){

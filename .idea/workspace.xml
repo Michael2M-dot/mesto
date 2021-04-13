@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28f30e0e-dcd9-4412-ba28-6f5fcb09ef0c" name="Default Changelist" comment="refactored form place and add CSS file for disabled button">
-      <change beforePath="$PROJECT_DIR$/pages/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/validate.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/validate.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -87,7 +87,7 @@
       <workItem from="1618038041864" duration="149000" />
       <workItem from="1618038248291" duration="21793000" />
       <workItem from="1618120932121" duration="64640000" />
-      <workItem from="1618321479195" duration="305000" />
+      <workItem from="1618321479195" duration="621000" />
     </task>
     <task id="LOCAL-00001" summary="refactored UserForm and inputs">
       <created>1617800461169</created>

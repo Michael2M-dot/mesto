@@ -119,7 +119,7 @@ function handleFormPlaceSubmit(evt) {
   handleFormSubmit(evt);
   renderUserCard();
   closePopup(popupPlace);
-  handleDisableButton();//отключаем кнопку сабмита
+  handleDisableButton(evt);//отключаем кнопку сабмита
 };
 
 
@@ -172,7 +172,7 @@ function closePopup(popup) {
 //функция для отключения кнопки submit. преводит кнопку в disabled  и убирает класс, делающий кнопу активной
 function handleDisableButton() {
   const submitButtons = document.querySelectorAll('.form__submit-btn')
-  submitButtons.forEach((btnElement) => handleSubmitButtonDisabled(btnElement, selectors))
+  submitButtons.forEach((buttonElement) => handleSubmitButtonDisabled(buttonElement, selectors))
 };
 
 
