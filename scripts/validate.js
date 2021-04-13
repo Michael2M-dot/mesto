@@ -102,10 +102,10 @@ const toggleButtonState = (inputList, buttonElement, selectors) => {
     //задаем усоловие, если есть невалидное поле, то меняем состояние кнопки и делаем ее не активной.
     if(hasInvalidInput){
         handleSubmitButtonDisabled(buttonElement, selectors);
-    }
+    } else {
         handleSubmitButtonEnabled(buttonElement, selectors);
+    }
 }
-
 
 //функция работает по элементам формы. на каждый элемент вешает обработчики
 const setEventListener = (formElement, selectors) => {
