@@ -32,7 +32,8 @@ const selectors = {
     submitBtnSelector: '.form__submit-btn',
     disabledBtnSelector: 'form__submit-btn_disabled',
     errorsSelector: '.form__input-error',
-    formSection: '.form__fieldset'
+    formSection: '.form__fieldset',
+    inputErrorSelector: 'form__input-error_active'
 }
 
 
@@ -44,7 +45,7 @@ const showInputError = (inputElement, errorMessage, selectors) => {
     const errorElement = formSectionElement.querySelector(selectors.errorsSelector);
     //указываем что в данное поле будет выводиться ошибка errorMessage
     errorElement.textContent = errorMessage;
-    errorElement.classList.add('form__input-error_active');//добваляем класс отвечающий за отображение ошибки
+    errorElement.classList.add(selectors.inputErrorSelector);//добваляем класс отвечающий за отображение ошибки
 }
 
 
@@ -55,7 +56,7 @@ const hideInputError = (inputElement, selectors) => {
     const errorElement = formSectionElement.querySelector(selectors.errorsSelector);
 
     errorElement.textContent = '';//убираем отображение текста ошибки
-    errorElement.classList.remove('form__input-error_active');//удаляем класс отображающий ошибку
+    errorElement.classList.remove(selectors.inputErrorSelector);//удаляем класс отображающий ошибку
 }
 
 //проверяет валидность поля ввода. В качестве аргумента передаем само поле
