@@ -109,8 +109,8 @@ initialCards.forEach(function (item) {
 
 
 //функция снимающая дефолтное действи при нажатии на submit: при нажатии страница не перезагружается
-const handleFormSubmit = (event) => {
-  event.preventDefault();
+const handleFormSubmit = (evt) => {
+  evt.preventDefault();
 }
 
 
@@ -147,7 +147,6 @@ function handleCloseWindow(popup, evt) {
   if (evt.target.classList.contains('page__popup') ||
       evt.target.classList.contains('popup__button-close') ||
       evt.key === 'Escape') {
-    console.log('я здесь!')
     closePopup(popup);
     handleDisableButton();
     handleInputErrorsHide();
@@ -173,7 +172,7 @@ function closePopup(popup) {
 //функция для отключения кнопки submit. преводит кнопку в disabled  и убирает класс, делающий кнопу активной
 function handleDisableButton() {
   const submitButtons = document.querySelectorAll('.form__submit-btn')
-  submitButtons.forEach((buttonElement) => handleSubmitButtonDisabled(buttonElement))
+  submitButtons.forEach((btnElement) => handleSubmitButtonDisabled(btnElement, selectors))
 };
 
 
