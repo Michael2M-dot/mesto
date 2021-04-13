@@ -40,51 +40,51 @@
         </div>
 
         <!-- Секция DOM дерева для попапа редактирования данных о пользователе. По умолчанию скрыта. Выводится в видимую область путем создания микса добавлением модификатора page__popup_visible -->
-        <div class="popup page__popup popup__edit-profile section" id="edit-profile" >
+        <section class="popup page__popup section" id="edit-profile" >
             <div class="popup__window popup__window_size_s">
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <button arial-lable="Закрыть форму для изменения данных о пользователе" tittle="Закрыть" type="button" class="button popup__button-close" id="close-userPopup"></button>
-                <form class="form form__user" id="user-profile"  name="userProfileForm" autocomplete="off" novalidate>
-                    <section class="form__fieldset" for="user-name-input">
-                        <input type="text" class="form__input from__user-name" id="user-name-input" name="userNameInput" placeholder="Имя" required maxlength="40" minlength="2"/>
+                <form class="form" id="user-profile"  name="userProfileForm" autocomplete="off" novalidate>
+                    <label class="form__fieldset" for="user-name-input">
+                        <input type="text" class="form__input" id="user-name-input" name="userNameInput" placeholder="Имя" required maxlength="40" minlength="2"/>
                         <!--                    <span class="form__placeholder">Имя</span>-->
                         <span class="form__input-error" id="user-name-input-error"></span>
-                    </section>
-                    <section class="form__fieldset" for="user-job-input">
+                    </label>
+                    <label class="form__fieldset" for="user-job-input">
                         <input type="text" class="form__input form__user-job" id="user-job-input" name="userJobInput" placeholder="О себе" required maxlength="200" minlength="2"/>
                         <!--                    <span class="form__placeholder">О себе</span>-->
                         <span class="form__input-error" id="user-job-input-error"></span>
-                    </section>
+                    </label>
                     <button arial-lable="Сохранить изменения данных о пользователе" type="submit" class="button form__submit-btn" id="user-submit">
                         Сохранить
                     </button>
                 </form>
             </div>
-        </div>
+        </section>
 
         <!-- Секция DOM дерева для попапа формы добавления новой карточки на страницу. Становиться путем добавления модификатора page__popup_visible -->
-        <div class="popup page__popup section popup__add-place" id="add-place">
+        <section class="popup page__popup section" id="add-place">
             <div class="popup__window popup__window_size_s">
                 <h2 class="popup__title">Новое место</h2>
                 <button arial-lable="Закрыть форму для добавлениия фотографий на страницу" tittle="Закрыть" type="button" class="button popup__button-close" id="close-placePopup"></button>
-                <form class="form form__place" id="place-form" name="placeCardForm" autocomplete="off" novalidate>
-                    <section class="form__fieldset" for="place-name-input">
-                        <input type="text" class="form__input form__place-name" id="place-name-input" name="placeNameInput" placeholder="Название (обязательно)" required maxlength="30" minlength="2"/>
+                <form class="form" id="place-form" name="placeCardForm" autocomplete="off" novalidate>
+                    <label class="form__fieldset" for="place-name-input">
+                        <input type="text" class="form__input" id="place-name-input" name="placeNameInput" placeholder="Название (обязательно)" required maxlength="30" minlength="2"/>
                         <span class="form__input-error" id="place-name-input-error"></span>
-                    </section>
-                    <section class="form__fieldset" for="place-link-input">
+                    </label>
+                    <label class="form__fieldset" for="place-link-input">
                         <input type="url" class="form__input form__place-link" id="place-link-input" name="placeLinkInput" placeholder="Ссылка на картинку (обязательно)" required />
                         <span class="form__input-error" id="place-link-input-error"></span>
-                    </section>
+                    </label>
                     <button arial-lable="Создать карточку нового места" type="submit" class="button form__submit-btn" id="place-submit">
                         Создать
                     </button>
                 </form>
             </div>
-        </div>
+        </section>
 
         <!-- Секция DOM дерева для попапа полноформатного просмотра картинки на экране. Становиться путем добавления модификатора page__popup_visible. Есть ограничение 75% по высоте и ширине. Ограничение устанавливается через модификатор popup__window_size_l -->
-        <div id="picture-popup" class="popup page__popup section popup__picture">
+        <section id="picture-popup" class="popup page__popup section popup__picture">
             <div class="popup__window popup__window_size_l">
                 <button arial-lable="Закрыть окно просмотра фотографии" tittle="Закрыть" type="button" class="button popup__button-close popup__button-close_pos_inside" id="close-PicturePopup"></button>
                 <figure class="popup__figure">
@@ -92,7 +92,7 @@
                     <figcaption class="popup__caption"></figcaption>
                 </figure>
             </div>
-        </div>
+        </section>
 
         <!-- Шаблон карточки. Карточка добавлется в DOM дерево через JS. -->
         <template class="element__template" id="cards-template">
