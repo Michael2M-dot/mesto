@@ -145,24 +145,23 @@ function handlePreviewPicture(item) {
 
 
 //функция управляющая закрытием всех попапов как от нажатия кнопок так и по кликам на оверлее или ECS
-function handleCloseWindow(popup, evt) {
+function handleMouseCloseWindow(popup, evt) {
   if (evt.target.classList.contains('page__popup') ||
-      evt.target.classList.contains('popup__button-close') ||
-      evt.key === 'Escape') {
+      evt.target.classList.contains('popup__button-close')) {
     closePopup(popup);
-    // document.removeEventListener('keydown', evt => handleCloseWindow(popup, evt))
-    console.log('вот и я!!')
+    console.log('опять и я!!')
   }
 };
 
-function handleKeyboardCloseWindow(popup, evt) {
+//функция управляющая закрытием по
+function handleKeyboardCloseWindow(evt) {
+  const slavePopup = document.querySelector('.page__popup_visible')
   if (evt.key === 'Escape') {
-    closePopup(popup);
+    closePopup(slavePopup);
     // document.removeEventListener('keydown', evt => handleCloseWindow(popup, evt))
     console.log('вот и я!!')
   }
 };
-
 
 
 //вспомагательная функция которая повторно вызывает hideInputError и скрывает вывод ошибок, когда форма закрывается без сохранения значений
@@ -173,6 +172,7 @@ const handleInputErrorsHide = (popup) => {
       hideInputError(input, selectors));
 }
 
+
 //функция для отключения кнопки submit. преводит кнопку в disabled  и убирает класс, делающий кнопу активной
 function handleDisableButton(popup) {
   const submitButtons = popup.querySelectorAll('.form__submit-btn')
@@ -180,20 +180,17 @@ function handleDisableButton(popup) {
 };
 
 
+//универсальная функция открытия попапа
+function openPopup(popup) {
+  popup.classList.add('page__popup_visible');
+  document.addEventListener('keydown', handleKeyboardCloseWindow)
+}
+
 
 //универсальная функция закрытия попапа
 function closePopup(popup) {
   popup.classList.remove('page__popup_visible');
-  popup.removeEventListener('keydown', evt => handleKeyboardCloseWindow(popup, evt))
-  // const popupOverlay = popup.closest('.page')
-  // popupOverlay.removeEventListener('keydown', evt => handleCloseWindow(popup, evt))
-}
-
-
-//универсальная функция открытия попапа
-function openPopup(popup) {
-  popup.classList.add('page__popup_visible');
-  popup.addEventListener('keydown', evt => handleKeyboardCloseWindow(popup, evt))
+  document.removeEventListener('keydown', handleKeyboardCloseWindow)
 }
 
 
@@ -218,7 +215,7 @@ function openUserCardPopup() {
 
 //универсальная функция которая запускает все закрытия попапов
 popupWindows.forEach((popup) => {
-  popup.addEventListener('click', evt => handleCloseWindow(popup, evt))
+  popup.addEventListener('click', evt => handleMouseCloseWindow(popup, evt))
   // document.addEventListener('keydown', evt => handleCloseWindow(popup, evt))
 });
 
@@ -242,6 +239,7 @@ formUser.addEventListener('submit', handleFormUserSubmit); //слушатель 
 //слушатели для попапа добавления карточек
 openPlacePopupBtn.addEventListener('click', openUserCardPopup);
 formPlace.addEventListener('submit', handleFormPlaceSubmit)
+
 
 
 // универсальный обработчик добавления лайка через делегирование и всплытие события на родителе -
