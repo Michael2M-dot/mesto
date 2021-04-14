@@ -144,22 +144,20 @@ function handlePreviewPicture(item) {
 }
 
 
-//функция управляющая закрытием всех попапов как от нажатия кнопок так и по кликам на оверлее или ECS
+//функция управляющая закрытием всех попапов как от нажатия кнопок так и по кликам на оверлее
 function handleMouseCloseWindow(popup, evt) {
   if (evt.target.classList.contains('page__popup') ||
       evt.target.classList.contains('popup__button-close')) {
     closePopup(popup);
-    console.log('опять и я!!')
   }
 };
 
-//функция управляющая закрытием по
+
+//функция управляющая закрытием попапа по клику на клавиатуре
 function handleKeyboardCloseWindow(evt) {
   const slavePopup = document.querySelector('.page__popup_visible')
   if (evt.key === 'Escape') {
     closePopup(slavePopup);
-    // document.removeEventListener('keydown', evt => handleCloseWindow(popup, evt))
-    console.log('вот и я!!')
   }
 };
 
@@ -216,7 +214,6 @@ function openUserCardPopup() {
 //универсальная функция которая запускает все закрытия попапов
 popupWindows.forEach((popup) => {
   popup.addEventListener('click', evt => handleMouseCloseWindow(popup, evt))
-  // document.addEventListener('keydown', evt => handleCloseWindow(popup, evt))
 });
 
 
