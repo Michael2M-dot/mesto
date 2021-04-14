@@ -72,27 +72,17 @@ function createCard(item) {
   placeImage.src = item.link;
   placeImage.alt = item.name;
 
+  const likeButton = cardElement.querySelector('.element__like');
+  likeButton.addEventListener('click', handleLikeElement);
+
+  const deleteButton = cardElement.querySelector('.element__trash');
+  deleteButton.addEventListener('click', handleDeleteCard);
+
   const openPreviewBtn = cardElement.querySelector('.element__image');
   openPreviewBtn.addEventListener('click', e => handlePreviewPicture(item));
 
   return cardElement;
 }
-
-
-// универсальный обработчик добавления лайка через делегирование и всплытие события на родителе
-cardList.addEventListener('click', function (evt, item) {
-  const eventTarget = evt.target;
-  if (eventTarget.classList.contains('element__like')) {
-    eventTarget.classList.toggle('element__like_active');
-  }
-  if (eventTarget.classList.contains('element__trash')) {
-    eventTarget.closest('.elements__list-item').remove();
-  }
-  // if (eventTarget.classList.contains('element__image')) {
-  //   handlePreviewPicture(evt.target, item);
-  // } //дописать слушатель для делегирования по картинке
-})
-//TODO = дописать слушатель для делегирования по всплытия для открытия ппопапа просмотра картинки.
 
 
 //функция добавления карточки на страницу
@@ -222,3 +212,20 @@ formUser.addEventListener('submit', handleFormUserSubmit); //слушатель 
 //слушатели для попапа добавления карточек
 openPlacePopupBtn.addEventListener('click', openUserCardPopup);
 formPlace.addEventListener('submit', handleFormPlaceSubmit)
+
+
+// универсальный обработчик добавления лайка через делегирование и всплытие события на родителе -
+//  закомитил как вариант отлавливания ошибок на родителе.
+// cardList.addEventListener('click', function (evt, item) {
+//   const eventTarget = evt.target;
+//   if (eventTarget.classList.contains('element__like')) {
+//     eventTarget.classList.toggle('element__like_active');
+//   }
+//   if (eventTarget.classList.contains('element__trash')) {
+//     eventTarget.closest('.elements__list-item').remove();
+//   }
+//   // if (eventTarget.classList.contains('element__image')) {
+//   //   handlePreviewPicture(evt.target, item);
+//   // } //дописать слушатель для делегирования по картинке
+// })
+// //TODO = дописать слушатель для делегирования по всплытия для открытия ппопапа просмотра картинки.
