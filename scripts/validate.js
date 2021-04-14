@@ -62,14 +62,11 @@ const hideInputError = (inputElement, selectors) => {
 //проверяет валидность поля ввода. В качестве аргумента передаем само поле
 const checkInputValidity =  (inputElement, selectors) => {
     const isInputNotValid = !inputElement.validity.valid;//проверяет свойство из API браузера
-    //добавляем условие проверки и действия
-    if(isInputNotValid){
-        const errorMessage = inputElement.validationMessage;/*в случае ошибки в валидации, присваиваем errorMessage
+    const errorMessage = inputElement.validationMessage;/*в случае ошибки в валидации, присваиваем errorMessage
         стандартную фразу описание ошибки браузером*/
-        showInputError(inputElement, errorMessage, selectors);//выводим стандартную браузерную ошибку
-    }else{
-        hideInputError(inputElement, selectors); //скрываем ошибку в поле вывода
-    }
+
+    //добавляем условие проверки и действия, выводим стандартную браузерную ошибку или скрываем
+    isInputNotValid ? showInputError(inputElement, errorMessage, selectors) : hideInputError(inputElement, selectors);
 }
 
 //функция добавляет классы и атрибуты на кнопку и делает ее неактивной
@@ -101,11 +98,7 @@ const toggleButtonState = (inputList, buttonElement, selectors) => {
     const hasInvalidInput = inputList.some(findInvalidInput);
 
     //задаем усоловие, если есть невалидное поле, то меняем состояние кнопки и делаем ее не активной.
-    if(hasInvalidInput){
-        handleSubmitButtonDisabled(buttonElement, selectors);
-    } else {
-        handleSubmitButtonEnabled(buttonElement, selectors);
-    }
+    hasInvalidInput ? handleSubmitButtonDisabled(buttonElement, selectors) : handleSubmitButtonEnabled(buttonElement, selectors)
 }
 
 //функция работает по элементам формы. на каждый элемент вешает обработчики

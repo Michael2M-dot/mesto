@@ -72,14 +72,16 @@ function createCard(item) {
   placeImage.src = item.link;
   placeImage.alt = item.name;
 
+  //добавляемя слушателя события по клику, который запускает функцию добавления Like
   const likeButton = cardElement.querySelector('.element__like');
   likeButton.addEventListener('click', handleLikeElement);
 
+  //добавляем слушателя события по клику, который запускает функцию удаления карточки.
   const deleteButton = cardElement.querySelector('.element__trash');
   deleteButton.addEventListener('click', handleDeleteCard);
 
-  const openPreviewBtn = cardElement.querySelector('.element__image');
-  openPreviewBtn.addEventListener('click', e => handlePreviewPicture(item));
+  //добавляем слушателя по клику, который запускает функцию полноразмерного отображения фото
+  placeImage.addEventListener('click', (e) => handlePreviewPicture(item));
 
   return cardElement;
 }
@@ -98,13 +100,23 @@ initialCards.forEach(function (item) {
 });//проходим по массиву и создаем карточки
 
 
-//функция снимающая дефолтное действи при нажатии на submit: при нажатии страница не перезагружается
+//функция снимающая действие по умолчанию при нажатии на кнопку submit: при нажатии страница не перезагружается
 const handleFormSubmit = (evt) => {
   evt.preventDefault();
 }
 
+//функция, при вызове которой добавляется класс на like
+function handleLikeElement(evt) {
+  evt.target.classList.toggle('element__like_active');
+}
 
-//сабмит для добавления карточек пользователя
+//функция, при вызове которой происходит удаление элемента из DOM
+function handleDeleteCard(evt) {
+  evt.target.closest('.elements__list-item').remove();
+};
+
+
+//Функция обработчик события на сабмите, которая добавляет элемент (карточка пользователя) в DOM
 function handleFormPlaceSubmit(evt) {
   handleFormSubmit(evt);
   renderUserCard();
@@ -119,7 +131,7 @@ function handleFormUserSubmit(evt) {
   nameInput.textContent = userNameInput.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
   jobInput.textContent = userJobInput.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
   closePopup(popupUser); //используем уже готовую функцию для закрытия попапа
-  handleDisableButton();//отключаем кнопку сабмита
+  // handleDisableButton(evt);//отключаем кнопку сабмита
 }
 
 
@@ -138,37 +150,50 @@ function handleCloseWindow(popup, evt) {
       evt.target.classList.contains('popup__button-close') ||
       evt.key === 'Escape') {
     closePopup(popup);
-    handleDisableButton();
-    handleInputErrorsHide();
+    // document.removeEventListener('keydown', evt => handleCloseWindow(popup, evt))
+    console.log('вот и я!!')
+  }
+};
+
+function handleKeyboardCloseWindow(popup, evt) {
+  if (evt.key === 'Escape') {
+    closePopup(popup);
+    // document.removeEventListener('keydown', evt => handleCloseWindow(popup, evt))
+    console.log('вот и я!!')
   }
 };
 
 
+
 //вспомагательная функция которая повторно вызывает hideInputError и скрывает вывод ошибок, когда форма закрывается без сохранения значений
-const handleInputErrorsHide = () => {
+const handleInputErrorsHide = (popup) => {
   //обнуляем поля ошибки при закрытии формы через вызов универсально функции hideInputError
-  const inputElements = document.querySelectorAll('.form__fieldset')
+  const inputElements = popup.querySelectorAll('.form__fieldset')
   inputElements.forEach((input) =>
       hideInputError(input, selectors));
 }
+
+//функция для отключения кнопки submit. преводит кнопку в disabled  и убирает класс, делающий кнопу активной
+function handleDisableButton(popup) {
+  const submitButtons = popup.querySelectorAll('.form__submit-btn')
+  submitButtons.forEach((buttonElement) => handleSubmitButtonDisabled(buttonElement, selectors))
+};
+
 
 
 //универсальная функция закрытия попапа
 function closePopup(popup) {
   popup.classList.remove('page__popup_visible');
+  popup.removeEventListener('keydown', evt => handleKeyboardCloseWindow(popup, evt))
+  // const popupOverlay = popup.closest('.page')
+  // popupOverlay.removeEventListener('keydown', evt => handleCloseWindow(popup, evt))
 }
-
-
-//функция для отключения кнопки submit. преводит кнопку в disabled  и убирает класс, делающий кнопу активной
-function handleDisableButton() {
-  const submitButtons = document.querySelectorAll('.form__submit-btn')
-  submitButtons.forEach((buttonElement) => handleSubmitButtonDisabled(buttonElement, selectors))
-};
 
 
 //универсальная функция открытия попапа
 function openPopup(popup) {
   popup.classList.add('page__popup_visible');
+  popup.addEventListener('keydown', evt => handleKeyboardCloseWindow(popup, evt))
 }
 
 
@@ -177,6 +202,8 @@ function openUserPopup() {
   openPopup(popupUser);
   userNameInput.value = nameInput.textContent;
   userJobInput.value = jobInput.textContent;
+  handleDisableButton(popupUser);
+  handleInputErrorsHide(popupUser);
 };
 
 
@@ -184,13 +211,15 @@ function openUserPopup() {
 function openUserCardPopup() {
   openPopup(popupPlace);
   formPlace.reset();
+  handleDisableButton(popupPlace);
+  handleInputErrorsHide(popupPlace);
 }
 
 
 //универсальная функция которая запускает все закрытия попапов
 popupWindows.forEach((popup) => {
   popup.addEventListener('click', evt => handleCloseWindow(popup, evt))
-  document.addEventListener('keydown', evt => handleCloseWindow(popup, evt))
+  // document.addEventListener('keydown', evt => handleCloseWindow(popup, evt))
 });
 
 
@@ -203,6 +232,7 @@ function renderUserCard() {
   };
   renderCard(item, true);
 }
+
 
 
 //слушатели для попапа редактирования данных пользователя
