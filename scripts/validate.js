@@ -86,9 +86,7 @@ const handleSubmitButtonEnabled = (buttonElement, selectors) => {
 
 
 //функция которая ищет невалидное поле и в данном случае используюя (!) если поле не прошло валидацюи возврщаем false
-const findInvalidInput = (inputElement) => {
-    return !inputElement.validity.valid;
-};
+const findInvalidInput = ((inputElement) => !inputElement.validity.valid);
 
 
 /* функия меняющая состояние кнопки в зависимости от условия. В качестве аргументов передаем массив всех инпутов и
@@ -105,21 +103,6 @@ const toggleButtonState = (inputList, buttonElement, selectors) => {
 }
 
 
-//функция итератор, которая проходит по всем элеметам массива
-/*на каждый инпут из элемент массива всех инпутов в данной форме добавляем обработчкик события ввода input, в качестве
-аргумента передается сам элемент input*/
-const inputElementIterator = (inputElement) => {
-    //функция вызывающая функции по событию
-    const handleInput = () => {
-        checkInputValidity(inputElement, selectors);//передаем аргументом поле ввода функции, отвечающей за проверку валидности
-        toggleButtonState(inputList, buttonElement, selectors);/*передаем аргументом форму и кнопку, по которой нужно изменить
-            состояние согласно функции*/
-    }
-    //добавляем слушателей на инпут и по событию вызываем функцию handleInput
-    inputElement.addEventListener('input', handleInput);
-}
-
-
 //функция работает по элементам формы. на каждый элемент вешает обработчики
 const setEventListener = (formElement, selectors) => {
     //добавляет функцию на каждый элемент формы.
@@ -128,7 +111,6 @@ const setEventListener = (formElement, selectors) => {
     //создаем массив из всех полей input в данной форме
     const inputElements = formElement.querySelectorAll(selectors.inputSelector);
     const inputList = Array.from(inputElements);
-    // console.log(inputList)
     //находим кнопку submit отвечающую за отправку формы.
     const buttonElement = formElement.querySelector(selectors.submitBtnSelector)
 
