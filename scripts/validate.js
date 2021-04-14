@@ -59,6 +59,7 @@ const hideInputError = (inputElement, selectors) => {
     errorElement.classList.remove(selectors.inputErrorSelector);//удаляем класс отображающий ошибку
 }
 
+
 //проверяет валидность поля ввода. В качестве аргумента передаем само поле
 const checkInputValidity =  (inputElement, selectors) => {
     const isInputNotValid = !inputElement.validity.valid;//проверяет свойство из API браузера
@@ -69,11 +70,13 @@ const checkInputValidity =  (inputElement, selectors) => {
     isInputNotValid ? showInputError(inputElement, errorMessage, selectors) : hideInputError(inputElement, selectors);
 }
 
+
 //функция добавляет классы и атрибуты на кнопку и делает ее неактивной
 const handleSubmitButtonDisabled = (buttonElement, selectors) => {
     buttonElement.setAttribute('disabled', true,);
     buttonElement.classList.add(selectors.disabledBtnSelector);
 }
+
 
 // функция делающая кнопку активной убирает классы и атрибуты
 const handleSubmitButtonEnabled = (buttonElement, selectors) => {
@@ -82,15 +85,15 @@ const handleSubmitButtonEnabled = (buttonElement, selectors) => {
 }
 
 
+//функция которая ищет невалидное поле и в данном случае используюя (!) если поле не прошло валидацюи возврщаем false
+const findInvalidInput = (inputElement) => {
+    return !inputElement.validity.valid;
+};
+
+
 /* функия меняющая состояние кнопки в зависимости от условия. В качестве аргументов передаем массив всех инпутов и
 * элемент кнопку, по которой будет происходить изменение состояния*/
 const toggleButtonState = (inputList, buttonElement, selectors) => {
-    //функция которая изщет невалидное поле
-    //в данном случае используюя ! если поле не прошло валидацюи возврщаем false
-    const findInvalidInput = (inputElement) => {
-        return !inputElement.validity.valid;
-    };
-
     /* функция которая определяет состояние полей ввода методом some. Данный метод проходит по всем элементам
     * массива inputList  и проверяет каждый элемент на валидность его полей, но в отличие от every останавливаетс
     * когда находит невалидное значениев совйстве validity.valid - и возвращает true если
@@ -100,6 +103,22 @@ const toggleButtonState = (inputList, buttonElement, selectors) => {
     //задаем усоловие, если есть невалидное поле, то меняем состояние кнопки и делаем ее не активной.
     hasInvalidInput ? handleSubmitButtonDisabled(buttonElement, selectors) : handleSubmitButtonEnabled(buttonElement, selectors)
 }
+
+
+//функция итератор, которая проходит по всем элеметам массива
+/*на каждый инпут из элемент массива всех инпутов в данной форме добавляем обработчкик события ввода input, в качестве
+аргумента передается сам элемент input*/
+const inputElementIterator = (inputElement) => {
+    //функция вызывающая функции по событию
+    const handleInput = () => {
+        checkInputValidity(inputElement, selectors);//передаем аргументом поле ввода функции, отвечающей за проверку валидности
+        toggleButtonState(inputList, buttonElement, selectors);/*передаем аргументом форму и кнопку, по которой нужно изменить
+            состояние согласно функции*/
+    }
+    //добавляем слушателей на инпут и по событию вызываем функцию handleInput
+    inputElement.addEventListener('input', handleInput);
+}
+
 
 //функция работает по элементам формы. на каждый элемент вешает обработчики
 const setEventListener = (formElement, selectors) => {
