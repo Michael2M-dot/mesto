@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="28f30e0e-dcd9-4412-ba28-6f5fcb09ef0c" name="Default Changelist" comment="refactored form place and add CSS file for disabled button">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +94,7 @@
       <workItem from="1618038248291" duration="21793000" />
       <workItem from="1618120932121" duration="64640000" />
       <workItem from="1618321479195" duration="18236000" />
-      <workItem from="1618407188654" duration="8885000" />
+      <workItem from="1618407188654" duration="9165000" />
     </task>
     <task id="LOCAL-00001" summary="refactored UserForm and inputs">
       <created>1617800461169</created>
