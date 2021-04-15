@@ -121,7 +121,6 @@ function handleFormPlaceSubmit(evt) {
   handleFormSubmit(evt);
   renderUserCard();
   closePopup(popupPlace);
-  handleDisableButton(evt);//отключаем кнопку сабмита
 };
 
 
@@ -131,7 +130,6 @@ function handleFormUserSubmit(evt) {
   nameInput.textContent = userNameInput.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
   jobInput.textContent = userJobInput.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
   closePopup(popupUser); //используем уже готовую функцию для закрытия попапа
-  // handleDisableButton(evt);//отключаем кнопку сабмита
 }
 
 
