@@ -53,51 +53,146 @@ const formPlace = document.forms.placeCardForm;//форма для добавл�
 const placeName = formPlace.elements.placeNameInput;//поле формы добавления карточки, нзвание места
 const placeLink = formPlace.elements.placeLinkInput;//поле формы карточки, ссылка на фотографию места
 const formInputErrors = document.querySelectorAll('.form__input-error');
-const cardList = document.querySelector('.elements__list');// место куда добавляем карточку
-const cardTemplate = document.querySelector('.element__template').content; //достаем шаблон из template
-const closePreviewPicturePopupBtn = document.querySelector('#close-PicturePopup');
-const popupPicturePreview = document.querySelector('#picture-popup');
-const currentPicture = popupPicturePreview.querySelector('.popup__image');
-const currentTitle = popupPicturePreview.querySelector('.popup__caption');
+
 const popupWindows = document.querySelectorAll('.popup');//универсальная переменная всех поапов на старнице
 
 
 
+// const cardTemplate = document.querySelector('.element__template').content; //достаем шаблон из template
+// const cardList = document.querySelector('.elements__list');// место куда добавляем карточку
+const popupPicturePreview = document.querySelector('#picture-popup');
+const currentPicture = popupPicturePreview.querySelector('.popup__image');
+const currentTitle = popupPicturePreview.querySelector('.popup__caption');
+const closePreviewPicturePopupBtn = document.querySelector('#close-PicturePopup');
+
+
+class Card {
+  constructor(item, cardSelector) {
+    this._name = item.name;
+    this._link = item.link;
+    this._cardSelector = cardSelector;
+  };
+
+  _getTemplate() {
+    const cardElement = document
+        .querySelector(this._cardSelector)
+        .content
+        .querySelector('.element')
+        .cloneNode(true);
+
+    return cardElement;
+  };
+
+  generateCard() {
+    this._element = this._getTemplate();
+    this._setEventListeners();
+
+    this._element.querySelector('.element__image').src = this._link;
+    this._element.querySelector('.element__image').alt = this._name;
+    this._element.querySelector('.element__title').textContent = this._name;
+
+    return this._element;
+  };
+
+  _setEventListeners() {
+    this._element.querySelector('.element__like').addEventListener('click', () => {
+      this._handleLikeClick();
+    });
+    this._element.querySelector('.element__trash').addEventListener('click', () => {
+      this._handleDeleteClick();
+    });
+    this._element.querySelector('.element__image').addEventListener('click', () => {
+      this._handlePreviewPopupOpen();
+    });
+    closePreviewPicturePopupBtn.addEventListener('click', () => {
+      this._handlePreviewPopupClose();
+    })
+  };
+
+  _handleLikeClick() {
+    this._element.querySelector('.element__like').classList.toggle('element__like_active');
+  };
+
+  _handleDeleteClick() {
+    this._element.querySelector('.element__trash').closest('.elements__list-item').remove();
+  };
+
+  _handlePreviewPopupOpen() {
+    currentPicture.src = this._link;
+    currentTitle.textContent = this._name;
+    currentPicture.alt = this._name;
+    popupPicturePreview.classList.add('page__popup_visible');
+  };
+
+  _handlePreviewPopupClose() {
+    currentPicture.src = '';
+    currentTitle.textContent = '';
+    currentPicture.alt = '';
+    popupPicturePreview.classList.remove('page__popup_visible');
+  }
+}
+
+initialCards.forEach((item) => {
+  const card = new Card(item, '.element__template');
+
+  const cardElement = card.generateCard();
+
+  document.querySelector('.elements__list').append(cardElement);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //функция создания новой карточек через клонирование блока в DOM. Исходные данные подгружает из массива initial-card.js
-function createCard(item) {
-  const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
-  const placeImage = cardElement.querySelector('.element__image'); //это моя ошибка, alt я добавлял после ревью, ну и надо было самому додуматься, что строчка дублируется. 
-
-  cardElement.querySelector('.element__title').textContent = item.name;
-  placeImage.src = item.link;
-  placeImage.alt = item.name;
-
-  //добавляемя слушателя события по клику, который запускает функцию добавления Like
-  const likeButton = cardElement.querySelector('.element__like');
-  likeButton.addEventListener('click', handleLikeElement);
-
-  //добавляем слушателя события по клику, который запускает функцию удаления карточки.
-  const deleteButton = cardElement.querySelector('.element__trash');
-  deleteButton.addEventListener('click', handleDeleteCard);
-
-  //добавляем слушателя по клику, который запускает функцию полноразмерного отображения фото
-  placeImage.addEventListener('click', (e) => handlePreviewPicture(item));
-
-  return cardElement;
-}
-
-
-//функция добавления карточки на страницу
-function renderCard(item, isPrepend) {
-  const element = createCard(item);
-  isPrepend ? cardList.prepend(element) : cardList.append(element);
-}
-
-
-//функция автоматического рендеринга карточек на старнице
-initialCards.forEach(function (item) {
-  renderCard(item);
-});//проходим по массиву и создаем карточки
+// function createCard(item) {
+//   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
+//   const placeImage = cardElement.querySelector('.element__image'); //это моя ошибка, alt я добавлял после ревью, ну и надо было самому додуматься, что строчка дублируется.
+//
+//   cardElement.querySelector('.element__title').textContent = item.name;
+//   placeImage.src = item.link;
+//   placeImage.alt = item.name;
+//
+//   //добавляемя слушателя события по клику, который запускает функцию добавления Like
+//   const likeButton = cardElement.querySelector('.element__like');
+//   likeButton.addEventListener('click', handleLikeElement);
+//
+//   //добавляем слушателя события по клику, который запускает функцию удаления карточки.
+//   const deleteButton = cardElement.querySelector('.element__trash');
+//   deleteButton.addEventListener('click', handleDeleteCard);
+//
+//   //добавляем слушателя по клику, который запускает функцию полноразмерного отображения фото
+//   placeImage.addEventListener('click', (e) => handlePreviewPicture(item));
+//
+//   return cardElement;
+// }
+//
+//
+// //функция добавления карточки на страницу
+// function renderCard(item, isPrepend) {
+//   const element = createCard(item);
+//   isPrepend ? cardList.prepend(element) : cardList.append(element);
+// }
+//
+//
+// //функция автоматического рендеринга карточек на старнице
+// initialCards.forEach(function (item) {
+//   renderCard(item);
+// });//проходим по массиву и создаем карточки
 
 
 //функция снимающая действие по умолчанию при нажатии на кнопку submit: при нажатии страница не перезагружается
@@ -105,15 +200,15 @@ const handleFormSubmit = (evt) => {
   evt.preventDefault();
 }
 
-//функция, при вызове которой добавляется класс на like
-function handleLikeElement(evt) {
-  evt.target.classList.toggle('element__like_active');
-}
-
-//функция, при вызове которой происходит удаление элемента из DOM
-function handleDeleteCard(evt) {
-  evt.target.closest('.elements__list-item').remove();
-};
+// //функция, при вызове которой добавляется класс на like
+// function handleLikeElement(evt) {
+//   evt.target.classList.toggle('element__like_active');
+// }
+//
+// //функция, при вызове которой происходит удаление элемента из DOM
+// function handleDeleteCard(evt) {
+//   evt.target.closest('.elements__list-item').remove();
+// };
 
 
 //Функция обработчик события на сабмите, которая добавляет элемент (карточка пользователя) в DOM
@@ -133,13 +228,13 @@ function handleFormUserSubmit(evt) {
 }
 
 
-//функция управляющая полноформатным отображением картинки в окне попапа.
-function handlePreviewPicture(item) {
-  openPopup(popupPicturePreview);
-  currentPicture.src = item.link;
-  currentTitle.textContent = item.name;
-  currentPicture.alt = item.name;
-}
+// //функция управляющая полноформатным отображением картинки в окне попапа.
+// function handlePreviewPicture(item) {
+//   openPopup(popupPicturePreview);
+//   currentPicture.src = item.link;
+//   currentTitle.textContent = item.name;
+//   currentPicture.alt = item.name;
+// }
 
 
 //функция управляющая закрытием всех попапов как от нажатия кнопок так и по кликам на оверлее
