@@ -25,6 +25,8 @@
 * email: darak.ltd@yandex.ru
 * */
 
+import {handleFormSubmit} from './index.js';
+
 
 const selectors = {
     formSelector: '.form',
@@ -148,3 +150,6 @@ const enableValidation = (selectors) => {
 }
 
 enableValidation(selectors);
+
+
+export {handleSubmitButtonDisabled, handleSubmitButtonEnabled, selectors, hideInputError, showInputError};
