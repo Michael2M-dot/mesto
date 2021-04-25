@@ -36,31 +36,13 @@
 
  Для каждой проверяемой формы создайте экземпляр класса `FormValidator`.*/
 
-import {handleFormSubmit} from './index.js';
-
-
-const selectors = {
-    formSelector: '.form',
-    inputSelector: '.form__input',
-    submitBtnSelector: '.form__submit-btn',
-    disabledBtnSelector: 'form__submit-btn_disabled',
-    errorsSelector: '.form__input-error',
-    formSection: '.form__fieldset',
-    inputErrorSelector: 'form__input-error_active'
-}
-
-//функция добавляет классы и атрибуты на кнопку и делает ее неактивной
-const handleSubmitButtonDisabled = (buttonElement, selectors) => {
-    buttonElement.setAttribute('disabled', true,);
-    buttonElement.classList.add(selectors.disabledBtnSelector);
-}
-
-
-// функция делающая кнопку активной убирает классы и атрибуты
-const handleSubmitButtonEnabled = (buttonElement, selectors) => {
-    buttonElement.removeAttribute('disabled');
-    buttonElement.classList.remove(selectors.disabledBtnSelector);
-}
+import {selectors,
+        handleFormSubmit,
+        handleSubmitButtonDisabled,
+        handleSubmitButtonEnabled,
+        showInputError,
+        hideInputError
+        } from './index.js';
 
 
 class FormValidator {
@@ -71,7 +53,7 @@ class FormValidator {
     }
 
 
-//проверяет валидность поля ввода. В качестве аргумента передаем само поле
+    //проверяет валидность поля ввода. В качестве аргумента передаем само поле
     _checkInputValidity(inputElement) {
         // const inputElement = this._formElement.querySelector(this._inputSelector);
         const isInputNotValid = !inputElement.validity.valid;//проверяет свойство из API браузера
@@ -140,55 +122,10 @@ class FormValidator {
 
 }
 
-//создаем массив из всех форм на странице
-const formElements = document.querySelectorAll(selectors.formSelector);
-const formList = Array.from(formElements);
-//методом forEach проходим по массиву всех форм и на каждую добавляем функцию обработчик события формы.
-formList.forEach((formElement) => {
-    const formValidator = new FormValidator(formElement, selectors);
-
-    formValidator.enableValidation();
-});
-
-
-//функция вывода ошибки в заданое поле.
-const showInputError = (inputElement, errorMessage, selectors) => {
-    // const errorElement = formElement.querySelector(`#${inputElement.id}-error`); - вариант поиска по id
-    //находим поле куда будем выводить ошибку
-    const formSectionElement = inputElement.closest(selectors.formSection);
-    const errorElement = formSectionElement.querySelector(selectors.errorsSelector);
-    //указываем что в данное поле будет выводиться ошибка errorMessage
-    errorElement.textContent = errorMessage;
-    errorElement.classList.add(selectors.inputErrorSelector);//добваляем класс отвечающий за отображение ошибки
-}
-
-
-//функция скрывающая ошибку
-const hideInputError = (inputElement, selectors) => {
-    // const errorElement = formElement.querySelector(`#${inputElement.id}-error`); -варинат поиска по id
-    const formSectionElement = inputElement.closest(selectors.formSection);
-    const errorElement = formSectionElement.querySelector(selectors.errorsSelector);
-
-    errorElement.textContent = '';//убираем отображение текста ошибки
-    errorElement.classList.remove(selectors.inputErrorSelector);//удаляем класс отображающий ошибку
-}
-
-
-
-
-
-
-export {handleSubmitButtonDisabled,
-        handleSubmitButtonEnabled,
-        selectors,
-        hideInputError,
-        showInputError
-       };
-
+export {FormValidator}
 
 
 /*
-
 
 //функция вывода ошибки в заданое поле.
 const showInputError = (inputElement, errorMessage, selectors) => {

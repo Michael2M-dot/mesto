@@ -36,14 +36,22 @@ email: darak.ltd@yandex.ru
 
 import {initialCards} from './initial-cards.js';
 
-import {handleSubmitButtonDisabled,
-        handleSubmitButtonEnabled,
-        selectors,
-        hideInputError,
-        showInputError
-       } from './validate.js';
+import {FormValidator} from './validate.js';
 
 import {Card} from './card.js';
+
+
+const selectors = {
+    formSelector: '.form',
+    inputSelector: '.form__input',
+    submitBtnSelector: '.form__submit-btn',
+    disabledBtnSelector: 'form__submit-btn_disabled',
+    errorsSelector: '.form__input-error',
+    formSection: '.form__fieldset',
+    inputErrorSelector: 'form__input-error_active',
+
+}
+
 
 //переменые для использвоания в скрипте
 const formUser = document.forms.userProfileForm;//форма для редактирования данных пользоватля
@@ -56,7 +64,7 @@ const popupPlace = document.querySelector('#add-place');
 const openUserPopupBtn = document.querySelector('.profile__button-edit');
 const closeUserPopupBtn = document.querySelector('#close-userPopup');
 const openPlacePopupBtn = document.querySelector('.profile__button-add');
-const userFormSubmitButton = document.querySelector('#user-submit');
+// const userFormSubmitButton = document.querySelector('#user-submit');
 const closePlacePopupBtn = document.querySelector('#close-placePopup');
 const popupWindows = document.querySelectorAll('.popup');//универсальная переменная всех поапов на старнице
 const cardList = document.querySelector('.elements__list');// место куда добавляем карточку
@@ -68,6 +76,8 @@ const formPlace = document.forms.placeCardForm;//форма для добавл�
 const placeName = formPlace.elements.placeNameInput;//поле формы добавления карточки, нзвание места
 const placeLink = formPlace.elements.placeLinkInput;//поле формы карточки, ссылка на фотографию места
 const ESC = 'Escape';
+
+
 
 //функция создания карточки
 const createCard = (cardClass, cardItem) => {
@@ -85,7 +95,7 @@ function renderCard(cardCalss, cardItem, isPrepend) {
 
 
 //функция автоматического рендеринга карточек на старнице
-initialCards.forEach(function (cardItem) {
+initialCards.forEach((cardItem) => {
   renderCard(Card, cardItem, false);
 });//проходим по массиву и создаем карточки
 
@@ -114,16 +124,11 @@ function renderUserCard(cardClass) {
 }
 
 
-//слушатели для попапа добавления карточек
-openPlacePopupBtn.addEventListener('click', openUserCardPopup);
-formPlace.addEventListener('submit', handleFormPlaceSubmit)
-
-
 
 //универсальная функция открытия попапа
 function openPopup(popup) {
   popup.classList.add('page__popup_visible');
-  document.addEventListener('keydown', handleKeyboardCloseWindow)
+  document.addEventListener('keydown', handleKeyboardCloseWindow);
 }
 
 
@@ -136,11 +141,13 @@ function closePopup(popup) {
 
 ///функция открытия попапа для заполнения данных пользователя c заполнение полей формы текущими занчениями
 function openUserPopup() {
-  openPopup(popupUser);
-  userNameInput.value = nameInput.textContent;
-  userJobInput.value = jobInput.textContent;
-  handleDisableButton(popupUser);
-  handleInputErrorsHide(popupUser);
+    openPopup(popupUser);
+    validateFormElement(popupUser);
+    userNameInput.value = nameInput.textContent;
+    userJobInput.value = jobInput.textContent;
+    handleDisableButton(popupUser);
+    handleInputErrorsHide(popupUser);
+
 };
 
 
@@ -150,6 +157,7 @@ function openUserCardPopup() {
   formPlace.reset();
   handleDisableButton(popupPlace);
   handleInputErrorsHide(popupPlace);
+  validateFormElement(popupPlace);
 }
 
 
@@ -180,10 +188,11 @@ function handleKeyboardCloseWindow(evt) {
 };
 
 
+
 //вспомагательная функция которая повторно вызывает hideInputError и скрывает вывод ошибок, когда форма закрывается без сохранения значений
 const handleInputErrorsHide = (popup) => {
   //обнуляем поля ошибки при закрытии формы через вызов универсально функции hideInputError
-  const inputElements = popup.querySelectorAll('.form__fieldset')
+  const inputElements = popup.querySelectorAll(selectors.formSection)
   inputElements.forEach((input) =>
       hideInputError(input, selectors));
 }
@@ -191,15 +200,66 @@ const handleInputErrorsHide = (popup) => {
 
 //функция для отключения кнопки submit. преводит кнопку в disabled  и убирает класс, делающий кнопу активной
 const handleDisableButton = (popup) => {
-  const submitButtons = popup.querySelectorAll('.form__submit-btn')
+  const submitButtons = popup.querySelectorAll(selectors.submitBtnSelector)
   submitButtons.forEach((buttonElement) => handleSubmitButtonDisabled(buttonElement, selectors))
 };
 
 
+
+//функция добавляет классы и атрибуты на кнопку и делает ее неактивной
+const handleSubmitButtonDisabled = (buttonElement, selectors) => {
+    buttonElement.setAttribute('disabled', true,);
+    buttonElement.classList.add(selectors.disabledBtnSelector);
+}
+
+
+// функция делающая кнопку активной убирает классы и атрибуты
+const handleSubmitButtonEnabled = (buttonElement, selectors) => {
+    buttonElement.removeAttribute('disabled');
+    buttonElement.classList.remove(selectors.disabledBtnSelector);
+}
+
+
+//функция проверки валидации полей формы.
+const validateFormElement = (formElement) => {
+    const formValidator = new FormValidator(formElement, selectors);
+
+    formValidator.enableValidation();
+};
+
+
+//функция вывода ошибки в заданое поле.
+const showInputError = (inputElement, errorMessage, selectors) => {
+    // const errorElement = formElement.querySelector(`#${inputElement.id}-error`); - вариант поиска по id
+    //находим поле куда будем выводить ошибку
+    const formSectionElement = inputElement.closest(selectors.formSection);
+    const errorElement = formSectionElement.querySelector(selectors.errorsSelector);
+    //указываем что в данное поле будет выводиться ошибка errorMessage
+    errorElement.textContent = errorMessage;
+    errorElement.classList.add(selectors.inputErrorSelector);//добваляем класс отвечающий за отображение ошибки
+}
+
+
+//функция скрывающая ошибку
+const hideInputError = (inputElement, selectors) => {
+    // const errorElement = formElement.querySelector(`#${inputElement.id}-error`); -варинат поиска по id
+    const formSectionElement = inputElement.closest(selectors.formSection);
+    const errorElement = formSectionElement.querySelector(selectors.errorsSelector);
+
+    errorElement.textContent = '';//убираем отображение текста ошибки
+    errorElement.classList.remove(selectors.inputErrorSelector);//удаляем класс отображающий ошибку
+}
+
+
 //универсальная функция которая запускает все закрытия попапов
 popupWindows.forEach((popup) => {
-  popup.addEventListener('click', evt => handleMouseCloseWindow(popup, evt))
+    popup.addEventListener('click', evt => handleMouseCloseWindow(popup, evt))
 });
+
+
+//слушатели для попапа добавления карточек
+openPlacePopupBtn.addEventListener('click', openUserCardPopup);
+formPlace.addEventListener('submit', handleFormPlaceSubmit)
 
 
 //слушатели для попапа редактирования данных пользователя
@@ -212,7 +272,12 @@ export {currentPicture,
         currentTitle,
         popupPicturePreview,
         openPopup,
-        handleFormSubmit
+        handleFormSubmit,
+        selectors,
+        handleSubmitButtonDisabled,
+        handleSubmitButtonEnabled,
+        showInputError,
+        hideInputError
        }
 
 
