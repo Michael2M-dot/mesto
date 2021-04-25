@@ -51,11 +51,11 @@ Michael2M (c) 2021
 email: darak.ltd@yandex.ru
 */
 
+import {Card} from './Card.js';
+
 import {initialCards} from './initial-cards.js';
 
 import {FormValidator} from './FormValidator.js';
-
-import {Card} from './Card.js';
 
 
 const selectors = {
@@ -131,11 +131,11 @@ const handleFormSubmit = (evt) => {
 
 //Функция добавляющая новую карточки от пользователя.
 function renderUserCard(cardClass) {
-  const item = {
+  const cardItem = {
       name: placeName.value,
       link: placeLink.value
     };
-  renderCard(cardClass, item, true);
+  renderCard(cardClass, cardItem, true);
 }
 
 

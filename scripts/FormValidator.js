@@ -72,8 +72,8 @@ import {selectors,
 class FormValidator {
 
     constructor(formElement, selectors) {
-        this._inputSelector = selectors.inputSelector,
-        this._submitBtnSelector = selectors.submitBtnSelector,
+        this._inputSelector = selectors.inputSelector
+        this._submitBtnSelector = selectors.submitBtnSelector
         this._formElement = formElement
     }
 

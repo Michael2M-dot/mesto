@@ -24,11 +24,7 @@ Project Mesto-Russia (Яндекс-Практикум)
 
 */
 
-import {currentPicture,
-        currentTitle,
-        popupPicturePreview,
-        openPopup
-   } from './index.js';
+import {currentPicture, currentTitle, openPopup, popupPicturePreview} from './index.js';
 
 //Класс для создания карточки
 class Card {
@@ -40,20 +36,18 @@ class Card {
         titleSelector: '.element__title'
     }
 
-    constructor(item, cardSelector) {
-        this._name = item.name;
-        this._link = item.link;
-        this._cardSelector = cardSelector;
+    constructor(cardItem, cardSelector) {
+        this._name = cardItem.name;
+        this._link = cardItem.link;
+        this._cardSelector = cardSelector
     };
 
     _getTemplate() {
-        const cardElement = document
+        return document
             .querySelector(this._cardSelector)
             .content
             .querySelector('.element')
             .cloneNode(true);
-
-        return cardElement;
     };
 
     _setEventListeners() {
@@ -93,6 +87,6 @@ class Card {
 
         return this._element;
     };
-};
+}
 
 export {Card};
