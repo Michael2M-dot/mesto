@@ -1,11 +1,28 @@
 /*
 Project Mesto-Russia (Яндекс - Практикум)
 
-Version 0.05a - 13.04.2021
+Version 0.07a - 25.04.2021
+Что нового (ver.0.07a):
 
-Что нового (ver.0.05a):
+- Добавлены классы Card и FormValidator, которые вынесены в отедльные файлы;
 
--  Добавлена валидация форм, вынесена в отедельный скрипт validate.js
+- Проведен рефакторинг кода по файлам JS с использованием import и export:
+
+- Каждый класс экспортируется в index.js и создается прототип класса с одним публичным методомю
+
+- Selectors используемые в классе вынесены в index.js.
+
+- В класс Card - вынесен функционал создания картчки с обработчиками.
+
+- В модуль экспортируются данные из модуля Card.js (Card) FormValidator.js и (FormValidator).
+
+
+
+Version 0.06a - 13.04.2021
+
+Что нового (ver.0.06a):
+
+-  Добавлена валидация форм, вынесена в отедельный скрипт FormValidator.js
 
 - Произведен рефакторинг функции отвечающе за созание карточки, теперь события не вешаются на каждую карточку,
 а отслеживаются по всплытию на родителе.
@@ -15,7 +32,7 @@ Version 0.05a - 13.04.2021
 - Добавлена функция деактивирующая кнопку при повторном открытии попапа и функция удаляющая ошибку после закрытия поапа.
 
 
-Version 0.04a - 30.03.2021
+Version 0.05a - 30.03.2021
 Description: Скрипт запускает:
 1. Форму заполнения данных пользователя на сайте
 По клику на иконке редактирования, открывается попап-форма, где доступны к заполнению поля Имени пользователя и его профессии
@@ -36,9 +53,9 @@ email: darak.ltd@yandex.ru
 
 import {initialCards} from './initial-cards.js';
 
-import {FormValidator} from './validate.js';
+import {FormValidator} from './FormValidator.js';
 
-import {Card} from './card.js';
+import {Card} from './Card.js';
 
 
 const selectors = {
@@ -49,7 +66,6 @@ const selectors = {
     errorsSelector: '.form__input-error',
     formSection: '.form__fieldset',
     inputErrorSelector: 'form__input-error_active',
-
 }
 
 
@@ -59,12 +75,11 @@ const nameInput = document.querySelector('.profile__user-name');
 const jobInput = document.querySelector('.profile__user-job');
 const userNameInput = formUser.elements.userNameInput;//переменная поля ввода имени для формы редактирования профиля пользователя
 const userJobInput = formUser.elements.userJobInput;//переменная поля ввода професси для формы редактирования профиля пользователя
-const popupUser = document.querySelector('#edit-profile');
-const popupPlace = document.querySelector('#add-place');
 const openUserPopupBtn = document.querySelector('.profile__button-edit');
 const closeUserPopupBtn = document.querySelector('#close-userPopup');
 const openPlacePopupBtn = document.querySelector('.profile__button-add');
-// const userFormSubmitButton = document.querySelector('#user-submit');
+const popupUser = document.querySelector('#edit-profile');
+const popupPlace = document.querySelector('#add-place');
 const closePlacePopupBtn = document.querySelector('#close-placePopup');
 const popupWindows = document.querySelectorAll('.popup');//универсальная переменная всех поапов на старнице
 const cardList = document.querySelector('.elements__list');// место куда добавляем карточку
@@ -140,24 +155,24 @@ function closePopup(popup) {
 
 
 ///функция открытия попапа для заполнения данных пользователя c заполнение полей формы текущими занчениями
-function openUserPopup() {
-    openPopup(popupUser);
-    validateFormElement(popupUser);
+function openUserPopup(popup) {
+    openPopup(popup);
+    validateFormElement(popup);
     userNameInput.value = nameInput.textContent;
     userJobInput.value = jobInput.textContent;
-    handleDisableButton(popupUser);
-    handleInputErrorsHide(popupUser);
+    handleDisableButton(popup);
+    handleInputErrorsHide(popup);
 
 };
 
 
 //открытие popup places с обнулением полей
-function openUserCardPopup() {
-  openPopup(popupPlace);
-  formPlace.reset();
-  handleDisableButton(popupPlace);
-  handleInputErrorsHide(popupPlace);
-  validateFormElement(popupPlace);
+function openUserCardPopup(popup) {
+  openPopup(popup);
+  formPlace.reset(popup);
+  handleDisableButton(popup);
+  handleInputErrorsHide(popup);
+  validateFormElement(popup);
 }
 
 
@@ -258,12 +273,12 @@ popupWindows.forEach((popup) => {
 
 
 //слушатели для попапа добавления карточек
-openPlacePopupBtn.addEventListener('click', openUserCardPopup);
+openPlacePopupBtn.addEventListener('click', () => openUserCardPopup(popupPlace));
 formPlace.addEventListener('submit', handleFormPlaceSubmit)
 
 
 //слушатели для попапа редактирования данных пользователя
-openUserPopupBtn.addEventListener('click', openUserPopup);//слушатель для открытия попапа для редактирования профиля пользователя
+openUserPopupBtn.addEventListener('click', () => openUserPopup(popupUser));//слушатель для открытия попапа для редактирования профиля пользователя
 formUser.addEventListener('submit', handleFormUserSubmit); //слушатель для сохранеия формы.
 
 
@@ -303,7 +318,7 @@ export {currentPicture,
 
 //АРХИВ
 /*
-функция создания новой карточек через клонирование блока в DOM. Исходные данные подгружает из массива initial-card.js
+функция создания новой карточек через клонирование блока в DOM. Исходные данные подгружает из массива initial-Card.js
 function createCard(item) {
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
   const placeImage = cardElement.querySelector('.element__image'); //это моя ошибка, alt я добавлял после ревью, ну и надо было самому додуматься, что строчка дублируется.
