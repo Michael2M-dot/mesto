@@ -67,7 +67,7 @@ const closePreviewPicturePopupBtn = document.querySelector('#close-PicturePopup'
 const formPlace = document.forms.placeCardForm;//форма для добавления карточки
 const placeName = formPlace.elements.placeNameInput;//поле формы добавления карточки, нзвание места
 const placeLink = formPlace.elements.placeLinkInput;//поле формы карточки, ссылка на фотографию места
-
+const ESC = 'Escape';
 
 //функция создания карточки
 const createCard = (cardClass, cardItem) => {
@@ -162,7 +162,6 @@ function handleFormUserSubmit(evt) {
 }
 
 
-
 //функция управляющая закрытием всех попапов как от нажатия кнопок так и по кликам на оверлее
 function handleMouseCloseWindow(popup, evt) {
   if (evt.target.classList.contains('page__popup') ||
@@ -175,7 +174,7 @@ function handleMouseCloseWindow(popup, evt) {
 //функция управляющая закрытием попапа по клику на клавиатуре
 function handleKeyboardCloseWindow(evt) {
   const currentPopup = document.querySelector('.page__popup_visible');
-  if (evt.key === 'Escape') {
+  if (evt.key === ESC) {
     closePopup(currentPopup);
   }
 };

@@ -16,10 +16,20 @@ import {currentPicture,
 
 //Класс для создания карточки
 class Card {
+
+    static  selectors = {
+        likeSelector: '.element__like',
+        trashSelector: '.element__trash',
+        imageSelector: '.element__image',
+        titleSelector: '.element__title'
+    }
+
     constructor(item, cardSelector) {
         this._name = item.name;
         this._link = item.link;
         this._cardSelector = cardSelector;
+
+
     };
 
     _getTemplate() {
@@ -33,23 +43,23 @@ class Card {
     };
 
     _setEventListeners() {
-        this._element.querySelector('.element__like').addEventListener('click', () => {
+        this._element.querySelector(Card.selectors.likeSelector).addEventListener('click', () => {
             this._handleLikeClick();
         });
-        this._element.querySelector('.element__trash').addEventListener('click', () => {
+        this._element.querySelector(Card.selectors.trashSelector).addEventListener('click', () => {
             this._handleDeleteClick();
         });
-        this._element.querySelector('.element__image').addEventListener('click', () => {
+        this._element.querySelector(Card.selectors.imageSelector).addEventListener('click', () => {
             this._handlePreviewPopupOpen();
         });
     };
 
     _handleLikeClick() {
-        this._element.querySelector('.element__like').classList.toggle('element__like_active');
+        this._element.querySelector(Card.selectors.likeSelector).classList.toggle('element__like_active');
     };
 
     _handleDeleteClick() {
-        this._element.querySelector('.element__trash').closest('.elements__list-item').remove();
+        this._element.querySelector(Card.selectors.trashSelector).closest('.elements__list-item').remove();
     };
 
     _handlePreviewPopupOpen() {
@@ -63,12 +73,12 @@ class Card {
         this._element = this._getTemplate();
         this._setEventListeners();
 
-        this._element.querySelector('.element__image').src = this._link;
-        this._element.querySelector('.element__image').alt = this._name;
-        this._element.querySelector('.element__title').textContent = this._name;
+        this._element.querySelector(Card.selectors.likeSelector).src = this._link;
+        this._element.querySelector(Card.selectors.trashSelector).alt = this._name;
+        this._element.querySelector(Card.selectors.titleSelector).textContent = this._name;
 
         return this._element;
     };
 };
 
-export {Card}
+export {Card};
