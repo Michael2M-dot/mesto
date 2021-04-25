@@ -39,7 +39,7 @@ class Card {
     constructor(cardItem, cardSelector) {
         this._name = cardItem.name;
         this._link = cardItem.link;
-        this._cardSelector = cardSelector
+        this._cardSelector = cardSelector;
     };
 
     _getTemplate() {
@@ -81,8 +81,8 @@ class Card {
         this._element = this._getTemplate();
         this._setEventListeners();
 
-        this._element.querySelector(Card.selectors.likeSelector).src = this._link;
-        this._element.querySelector(Card.selectors.trashSelector).alt = this._name;
+        this._element.querySelector(Card.selectors.imageSelector).src = this._link;
+        this._element.querySelector(Card.selectors.imageSelector).alt = this._name;
         this._element.querySelector(Card.selectors.titleSelector).textContent = this._name;
 
         return this._element;
