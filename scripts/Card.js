@@ -23,85 +23,87 @@ Project Mesto-Russia (Яндекс-Практикум)
 */
 
 import {
-  currentPicture,
-  currentTitle,
-  popupPicturePreview,
+	popupPicturePreview,
+	currentPicture,
+	currentTitle
 } from "./constants.js"
 
-import { openPopup } from "./index.js";
+import {openPopup} from "./utils.js";
 
 //Класс для создания карточки
 class Card {
-  static selectors = {
-    likeSelector: ".element__like",
-    trashSelector: ".element__trash",
-    imageSelector: ".element__image",
-    titleSelector: ".element__title",
-  };
+	static selectors = {
+		likeSelector: ".element__like",
+		trashSelector: ".element__trash",
+		imageSelector: ".element__image",
+		titleSelector: ".element__title",
+	};
 
-  constructor(cardItem, cardSelector) {
-    this._name = cardItem.name;
-    this._link = cardItem.link;
-    this._cardSelector = cardSelector;
-  }
+	constructor(cardItem, cardSelector) {
+		this._name = cardItem.name;
+		this._link = cardItem.link;
+		this._cardSelector = cardSelector;
+		// this._handleCardClick = handleCardClick(cardItem);
+	}
 
-  _getTemplate() {
-    return document
-      .querySelector(this._cardSelector)
-      .content.querySelector(".element")
-      .cloneNode(true);
-  }
+	_getTemplate() {
+		return document
+			.querySelector(this._cardSelector)
+			.content.querySelector(".element")
+			.cloneNode(true);
+	}
 
-  _setEventListeners() {
-    this._element
-      .querySelector(Card.selectors.likeSelector)
-      .addEventListener("click", () => {
-        this._handleLikeClick();
-      });
-    this._element
-      .querySelector(Card.selectors.trashSelector)
-      .addEventListener("click", () => {
-        this._handleDeleteClick();
-      });
-    this._element
-      .querySelector(Card.selectors.imageSelector)
-      .addEventListener("click", () => {
-        this._handlePreviewPopupOpen();
-      });
-  }
+	_setEventListeners() {
+		this._element
+			.querySelector(Card.selectors.likeSelector)
+			.addEventListener("click", () => {
+				this._handleLikeClick();
+			});
+		this._element
+			.querySelector(Card.selectors.trashSelector)
+			.addEventListener("click", () => {
+				this._handleDeleteClick();
+			});
+		this._element
+			.querySelector(Card.selectors.imageSelector)
+			.addEventListener("click", () => {
+				this._handlePreviewPopupOpen();
+			});
+	}
 
-  _handleLikeClick() {
-    this._element
-      .querySelector(Card.selectors.likeSelector)
-      .classList.toggle("element__like_active");
-  }
+	_handleLikeClick() {
+		this._element
+			.querySelector(Card.selectors.likeSelector)
+			.classList.toggle("element__like_active");
+	}
 
-  _handleDeleteClick() {
-    this._element
-      .querySelector(Card.selectors.trashSelector)
-      .closest(".elements__list-item")
-      .remove();
-  }
+	_handleDeleteClick() {
+		this._element
+			.querySelector(Card.selectors.trashSelector)
+			.closest(".elements__list-item")
+			.remove();
+	}
 
-  _handlePreviewPopupOpen() {
-    currentPicture.src = this._link;
-    currentTitle.textContent = this._name;
-    currentPicture.alt = this._name;
-    openPopup(popupPicturePreview);
-  }
+	_handlePreviewPopupOpen() {
+		// this._handleCardClick();
+		currentPicture.src = this._link;
+		currentTitle.textContent = this._name;
+		currentPicture.alt = this._name;
+		openPopup(popupPicturePreview);
+	}
 
-  generateCard() {
-    this._element = this._getTemplate();
-    this._setEventListeners();
+	generateCard() {
+		this._element = this._getTemplate();
+		this._setEventListeners();
 
-    this._element.querySelector(Card.selectors.imageSelector).src = this._link;
-    this._element.querySelector(Card.selectors.imageSelector).alt = this._name;
-    this._element.querySelector(
-      Card.selectors.titleSelector
-    ).textContent = this._name;
+		this._element.querySelector(Card.selectors.imageSelector).src = this._link;
+		this._element.querySelector(Card.selectors.imageSelector).alt = this._name;
+		this._element.querySelector(
+			Card.selectors.titleSelector
+		).textContent = this._name;
 
-    return this._element;
-  }
+		return this._element;
+	}
 }
 
-export { Card };
+export {Card};

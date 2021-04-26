@@ -49,119 +49,112 @@
  * email: darak.ltd@yandex.ru
  * */
 
-/*Создайте класс `FormValidator`, который настраивает валидацию полей формы:
-
-- принимает в конструктор объект настроек с селекторами и классами формы;
-- принимает вторым параметром элемент той формы, которая валидируется;
-- имеет приватные методы, которые обрабатывают форму: проверяют валидность поля, изменяют состояние кнопки сабмита, устанавливают все обработчики;
-- имеет один публичный метод `enableValidation`, который включает валидацию формы.
-
- Для каждой проверяемой формы создайте экземпляр класса `FormValidator`.*/
 
 import {
-  handleFormSubmit,
-  handleSubmitButtonDisabled,
-  handleSubmitButtonEnabled,
-  showInputError,
-  hideInputError,
+	handleSubmitButtonDisabled,
+	handleSubmitButtonEnabled,
+	showInputError,
+	hideInputError,
 } from "./index.js";
 
+import {handleFormSubmit} from "./utils.js"
+
 import {
-  selectors
+	selectors
 } from "./constants.js"
 
 
 class FormValidator {
 
-  static selectors ={
-    inputSelector: ".form__input",
-  }
+	static selectors = {
+		inputSelector: ".form__input",
+	}
 
-  constructor(formElement, selectors) {
-    this._inputSelector = FormValidator.selectors.inputSelector;
-    this._submitBtnSelector = selectors.submitBtnSelector;
-    this._formElement = formElement;
-  }
+	constructor(formElement, selectors) {
+		this._inputSelector = FormValidator.selectors.inputSelector;
+		this._submitBtnSelector = selectors.submitBtnSelector;
+		this._formElement = formElement;
+	}
 
-  //проверяет валидность поля ввода. В качестве аргумента передаем само поле
-  _checkInputValidity(inputElement) {
-    // const inputElement = this._formElement.querySelector(this._inputSelector);
-    const isInputNotValid = !inputElement.validity.valid; //проверяет свойство из API браузера
-    const errorMessage =
-      inputElement.validationMessage; /*в случае ошибки в валидации, присваиваем errorMessage
+	//проверяет валидность поля ввода. В качестве аргумента передаем само поле
+	_checkInputValidity(inputElement) {
+		// const inputElement = this._formElement.querySelector(this._inputSelector);
+		const isInputNotValid = !inputElement.validity.valid; //проверяет свойство из API браузера
+		const errorMessage =
+			inputElement.validationMessage; /*в случае ошибки в валидации, присваиваем errorMessage
         стандартную фразу описание ошибки браузером*/
 
-    //добавляем условие проверки и действия, выводим стандартную браузерную ошибку или скрываем
-    isInputNotValid
-      ? showInputError(inputElement, errorMessage, selectors)
-      : hideInputError(inputElement, selectors);
-  }
+		//добавляем условие проверки и действия, выводим стандартную браузерную ошибку или скрываем
+		isInputNotValid
+			? showInputError(inputElement, errorMessage, selectors)
+			: hideInputError(inputElement, selectors);
+	}
 
-  /* функция меняющая состояние кнопки в зависимости от условия. В качестве аргументов передаем массив всех инпутов и
-   * элемент кнопку, по которой будет происходить изменение состояния*/
-  _toggleButtonState(inputList, buttonElement, selectors) {
-    //функция которая ищет невалидное поле и в данном случае используюя (!) если поле не прошло валидацюи возврщаем false
-    const findInvalidInput = (inputElement) => !inputElement.validity.valid;
+	/* функция меняющая состояние кнопки в зависимости от условия. В качестве аргументов передаем массив всех инпутов и
+	 * элемент кнопку, по которой будет происходить изменение состояния*/
+	_toggleButtonState(inputList, buttonElement, selectors) {
+		//функция которая ищет невалидное поле и в данном случае используюя (!) если поле не прошло валидацюи возврщаем false
+		const findInvalidInput = (inputElement) => !inputElement.validity.valid;
 
-    /* функция которая определяет состояние полей ввода методом some. Данный метод проходит по всем элементам
-     * массива inputList  и проверяет каждый элемент на валидность его полей, но в отличие от every останавливаетс
-     * когда находит невалидное значениев совйстве validity.valid - и возвращает true если
-     * хотябы один из атрибутов формы не прошел валидацию и false если все атрибуты формы прошли валадицюи*/
-    const hasInvalidInput = inputList.some(findInvalidInput);
+		/* функция которая определяет состояние полей ввода методом some. Данный метод проходит по всем элементам
+		 * массива inputList  и проверяет каждый элемент на валидность его полей, но в отличие от every останавливаетс
+		 * когда находит невалидное значениев совйстве validity.valid - и возвращает true если
+		 * хотябы один из атрибутов формы не прошел валидацию и false если все атрибуты формы прошли валадицюи*/
+		const hasInvalidInput = inputList.some(findInvalidInput);
 
-    //задаем усоловие, если есть невалидное поле, то меняем состояние кнопки и делаем ее не активной.
-    hasInvalidInput
-      ? handleSubmitButtonDisabled(buttonElement, selectors)
-      : handleSubmitButtonEnabled(buttonElement, selectors);
-  }
+		//задаем усоловие, если есть невалидное поле, то меняем состояние кнопки и делаем ее не активной.
+		hasInvalidInput
+			? handleSubmitButtonDisabled(buttonElement, selectors)
+			: handleSubmitButtonEnabled(buttonElement, selectors);
+	}
 
-  //функция работает по элементам формы. на каждый элемент вешает обработчики
-  _setEventListener() {
-    //добавляет функцию на каждый элемент формы.
-    this._formElement.addEventListener("submit", (evt) =>
-      handleFormSubmit(evt)
-    );
+	//функция работает по элементам формы. на каждый элемент вешает обработчики
+	_setEventListener() {
+		//добавляет функцию на каждый элемент формы.
+		this._formElement.addEventListener("submit", (evt) =>
+			handleFormSubmit(evt)
+		);
 
-    //создаем массив из всех полей input в данной форме
-    const inputElements = this._formElement.querySelectorAll(
-      this._inputSelector
-    );
-    const inputList = Array.from(inputElements);
-    //находим кнопку submit отвечающую за отправку формы.
-    const buttonElement = this._formElement.querySelector(
-      this._submitBtnSelector
-    );
+		//создаем массив из всех полей input в данной форме
+		const inputElements = this._formElement.querySelectorAll(
+			this._inputSelector
+		);
+		const inputList = Array.from(inputElements);
+		//находим кнопку submit отвечающую за отправку формы.
+		const buttonElement = this._formElement.querySelector(
+			this._submitBtnSelector
+		);
 
-    //функция итератор, которая проходит по всем элеметам массива
-    /*на каждый инпут из элемент массива всех инпутов в данной форме добавляем обработчкик события ввода input, в качестве
-        аргумента передается сам элемент input*/
-    const inputElementIterator = (inputElement) => {
-      //функция вызывающая функции по событию
-      const handleInput = () => {
-        this._checkInputValidity(inputElement); //передаем аргументом поле ввода функции, отвечающей за проверку валидности
-        this._toggleButtonState(
-          inputList,
-          buttonElement,
-          selectors
-        ); /*передаем аргументом форму и кнопку, по которой нужно изменить
+		//функция итератор, которая проходит по всем элеметам массива
+		/*на каждый инпут из элемент массива всех инпутов в данной форме добавляем обработчкик события ввода input, в качестве
+			аргумента передается сам элемент input*/
+		const inputElementIterator = (inputElement) => {
+			//функция вызывающая функции по событию
+			const handleInput = () => {
+				this._checkInputValidity(inputElement); //передаем аргументом поле ввода функции, отвечающей за проверку валидности
+				this._toggleButtonState(
+					inputList,
+					buttonElement,
+					selectors
+				); /*передаем аргументом форму и кнопку, по которой нужно изменить
             состояние согласно функции*/
-      };
-      //добавляем слушателей на инпут и по событию вызываем функцию handleInput
-      inputElement.addEventListener("input", () => handleInput());
-    };
+			};
+			//добавляем слушателей на инпут и по событию вызываем функцию handleInput
+			inputElement.addEventListener("input", () => handleInput());
+		};
 
-    //используя метод forEach проходим по массиву инпутов и вешаем обработчик события на событие ввода - input
-    inputList.forEach((inputElement) => inputElementIterator(inputElement));
+		//используя метод forEach проходим по массиву инпутов и вешаем обработчик события на событие ввода - input
+		inputList.forEach((inputElement) => inputElementIterator(inputElement));
 
-    /*передаем аргументом форму и кнопку, по которой нужно изменить состояние согласно функции для предварительной
-     * проверки формы. Если при открытия формы уже имется неавалидные инпуты, передаем нужное состояние на кнопку.*/
-    this._toggleButtonState(inputList, buttonElement, selectors);
-  }
+		/*передаем аргументом форму и кнопку, по которой нужно изменить состояние согласно функции для предварительной
+		 * проверки формы. Если при открытия формы уже имется неавалидные инпуты, передаем нужное состояние на кнопку.*/
+		this._toggleButtonState(inputList, buttonElement, selectors);
+	}
 
-  //проходим по всем формам и добавляет обработчик события setEventListener на каждую форму
-  enableValidation() {
-    this._setEventListener();
-  }
+	//проходим по всем формам и добавляет обработчик события setEventListener на каждую форму
+	enableValidation() {
+		this._setEventListener();
+	}
 }
 
-export { FormValidator };
+export {FormValidator};

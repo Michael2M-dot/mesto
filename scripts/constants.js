@@ -32,6 +32,7 @@ const formPlace = document.forms.placeCardForm; //форма для добавл
 const placeName = formPlace.elements.placeNameInput; //поле формы добавления карточки, нзвание места
 const placeLink = formPlace.elements.placeLinkInput; //поле формы карточки, ссылка на фотографию места
 
+const ESC = "Escape";
 
 export {
 	formUser,
@@ -53,5 +54,6 @@ export {
 	closePreviewPicturePopupBtn,
 	formPlace,
 	placeName,
-	placeLink
+	placeLink,
+	ESC
 }
