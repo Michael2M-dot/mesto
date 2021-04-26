@@ -57,40 +57,32 @@ import { initialCards } from "./initial-cards.js";
 
 import { FormValidator } from "./FormValidator.js";
 
-const selectors = {
-  formSelector: ".form",
-  inputSelector: ".form__input",
-  submitBtnSelector: ".form__submit-btn",
-  disabledBtnSelector: "form__submit-btn_disabled",
-  errorsSelector: ".form__input-error",
-  formSection: ".form__fieldset",
-  inputErrorSelector: "form__input-error_active",
-};
+import { selectors,
+  formUser,
+  nameInput,
+  jobInput,
+  userNameInput,
+  userJobInput,
+  openUserPopupBtn,
+  closeUserPopupBtn,
+  openPlacePopupBtn,
+  popupUser,
+  popupPlace,
+  closePlacePopupBtn,
+  popupWindows,
+  cardList,
+  popupPicturePreview,
+  currentPicture,
+  currentTitle,
+  closePreviewPicturePopupBtn,
+  formPlace,
+  placeName,
+  placeLink
+} from "./constants.js"
 
-//переменые для использвоания в скрипте
-const formUser = document.forms.userProfileForm; //форма для редактирования данных пользоватля
-const nameInput = document.querySelector(".profile__user-name");
-const jobInput = document.querySelector(".profile__user-job");
-const userNameInput = formUser.elements.userNameInput; //переменная поля ввода имени для формы редактирования профиля пользователя
-const userJobInput = formUser.elements.userJobInput; //переменная поля ввода професси для формы редактирования профиля пользователя
-const openUserPopupBtn = document.querySelector(".profile__button-edit");
-const closeUserPopupBtn = document.querySelector("#close-userPopup");
-const openPlacePopupBtn = document.querySelector(".profile__button-add");
-const popupUser = document.querySelector("#edit-profile");
-const popupPlace = document.querySelector("#add-place");
-const closePlacePopupBtn = document.querySelector("#close-placePopup");
-const popupWindows = document.querySelectorAll(".popup"); //универсальная переменная всех поапов на старнице
-const cardList = document.querySelector(".elements__list"); // место куда добавляем карточку
-const popupPicturePreview = document.querySelector("#picture-popup");
-const currentPicture = popupPicturePreview.querySelector(".popup__image");
-const currentTitle = popupPicturePreview.querySelector(".popup__caption");
-const closePreviewPicturePopupBtn = document.querySelector(
-  "#close-PicturePopup"
-);
-const formPlace = document.forms.placeCardForm; //форма для добавления карточки
-const placeName = formPlace.elements.placeNameInput; //поле формы добавления карточки, нзвание места
-const placeLink = formPlace.elements.placeLinkInput; //поле формы карточки, ссылка на фотографию места
+
 const ESC = "Escape";
+
 
 //функция создания карточки
 const createCard = (cardClass, cardItem) => {
@@ -146,7 +138,6 @@ function closePopup(popup) {
 ///функция открытия попапа для заполнения данных пользователя c заполнение полей формы текущими занчениями
 function openUserPopup(popup) {
   openPopup(popup);
-  validateFormElement(popup);
   userNameInput.value = nameInput.textContent;
   userJobInput.value = jobInput.textContent;
   handleDisableButton(popup);
@@ -159,7 +150,6 @@ function openUserCardPopup(popup) {
   formPlace.reset(popup);
   handleDisableButton(popup);
   handleInputErrorsHide(popup);
-  validateFormElement(popup);
 }
 
 //функция кнопки Сохранить информацию о пользователе
@@ -215,12 +205,20 @@ const handleSubmitButtonEnabled = (buttonElement, selectors) => {
   buttonElement.classList.remove(selectors.disabledBtnSelector);
 };
 
+
+
 //функция проверки валидации полей формы.
 const validateFormElement = (formElement) => {
   const formValidator = new FormValidator(formElement, selectors);
 
   formValidator.enableValidation();
 };
+
+//функции валидации попапов в глобально видимости
+validateFormElement(popupUser);
+validateFormElement(popupPlace);
+
+
 
 //функция вывода ошибки в заданое поле.
 const showInputError = (inputElement, errorMessage, selectors) => {

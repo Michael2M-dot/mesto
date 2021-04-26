@@ -25,9 +25,10 @@ Project Mesto-Russia (Яндекс-Практикум)
 import {
   currentPicture,
   currentTitle,
-  openPopup,
   popupPicturePreview,
-} from "./index.js";
+} from "./constants.js"
+
+import { openPopup } from "./index.js";
 
 //Класс для создания карточки
 class Card {

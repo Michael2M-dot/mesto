@@ -59,7 +59,6 @@
  Для каждой проверяемой формы создайте экземпляр класса `FormValidator`.*/
 
 import {
-  selectors,
   handleFormSubmit,
   handleSubmitButtonDisabled,
   handleSubmitButtonEnabled,
@@ -67,9 +66,19 @@ import {
   hideInputError,
 } from "./index.js";
 
+import {
+  selectors
+} from "./constants.js"
+
+
 class FormValidator {
+
+  static selectors ={
+    inputSelector: ".form__input",
+  }
+
   constructor(formElement, selectors) {
-    this._inputSelector = selectors.inputSelector;
+    this._inputSelector = FormValidator.selectors.inputSelector;
     this._submitBtnSelector = selectors.submitBtnSelector;
     this._formElement = formElement;
   }
