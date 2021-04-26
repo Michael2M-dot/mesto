@@ -1,6 +1,5 @@
-.page__popup_visible{
+.page__popup_visible {
   visibility: visible;
   opacity: 1;
   display: flex;
 }
-

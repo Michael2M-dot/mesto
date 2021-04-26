@@ -1,7 +1,7 @@
 .form__submit-btn {
   -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   border-radius: 2px;
   background-color: var(--color__background);
   font-size: 18px;

@@ -1,4 +1,4 @@
-.popup__caption{
+.popup__caption {
   color: var(--color__main-text_profile);
   font-weight: 400;
   font-size: 12px;
@@ -6,6 +6,6 @@
   margin: 0;
   margin-top: 10px;
   -ms-flex-item-align: start;
-      -ms-grid-row-align: start;
-      align-self: start;
+  -ms-grid-row-align: start;
+  align-self: start;
 }

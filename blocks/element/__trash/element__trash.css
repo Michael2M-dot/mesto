@@ -1,4 +1,4 @@
-.element__trash{
+.element__trash {
   background-image: url(../../../images/Trash.svg);
   background-position: center;
   background-size: cover;
@@ -9,8 +9,8 @@
   -webkit-transition: scale 0.1s ease-in-out 0.1s;
   -o-transition: scale 0.1s ease-in-out 0.1s;
   transition: scale 0.1s ease-in-out 0.1s;
-  position:absolute;
-  top:18px;
+  position: absolute;
+  top: 18px;
   right: 17px;
 }
 

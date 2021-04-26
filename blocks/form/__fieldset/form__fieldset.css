@@ -1,12 +1,12 @@
-.form__fieldset{
-    width: 100%;
-    min-height: 52px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
+.form__fieldset {
+  width: 100%;
+  min-height: 52px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
-.form__fieldset:last-of-type{
-    margin-bottom: 31px;
+.form__fieldset:last-of-type {
+  margin-bottom: 31px;
 }

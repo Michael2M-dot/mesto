@@ -10,3 +10,5 @@
 .idea/**/contentModel.xml
 
 .DS_Store
+
+.prettierrc.json

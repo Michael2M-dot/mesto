@@ -1,4 +1,4 @@
-.page__popup{
+.page__popup {
   width: 100%;
   min-width: 320px;
   min-height: 100vh;
@@ -7,5 +7,5 @@
   visibility: hidden;
   opacity: 0;
   background: rgba(0, 0, 0, 0.5);
-  transition: visibility .4s ease-out, opacity 0.4s ease-out;
+  transition: visibility 0.4s ease-out, opacity 0.4s ease-out;
 }
