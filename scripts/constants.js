@@ -1,11 +1,11 @@
 //константы и селекторы
 
 export const selectors = {
-	submitBtnSelector: ".form__submit-btn",
-	disabledBtnSelector: "form__submit-btn_disabled",
-	errorsSelector: ".form__input-error",
-	formSection: ".form__fieldset",
-	inputErrorSelector: "form__input-error_active",
+  submitBtnSelector: ".form__submit-btn",
+  disabledBtnSelector: "form__submit-btn_disabled",
+  errorsSelector: ".form__input-error",
+  formSection: ".form__fieldset",
+  inputErrorSelector: "form__input-error_active",
 };
 
 //переменые для использвоания в скрипте
@@ -26,7 +26,7 @@ const popupPicturePreview = document.querySelector("#picture-popup");
 const currentPicture = popupPicturePreview.querySelector(".popup__image");
 const currentTitle = popupPicturePreview.querySelector(".popup__caption");
 const closePreviewPicturePopupBtn = document.querySelector(
-	"#close-PicturePopup"
+  "#close-PicturePopup"
 );
 const formPlace = document.forms.placeCardForm; //форма для добавления карточки
 const placeName = formPlace.elements.placeNameInput; //поле формы добавления карточки, нзвание места
@@ -34,25 +34,25 @@ const placeLink = formPlace.elements.placeLinkInput; //поле формы ка�
 const ESC = "Escape";
 
 export {
-	formUser,
-	nameInput,
-	jobInput,
-	userNameInput,
-	userJobInput,
-	openUserPopupBtn,
-	closeUserPopupBtn,
-	openPlacePopupBtn,
-	popupUser,
-	popupPlace,
-	closePlacePopupBtn,
-	popupWindows,
-	cardList,
-	popupPicturePreview,
-	currentPicture,
-	currentTitle,
-	closePreviewPicturePopupBtn,
-	formPlace,
-	placeName,
-	placeLink,
-	ESC
-}
+  formUser,
+  nameInput,
+  jobInput,
+  userNameInput,
+  userJobInput,
+  openUserPopupBtn,
+  closeUserPopupBtn,
+  openPlacePopupBtn,
+  popupUser,
+  popupPlace,
+  closePlacePopupBtn,
+  popupWindows,
+  cardList,
+  popupPicturePreview,
+  currentPicture,
+  currentTitle,
+  closePreviewPicturePopupBtn,
+  formPlace,
+  placeName,
+  placeLink,
+  ESC,
+};

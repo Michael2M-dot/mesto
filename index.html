@@ -1,218 +1,218 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content=""/>
-    <meta name="keywords" content=""/>
-    <meta name="author" content="Michael2M"/>
-    <link rel="icon" href="images/mesto_logo.svg" type="image/x-icon"/>
-    <link rel="stylesheet" href="./pages/index.css"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="Michael2M" />
+    <link rel="icon" href="images/mesto_logo.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="./pages/index.css" />
     <title>МЕСТО-Россия</title>
-</head>
+  </head>
 
-<body class="page">
-<div class="page__container">
-    <header class="header page__header section">
+  <body class="page">
+    <div class="page__container">
+      <header class="header page__header section">
         <a href="#" class="logo" target="_self">
-            <img
-                    src="images/mesto_logo.svg"
-                    alt="Логотип MESTO"
-                    class="header__logo"
-            />
+          <img
+            src="images/mesto_logo.svg"
+            alt="Логотип MESTO"
+            class="header__logo"
+          />
         </a>
-    </header>
+      </header>
 
-    <main class="content page__content section section_size_narrow">
+      <main class="content page__content section section_size_narrow">
         <section class="profile">
-            <div class="profile__user">
-                <div class="profile__user-avatar"></div>
-                <div
-                        class="profile__user-info profile__user-info_margins_top-bottom profile__user-info_margins_left-right"
-                >
-                    <h1 class="profile__user-name">Жак-Ив Кусто</h1>
-                    <p class="profile__user-job">Исследователь океана</p>
-                </div>
-                <button
-                        arial-lable="Открыть форму для изменения данных о пользователе"
-                        tittle="Открыть"
-                        type="button"
-                        class="button profile__button-edit"
-                        id="profile-editBtn"
-                ></button>
+          <div class="profile__user">
+            <div class="profile__user-avatar"></div>
+            <div
+              class="profile__user-info profile__user-info_margins_top-bottom profile__user-info_margins_left-right"
+            >
+              <h1 class="profile__user-name">Жак-Ив Кусто</h1>
+              <p class="profile__user-job">Исследователь океана</p>
             </div>
             <button
-                    arial-lable="Открыть форму для добавлениия фотографий на страницу"
-                    tittle="Добавить"
-                    type="button"
-                    class="button profile__button-add"
+              arial-lable="Открыть форму для изменения данных о пользователе"
+              tittle="Открыть"
+              type="button"
+              class="button profile__button-edit"
+              id="profile-editBtn"
             ></button>
+          </div>
+          <button
+            arial-lable="Открыть форму для добавлениия фотографий на страницу"
+            tittle="Добавить"
+            type="button"
+            class="button profile__button-add"
+          ></button>
         </section>
         <section class="elements">
-            <ul class="elements__list"></ul>
+          <ul class="elements__list"></ul>
         </section>
-    </main>
-    <footer class="footer page__footer">
+      </main>
+      <footer class="footer page__footer">
         <p class="footer__copyright">© 2020 Mesto Russia</p>
-    </footer>
-</div>
+      </footer>
+    </div>
 
-<!-- Секция DOM дерева для попапа редактирования данных о пользователе. По умолчанию скрыта. Выводится в видимую область путем создания микса добавлением модификатора page__popup_visible -->
-<section class="popup page__popup section" id="edit-profile">
-    <div class="popup__window popup__window_size_s">
+    <!-- Секция DOM дерева для попапа редактирования данных о пользователе. По умолчанию скрыта. Выводится в видимую область путем создания микса добавлением модификатора page__popup_visible -->
+    <section class="popup page__popup section" id="edit-profile">
+      <div class="popup__window popup__window_size_s">
         <h2 class="popup__title">Редактировать профиль</h2>
         <button
-                arial-lable="Закрыть форму для изменения данных о пользователе"
-                tittle="Закрыть"
-                type="button"
-                class="button popup__button-close"
-                id="close-userPopup"
+          arial-lable="Закрыть форму для изменения данных о пользователе"
+          tittle="Закрыть"
+          type="button"
+          class="button popup__button-close"
+          id="close-userPopup"
         ></button>
         <form
-                class="form"
-                id="user-profile"
-                name="userProfileForm"
-                autocomplete="off"
-                novalidate
+          class="form"
+          id="user-profile"
+          name="userProfileForm"
+          autocomplete="off"
+          novalidate
         >
-            <label class="form__fieldset" for="user-name-input">
-                <input
-                        type="text"
-                        class="form__input"
-                        id="user-name-input"
-                        name="userNameInput"
-                        placeholder="Имя"
-                        required
-                        maxlength="40"
-                        minlength="2"
-                />
-                <!--                    <span class="form__placeholder">Имя</span>-->
-                <span class="form__input-error" id="user-name-input-error"></span>
-            </label>
-            <label class="form__fieldset" for="user-job-input">
-                <input
-                        type="text"
-                        class="form__input form__user-job"
-                        id="user-job-input"
-                        name="userJobInput"
-                        placeholder="О себе"
-                        required
-                        maxlength="200"
-                        minlength="2"
-                />
-                <!--                    <span class="form__placeholder">О себе</span>-->
-                <span class="form__input-error" id="user-job-input-error"></span>
-            </label>
-            <button
-                    arial-lable="Сохранить изменения данных о пользователе"
-                    type="submit"
-                    class="button form__submit-btn"
-                    id="user-submit"
-            >
-                Сохранить
-            </button>
+          <label class="form__fieldset" for="user-name-input">
+            <input
+              type="text"
+              class="form__input"
+              id="user-name-input"
+              name="userNameInput"
+              placeholder="Имя"
+              required
+              maxlength="40"
+              minlength="2"
+            />
+            <!--                    <span class="form__placeholder">Имя</span>-->
+            <span class="form__input-error" id="user-name-input-error"></span>
+          </label>
+          <label class="form__fieldset" for="user-job-input">
+            <input
+              type="text"
+              class="form__input form__user-job"
+              id="user-job-input"
+              name="userJobInput"
+              placeholder="О себе"
+              required
+              maxlength="200"
+              minlength="2"
+            />
+            <!--                    <span class="form__placeholder">О себе</span>-->
+            <span class="form__input-error" id="user-job-input-error"></span>
+          </label>
+          <button
+            arial-lable="Сохранить изменения данных о пользователе"
+            type="submit"
+            class="button form__submit-btn"
+            id="user-submit"
+          >
+            Сохранить
+          </button>
         </form>
-    </div>
-</section>
+      </div>
+    </section>
 
-<!-- Секция DOM дерева для попапа формы добавления новой карточки на страницу. Становиться путем добавления модификатора page__popup_visible -->
-<section class="popup page__popup section" id="add-place">
-    <div class="popup__window popup__window_size_s">
+    <!-- Секция DOM дерева для попапа формы добавления новой карточки на страницу. Становиться путем добавления модификатора page__popup_visible -->
+    <section class="popup page__popup section" id="add-place">
+      <div class="popup__window popup__window_size_s">
         <h2 class="popup__title">Новое место</h2>
         <button
-                arial-lable="Закрыть форму для добавлениия фотографий на страницу"
-                tittle="Закрыть"
-                type="button"
-                class="button popup__button-close"
-                id="close-placePopup"
+          arial-lable="Закрыть форму для добавлениия фотографий на страницу"
+          tittle="Закрыть"
+          type="button"
+          class="button popup__button-close"
+          id="close-placePopup"
         ></button>
         <form
-                class="form"
-                id="place-form"
-                name="placeCardForm"
-                autocomplete="off"
-                novalidate
+          class="form"
+          id="place-form"
+          name="placeCardForm"
+          autocomplete="off"
+          novalidate
         >
-            <label class="form__fieldset" for="place-name-input">
-                <input
-                        type="text"
-                        class="form__input"
-                        id="place-name-input"
-                        name="placeNameInput"
-                        placeholder="Название (обязательно)"
-                        required
-                        maxlength="30"
-                        minlength="2"
-                />
-                <span class="form__input-error" id="place-name-input-error"></span>
-            </label>
-            <label class="form__fieldset" for="place-link-input">
-                <input
-                        type="url"
-                        class="form__input form__place-link"
-                        id="place-link-input"
-                        name="placeLinkInput"
-                        placeholder="Ссылка на картинку (обязательно)"
-                        required
-                />
-                <span class="form__input-error" id="place-link-input-error"></span>
-            </label>
-            <button
-                    arial-lable="Создать карточку нового места"
-                    type="submit"
-                    class="button form__submit-btn"
-                    id="place-submit"
-            >
-                Создать
-            </button>
+          <label class="form__fieldset" for="place-name-input">
+            <input
+              type="text"
+              class="form__input"
+              id="place-name-input"
+              name="placeNameInput"
+              placeholder="Название (обязательно)"
+              required
+              maxlength="30"
+              minlength="2"
+            />
+            <span class="form__input-error" id="place-name-input-error"></span>
+          </label>
+          <label class="form__fieldset" for="place-link-input">
+            <input
+              type="url"
+              class="form__input form__place-link"
+              id="place-link-input"
+              name="placeLinkInput"
+              placeholder="Ссылка на картинку (обязательно)"
+              required
+            />
+            <span class="form__input-error" id="place-link-input-error"></span>
+          </label>
+          <button
+            arial-lable="Создать карточку нового места"
+            type="submit"
+            class="button form__submit-btn"
+            id="place-submit"
+          >
+            Создать
+          </button>
         </form>
-    </div>
-</section>
+      </div>
+    </section>
 
-<!-- Секция DOM дерева для попапа полноформатного просмотра картинки на экране. Становиться путем добавления модификатора page__popup_visible. Есть ограничение 75% по высоте и ширине. Ограничение устанавливается через модификатор popup__window_size_l -->
-<section class="popup page__popup section" id="picture-popup">
-    <div class="popup__window popup__window_size_l">
+    <!-- Секция DOM дерева для попапа полноформатного просмотра картинки на экране. Становиться путем добавления модификатора page__popup_visible. Есть ограничение 75% по высоте и ширине. Ограничение устанавливается через модификатор popup__window_size_l -->
+    <section class="popup page__popup section" id="picture-popup">
+      <div class="popup__window popup__window_size_l">
         <button
-                arial-lable="Закрыть окно просмотра фотографии"
-                tittle="Закрыть"
-                type="button"
-                class="button popup__button-close popup__button-close_pos_inside"
-                id="close-PicturePopup"
+          arial-lable="Закрыть окно просмотра фотографии"
+          tittle="Закрыть"
+          type="button"
+          class="button popup__button-close popup__button-close_pos_inside"
+          id="close-PicturePopup"
         ></button>
         <figure class="popup__figure">
-            <img class="popup__image" src="#" alt="#"/>
-            <figcaption class="popup__caption"></figcaption>
+          <img class="popup__image" src="#" alt="#" />
+          <figcaption class="popup__caption"></figcaption>
         </figure>
-    </div>
-</section>
+      </div>
+    </section>
 
-<!-- Шаблон карточки. Карточка добавлется в DOM дерево через JS. -->
-<template class="element__template" id="cards-template">
-    <li class="element elements__list-item">
-        <img src=" " alt="" class="element__image"/>
+    <!-- Шаблон карточки. Карточка добавлется в DOM дерево через JS. -->
+    <template class="element__template" id="cards-template">
+      <li class="element elements__list-item">
+        <img src=" " alt="" class="element__image" />
         <div class="element__heading">
-            <h2 class="element__title"></h2>
-            <button
-                    arial-lable="Поставить/снять лайк на карточке"
-                    tittle="Поставить/снять лайк"
-                    type="button"
-                    class="element__like"
-            ></button>
+          <h2 class="element__title"></h2>
+          <button
+            arial-lable="Поставить/снять лайк на карточке"
+            tittle="Поставить/снять лайк"
+            type="button"
+            class="element__like"
+          ></button>
         </div>
         <button
-                arial-lable="Удалить карточку со страницы"
-                tittle="Удалить"
-                type="button"
-                class="button element__trash"
-                id="delete-Btn"
+          arial-lable="Удалить карточку со страницы"
+          tittle="Удалить"
+          type="button"
+          class="button element__trash"
+          id="delete-Btn"
         ></button>
-    </li>
-</template>
+      </li>
+    </template>
 
-<script type="module" src="./scripts/constants.js"></script>
-<script type="module" src="./scripts/index.js"></script>
-<script type="module" src="./scripts/Card.js"></script>
-<script type="module" src="./scripts/FormValidator.js"></script>
-<script type="module" src="./scripts/initial-cards.js"></script>
-</body>
+    <script type="module" src="./scripts/constants.js"></script>
+    <script type="module" src="./scripts/index.js"></script>
+    <script type="module" src="./scripts/Card.js"></script>
+    <script type="module" src="./scripts/FormValidator.js"></script>
+    <script type="module" src="./scripts/initial-cards.js"></script>
+  </body>
 </html>

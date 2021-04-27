@@ -57,202 +57,194 @@ Michael2M (c) 2021
 email: darak.ltd@yandex.ru
 */
 
-import {Card} from "./Card.js";
+import { Card } from "./Card.js";
 
-import {initialCards} from "./initial-cards.js";
+import { initialCards } from "./initial-cards.js";
 
-import {FormValidator} from "./FormValidator.js";
-
-import {
-	selectors,
-	formUser,
-	nameInput,
-	jobInput,
-	userNameInput,
-	userJobInput,
-	openUserPopupBtn,
-	closeUserPopupBtn,
-	openPlacePopupBtn,
-	popupUser,
-	popupPlace,
-	closePlacePopupBtn,
-	popupWindows,
-	cardList,
-	popupPicturePreview,
-	currentPicture,
-	currentTitle,
-	closePreviewPicturePopupBtn,
-	formPlace,
-	placeName,
-	placeLink,
-	ESC
-} from "./constants.js"
+import { FormValidator } from "./FormValidator.js";
 
 import {
-	handleFormSubmit,
-	openPopup,
-	closePopup
-} from "./utils.js"
+  selectors,
+  formUser,
+  nameInput,
+  jobInput,
+  userNameInput,
+  userJobInput,
+  openUserPopupBtn,
+  closeUserPopupBtn,
+  openPlacePopupBtn,
+  popupUser,
+  popupPlace,
+  closePlacePopupBtn,
+  popupWindows,
+  cardList,
+  popupPicturePreview,
+  currentPicture,
+  currentTitle,
+  closePreviewPicturePopupBtn,
+  formPlace,
+  placeName,
+  placeLink,
+  ESC,
+} from "./constants.js";
 
+import { handleFormSubmit, openPopup, closePopup } from "./utils.js";
 
 function handleCardClick(link, name) {
-	currentPicture.src = link;
-	currentTitle.textContent = name;
-	currentPicture.alt = `Нам очень жаль что вы не можете увидеть эту 
+  currentPicture.src = link;
+  currentTitle.textContent = name;
+  currentPicture.alt = `Нам очень жаль что вы не можете увидеть эту 
 	красивую фотографию этого удивительного места ${name}`;
 }
 
 //функция создания карточки
 const createCard = (cardClass, cardItem) => {
-	const card = new cardClass(cardItem, handleCardClick, ".element__template");
-	const cardElement = card.generateCard();
-	return cardElement;
+  const card = new cardClass(cardItem, handleCardClick, ".element__template");
+  const cardElement = card.generateCard();
+  return cardElement;
 };
 
 //функция рендеринга карточек
 function renderCard(cardCalss, cardItem, isPrepend) {
-	const element = createCard(cardCalss, cardItem);
-	isPrepend ? cardList.prepend(element) : cardList.append(element);
+  const element = createCard(cardCalss, cardItem);
+  isPrepend ? cardList.prepend(element) : cardList.append(element);
 }
 
 //функция автоматического рендеринга карточек на старнице
 initialCards.forEach((cardItem) => {
-	renderCard(Card, cardItem, false);
+  renderCard(Card, cardItem, false);
 }); //проходим по массиву и создаем карточки
 
 //Функция обработчик события на сабмите, которая добавляет элемент (карточка пользователя) в DOM
 function handleFormPlaceSubmit(evt) {
-	handleFormSubmit(evt);
-	renderUserCard(Card);
-	closePopup(popupPlace);
+  handleFormSubmit(evt);
+  renderUserCard(Card);
+  closePopup(popupPlace);
 }
 
 //Функция добавляющая новую карточки от пользователя.
 function renderUserCard(cardClass) {
-	const cardItem = {
-		name: placeName.value,
-		link: placeLink.value,
-	};
-	renderCard(cardClass, cardItem, true);
+  const cardItem = {
+    name: placeName.value,
+    link: placeLink.value,
+  };
+  renderCard(cardClass, cardItem, true);
 }
 
 ///функция открытия попапа для заполнения данных пользователя c заполнение полей формы текущими занчениями
 function openUserPopup(popup) {
-	openPopup(popup);
-	userNameInput.value = nameInput.textContent;
-	userJobInput.value = jobInput.textContent;
-	handleDisableButton(popup);
-	handleInputErrorsHide(popup);
+  openPopup(popup);
+  userNameInput.value = nameInput.textContent;
+  userJobInput.value = jobInput.textContent;
+  handleDisableButton(popup);
+  handleInputErrorsHide(popup);
 }
 
 //открытие popup places с обнулением полей
 function openUserCardPopup(popup) {
-	openPopup(popup);
-	formPlace.reset(popup);
-	handleDisableButton(popup);
-	handleInputErrorsHide(popup);
+  openPopup(popup);
+  formPlace.reset(popup);
+  handleDisableButton(popup);
+  handleInputErrorsHide(popup);
 }
 
 //функция кнопки Сохранить информацию о пользователе
 function handleFormUserSubmit(evt) {
-	handleFormSubmit(evt);
-	nameInput.textContent = userNameInput.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
-	jobInput.textContent = userJobInput.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
-	closePopup(popupUser); //используем уже готовую функцию для закрытия попапа
+  handleFormSubmit(evt);
+  nameInput.textContent = userNameInput.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
+  jobInput.textContent = userJobInput.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
+  closePopup(popupUser); //используем уже готовую функцию для закрытия попапа
 }
 
 //функция управляющая закрытием всех попапов как от нажатия кнопок так и по кликам на оверлее
 function handleMouseCloseWindow(popup, evt) {
-	if (
-		evt.target.classList.contains("page__popup") ||
-		evt.target.classList.contains("popup__button-close")
-	) {
-		closePopup(popup);
-	}
+  if (
+    evt.target.classList.contains("page__popup") ||
+    evt.target.classList.contains("popup__button-close")
+  ) {
+    closePopup(popup);
+  }
 }
 
 //функция управляющая закрытием попапа по клику на клавиатуре
 function handleKeyboardCloseWindow(evt) {
-	const currentPopup = document.querySelector(".page__popup_visible");
-	if (evt.key === ESC) {
-		closePopup(currentPopup);
-	}
+  const currentPopup = document.querySelector(".page__popup_visible");
+  if (evt.key === ESC) {
+    closePopup(currentPopup);
+  }
 }
 
 //вспомагательная функция которая повторно вызывает hideInputError и скрывает вывод ошибок, когда форма закрывается без сохранения значений
 const handleInputErrorsHide = (popup) => {
-	//обнуляем поля ошибки при закрытии формы через вызов универсально функции hideInputError
-	const inputElements = popup.querySelectorAll(selectors.formSection);
-	inputElements.forEach((input) => hideInputError(input, selectors));
+  //обнуляем поля ошибки при закрытии формы через вызов универсально функции hideInputError
+  const inputElements = popup.querySelectorAll(selectors.formSection);
+  inputElements.forEach((input) => hideInputError(input, selectors));
 };
 
 //функция для отключения кнопки submit. преводит кнопку в disabled  и убирает класс, делающий кнопу активной
 const handleDisableButton = (popup) => {
-	const submitButtons = popup.querySelectorAll(selectors.submitBtnSelector);
-	submitButtons.forEach((buttonElement) =>
-		handleSubmitButtonDisabled(buttonElement, selectors)
-	);
+  const submitButtons = popup.querySelectorAll(selectors.submitBtnSelector);
+  submitButtons.forEach((buttonElement) =>
+    handleSubmitButtonDisabled(buttonElement, selectors)
+  );
 };
 
 //функция добавляет классы и атрибуты на кнопку и делает ее неактивной
 const handleSubmitButtonDisabled = (buttonElement, selectors) => {
-	buttonElement.setAttribute("disabled", true);
-	buttonElement.classList.add(selectors.disabledBtnSelector);
+  buttonElement.setAttribute("disabled", true);
+  buttonElement.classList.add(selectors.disabledBtnSelector);
 };
 
 // функция делающая кнопку активной убирает классы и атрибуты
 const handleSubmitButtonEnabled = (buttonElement, selectors) => {
-	buttonElement.removeAttribute("disabled");
-	buttonElement.classList.remove(selectors.disabledBtnSelector);
+  buttonElement.removeAttribute("disabled");
+  buttonElement.classList.remove(selectors.disabledBtnSelector);
 };
-
 
 //функция проверки валидации полей формы.
 const validateFormElement = (formElement) => {
-	const formValidator = new FormValidator(formElement, selectors);
+  const formValidator = new FormValidator(formElement, selectors);
 
-	formValidator.enableValidation();
+  formValidator.enableValidation();
 };
 
 //функции валидации попапов в глобально видимости
 validateFormElement(popupUser);
 validateFormElement(popupPlace);
 
-
 //функция вывода ошибки в заданое поле.
 const showInputError = (inputElement, errorMessage, selectors) => {
-	// const errorElement = formElement.querySelector(`#${inputElement.id}-error`); - вариант поиска по id
-	//находим поле куда будем выводить ошибку
-	const formSectionElement = inputElement.closest(selectors.formSection);
-	const errorElement = formSectionElement.querySelector(
-		selectors.errorsSelector
-	);
-	//указываем что в данное поле будет выводиться ошибка errorMessage
-	errorElement.textContent = errorMessage;
-	errorElement.classList.add(selectors.inputErrorSelector); //добваляем класс отвечающий за отображение ошибки
+  // const errorElement = formElement.querySelector(`#${inputElement.id}-error`); - вариант поиска по id
+  //находим поле куда будем выводить ошибку
+  const formSectionElement = inputElement.closest(selectors.formSection);
+  const errorElement = formSectionElement.querySelector(
+    selectors.errorsSelector
+  );
+  //указываем что в данное поле будет выводиться ошибка errorMessage
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add(selectors.inputErrorSelector); //добваляем класс отвечающий за отображение ошибки
 };
 
 //функция скрывающая ошибку
 const hideInputError = (inputElement, selectors) => {
-	// const errorElement = formElement.querySelector(`#${inputElement.id}-error`); -варинат поиска по id
-	const formSectionElement = inputElement.closest(selectors.formSection);
-	const errorElement = formSectionElement.querySelector(
-		selectors.errorsSelector
-	);
+  // const errorElement = formElement.querySelector(`#${inputElement.id}-error`); -варинат поиска по id
+  const formSectionElement = inputElement.closest(selectors.formSection);
+  const errorElement = formSectionElement.querySelector(
+    selectors.errorsSelector
+  );
 
-	errorElement.textContent = ""; //убираем отображение текста ошибки
-	errorElement.classList.remove(selectors.inputErrorSelector); //удаляем класс отображающий ошибку
+  errorElement.textContent = ""; //убираем отображение текста ошибки
+  errorElement.classList.remove(selectors.inputErrorSelector); //удаляем класс отображающий ошибку
 };
-
 
 //универсальная функция которая запускает все закрытия попапов
 popupWindows.forEach((popup) => {
-	popup.addEventListener("click", (evt) => handleMouseCloseWindow(popup, evt));
+  popup.addEventListener("click", (evt) => handleMouseCloseWindow(popup, evt));
 });
 
 //слушатели для попапа добавления карточек
 openPlacePopupBtn.addEventListener("click", () =>
-	openUserCardPopup(popupPlace)
+  openUserCardPopup(popupPlace)
 );
 formPlace.addEventListener("submit", handleFormPlaceSubmit);
 
@@ -261,15 +253,15 @@ openUserPopupBtn.addEventListener("click", () => openUserPopup(popupUser)); //с
 formUser.addEventListener("submit", handleFormUserSubmit); //слушатель для сохранеия формы.
 
 export {
-	currentPicture,
-	currentTitle,
-	popupPicturePreview,
-	openPopup,
-	handleFormSubmit,
-	selectors,
-	handleSubmitButtonDisabled,
-	handleSubmitButtonEnabled,
-	showInputError,
-	hideInputError,
-	handleKeyboardCloseWindow
+  currentPicture,
+  currentTitle,
+  popupPicturePreview,
+  openPopup,
+  handleFormSubmit,
+  selectors,
+  handleSubmitButtonDisabled,
+  handleSubmitButtonEnabled,
+  showInputError,
+  hideInputError,
+  handleKeyboardCloseWindow,
 };
