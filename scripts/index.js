@@ -4,17 +4,23 @@ Project Mesto-Russia (Яндекс - Практикум)
 Version 0.07a - 25.04.2021
 Что нового (ver.0.07a):
 
-- Добавлены классы Card и FormValidator, которые вынесены в отедльные файлы;
+- Добавлены классы Card и FormValidator, которые вынесены в отдельные файлы;
 
 - Проведен рефакторинг кода по файлам JS с использованием import и export:
 
-- Каждый класс экспортируется в index.js и создается прототип класса с одним публичным методомю
+- Каждый класс экспортируется в index.js и создается прототип класса с одним публичным методом
 
-- Selectors используемые в классе вынесены в index.js.
+- Selectors и переменные используемые в скрипте вынесены в constant.js.
 
-- В класс Card - вынесен функционал создания картчки с обработчиками.
+- В класс Card - вынесен функционал создания картчки с обработчиками и приватными методами.
 
-- В модуль экспортируются данные из модуля Card.js (Card) FormValidator.js и (FormValidator).
+- Yтилитарные функции вынесены в отдельный файл utils.js.
+
+- В модуль экспортируются данные из модулей:
+ Card.js  -  класс Card,
+ FormValidator.js - класс FormValidator,
+ constants.js - переменные и селекторы,
+ utils.js - утилитарные функции.
 
 
 
@@ -88,9 +94,17 @@ import {
 	closePopup
 } from "./utils.js"
 
+
+function handleCardClick(link, name) {
+	currentPicture.src = link;
+	currentTitle.textContent = name;
+	currentPicture.alt = `Нам очень жаль что вы не можете увидеть эту 
+	красивую фотографию этого удивительного места ${name}`;
+}
+
 //функция создания карточки
 const createCard = (cardClass, cardItem) => {
-	const card = new cardClass(cardItem, ".element__template");
+	const card = new cardClass(cardItem, handleCardClick, ".element__template");
 	const cardElement = card.generateCard();
 	return cardElement;
 };
@@ -121,41 +135,6 @@ function renderUserCard(cardClass) {
 	};
 	renderCard(cardClass, cardItem, true);
 }
-
-/*
-//функция передающая значения по клику на изображении
-function handleCardClick(item) {
-	currentPicture.src = item.link,
-		currentTitle.textContent = item.name,
-		currentPicture.alt = item.name
-}
-*/
-
-
-/*
-//
-function handlePreviewPopupOpen(item) {
-  currentPicture.src = item.link;
-  currentTitle.textContent = item.name;
-  currentPicture.alt = item.name;
-  openPopup(popupPicturePreview);
-}
-*/
-
-/*
-
-//универсальная функция открытия попапа
-function openPopup(popup) {
-	popup.classList.add("page__popup_visible");
-	document.addEventListener("keydown", handleKeyboardCloseWindow);
-}
-
-//универсальная функция закрытия попапа
-function closePopup(popup) {
-	popup.classList.remove("page__popup_visible");
-	document.removeEventListener("keydown", handleKeyboardCloseWindow);
-}
-*/
 
 ///функция открытия попапа для заполнения данных пользователя c заполнение полей формы текущими занчениями
 function openUserPopup(popup) {

@@ -1,4 +1,4 @@
-/*Скрипт для созданич карточки
+/*Скрипт для создания карточки
 
 Project Mesto-Russia (Яндекс-Практикум)
 *
@@ -6,29 +6,26 @@ Project Mesto-Russia (Яндекс-Практикум)
 
 - Создаем класс Card, который создаёт карточку с текстом и ссылкой на изображение
 
-- В конструктор класса Card передаем в качестве аргумента объект с данными карточки  и селектор template-элемента
- из HTML страницы;
+- В конструктор класса Card передаем в качестве аргумента объект с данными карточки, функция колбэк, которая подставляет
+ значения полей (handleCardClick) и селектор template-элемента (cardSelector) из HTML разметки страницы;
 
 - Прописываем приватные методы, которые работают с разметкой (_getTemplate) и устанавливают слушателей событий
 (_setEventListener);
 
 - Класс содержит приватные методы для каждого обработчиков по LIke (_handleLikeClick),
-удалению карточки (_handleDeleteClick) и  и открытию полнформатного просмотра изображения (_handlePreviewPopupOpen);
+удалению карточки (_handleDeleteClick) и открытию полноформатного просмотра изображения (_handlePreviewPopupOpen);
 
 - Содержит один публичный метод, который возвращает полностью работоспособный и наполненный данными элемент карточки.
 
-- В модуль импортируются переменные которые передают значения для объекта создания карточки пользователем:
+- В модуль импортируются переменные, которые передают значения для объекта создания карточки пользователем:
 ссылка на изображение (currentPicture) и название карточки (currentTitle). А также функция открытия попапа (openPopup) и
-переменная с селектром открытия поапа просмотра изображения.
+переменная с селектором открытия попапа просмотра изображения.
 */
 
-import {
-	popupPicturePreview,
-	currentPicture,
-	currentTitle
-} from "./constants.js"
+import {popupPicturePreview} from "./constants.js"
 
 import {openPopup} from "./utils.js";
+
 
 //Класс для создания карточки
 class Card {
@@ -39,11 +36,11 @@ class Card {
 		titleSelector: ".element__title",
 	};
 
-	constructor(cardItem, cardSelector) {
+	constructor(cardItem, handleCardClick, cardSelector) {
 		this._name = cardItem.name;
 		this._link = cardItem.link;
+		this._handleCardClick = handleCardClick
 		this._cardSelector = cardSelector;
-		// this._handleCardClick = handleCardClick(cardItem);
 	}
 
 	_getTemplate() {
@@ -84,11 +81,8 @@ class Card {
 			.remove();
 	}
 
-	_handlePreviewPopupOpen() {
-		// this._handleCardClick();
-		currentPicture.src = this._link;
-		currentTitle.textContent = this._name;
-		currentPicture.alt = this._name;
+	_handlePreviewPopupOpen = () => {
+		this._handleCardClick(this._link, this._name);
 		openPopup(popupPicturePreview);
 	}
 
@@ -97,7 +91,8 @@ class Card {
 		this._setEventListeners();
 
 		this._element.querySelector(Card.selectors.imageSelector).src = this._link;
-		this._element.querySelector(Card.selectors.imageSelector).alt = this._name;
+		this._element.querySelector(Card.selectors.imageSelector).alt = `Нам очень жаль что вы не можете увидеть эту 
+	красивую фотографию этого удивительного места ${this._name}`;
 		this._element.querySelector(
 			Card.selectors.titleSelector
 		).textContent = this._name;

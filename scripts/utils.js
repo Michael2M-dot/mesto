@@ -1,8 +1,6 @@
 //модуль с утилитарными функциями
 
-import {
-	handleKeyboardCloseWindow
-} from "./index.js"
+import {handleKeyboardCloseWindow} from "./index.js"
 
 
 //функция снимающая действие по умолчанию при нажатии на кнопку submit: при нажатии страница не перезагружается
@@ -22,10 +20,8 @@ function closePopup(popup) {
 	document.removeEventListener("keydown", handleKeyboardCloseWindow);
 }
 
-
 export {
 	handleFormSubmit,
 	openPopup,
 	closePopup
 }
-

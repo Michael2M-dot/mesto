@@ -30,8 +30,7 @@ const closePreviewPicturePopupBtn = document.querySelector(
 );
 const formPlace = document.forms.placeCardForm; //форма для добавления карточки
 const placeName = formPlace.elements.placeNameInput; //поле формы добавления карточки, нзвание места
-const placeLink = formPlace.elements.placeLinkInput; //поле формы карточки, ссылка на фотографию места
-
+const placeLink = formPlace.elements.placeLinkInput; //поле формы карточки, ссылка на фотографию местад
 const ESC = "Escape";
 
 export {
