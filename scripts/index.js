@@ -208,9 +208,12 @@ const validateFormElement = (formElement) => {
   formValidator.enableValidation();
 };
 
+
 //функции валидации попапов в глобально видимости
-validateFormElement(popupUser);
-validateFormElement(popupPlace);
+popupElements.forEach((popupElement) => {
+  validateFormElement(popupElement);
+})
+
 
 //функция вывода ошибки в заданое поле.
 const showInputError = (inputElement, errorMessage, selectors) => {
