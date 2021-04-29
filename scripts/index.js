@@ -87,10 +87,18 @@ import {
   placeLink,
   popupElements,
   ESC,
-
 } from "./constants.js";
 
-import { handleFormSubmit, openPopup, closePopup } from "./utils.js";
+import {
+  handleFormSubmit,
+  openPopup,
+  closePopup,
+  handleMouseCloseWindow,
+  handleKeyboardCloseWindow,
+  hideInputError,
+  showInputError,
+  handleDisableButton,
+} from "./utils.js";
 
 function handleCardClick(link, name) {
   currentPicture.src = link;
@@ -158,49 +166,11 @@ function handleFormUserSubmit(evt) {
   closePopup(popupUser); //используем уже готовую функцию для закрытия попапа
 }
 
-//функция управляющая закрытием всех попапов как от нажатия кнопок так и по кликам на оверлее
-function handleMouseCloseWindow(popup, evt) {
-  if (
-    evt.target.classList.contains("page__popup") ||
-    evt.target.classList.contains("popup__button-close")
-  ) {
-    closePopup(popup);
-  }
-}
-
-//функция управляющая закрытием попапа по клику на клавиатуре
-function handleKeyboardCloseWindow(evt) {
-  const currentPopup = document.querySelector(".page__popup_visible");
-  if (evt.key === ESC) {
-    closePopup(currentPopup);
-  }
-}
-
 //вспомагательная функция которая повторно вызывает hideInputError и скрывает вывод ошибок, когда форма закрывается без сохранения значений
 const handleInputErrorsHide = (popup) => {
   //обнуляем поля ошибки при закрытии формы через вызов универсально функции hideInputError
   const inputElements = popup.querySelectorAll(selectors.formSection);
   inputElements.forEach((input) => hideInputError(input, selectors));
-};
-
-//функция для отключения кнопки submit. преводит кнопку в disabled  и убирает класс, делающий кнопу активной
-const handleDisableButton = (popup) => {
-  const submitButtons = popup.querySelectorAll(selectors.submitBtnSelector);
-  submitButtons.forEach((buttonElement) =>
-    handleSubmitButtonDisabled(buttonElement, selectors)
-  );
-};
-
-//функция добавляет классы и атрибуты на кнопку и делает ее неактивной
-const handleSubmitButtonDisabled = (buttonElement, selectors) => {
-  buttonElement.setAttribute("disabled", true);
-  buttonElement.classList.add(selectors.disabledBtnSelector);
-};
-
-// функция делающая кнопку активной убирает классы и атрибуты
-const handleSubmitButtonEnabled = (buttonElement, selectors) => {
-  buttonElement.removeAttribute("disabled");
-  buttonElement.classList.remove(selectors.disabledBtnSelector);
 };
 
 //функция проверки валидации полей формы.
@@ -210,37 +180,10 @@ const validateFormElement = (formElement) => {
   formValidator.enableValidation();
 };
 
-
 //функции валидации попапов в глобально видимости
 popupElements.forEach((popupElement) => {
   validateFormElement(popupElement);
-})
-
-
-//функция вывода ошибки в заданое поле.
-const showInputError = (inputElement, errorMessage, selectors) => {
-  // const errorElement = formElement.querySelector(`#${inputElement.id}-error`); - вариант поиска по id
-  //находим поле куда будем выводить ошибку
-  const formSectionElement = inputElement.closest(selectors.formSection);
-  const errorElement = formSectionElement.querySelector(
-    selectors.errorsSelector
-  );
-  //указываем что в данное поле будет выводиться ошибка errorMessage
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add(selectors.inputErrorSelector); //добваляем класс отвечающий за отображение ошибки
-};
-
-//функция скрывающая ошибку
-const hideInputError = (inputElement, selectors) => {
-  // const errorElement = formElement.querySelector(`#${inputElement.id}-error`); -варинат поиска по id
-  const formSectionElement = inputElement.closest(selectors.formSection);
-  const errorElement = formSectionElement.querySelector(
-    selectors.errorsSelector
-  );
-
-  errorElement.textContent = ""; //убираем отображение текста ошибки
-  errorElement.classList.remove(selectors.inputErrorSelector); //удаляем класс отображающий ошибку
-};
+});
 
 //универсальная функция которая запускает все закрытия попапов
 popupWindows.forEach((popup) => {
@@ -256,17 +199,3 @@ formPlace.addEventListener("submit", handleFormPlaceSubmit);
 //слушатели для попапа редактирования данных пользователя
 openUserPopupBtn.addEventListener("click", () => openUserPopup(popupUser)); //слушатель для открытия попапа для редактирования профиля пользователя
 formUser.addEventListener("submit", handleFormUserSubmit); //слушатель для сохранеия формы.
-
-export {
-  currentPicture,
-  currentTitle,
-  popupPicturePreview,
-  openPopup,
-  handleFormSubmit,
-  selectors,
-  handleSubmitButtonDisabled,
-  handleSubmitButtonEnabled,
-  showInputError,
-  hideInputError,
-  handleKeyboardCloseWindow,
-};

@@ -1,11 +1,11 @@
 //константы и селекторы
 
-export const selectors = {
+const selectors = {
   submitBtnSelector: ".form__submit-btn",
   disabledBtnSelector: "form__submit-btn_disabled",
   errorsSelector: ".form__input-error",
   formSection: ".form__fieldset",
-  inputErrorSelector: "form__input-error_active"
+  inputErrorSelector: "form__input-error_active",
 };
 
 //переменные для использования в скрипте
@@ -31,11 +31,11 @@ const closePreviewPicturePopupBtn = document.querySelector(
 const formPlace = document.forms.placeCardForm; //форма для добавления карточки
 const placeName = formPlace.elements.placeNameInput; //поле формы добавления карточки, название места
 const placeLink = formPlace.elements.placeLinkInput; //поле формы карточки, ссылка на фотографию места
-const popupElements = document.querySelectorAll('.popup__window_size_s');
+const popupElements = document.querySelectorAll(".popup__window_size_s");
 const ESC = "Escape";
 
-
 export {
+  selectors,
   formUser,
   nameInput,
   jobInput,
@@ -57,5 +57,5 @@ export {
   placeName,
   placeLink,
   popupElements,
-  ESC
+  ESC,
 };

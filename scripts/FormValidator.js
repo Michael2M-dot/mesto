@@ -49,14 +49,20 @@
  * email: darak.ltd@yandex.ru
  * */
 
+/*
 import {
   handleSubmitButtonDisabled,
-  handleSubmitButtonEnabled,
-  showInputError,
-  hideInputError,
+  handleSubmitButtonEnabled
 } from "./index.js";
+*/
 
-import { handleFormSubmit } from "./utils.js";
+import {
+  handleFormSubmit,
+  hideInputError,
+  showInputError,
+  handleSubmitButtonDisabled,
+  handleSubmitButtonEnabled,
+} from "./utils.js";
 
 import { selectors } from "./constants.js";
 

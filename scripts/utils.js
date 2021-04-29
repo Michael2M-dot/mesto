@@ -1,6 +1,6 @@
 //модуль с утилитарными функциями
 
-import { handleKeyboardCloseWindow } from "./index.js";
+import { ESC, selectors } from "./constants.js";
 
 //функция снимающая действие по умолчанию при нажатии на кнопку submit: при нажатии страница не перезагружается
 const handleFormSubmit = (evt) => {
@@ -19,4 +19,78 @@ function closePopup(popup) {
   document.removeEventListener("keydown", handleKeyboardCloseWindow);
 }
 
-export { handleFormSubmit, openPopup, closePopup };
+//функция управляющая закрытием всех попапов как от нажатия кнопок так и по кликам на оверлее
+function handleMouseCloseWindow(popup, evt) {
+  if (
+    evt.target.classList.contains("page__popup") ||
+    evt.target.classList.contains("popup__button-close")
+  ) {
+    closePopup(popup);
+  }
+}
+
+//функция управляющая закрытием попапа по клику на клавиатуре
+function handleKeyboardCloseWindow(evt) {
+  const currentPopup = document.querySelector(".page__popup_visible");
+  if (evt.key === ESC) {
+    closePopup(currentPopup);
+  }
+}
+
+//функция вывода ошибки в заданое поле.
+const showInputError = (inputElement, errorMessage, selectors) => {
+  // const errorElement = formElement.querySelector(`#${inputElement.id}-error`); - вариант поиска по id
+  //находим поле куда будем выводить ошибку
+  const formSectionElement = inputElement.closest(selectors.formSection);
+  const errorElement = formSectionElement.querySelector(
+    selectors.errorsSelector
+  );
+  //указываем что в данное поле будет выводиться ошибка errorMessage
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add(selectors.inputErrorSelector); //добваляем класс отвечающий за отображение ошибки
+};
+
+//функция скрывающая ошибку
+const hideInputError = (inputElement, selectors) => {
+  // const errorElement = formElement.querySelector(`#${inputElement.id}-error`); -варинат поиска по id
+  const formSectionElement = inputElement.closest(selectors.formSection);
+  const errorElement = formSectionElement.querySelector(
+    selectors.errorsSelector
+  );
+
+  errorElement.textContent = ""; //убираем отображение текста ошибки
+  errorElement.classList.remove(selectors.inputErrorSelector); //удаляем класс отображающий ошибку
+};
+
+//функция для отключения кнопки submit. пtреводит кнопку в disabled и убирает класс, делающий кнопу активной
+const handleDisableButton = (popup) => {
+  const submitButtons = popup.querySelectorAll(selectors.submitBtnSelector);
+  submitButtons.forEach((buttonElement) =>
+    handleSubmitButtonDisabled(buttonElement, selectors)
+  );
+};
+
+//функция добавляет классы и атрибуты на кнопку и делает ее неактивной
+const handleSubmitButtonDisabled = (buttonElement, selectors) => {
+  buttonElement.setAttribute("disabled", true);
+  buttonElement.classList.add(selectors.disabledBtnSelector);
+};
+
+// функция делающая кнопку активной убирает классы и атрибуты
+const handleSubmitButtonEnabled = (buttonElement, selectors) => {
+  buttonElement.removeAttribute("disabled");
+  buttonElement.classList.remove(selectors.disabledBtnSelector);
+};
+
+export {
+  handleFormSubmit,
+  openPopup,
+  closePopup,
+  handleMouseCloseWindow,
+  handleKeyboardCloseWindow,
+  hideInputError,
+  showInputError,
+  handleDisableButton,
+  handleSubmitButtonDisabled,
+  handleSubmitButtonEnabled,
+};
