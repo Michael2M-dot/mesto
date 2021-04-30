@@ -1,0 +1,8 @@
+/*селектор для светлой темы переопределяем переменные для светой темы, они должны наследоваться при добавлении селектора*/
+.theme__light {
+    --color__background: #c6c2c2;
+    --color__background_window: #151313;
+    --color__main-text_profile: #131111;
+    --color__main-text_elements: #f6f3f3;
+    --color__main-text_footer: #545454;
+}
