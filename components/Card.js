@@ -22,12 +22,12 @@ Project Mesto-Russia (Яндекс-Практикум)
 переменная с селектором открытия попапа просмотра изображения.
 */
 
-import { popupPicturePreview } from "./constants.js";
+import { popupPicturePreview } from "../utils/constants.js";
 
-import { openPopup } from "./utils.js";
+import { openPopup } from "../utils/utils.js";
 
 //Класс для создания карточки
-class Card {
+export class Card {
   static selectors = {
     likeSelector: ".element__like",
     trashSelector: ".element__trash",
@@ -35,7 +35,7 @@ class Card {
     titleSelector: ".element__title",
   };
 
-  constructor({name, link}, handleCardClick, cardSelector) {
+  constructor({ name, link }, handleCardClick, cardSelector) {
     this._name = name;
     this._link = link;
     this._handleCardClick = handleCardClick;
@@ -101,5 +101,3 @@ class Card {
     return this._element;
   }
 }
-
-export { Card };

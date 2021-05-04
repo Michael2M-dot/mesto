@@ -57,11 +57,11 @@ Michael2M (c) 2021
 email: darak.ltd@yandex.ru
 */
 
-import { Card } from "../scripts/Card.js";
+import { Card } from "../components/Card.js";
 
-import { initialCards } from "../scripts/initial-cards.js";
+import { initialCards } from "../utils/initial-cards.js";
 
-import { FormValidator } from "../scripts/FormValidator.js";
+import { FormValidator } from "../components/FormValidator.js";
 
 import {
   selectors,
@@ -87,7 +87,7 @@ import {
   placeLink,
   popupElements,
   ESC,
-} from "../scripts/constants.js";
+} from "../utils/constants.js";
 
 import {
   handleFormSubmit,
@@ -98,7 +98,7 @@ import {
   hideInputError,
   showInputError,
   handleDisableButton,
-} from "../scripts/utils.js";
+} from "../utils/utils.js";
 
 function handleCardClick(link, name) {
   currentPicture.src = link;

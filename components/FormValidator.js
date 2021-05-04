@@ -49,24 +49,17 @@
  * email: darak.ltd@yandex.ru
  * */
 
-/*
-import {
-  handleSubmitButtonDisabled,
-  handleSubmitButtonEnabled
-} from "./index.js";
-*/
-
 import {
   handleFormSubmit,
   hideInputError,
   showInputError,
   handleSubmitButtonDisabled,
   handleSubmitButtonEnabled,
-} from "./utils.js";
+} from "../utils/utils.js";
 
-import { selectors } from "./constants.js";
+import { selectors } from "../utils/constants.js";
 
-class FormValidator {
+export class FormValidator {
   static selectors = {
     inputSelector: ".form__input",
   };
@@ -157,5 +150,3 @@ class FormValidator {
     this._setEventListener();
   }
 }
-
-export { FormValidator };

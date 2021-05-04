@@ -3,24 +3,24 @@
 import { ESC, selectors } from "./constants.js";
 
 //функция снимающая действие по умолчанию при нажатии на кнопку submit: при нажатии страница не перезагружается
-const handleFormSubmit = (evt) => {
+export const handleFormSubmit = (evt) => {
   evt.preventDefault();
 };
 
 //универсальная функция открытия попапа
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add("page__popup_visible");
   document.addEventListener("keydown", handleKeyboardCloseWindow);
 }
 
 //универсальная функция закрытия попапа
-function closePopup(popup) {
+export function closePopup(popup) {
   popup.classList.remove("page__popup_visible");
   document.removeEventListener("keydown", handleKeyboardCloseWindow);
 }
 
 //функция управляющая закрытием всех попапов как от нажатия кнопок так и по кликам на оверлее
-function handleMouseCloseWindow(popup, evt) {
+export function handleMouseCloseWindow(popup, evt) {
   if (
     evt.target.classList.contains("page__popup") ||
     evt.target.classList.contains("popup__button-close")
@@ -30,7 +30,7 @@ function handleMouseCloseWindow(popup, evt) {
 }
 
 //функция управляющая закрытием попапа по клику на клавиатуре
-function handleKeyboardCloseWindow(evt) {
+export function handleKeyboardCloseWindow(evt) {
   const currentPopup = document.querySelector(".page__popup_visible");
   if (evt.key === ESC) {
     closePopup(currentPopup);
@@ -38,7 +38,7 @@ function handleKeyboardCloseWindow(evt) {
 }
 
 //функция вывода ошибки в заданое поле.
-const showInputError = (inputElement, errorMessage, selectors) => {
+export const showInputError = (inputElement, errorMessage, selectors) => {
   // const errorElement = formElement.querySelector(`#${inputElement.id}-error`); - вариант поиска по id
   //находим поле куда будем выводить ошибку
   const formSectionElement = inputElement.closest(selectors.formSection);
@@ -51,7 +51,7 @@ const showInputError = (inputElement, errorMessage, selectors) => {
 };
 
 //функция скрывающая ошибку
-const hideInputError = (inputElement, selectors) => {
+export const hideInputError = (inputElement, selectors) => {
   // const errorElement = formElement.querySelector(`#${inputElement.id}-error`); -варинат поиска по id
   const formSectionElement = inputElement.closest(selectors.formSection);
   const errorElement = formSectionElement.querySelector(
@@ -63,7 +63,7 @@ const hideInputError = (inputElement, selectors) => {
 };
 
 //функция для отключения кнопки submit. пtреводит кнопку в disabled и убирает класс, делающий кнопу активной
-const handleDisableButton = (popup) => {
+export const handleDisableButton = (popup) => {
   const submitButtons = popup.querySelectorAll(selectors.submitBtnSelector);
   submitButtons.forEach((buttonElement) =>
     handleSubmitButtonDisabled(buttonElement, selectors)
@@ -71,26 +71,13 @@ const handleDisableButton = (popup) => {
 };
 
 //функция добавляет классы и атрибуты на кнопку и делает ее неактивной
-const handleSubmitButtonDisabled = (buttonElement, selectors) => {
+export const handleSubmitButtonDisabled = (buttonElement, selectors) => {
   buttonElement.setAttribute("disabled", true);
   buttonElement.classList.add(selectors.disabledBtnSelector);
 };
 
 // функция делающая кнопку активной убирает классы и атрибуты
-const handleSubmitButtonEnabled = (buttonElement, selectors) => {
+export const handleSubmitButtonEnabled = (buttonElement, selectors) => {
   buttonElement.removeAttribute("disabled");
   buttonElement.classList.remove(selectors.disabledBtnSelector);
-};
-
-export {
-  handleFormSubmit,
-  openPopup,
-  closePopup,
-  handleMouseCloseWindow,
-  handleKeyboardCloseWindow,
-  hideInputError,
-  showInputError,
-  handleDisableButton,
-  handleSubmitButtonDisabled,
-  handleSubmitButtonEnabled,
 };
