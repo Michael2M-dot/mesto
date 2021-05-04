@@ -10,10 +10,18 @@ const selectors = {
 
 //переменные для использования в скрипте
 const formUser = document.forms.userProfileForm; //форма для редактирования данных пользователя
+const {userNameInput, userJobInput} = formUser;
+/*const userNameInput = formUser.elements.userNameInput; //переменная поля ввода имени для формы редактирования профиля пользователя
+const userJobInput = formUser.elements.userJobInput; //переменная поля ввода профессии для формы редактирования профиля пользователя*/
+
+const formPlace = document.forms.placeCardForm; //форма для добавления карточки
+const {placeName, placeLink} = formPlace;
+/*const placeName = formPlace.elements.placeNameInput; //поле формы добавления карточки, название места
+const placeLink = formPlace.elements.placeLinkInput; //поле формы карточки, ссылка на фотографию места*/
+
+
 const nameInput = document.querySelector(".profile__user-name");
 const jobInput = document.querySelector(".profile__user-job");
-const userNameInput = formUser.elements.userNameInput; //переменная поля ввода имени для формы редактирования профиля пользователя
-const userJobInput = formUser.elements.userJobInput; //переменная поля ввода профессии для формы редактирования профиля пользователя
 const openUserPopupBtn = document.querySelector(".profile__button-edit");
 const closeUserPopupBtn = document.querySelector("#close-userPopup");
 const openPlacePopupBtn = document.querySelector(".profile__button-add");
@@ -28,9 +36,6 @@ const currentTitle = popupPicturePreview.querySelector(".popup__caption");
 const closePreviewPicturePopupBtn = document.querySelector(
   "#close-PicturePopup"
 );
-const formPlace = document.forms.placeCardForm; //форма для добавления карточки
-const placeName = formPlace.elements.placeNameInput; //поле формы добавления карточки, название места
-const placeLink = formPlace.elements.placeLinkInput; //поле формы карточки, ссылка на фотографию места
 const popupElements = document.querySelectorAll(".popup__window_size_s");
 const ESC = "Escape";
 
