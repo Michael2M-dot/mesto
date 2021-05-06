@@ -35,9 +35,9 @@ export class Card {
     titleSelector: ".element__title",
   };
 
-  constructor({ name, link }, handleCardClick, cardSelector) {
-    this._name = name;
-    this._link = link;
+  constructor(item, handleCardClick, cardSelector) {
+    this._name = item.name;
+    this._link = item.link;
     this._handleCardClick = handleCardClick;
     this._cardSelector = cardSelector;
   }

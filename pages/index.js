@@ -63,6 +63,8 @@ import { initialCards } from "../utils/initial-cards.js";
 
 import { FormValidator } from "../components/FormValidator.js";
 
+import Section from "../components/Section.js";
+
 import {
   selectors,
   formUser,
@@ -77,7 +79,7 @@ import {
   popupPlace,
   closePlacePopupBtn,
   popupWindows,
-  cardList,
+  cardListSection,
   popupPicturePreview,
   currentPicture,
   currentTitle,
@@ -107,39 +109,42 @@ function handleCardClick(link, name) {
 	красивую фотографию этого удивительного места ${name}`;
 }
 
-//функция создания карточки
-const createCard = (cardClass, cardItem) => {
-  const card = new cardClass(cardItem, handleCardClick, ".element__template");
-  const cardElement = card.generateCard();
-  return cardElement;
-};
+//обращаемся к классу section и выводим на страницу начальный массив данных
+const cardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const card = new Card(item, handleCardClick, ".element__template");
+    const cardElement = card.generateCard();
 
-//функция рендеринга карточек
-function renderCard(cardCalss, cardItem, isPrepend) {
-  const element = createCard(cardCalss, cardItem);
-  isPrepend ? cardList.prepend(element) : cardList.append(element);
-}
+    cardList.addItem(cardElement, false);
+  }},
+  cardListSection
+)
 
-//функция автоматического рендеринга карточек на старнице
-initialCards.forEach((cardItem) => {
-  renderCard(Card, cardItem, false);
-}); //проходим по массиву и создаем карточки
+//вывели начальный массив карточек
+cardList.renderItems();
+
+//создаем карточку пользователя.
+const userCard = new Section({
+      items: formPlace,
+      renderer: (item) => {
+        const card = new Card(item, handleCardClick, ".element__template");
+        const cardElement = card.generateCard();
+
+        userCard.addItem(cardElement, true);
+      }},
+    cardListSection
+)
+
+
 
 //Функция обработчик события на сабмите, которая добавляет элемент (карточка пользователя) в DOM
 function handleFormPlaceSubmit(evt) {
   handleFormSubmit(evt);
-  renderUserCard(Card);
+  userCard.renderItems();
   closePopup(popupPlace);
 }
 
-//Функция добавляющая новую карточки от пользователя.
-function renderUserCard(cardClass) {
-  const cardItem = {
-    name: placeName.value,
-    link: placeLink.value,
-  };
-  renderCard(cardClass, cardItem, true);
-}
 
 ///функция открытия попапа для заполнения данных пользователя c заполнение полей формы текущими занчениями
 function openUserPopup(popup) {
@@ -199,3 +204,41 @@ formPlace.addEventListener("submit", handleFormPlaceSubmit);
 //слушатели для попапа редактирования данных пользователя
 openUserPopupBtn.addEventListener("click", () => openUserPopup(popupUser)); //слушатель для открытия попапа для редактирования профиля пользователя
 formUser.addEventListener("submit", handleFormUserSubmit); //слушатель для сохранеия формы.
+
+
+
+
+
+
+/*
+
+//функция создания карточки
+const createCard = (cardClass, cardItem) => {
+  const card = new cardClass(cardItem, handleCardClick, ".element__template");
+  const cardElement = card.generateCard();
+  return cardElement;
+};
+
+//Функция добавляющая новую карточки от пользователя.
+function renderUserCard(cardClass) {
+  const cardItem = {
+    name: placeName.value,
+    link: placeLink.value,
+  };
+  renderCard(cardClass, cardItem, true);
+}
+
+//функция отрисовки рендеринга карточек
+function renderCard(cardCalss, cardItem, isPrepend) {
+  const element = createCard(cardCalss, cardItem);
+  isPrepend ? cardList.prepend(element) : cardList.append(element);
+}
+
+//функция автоматического рендеринга карточек на старнице
+initialCards.forEach((cardItem) => {
+  renderCard(Card, cardItem, false);
+}); //проходим по массиву и создаем карточки
+
+*/
+
+

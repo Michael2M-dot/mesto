@@ -28,7 +28,7 @@ export const popupUser = document.querySelector("#edit-profile");
 export const popupPlace = document.querySelector("#add-place");
 export const closePlacePopupBtn = document.querySelector("#close-placePopup");
 export const popupWindows = document.querySelectorAll(".popup"); //универсальная переменная всех попапов на странице
-export const cardList = document.querySelector(".elements__list"); // место куда добавляем карточку
+export const cardListSection = document.querySelector(".elements__list"); // место куда добавляем карточку
 export const popupPicturePreview = document.querySelector("#picture-popup");
 export const currentPicture = popupPicturePreview.querySelector(
   ".popup__image"
