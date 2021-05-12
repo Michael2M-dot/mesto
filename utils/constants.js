@@ -16,20 +16,21 @@ const userJobInput = formUser.elements.userJobInput; //переменная по
 
 export const formPlace = document.forms.placeCardForm; //форма для добавления карточки
 export const { placeName, placeLink } = formPlace;
-/*const placeName = formPlace.elements.placeNameInput; //поле формы добавления карточки, название места
-const placeLink = formPlace.elements.placeLinkInput; //поле формы карточки, ссылка на фотографию места*/
+// export const placeName = formPlace.elements.placeNameInput; //поле формы добавления карточки, название места
+// export const placeLink = formPlace.elements.placeLinkInput; //поле формы карточки, ссылка на фотографию места
 
 export const nameInput = document.querySelector(".profile__user-name");
 export const jobInput = document.querySelector(".profile__user-job");
 export const openUserPopupBtn = document.querySelector(".profile__button-edit");
 export const closeUserPopupBtn = document.querySelector("#close-userPopup");
-export const openPlacePopupBtn = document.querySelector(".profile__button-add");
+export const addUserCardBtn = document.querySelector(".profile__button-add");
 export const popupUser = document.querySelector("#edit-profile");
 export const popupPlace = document.querySelector("#add-place");
 export const closePlacePopupBtn = document.querySelector("#close-placePopup");
 export const popupWindows = document.querySelectorAll(".popup"); //универсальная переменная всех попапов на странице
 export const cardListSection = document.querySelector(".elements__list"); // место куда добавляем карточку
 export const popupPicturePreview = document.querySelector("#picture-popup");
+
 export const currentPicture = popupPicturePreview.querySelector(
   ".popup__image"
 );

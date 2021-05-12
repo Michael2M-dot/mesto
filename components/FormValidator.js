@@ -50,7 +50,7 @@
  * */
 
 import {
-  handleFormSubmit,
+  handleDefaultSubmit,
   hideInputError,
   showInputError,
   handleSubmitButtonDisabled,
@@ -106,7 +106,7 @@ export class FormValidator {
   _setEventListener() {
     //добавляет функцию на каждый элемент формы.
     this._formElement.addEventListener("submit", (evt) =>
-      handleFormSubmit(evt)
+        handleDefaultSubmit(evt)
     );
 
     //создаем массив из всех полей input в данной форме

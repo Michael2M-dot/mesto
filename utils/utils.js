@@ -3,9 +3,10 @@
 import { ESC, selectors } from "./constants.js";
 
 //функция снимающая действие по умолчанию при нажатии на кнопку submit: при нажатии страница не перезагружается
-export const handleFormSubmit = (evt) => {
+export const handleDefaultSubmit = (evt) => {
   evt.preventDefault();
 };
+/*
 
 //универсальная функция открытия попапа
 export function openPopup(popup) {
@@ -36,6 +37,7 @@ export function handleKeyboardCloseWindow(evt) {
     closePopup(currentPopup);
   }
 }
+*/
 
 //функция вывода ошибки в заданое поле.
 export const showInputError = (inputElement, errorMessage, selectors) => {
@@ -62,7 +64,7 @@ export const hideInputError = (inputElement, selectors) => {
   errorElement.classList.remove(selectors.inputErrorSelector); //удаляем класс отображающий ошибку
 };
 
-//функция для отключения кнопки submit. пtреводит кнопку в disabled и убирает класс, делающий кнопу активной
+//функция для отключения кнопки submit. переводит кнопку в disabled и убирает класс, делающий кнопу активной
 export const handleDisableButton = (popup) => {
   const submitButtons = popup.querySelectorAll(selectors.submitBtnSelector);
   submitButtons.forEach((buttonElement) =>

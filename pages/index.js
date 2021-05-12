@@ -57,7 +57,7 @@ Michael2M (c) 2021
 email: darak.ltd@yandex.ru
 */
 
-import { Card } from "../components/Card.js";
+import Card from "../components/Card.js";
 
 import { initialCards } from "../utils/initial-cards.js";
 
@@ -74,7 +74,7 @@ import {
   userJobInput,
   openUserPopupBtn,
   closeUserPopupBtn,
-  openPlacePopupBtn,
+  addUserCardBtn,
   popupUser,
   popupPlace,
   closePlacePopupBtn,
@@ -92,84 +92,96 @@ import {
 } from "../utils/constants.js";
 
 import {
-  handleFormSubmit,
-  openPopup,
-  closePopup,
-  handleMouseCloseWindow,
-  handleKeyboardCloseWindow,
+  handleDefaultSubmit,
+  // openPopup,
+  // closePopup,
+  // handleMouseCloseWindow,
+  // handleKeyboardCloseWindow,
   hideInputError,
   showInputError,
   handleDisableButton,
 } from "../utils/utils.js";
 
-function handleCardClick(link, name) {
-  currentPicture.src = link;
-  currentTitle.textContent = name;
-  currentPicture.alt = `Нам очень жаль что вы не можете увидеть эту 
-	красивую фотографию этого удивительного места ${name}`;
-}
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
+
+
+//создаем карточку из класса Card
+const createCard = (data) => {
+  const card = new Card(data, '#cards-template', handleCardClick);
+  return card.generateCard();
+};
 
 //обращаемся к классу section и выводим на страницу начальный массив данных
 const cardList = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    const card = new Card(item, handleCardClick, ".element__template");
-    const cardElement = card.generateCard();
-
-    cardList.addItem(cardElement, false);
-  }},
-  cardListSection
-)
-
+      items: initialCards,
+      renderer: (data) => {
+        cardList.addItem(createCard(data), false);
+      }},
+    cardListSection
+);
 //вывели начальный массив карточек
 cardList.renderItems();
 
-//создаем карточку пользователя.
-const userCard = new Section({
-      items: formPlace,
-      renderer: (item) => {
-        const card = new Card(item, handleCardClick, ".element__template");
-        const cardElement = card.generateCard();
 
-        userCard.addItem(cardElement, true);
-      }},
-    cardListSection
-)
+//инициализируем попап для картинки из класса PopupWithImage
+const popupWithImage = new PopupWithImage("#picture-popup");
+popupWithImage.setEventListener();
+
+// открываем попап с картинокй (передаем даннные изображения для его отображения в полном размере)
+function handleCardClick(link, name) {
+  popupWithImage.open(link, name)
+};
 
 
+//инстант попап добавления карточки пользователя
+const addCardPopup = new PopupWithForm('#add-place', addPlaceSubmitHandler);
+addCardPopup.setEventListener();
 
 //Функция обработчик события на сабмите, которая добавляет элемент (карточка пользователя) в DOM
-function handleFormPlaceSubmit(evt) {
-  handleFormSubmit(evt);
-  userCard.renderItems();
-  closePopup(popupPlace);
-}
+function addPlaceSubmitHandler(data) {
+  console.log(data)
+  cardList.addItem(createCard(data), true);
+  addCardPopup.close();
+};
+
+// слушатели для попапа добавления карточек
+addUserCardBtn.addEventListener("click", () => {
+      addCardPopup.open();
+      handleDisableButton(formPlace);
+      handleInputErrorsHide(formPlace);
+    }
+);
 
 
-///функция открытия попапа для заполнения данных пользователя c заполнение полей формы текущими занчениями
-function openUserPopup(popup) {
-  openPopup(popup);
-  userNameInput.value = nameInput.textContent;
-  userJobInput.value = jobInput.textContent;
-  handleDisableButton(popup);
-  handleInputErrorsHide(popup);
-}
-
-//открытие popup places с обнулением полей
-function openUserCardPopup(popup) {
-  openPopup(popup);
-  formPlace.reset(popup);
-  handleDisableButton(popup);
-  handleInputErrorsHide(popup);
-}
+//создаем инстант и получаем данные имени пользователя и его работы
+const userInfo = new UserInfo({
+  userNameSelector:".profile__user-name",
+  userJobSelector: ".profile__user-job"});
+//инстант попапа редактирования данных пользователя
+const editProfilePopup = new PopupWithForm('#edit-profile', editProfileSubmitHandler);
+editProfilePopup.setEventListener();
 
 //функция кнопки Сохранить информацию о пользователе
-function handleFormUserSubmit(evt) {
-  handleFormSubmit(evt);
-  nameInput.textContent = userNameInput.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
-  jobInput.textContent = userJobInput.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
-  closePopup(popupUser); //используем уже готовую функцию для закрытия попапа
-}
+function editProfileSubmitHandler(data) {
+  userInfo.setUserInfo(data)
+  editProfilePopup.close();
+};
+
+//слушатель кнопки открытия попапа редактирования данных о пользователе
+openUserPopupBtn.addEventListener('click', () => {
+  editProfilePopup.open();
+  userInfo.getUserInfo(userNameInput, userJobInput);
+  handleDisableButton(formUser);
+  handleInputErrorsHide(formUser);
+});
+
+
+
+
+
+
 
 //вспомагательная функция которая повторно вызывает hideInputError и скрывает вывод ошибок, когда форма закрывается без сохранения значений
 const handleInputErrorsHide = (popup) => {
@@ -190,20 +202,11 @@ popupElements.forEach((popupElement) => {
   validateFormElement(popupElement);
 });
 
-//универсальная функция которая запускает все закрытия попапов
-popupWindows.forEach((popup) => {
-  popup.addEventListener("click", (evt) => handleMouseCloseWindow(popup, evt));
-});
 
-//слушатели для попапа добавления карточек
-openPlacePopupBtn.addEventListener("click", () =>
-  openUserCardPopup(popupPlace)
-);
-formPlace.addEventListener("submit", handleFormPlaceSubmit);
-
-//слушатели для попапа редактирования данных пользователя
-openUserPopupBtn.addEventListener("click", () => openUserPopup(popupUser)); //слушатель для открытия попапа для редактирования профиля пользователя
-formUser.addEventListener("submit", handleFormUserSubmit); //слушатель для сохранеия формы.
+//
+// //слушатели для попапа редактирования данных пользователя
+// openUserPopupBtn.addEventListener("click", () => openUserPopup(popupUser)); //слушатель для открытия попапа для редактирования профиля пользователя
+//
 
 
 
@@ -211,7 +214,60 @@ formUser.addEventListener("submit", handleFormUserSubmit); //слушатель 
 
 
 /*
+//Функция обработчик события на сабмите, которая добавляет элемент (карточка пользователя) в DOM
+function handleFormPlaceSubmit(evt) {
+  handleDefaultSubmit(evt);
+  userCard.addItem(cardElement, );
+  closePopup(popupPlace);
+}
+*/
 
+//
+// ///функция открытия попапа для заполнения данных пользователя c заполнение полей формы текущими занчениями
+// function openUserPopup(popup) {
+//   openPopup(popup);
+//   userNameInput.value = nameInput.textContent;
+//   userJobInput.value = jobInput.textContent;
+//   handleDisableButton(popup);
+//   handleInputErrorsHide(popup);
+// }
+
+
+
+
+
+/*
+
+
+formPlace.addEventListener("submit", handleFormPlaceSubmit);
+formUser.addEventListener("submit", handleFormUserSubmit); //слушатель для сохранеия формы.
+//универсальная функция которая запускает все закрытия попапов
+popupWindows.forEach((popup) => {
+  popup.addEventListener("click", (evt) => handleMouseCloseWindow(popup, evt));
+});
+//открытие popup places с обнулением полей
+function openUserCardPopup(popup) {
+  openPopup(popup);
+  formPlace.reset(popup);
+  handleDisableButton(popup);
+  handleInputErrorsHide(popup);
+}
+
+!//функция кнопки Сохранить информацию о пользователе
+function handleFormUserSubmit(evt) {
+  handleDefaultSubmit(evt);
+  nameInput.textContent = userNameInput.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
+  jobInput.textContent = userJobInput.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
+  closePopup(popupUser); //используем уже готовую функцию для закрытия попапа
+}
+*/
+
+
+
+
+
+
+/*
 //функция создания карточки
 const createCard = (cardClass, cardItem) => {
   const card = new cardClass(cardItem, handleCardClick, ".element__template");

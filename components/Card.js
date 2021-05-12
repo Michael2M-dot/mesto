@@ -24,10 +24,10 @@ Project Mesto-Russia (Яндекс-Практикум)
 
 import { popupPicturePreview } from "../utils/constants.js";
 
-import { openPopup } from "../utils/utils.js";
+// import { openPopup } from "../utils/utils.js";
 
 //Класс для создания карточки
-export class Card {
+export default class Card {
   static selectors = {
     likeSelector: ".element__like",
     trashSelector: ".element__trash",
@@ -35,9 +35,10 @@ export class Card {
     titleSelector: ".element__title",
   };
 
-  constructor(item, handleCardClick, cardSelector) {
-    this._name = item.name;
-    this._link = item.link;
+  constructor(data, cardSelector, handleCardClick) {
+    // const {link, name} = data;//пример реструктуризации
+    this._link = data.link;
+    this._name = data.name;
     this._handleCardClick = handleCardClick;
     this._cardSelector = cardSelector;
   }
@@ -63,7 +64,7 @@ export class Card {
     this._element
       .querySelector(Card.selectors.imageSelector)
       .addEventListener("click", () => {
-        this._handlePreviewPopupOpen();
+        this._handlePreviewPopupOpen(this._link, this._name);
       });
   }
 
@@ -82,7 +83,6 @@ export class Card {
 
   _handlePreviewPopupOpen = () => {
     this._handleCardClick(this._link, this._name);
-    openPopup(popupPicturePreview);
   };
 
   generateCard() {
