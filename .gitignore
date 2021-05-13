@@ -12,3 +12,8 @@
 .DS_Store
 
 .prettierrc.json
+
+babel.config.js
+
+node_modules
+dist
