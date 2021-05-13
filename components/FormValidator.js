@@ -59,7 +59,7 @@ import {
 
 import { selectors } from "../utils/constants.js";
 
-export class FormValidator {
+export default class FormValidator {
   static selectors = {
     inputSelector: ".form__input",
   };

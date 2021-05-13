@@ -20,18 +20,9 @@ export default  class UserInfo {
 		userJob.value = this._userJobSelector.textContent;
 	}
 
-
 	setUserInfo(data){
 		const {userNameInput, userJobInput} = data;
 		this._userNameSelector.textContent = userNameInput;
 		this._userJobSelector.textContent = userJobInput;
 	}
-
-
-
-	// setUserInfo(userName, userJob){
-	// 	this._userNameSelector.textContent = userName.value;
-	// 	this._userJobSelector.textContent = userJob.value;
-	// }
-
 }

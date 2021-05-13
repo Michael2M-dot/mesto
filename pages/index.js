@@ -61,7 +61,7 @@ import Card from "../components/Card.js";
 
 import { initialCards } from "../utils/initial-cards.js";
 
-import { FormValidator } from "../components/FormValidator.js";
+import FormValidator from "../components/FormValidator.js";
 
 import Section from "../components/Section.js";
 
@@ -73,30 +73,18 @@ import {
   userNameInput,
   userJobInput,
   openUserPopupBtn,
-  closeUserPopupBtn,
   addUserCardBtn,
   popupUser,
   popupPlace,
-  closePlacePopupBtn,
-  popupWindows,
   cardListSection,
-  popupPicturePreview,
-  currentPicture,
-  currentTitle,
-  closePreviewPicturePopupBtn,
   formPlace,
   placeName,
   placeLink,
   popupElements,
-  ESC,
 } from "../utils/constants.js";
 
 import {
   handleDefaultSubmit,
-  // openPopup,
-  // closePopup,
-  // handleMouseCloseWindow,
-  // handleKeyboardCloseWindow,
   hideInputError,
   showInputError,
   handleDisableButton,
@@ -109,6 +97,7 @@ import UserInfo from "../components/UserInfo.js";
 
 //создаем карточку из класса Card
 const createCard = (data) => {
+  console.log(data)
   const card = new Card(data, '#cards-template', handleCardClick);
   return card.generateCard();
 };
@@ -135,6 +124,7 @@ function handleCardClick(link, name) {
 };
 
 
+//< ----------блок создания попапа для добавления карточки-------->
 //инстант попап добавления карточки пользователя
 const addCardPopup = new PopupWithForm('#add-place', addPlaceSubmitHandler);
 addCardPopup.setEventListener();
@@ -142,7 +132,11 @@ addCardPopup.setEventListener();
 //Функция обработчик события на сабмите, которая добавляет элемент (карточка пользователя) в DOM
 function addPlaceSubmitHandler(data) {
   console.log(data)
-  cardList.addItem(createCard(data), true);
+  const cardData = {
+    name: data.placeNameInput,
+    link: data.placeLinkInput};
+  console.log(data)
+  cardList.addItem(createCard(cardData), true);
   addCardPopup.close();
 };
 
@@ -155,6 +149,8 @@ addUserCardBtn.addEventListener("click", () => {
 );
 
 
+
+//< ----------блок создания и вызова попапа редакитрования данных о пользователе--------->
 //создаем инстант и получаем данные имени пользователя и его работы
 const userInfo = new UserInfo({
   userNameSelector:".profile__user-name",
@@ -180,9 +176,7 @@ openUserPopupBtn.addEventListener('click', () => {
 
 
 
-
-
-
+// <---------Блок валадиции форм ---------->
 //вспомагательная функция которая повторно вызывает hideInputError и скрывает вывод ошибок, когда форма закрывается без сохранения значений
 const handleInputErrorsHide = (popup) => {
   //обнуляем поля ошибки при закрытии формы через вызов универсально функции hideInputError
@@ -203,10 +197,8 @@ popupElements.forEach((popupElement) => {
 });
 
 
-//
-// //слушатели для попапа редактирования данных пользователя
-// openUserPopupBtn.addEventListener("click", () => openUserPopup(popupUser)); //слушатель для открытия попапа для редактирования профиля пользователя
-//
+
+
 
 
 

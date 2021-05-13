@@ -22,10 +22,6 @@ Project Mesto-Russia (Яндекс-Практикум)
 переменная с селектором открытия попапа просмотра изображения.
 */
 
-import { popupPicturePreview } from "../utils/constants.js";
-
-// import { openPopup } from "../utils/utils.js";
-
 //Класс для создания карточки
 export default class Card {
   static selectors = {
@@ -36,9 +32,13 @@ export default class Card {
   };
 
   constructor(data, cardSelector, handleCardClick) {
-    // const {link, name} = data;//пример реструктуризации
-    this._link = data.link;
-    this._name = data.name;
+    const {name, link} = data;//пример реструктуризации
+    this._name = name;
+    this._link = link;
+    console.log(this._link)
+    console.log(this._name)
+    // this._link = data.link;
+    // this._name = data.name;
     this._handleCardClick = handleCardClick;
     this._cardSelector = cardSelector;
   }
@@ -85,7 +85,7 @@ export default class Card {
     this._handleCardClick(this._link, this._name);
   };
 
-  generateCard() {
+  generateCard = () => {
     this._element = this._getTemplate();
     this._setEventListeners();
 

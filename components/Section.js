@@ -16,6 +16,6 @@ export default class Section {
 
 
 	addItem(element, isPrepend) {
-		isPrepend ? this._cardSelector.prepend(element) : this._cardSelector.append(element);//TODO уточнить по этой конструкции
+		isPrepend ? this._cardSelector.prepend(element) : this._cardSelector.append(element);
 	}
 }
