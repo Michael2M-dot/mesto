@@ -6,38 +6,6 @@ import { ESC, selectors } from "./constants.js";
 export const handleDefaultSubmit = (evt) => {
   evt.preventDefault();
 };
-/*
-
-//универсальная функция открытия попапа
-export function openPopup(popup) {
-  popup.classList.add("page__popup_visible");
-  document.addEventListener("keydown", handleKeyboardCloseWindow);
-}
-
-//универсальная функция закрытия попапа
-export function closePopup(popup) {
-  popup.classList.remove("page__popup_visible");
-  document.removeEventListener("keydown", handleKeyboardCloseWindow);
-}
-
-//функция управляющая закрытием всех попапов как от нажатия кнопок так и по кликам на оверлее
-export function handleMouseCloseWindow(popup, evt) {
-  if (
-    evt.target.classList.contains("page__popup") ||
-    evt.target.classList.contains("popup__button-close")
-  ) {
-    closePopup(popup);
-  }
-}
-
-//функция управляющая закрытием попапа по клику на клавиатуре
-export function handleKeyboardCloseWindow(evt) {
-  const currentPopup = document.querySelector(".page__popup_visible");
-  if (evt.key === ESC) {
-    closePopup(currentPopup);
-  }
-}
-*/
 
 //функция вывода ошибки в заданое поле.
 export const showInputError = (inputElement, errorMessage, selectors) => {

@@ -24,19 +24,3 @@ export const cardListSection = document.querySelector(".elements__list"); // Ð¼Ð
 export const popupPicturePreview = document.querySelector("#picture-popup");
 export const popupElements = document.querySelectorAll(".popup__window_size_s");
 export const ESC = "Escape";
-
-
-
-
-
-export const currentPicture = popupPicturePreview.querySelector(
-    ".popup__image"
-);
-export const currentTitle = popupPicturePreview.querySelector(
-    ".popup__caption"
-);
-export const closePreviewPicturePopupBtn = document.querySelector(
-    "#close-PicturePopup"
-);
-export const closeUserPopupBtn = document.querySelector("#close-userPopup");
-export const closePlacePopupBtn = document.querySelector("#close-placePopup");

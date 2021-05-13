@@ -1,7 +1,7 @@
 /*
-Создайте класс PopupWithImage, который наследует от Popup.
-Этот класс должен перезаписывать родительский метод open.
-В методе open класса PopupWithImage нужно вставлять в попап картинку и атрибут src изображения.*/
+Класс PopupWithImage, который наследует от Popup.
+Этот класс должен перезаписывает родительский метод open()
+В методе open класса PopupWithImage вставляем в попап картинку и атрибут src изображения.*/
 
 import Popup from "./Popup.js";
 // import {currentPicture, currentTitle} from "../utils/constants.js";
@@ -19,15 +19,5 @@ export default class PopupWithImage extends Popup {
 	красивую фотографию этого удивительного места ${name}`;
 
 		super.open();
-
-	//
-	//
-	// 	this._currentPicture.src = this._link;
-	// 	this._currentPicture.alt = `Нам очень жаль что вы не можете увидеть эту
-	// красивую фотографию этого удивительного места ${this._name}`;
-	// 	this._currentTitle.textContent = this._name;
-
-
-
 	}
 }
