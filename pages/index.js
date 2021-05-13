@@ -174,8 +174,6 @@ openUserPopupBtn.addEventListener('click', () => {
 });
 
 
-
-
 // <---------Блок валадиции форм ---------->
 //вспомагательная функция которая повторно вызывает hideInputError и скрывает вывод ошибок, когда форма закрывается без сохранения значений
 const handleInputErrorsHide = (popup) => {
@@ -195,98 +193,3 @@ const validateFormElement = (formElement) => {
 popupElements.forEach((popupElement) => {
   validateFormElement(popupElement);
 });
-
-
-
-
-
-
-
-
-
-
-/*
-//Функция обработчик события на сабмите, которая добавляет элемент (карточка пользователя) в DOM
-function handleFormPlaceSubmit(evt) {
-  handleDefaultSubmit(evt);
-  userCard.addItem(cardElement, );
-  closePopup(popupPlace);
-}
-*/
-
-//
-// ///функция открытия попапа для заполнения данных пользователя c заполнение полей формы текущими занчениями
-// function openUserPopup(popup) {
-//   openPopup(popup);
-//   userNameInput.value = nameInput.textContent;
-//   userJobInput.value = jobInput.textContent;
-//   handleDisableButton(popup);
-//   handleInputErrorsHide(popup);
-// }
-
-
-
-
-
-/*
-
-
-formPlace.addEventListener("submit", handleFormPlaceSubmit);
-formUser.addEventListener("submit", handleFormUserSubmit); //слушатель для сохранеия формы.
-//универсальная функция которая запускает все закрытия попапов
-popupWindows.forEach((popup) => {
-  popup.addEventListener("click", (evt) => handleMouseCloseWindow(popup, evt));
-});
-//открытие popup places с обнулением полей
-function openUserCardPopup(popup) {
-  openPopup(popup);
-  formPlace.reset(popup);
-  handleDisableButton(popup);
-  handleInputErrorsHide(popup);
-}
-
-!//функция кнопки Сохранить информацию о пользователе
-function handleFormUserSubmit(evt) {
-  handleDefaultSubmit(evt);
-  nameInput.textContent = userNameInput.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
-  jobInput.textContent = userJobInput.value; //присваиваем новые значения с помощью textContent, значения полность перезаписываются
-  closePopup(popupUser); //используем уже готовую функцию для закрытия попапа
-}
-*/
-
-
-
-
-
-
-/*
-//функция создания карточки
-const createCard = (cardClass, cardItem) => {
-  const card = new cardClass(cardItem, handleCardClick, ".element__template");
-  const cardElement = card.generateCard();
-  return cardElement;
-};
-
-//Функция добавляющая новую карточки от пользователя.
-function renderUserCard(cardClass) {
-  const cardItem = {
-    name: placeName.value,
-    link: placeLink.value,
-  };
-  renderCard(cardClass, cardItem, true);
-}
-
-//функция отрисовки рендеринга карточек
-function renderCard(cardCalss, cardItem, isPrepend) {
-  const element = createCard(cardCalss, cardItem);
-  isPrepend ? cardList.prepend(element) : cardList.append(element);
-}
-
-//функция автоматического рендеринга карточек на старнице
-initialCards.forEach((cardItem) => {
-  renderCard(Card, cardItem, false);
-}); //проходим по массиву и создаем карточки
-
-*/
-
-
