@@ -11,7 +11,7 @@
 Для каждого попапа создавайте свой экземпляр класса `PopupWithForm`.
 */
 
-import Popup from "../components/Popup.js";
+import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
 	constructor(popupSelector, submitHandler) {

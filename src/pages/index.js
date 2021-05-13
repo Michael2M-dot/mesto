@@ -57,13 +57,13 @@ Michael2M (c) 2021
 email: darak.ltd@yandex.ru
 */
 
-import Card from "../components/Card.js";
+import Card from "../scripts/components/Card.js";
 
-import { initialCards } from "../utils/initial-cards.js";
+import { initialCards } from "../scripts/utils/initial-cards.js";
 
-import FormValidator from "../components/FormValidator.js";
+import FormValidator from "../scripts/components/FormValidator.js";
 
-import Section from "../components/Section.js";
+import Section from "../scripts/components/Section.js";
 
 import {
   selectors,
@@ -81,18 +81,18 @@ import {
   placeName,
   placeLink,
   popupElements,
-} from "../utils/constants.js";
+} from "../scripts/utils/constants.js";
 
 import {
   handleDefaultSubmit,
   hideInputError,
   showInputError,
   handleDisableButton,
-} from "../utils/utils.js";
+} from "../scripts/utils/utils.js";
 
-import PopupWithImage from "../components/PopupWithImage.js";
-import PopupWithForm from "../components/PopupWithForm.js";
-import UserInfo from "../components/UserInfo.js";
+import PopupWithImage from "../scripts/components/PopupWithImage.js";
+import PopupWithForm from "../scripts/components/PopupWithForm.js";
+import UserInfo from "../scripts/components/UserInfo.js";
 
 
 //создаем карточку из класса Card

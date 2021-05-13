@@ -3,7 +3,7 @@
 Этот класс должен перезаписывать родительский метод open.
 В методе open класса PopupWithImage нужно вставлять в попап картинку и атрибут src изображения.*/
 
-import Popup from "../components/Popup.js";
+import Popup from "./Popup.js";
 // import {currentPicture, currentTitle} from "../utils/constants.js";
 
 
