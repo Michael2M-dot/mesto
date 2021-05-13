@@ -9,10 +9,16 @@ export const selectors = {
 };
 
 //переменные для использования в скрипте
-export const formUser = document.forms.userProfileForm; //форма для редактирования данных пользователя
-export const { userNameInput, userJobInput } = formUser;
-export const formPlace = document.forms.placeCardForm; //форма для добавления карточки
-export const { placeName, placeLink } = formPlace;
+// export const formUser = document.forms.userProfileForm; //форма для редактирования данных пользователя
+export const formUser = document.querySelector('#edit-profile');
+export const userNameInput = formUser.querySelector('#user-name-input');
+export const userJobInput = formUser.querySelector('#user-job-input-input')
+// export const { userNameInput, userJobInput } = formUser;
+// export const formPlace = document.forms.placeCardForm; //форма для добавления карточки
+export const formPlace = document.querySelector('#add-place'); //форма для добавления карточки
+export const placeName = formPlace.querySelector('#place-name-input')
+export const placeLink = formPlace.querySelector('#place-link-input')
+// export const { placeName, placeLink } = formPlace;
 export const nameInput = document.querySelector(".profile__user-name");
 export const jobInput = document.querySelector(".profile__user-job");
 export const openUserPopupBtn = document.querySelector(".profile__button-edit");

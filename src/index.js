@@ -99,7 +99,6 @@ import UserInfo from "./scripts/components/UserInfo.js";
 
 //создаем карточку из класса Card
 const createCard = (data) => {
-  console.log(data)
   const card = new Card(data, '#cards-template', handleCardClick);
   return card.generateCard();
 };
@@ -133,11 +132,11 @@ addCardPopup.setEventListener();
 
 //Функция обработчик события на сабмите, которая добавляет элемент (карточка пользователя) в DOM
 function addPlaceSubmitHandler(data) {
-  console.log(data)
+
   const cardData = {
     name: data.placeNameInput,
     link: data.placeLinkInput};
-  console.log(data)
+
   cardList.addItem(createCard(cardData), true);
   addCardPopup.close();
 };

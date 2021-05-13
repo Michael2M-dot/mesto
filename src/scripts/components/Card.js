@@ -35,8 +35,6 @@ export default class Card {
     const {name, link} = data;//пример реструктуризации
     this._name = name;
     this._link = link;
-    console.log(this._link)
-    console.log(this._name)
     // this._link = data.link;
     // this._name = data.name;
     this._handleCardClick = handleCardClick;

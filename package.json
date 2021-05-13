@@ -18,11 +18,11 @@
   },
   "homepage": "https://github.com/Michael2M-dot/mesto#readme",
   "devDependencies": {
-    "@babel/core": "^7.14.2",
+    "@babel/core": "^7.14.0",
     "@babel/preset-env": "^7.14.2",
     "autoprefixer": "^10.2.5",
     "babel-loader": "^8.2.2",
-    "clean-webpack-plugin": "*",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
     "css-loader": "^5.2.4",
     "cssnano": "^5.0.2",
     "html-webpack-plugin": "^5.3.1",
