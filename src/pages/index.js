@@ -57,7 +57,7 @@ Michael2M (c) 2021
 email: darak.ltd@yandex.ru
 */
 
-import './index.css';
+import "./index.css";
 
 import Card from "../scripts/components/Card.js";
 
@@ -76,36 +76,33 @@ import {
   addUserCardBtn,
   cardListSection,
   formPlace,
-  popupElements
+  popupElements,
 } from "../scripts/utils/constants.js";
 
-import {
-  hideInputError,
-  handleDisableButton,
-} from "../scripts/utils/utils.js";
+import { hideInputError, handleDisableButton } from "../scripts/utils/utils.js";
 
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import UserInfo from "../scripts/components/UserInfo.js";
 
-
 //создаем карточку из класса Card
 const createCard = (data) => {
-  const card = new Card(data, '#cards-template', handleCardClick);
+  const card = new Card(data, "#cards-template", handleCardClick);
   return card.generateCard();
 };
 
 //обращаемся к классу section и выводим на страницу начальный массив данных
-const cardList = new Section({
-      items: initialCards,
-      renderer: (data) => {
-        cardList.addItem(createCard(data), false);
-      }},
-    cardListSection
+const cardList = new Section(
+  {
+    items: initialCards,
+    renderer: (data) => {
+      cardList.addItem(createCard(data), false);
+    },
+  },
+  cardListSection
 );
 //вывели начальный массив карточек
 cardList.renderItems();
-
 
 //инициализируем попап для картинки из класса PopupWithImage
 const popupWithImage = new PopupWithImage("#picture-popup");
@@ -113,59 +110,58 @@ popupWithImage.setEventListener();
 
 // открываем попап с картинокй (передаем даннные изображения для его отображения в полном размере)
 function handleCardClick(link, name) {
-  popupWithImage.open(link, name)
-};
-
+  popupWithImage.open(link, name);
+}
 
 //< ----------блок создания попапа для добавления карточки-------->
 //инстант попап добавления карточки пользователя
-const addCardPopup = new PopupWithForm('#add-place', addPlaceSubmitHandler);
+const addCardPopup = new PopupWithForm("#add-place", addPlaceSubmitHandler);
 addCardPopup.setEventListener();
 
 //Функция обработчик события на сабмите, которая добавляет элемент (карточка пользователя) в DOM
 function addPlaceSubmitHandler(data) {
-
   const cardData = {
     name: data.placeNameInput,
-    link: data.placeLinkInput};
+    link: data.placeLinkInput,
+  };
 
   cardList.addItem(createCard(cardData), true);
   addCardPopup.close();
-};
+}
 
 // слушатели для попапа добавления карточек
 addUserCardBtn.addEventListener("click", () => {
-      addCardPopup.open();
-      handleDisableButton(formPlace);
-      handleInputErrorsHide(formPlace);
-    }
-);
-
-
+  addCardPopup.open();
+  handleDisableButton(formPlace);
+  handleInputErrorsHide(formPlace);
+});
 
 //< ----------блок создания и вызова попапа редакитрования данных о пользователе--------->
 //создаем инстант и получаем данные имени пользователя и его работы
 const userInfo = new UserInfo({
-  userNameSelector:".profile__user-name",
-  userJobSelector: ".profile__user-job"});
+  userNameSelector: ".profile__user-name",
+  userJobSelector: ".profile__user-job",
+});
 //инстант попапа редактирования данных пользователя
-const editProfilePopup = new PopupWithForm('#edit-profile', editProfileSubmitHandler);
+const editProfilePopup = new PopupWithForm(
+  "#edit-profile",
+  editProfileSubmitHandler
+);
 editProfilePopup.setEventListener();
 
 //функция кнопки Сохранить информацию о пользователе
 function editProfileSubmitHandler(data) {
-  userInfo.setUserInfo(data)
+  userInfo.setUserInfo(data);
   editProfilePopup.close();
-};
+}
 
 //слушатель кнопки открытия попапа редактирования данных о пользователе
-openUserPopupBtn.addEventListener('click', () => {
+openUserPopupBtn.addEventListener("click", () => {
   editProfilePopup.open();
   userInfo.getUserInfo(userNameInput, userJobInput);
   handleDisableButton(formUser);
   handleInputErrorsHide(formUser);
 });
-
 
 // <---------Блок валадиции форм ---------->
 //вспомагательная функция которая повторно вызывает hideInputError и скрывает вывод ошибок, когда форма закрывается без сохранения значений

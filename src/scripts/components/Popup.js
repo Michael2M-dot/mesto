@@ -9,42 +9,40 @@
 - Содержит публичный метод `_setEventListeners`, который добавляет слушатель клика иконке закрытия попапа.
 */
 
-
-import {ESC} from "../utils/constants.js";
+import { ESC } from "../utils/constants.js";
 
 export default class Popup {
+  constructor(popupSelector) {
+    this._popupSelector = popupSelector;
+    this._handleEscClose = this._handleEscClose.bind(this);
+    this._popup = document.querySelector(this._popupSelector);
+  }
 
-	constructor(popupSelector) {
-		this._popupSelector = popupSelector;
-		this._handleEscClose = this._handleEscClose.bind(this);
-		this._popup = document.querySelector(this._popupSelector);
-	}
+  setEventListener() {
+    this._popup.addEventListener("click", (evt) => {
+      if (
+        evt.target.classList.contains("page__popup") ||
+        evt.target.classList.contains("popup__button-close")
+      ) {
+        this.close();
+      }
+    });
+  }
 
-	setEventListener(){
-		this._popup.addEventListener ('click', (evt) => {
-			if (
-				evt.target.classList.contains("page__popup") ||
-				evt.target.classList.contains("popup__button-close")
-			) {
-				this.close();
-			}
-		})
-	}
+  _handleEscClose(evt) {
+    // this._currentPopup = document.querySelector(".page__popup_visible");
+    if (evt.key === ESC) {
+      this.close(); //чтобы не потерять контекст, можно либо стрелочную либо черз bind
+    }
+  }
 
-	_handleEscClose(evt){
-		// this._currentPopup = document.querySelector(".page__popup_visible");
-		if (evt.key === ESC) {
-			this.close();//чтобы не потерять контекст, можно либо стрелочную либо черз bind
-		}
-	}
+  open() {
+    this._popup.classList.add("page__popup_visible");
+    document.addEventListener("keydown", this._handleEscClose);
+  }
 
-	open() {
-		this._popup.classList.add("page__popup_visible");
-		document.addEventListener("keydown", this._handleEscClose)
-	}
-
-	close(){
-		this._popup.classList.remove("page__popup_visible");
-		document.removeEventListener("keydown", this._handleEscClose)
-	}
+  close() {
+    this._popup.classList.remove("page__popup_visible");
+    document.removeEventListener("keydown", this._handleEscClose);
+  }
 }

@@ -32,11 +32,16 @@ export default class Card {
   };
 
   constructor(data, cardSelector, handleCardClick) {
-    const {name, link} = data;//пример реструктуризации
+    const { name, link } = data; //пример реструктуризации
     this._name = name;
     this._link = link;
     this._handleCardClick = handleCardClick;
     this._cardSelector = cardSelector;
+    this._element = this._getTemplate();
+    this._cardImage = this._element.querySelector(Card.selectors.imageSelector);
+    this._cardName = this._element.querySelector(Card.selectors.titleSelector);
+    this._cardLike = this._element.querySelector(Card.selectors.likeSelector);
+    this._cardTrash = this._element.querySelector(Card.selectors.trashSelector);
   }
 
   _getTemplate() {
@@ -47,27 +52,17 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._element
-      .querySelector(Card.selectors.likeSelector)
-      .addEventListener("click", () => {
-        this._handleLikeClick();
-      });
-    this._element
-      .querySelector(Card.selectors.trashSelector)
-      .addEventListener("click", () => {
-        this._handleDeleteClick();
-      });
-    this._element
-      .querySelector(Card.selectors.imageSelector)
-      .addEventListener("click", () => {
-        this._handlePreviewPopupOpen(this._link, this._name);
-      });
+    this._cardLike.addEventListener("click", () => this._handleLikeClick());
+
+    this._cardTrash.addEventListener("click", () => this._handleDeleteClick());
+
+    this._cardImage.addEventListener("click", () => {
+      this._handlePreviewPopupOpen(this._link, this._name);
+    });
   }
 
   _handleLikeClick() {
-    this._element
-      .querySelector(Card.selectors.likeSelector)
-      .classList.toggle("element__like_active");
+    this._cardLike.classList.toggle("element__like_active");
   }
 
   _handleDeleteClick() {
@@ -79,18 +74,13 @@ export default class Card {
   };
 
   generateCard = () => {
-    this._element = this._getTemplate();
     this._setEventListeners();
 
-    this._element.querySelector(Card.selectors.imageSelector).src = this._link;
-    this._element.querySelector(
-      Card.selectors.imageSelector
-    ).alt = `Нам очень жаль что вы не можете увидеть эту 
+    this._cardImage.src = this._link;
+    this._cardImage.alt = `Нам очень жаль что вы не можете увидеть эту 
 	красивую фотографию этого удивительного места ${this._name}`;
-    this._element.querySelector(
-      Card.selectors.titleSelector
-    ).textContent = this._name;
+    this._cardName.textContent = this._name;
 
     return this._element;
-  }
+  };
 }

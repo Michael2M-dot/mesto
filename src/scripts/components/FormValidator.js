@@ -106,7 +106,7 @@ export default class FormValidator {
   _setEventListener() {
     //добавляет функцию на каждый элемент формы.
     this._formElement.addEventListener("submit", (evt) =>
-        handleDefaultSubmit(evt)
+      handleDefaultSubmit(evt)
     );
 
     //создаем массив из всех полей input в данной форме

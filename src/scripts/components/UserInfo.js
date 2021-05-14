@@ -7,20 +7,20 @@
 - Содержит публичный метод `setUserInfo,` который принимает новые данные пользователя и добавляет их на страницу.
 */
 
-export default  class UserInfo {
-	constructor({userNameSelector, userJobSelector}) {
-		this._userNameSelector = document.querySelector(userNameSelector);
-		this._userJobSelector = document.querySelector(userJobSelector);
-	}
+export default class UserInfo {
+  constructor({ userNameSelector, userJobSelector }) {
+    this._userNameSelector = document.querySelector(userNameSelector);
+    this._userJobSelector = document.querySelector(userJobSelector);
+  }
 
-	getUserInfo = (userName, userJob) => {
-		userName.value = this._userNameSelector.textContent;
-		userJob.value = this._userJobSelector.textContent;
-	}
+  getUserInfo = (userName, userJob) => {
+    userName.value = this._userNameSelector.textContent;
+    userJob.value = this._userJobSelector.textContent;
+  };
 
-	setUserInfo(data){
-		const {userNameInput, userJobInput} = data;
-		this._userNameSelector.textContent = userNameInput;
-		this._userJobSelector.textContent = userJobInput;
-	}
+  setUserInfo(data) {
+    const { userNameInput, userJobInput } = data;
+    this._userNameSelector.textContent = userNameInput;
+    this._userJobSelector.textContent = userJobInput;
+  }
 }
