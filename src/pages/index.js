@@ -57,44 +57,36 @@ Michael2M (c) 2021
 email: darak.ltd@yandex.ru
 */
 
-import './pages/index.css';
+import './index.css';
 
-import Card from "./scripts/components/Card.js";
+import Card from "../scripts/components/Card.js";
 
-import { initialCards } from "./scripts/utils/initial-cards.js";
+import { initialCards } from "../scripts/utils/initial-cards.js";
 
-import FormValidator from "./scripts/components/FormValidator.js";
+import FormValidator from "../scripts/components/FormValidator.js";
 
-import Section from "./scripts/components/Section.js";
+import Section from "../scripts/components/Section.js";
 
 import {
   selectors,
   formUser,
-  nameInput,
-  jobInput,
   userNameInput,
   userJobInput,
   openUserPopupBtn,
   addUserCardBtn,
-  popupUser,
-  popupPlace,
   cardListSection,
   formPlace,
-  placeName,
-  placeLink,
-  popupElements,
-} from "./scripts/utils/constants.js";
+  popupElements
+} from "../scripts/utils/constants.js";
 
 import {
-  handleDefaultSubmit,
   hideInputError,
-  showInputError,
   handleDisableButton,
-} from "./scripts/utils/utils.js";
+} from "../scripts/utils/utils.js";
 
-import PopupWithImage from "./scripts/components/PopupWithImage.js";
-import PopupWithForm from "./scripts/components/PopupWithForm.js";
-import UserInfo from "./scripts/components/UserInfo.js";
+import PopupWithImage from "../scripts/components/PopupWithImage.js";
+import PopupWithForm from "../scripts/components/PopupWithForm.js";
+import UserInfo from "../scripts/components/UserInfo.js";
 
 
 //создаем карточку из класса Card

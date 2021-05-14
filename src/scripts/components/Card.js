@@ -35,8 +35,6 @@ export default class Card {
     const {name, link} = data;//пример реструктуризации
     this._name = name;
     this._link = link;
-    // this._link = data.link;
-    // this._name = data.name;
     this._handleCardClick = handleCardClick;
     this._cardSelector = cardSelector;
   }
@@ -73,10 +71,7 @@ export default class Card {
   }
 
   _handleDeleteClick() {
-    this._element
-      .querySelector(Card.selectors.trashSelector)
-      .closest(".elements__list-item")
-      .remove();
+    this._element.remove();
   }
 
   _handlePreviewPopupOpen = () => {
