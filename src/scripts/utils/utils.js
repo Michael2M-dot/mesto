@@ -1,13 +1,13 @@
 //модуль с утилитарными функциями
 
-import { ESC, selectors } from "./constants.js";
+import { selectors } from "./constants.js";
 
 //функция снимающая действие по умолчанию при нажатии на кнопку submit: при нажатии страница не перезагружается
 export const handleDefaultSubmit = (evt) => {
   evt.preventDefault();
 };
 
-//функция вывода ошибки в заданое поле.
+//функция вывода ошибки в заданное поле.
 export const showInputError = (inputElement, errorMessage, selectors) => {
   // const errorElement = formElement.querySelector(`#${inputElement.id}-error`); - вариант поиска по id
   //находим поле куда будем выводить ошибку
