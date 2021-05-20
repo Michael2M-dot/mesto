@@ -1,21 +1,6 @@
 // Токен: 99295e52-decf-4a30-8030-f17c65fb60b0
 // Идентификатор группы: cohort-24
 
-/*
-fetch('https://mesto.nomoreparties.co/v1/cohort-24/cards', {
-  headers: {
-    authorization: '99295e52-decf-4a30-8030-f17c65fb60b0'
-  }
-})
-  .then(res => res.json())
-  .then((result) => {
-    console.log(result);
-  }); 
-  */
-
-const userName = document.querySelector(".profile__user-name");
-const userJob = document.querySelector(".profile__user-job");
-const userAvatar = document.querySelector(".profile__user-avatar");
 
 export default class Api {
   constructor(serverUrl, headers) {
