@@ -190,9 +190,8 @@
       </div>
     </section>
 
-
     <!-- Секция DOM дерева для попапа подтверждения действия пользователя. Добавляетсяв DOM путем добавления модификатора page__popup_visible -->
-    <section class="popup page__popup section page__popup_visible" id="act-approval">
+    <section class="popup page__popup section" id="act-approval">
       <div class="popup__window popup__window_size_s">
         <h2 class="popup__title">Вы уверены?</h2>
         <button
@@ -213,6 +212,46 @@
       </div>
     </section>
 
+    <!-- Секция DOM дерева для попапа формы добавления аватара пользователя. Становиться путем добавления модификатора page__popup_visible -->
+    <section class="popup page__popup section" id="add-avatar">
+      <div class="popup__window popup__window_size_s">
+        <h2 class="popup__title">Обновить аватар</h2>
+        <button
+          arial-lable="Закрыть форму для добавления фотографий на страницу"
+          tittle="Закрыть"
+          type="button"
+          class="button popup__button-close"
+          id="close-avatarPopup"
+        ></button>
+        <form
+          class="form"
+          id="avatar-form"
+          name="avatarForm"
+          autocomplete="off"
+          novalidate
+        >
+          <label class="form__fieldset" for="place-link-input">
+            <input
+              type="url"
+              class="form__input form__place-link"
+              id="avatar-link-input"
+              name="avatarLinkInput"
+              placeholder="Ссылка на изображение (обязательно)"
+              required
+            />
+            <span class="form__input-error" id="avatar-link-input-error"></span>
+          </label>
+          <button
+            arial-lable="Добавляет новое изображение на аватар пользователя"
+            type="submit"
+            class="button form__submit-btn"
+            id="avatar-submit"
+          >
+            Сохранить
+          </button>
+        </form>
+      </div>
+    </section>
 
     <!-- Шаблон карточки. Карточка добавляется в DOM дерево через JS. -->
     <template class="element__template" id="cards-template">
@@ -229,7 +268,6 @@
             ></button>
             <p class="element__count">0</p>
           </div>
-
         </div>
         <button
           arial-lable="Удалить карточку со страницы"

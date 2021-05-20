@@ -28,7 +28,7 @@ export default class Card {
     likeSelector: ".element__like",
     trashSelector: ".element__trash",
     imageSelector: ".element__image",
-    titleSelector: ".element__title"
+    titleSelector: ".element__title",
   };
 
   constructor(data, cardSelector, handleCardClick) {
