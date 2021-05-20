@@ -190,6 +190,30 @@
       </div>
     </section>
 
+
+    <!-- Секция DOM дерева для попапа подтверждения действия пользователя. Добавляетсяв DOM путем добавления модификатора page__popup_visible -->
+    <section class="popup page__popup section page__popup_visible" id="act-approval">
+      <div class="popup__window popup__window_size_s">
+        <h2 class="popup__title">Вы уверены?</h2>
+        <button
+          arial-lable="Закрыть форму подтверждения действия пользователя"
+          tittle="Закрыть"
+          type="button"
+          class="button popup__button-close"
+          id="close-approvalPopup"
+        ></button>
+        <button
+          arial-lable="Подтвердить действие"
+          type="submit"
+          class="button form__submit-btn"
+          id="approval-submit"
+        >
+          Да
+        </button>
+      </div>
+    </section>
+
+
     <!-- Шаблон карточки. Карточка добавляется в DOM дерево через JS. -->
     <template class="element__template" id="cards-template">
       <li class="element elements__list-item">
