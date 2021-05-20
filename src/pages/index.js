@@ -72,7 +72,7 @@ import {
   addUserCardBtn,
   cardListSection,
   formPlace,
-  popupElements,
+  popupElements
 } from "../scripts/utils/constants.js";
 
 import { hideInputError, handleDisableButton } from "../scripts/utils/utils.js";
@@ -93,7 +93,7 @@ const cardList = new Section(
     items: initialCards,
     renderer: (data) => {
       cardList.addItem(createCard(data), false);
-    },
+    }
   },
   cardListSection
 );
@@ -118,7 +118,7 @@ addCardPopup.setEventListener();
 function addPlaceSubmitHandler(data) {
   const cardData = {
     name: data.placeNameInput,
-    link: data.placeLinkInput,
+    link: data.placeLinkInput
   };
 
   cardList.addItem(createCard(cardData), true);
@@ -136,7 +136,7 @@ addUserCardBtn.addEventListener("click", () => {
 //создаем инстант и получаем данные имени пользователя и его работы
 const userInfo = new UserInfo({
   userNameSelector: ".profile__user-name",
-  userJobSelector: ".profile__user-job",
+  userJobSelector: ".profile__user-job"
 });
 //инстант попапа редактирования данных пользователя
 const editProfilePopup = new PopupWithForm(
