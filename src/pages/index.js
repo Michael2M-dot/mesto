@@ -73,6 +73,8 @@ import {
   cardListSection,
   formPlace,
   popupElements,
+  avatarPopupBtn,
+  avatarForm
 } from "../scripts/utils/constants.js";
 
 import { hideInputError, handleDisableButton } from "../scripts/utils/utils.js";
@@ -159,6 +161,32 @@ openUserPopupBtn.addEventListener("click", () => {
   handleInputErrorsHide(formUser);
 });
 
+
+
+//<----------- инстант поапа добавления аватара пользователя ------------->
+
+const addAvatarPopup = new PopupWithForm(
+  '#add-avatar',
+  addAvatarSubmitHandler
+);
+
+addAvatarPopup.setEventListener();
+
+function addAvatarSubmitHandler (data) {
+  //дописать функционал добавления аватара
+  addAvatarPopup.close();
+}
+
+avatarPopupBtn.addEventListener('click', () => {
+  addAvatarPopup.open();
+  handleDisableButton(avatarForm);
+  handleInputErrorsHide(avatarForm);
+})
+
+
+
+
+
 // <---------Блок валадиции форм ---------->
 //вспомагательная функция которая повторно вызывает hideInputError и скрывает вывод ошибок, когда форма закрывается без сохранения значений
 const handleInputErrorsHide = (popup) => {
@@ -178,3 +206,4 @@ const validateFormElement = (formElement) => {
 popupElements.forEach((popupElement) => {
   validateFormElement(popupElement);
 });
+

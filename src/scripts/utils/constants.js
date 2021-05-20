@@ -21,4 +21,6 @@ export const popupWindows = document.querySelectorAll(".popup"); //универ�
 export const cardListSection = document.querySelector(".elements__list"); // место куда добавляем карточку
 export const popupPicturePreview = document.querySelector("#picture-popup");
 export const popupElements = document.querySelectorAll(".popup__window_size_s");
+export const avatarPopupBtn = document.querySelector('.profile__user-avatar');
+export const avatarForm = document.querySelector('#add-avatar')
 export const ESC = "Escape";
