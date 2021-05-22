@@ -6,8 +6,10 @@
   background-color: var(--color__background);
   font-size: 18px;
   color: var(--color__main-text_profile);
-  padding: 15px 132px;
+  /*padding: 15px 132px;*/
   width: 100%;
+  /*min-width: 358px;*/
+  min-height: 50px;
 }
 
 .form__submit-btn:hover {

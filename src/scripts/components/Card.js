@@ -29,10 +29,11 @@ export default class Card {
     trashSelector: ".element__trash",
     imageSelector: ".element__image",
     titleSelector: ".element__title",
+    likeCountSelector: ".element__count"
   };
 
   constructor(data, cardSelector, handleCardClick) {
-    const { name, link } = data; //пример реструктуризации
+    const { name, link, likes } = data; //пример реструктуризации
     this._name = name;
     this._link = link;
     this._handleCardClick = handleCardClick;
@@ -41,7 +42,10 @@ export default class Card {
     this._cardImage = this._element.querySelector(Card.selectors.imageSelector);
     this._cardName = this._element.querySelector(Card.selectors.titleSelector);
     this._cardLike = this._element.querySelector(Card.selectors.likeSelector);
+    this._likesCount = this._element.querySelector(Card.selectors.likeCountSelector);
     this._cardTrash = this._element.querySelector(Card.selectors.trashSelector);
+
+    this._likes = likes;
   }
 
   _getTemplate() {
@@ -61,7 +65,7 @@ export default class Card {
     });
   }
 
-  _handleLikeClick() {
+  _handleLikeClick(data) {
     this._cardLike.classList.toggle("element__like_active");
   }
 
@@ -73,6 +77,10 @@ export default class Card {
     this._handleCardClick(this._link, this._name);
   };
 
+  _getLikes() {
+    this._likesCount.textContent = this._likes.length;
+  }
+
   generateCard = () => {
     this._setEventListeners();
 
@@ -80,6 +88,8 @@ export default class Card {
     this._cardImage.alt = `Нам очень жаль что вы не можете увидеть эту 
 	красивую фотографию этого удивительного места ${this._name}`;
     this._cardName.textContent = this._name;
+
+    this._getLikes();
 
     return this._element;
   };

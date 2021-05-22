@@ -8,30 +8,33 @@
 */
 
 export default class UserInfo {
-  constructor({ userNameSelector, userJobSelector, userAvatarSelector, userId}) {
+  constructor({
+    userNameSelector,
+    userJobSelector,
+    userAvatarSelector,
+    userId,
+  }) {
     this._userNameSelector = document.querySelector(userNameSelector);
     this._userJobSelector = document.querySelector(userJobSelector);
-    this._userAvatarSelector = document.querySelector(userAvatarSelector)
+    this._userAvatarSelector = document.querySelector(userAvatarSelector);
     this._userId = userId;
   }
 
-/*
+  /*
   getUserInfo = (userName, userJob) => {
     userName.value = this._userNameSelector.textContent;
     userJob.value = this._userJobSelector.textContent;
   };
 */
 
-
   getUserInfo() {
     return {
       userName: this._userNameSelector.textContent,
       userJob: this._userJobSelector.textContent,
       // userAvatar.style.backgroundImage = this._userAvatarSelector.style.backgroundImage,
-      userId: this._userId
-    }
-
-  };
+      userId: this._userId,
+    };
+  }
 
   // setUserInfo(data) {
   //   const { userNameInput, userJobInput } = data;
@@ -40,18 +43,17 @@ export default class UserInfo {
   // }
 
   setUserInfo(data) {
-    if(data.name){
+    if (data.name) {
       this._userNameSelector.textContent = data.name;
     }
-    if(data.about){
+    if (data.about) {
       this._userJobSelector.textContent = data.about;
     }
-    if(data.avatar) {
+    if (data.avatar) {
       this._userAvatarSelector.style.backgroundImage = `url(${data.avatar})`;
     }
-    if(data._id) {
+    if (data._id) {
       this._userId = data._id;
     }
   }
-
 }

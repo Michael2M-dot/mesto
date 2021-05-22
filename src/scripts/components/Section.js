@@ -14,26 +14,14 @@
 
 export default class Section {
   constructor({ renderer }, containerSection) {
-    // this._renderedItems = items;
     this._renderer = renderer;
     this._cardSelector = containerSection;
   }
-/*
-
-  constructor({ items, renderer }, containerSection) {
-    // this._renderedItems = items;
-    this._renderer = renderer;
-    this._cardSelector = containerSection;
-  }
-*/
 
   renderItems(items) {
     items.forEach((item) => {
       this._renderer(item);
     });
-    /*this._renderedItems.forEach((item) => {
-      this._renderer(item);
-    });*/
   }
 
   addItem(element, isPrepend) {
