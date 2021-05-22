@@ -192,11 +192,13 @@ function editProfileSubmitHandler(data) {
   renderLoading(true);
   api.updateUserData(data)
     .then(data => {
-      userInfo.setUserInfo({data});
+      userInfo.setUserInfo({
+        name: data.name,
+        about: data.about,
+        avatar: data.avatar,
+        _id: data._id,
+      });
     })
-/*    .then(() => {
-
-    })*/
     .catch((err) => console.log(`Ошибка выгрузки данных пользователя: ${err.status} ${err.statusText}`))
     .finally(() => {
       renderLoading(false)

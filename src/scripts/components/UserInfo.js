@@ -33,7 +33,6 @@ export default class UserInfo {
 
   };
 
-
   // setUserInfo(data) {
   //   const { userNameInput, userJobInput } = data;
   //   this._userNameSelector.textContent = userNameInput;
@@ -41,20 +40,18 @@ export default class UserInfo {
   // }
 
   setUserInfo(data) {
-    const { name, about, avatar, _id} = data;
-    if(name){
-      this._userNameSelector.textContent = name;
+    if(data.name){
+      this._userNameSelector.textContent = data.name;
     }
-    if(about){
-      this._userJobSelector.textContent = about;
+    if(data.about){
+      this._userJobSelector.textContent = data.about;
     }
-    if(avatar) {
-      this._userAvatarSelector.style.backgroundImage = `url(${avatar})`;
+    if(data.avatar) {
+      this._userAvatarSelector.style.backgroundImage = `url(${data.avatar})`;
     }
-    if(_id) {
-      this._userId = _id;
+    if(data._id) {
+      this._userId = data._id;
     }
-    console.log(data)
   }
 
 }
