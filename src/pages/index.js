@@ -63,6 +63,8 @@ import FormValidator from "../scripts/components/FormValidator.js";
 
 import Section from "../scripts/components/Section.js";
 
+import Api from "../scripts/components/Api.js";
+
 import {
   selectors,
   formUser,
@@ -74,7 +76,8 @@ import {
   formPlace,
   popupElements,
   avatarPopupBtn,
-  avatarForm
+  avatarForm,
+  formSubmitBtns
 } from "../scripts/utils/constants.js";
 
 import { hideInputError, handleDisableButton } from "../scripts/utils/utils.js";
@@ -83,24 +86,48 @@ import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import UserInfo from "../scripts/components/UserInfo.js";
 
+
+const api = new Api({
+  serverUrl: 'https://mesto.nomoreparties.co/v1/cohort-24',
+  headers: {
+      authorization: "99295e52-decf-4a30-8030-f17c65fb60b0",
+      'Content-Type': 'application/json'
+   }
+})
+
+
+Promise.all([api.getUserData(), api.getInitialCards()])
+  .then(([data, initialCards]) => {
+    userInfo.setUserInfo({
+      name: data.name,
+      about: data.about,
+      avatar: data.avatar,
+      userId: data._id,
+    });
+
+    //обращаемся к классу section и выводим на страницу начальный массив данных
+    const cardList = new Section(
+      {
+        items: initialCards,
+        renderer: (data) => {
+          cardList.addItem(createCard(data), false);
+        },
+      },
+      cardListSection
+    );
+    cardList.renderItems();
+  })
+  .catch((err) => console.log(`Ошибка начальной загрузки страницы: ${err.status} ${err.statusText}`))
+
+
+
 //создаем карточку из класса Card
 const createCard = (data) => {
   const card = new Card(data, "#cards-template", handleCardClick);
   return card.generateCard();
 };
 
-//обращаемся к классу section и выводим на страницу начальный массив данных
-const cardList = new Section(
-  {
-    items: initialCards,
-    renderer: (data) => {
-      cardList.addItem(createCard(data), false);
-    },
-  },
-  cardListSection
-);
-//вывели начальный массив карточек
-cardList.renderItems();
+
 
 //инициализируем попап для картинки из класса PopupWithImage
 const popupWithImage = new PopupWithImage("#picture-popup");
@@ -110,6 +137,7 @@ popupWithImage.setEventListener();
 function handleCardClick(link, name) {
   popupWithImage.open(link, name);
 }
+
 
 //< ----------блок создания попапа для добавления карточки-------->
 //инстант попап добавления карточки пользователя
@@ -134,12 +162,16 @@ addUserCardBtn.addEventListener("click", () => {
   handleInputErrorsHide(formPlace);
 });
 
+
 //< ----------блок создания и вызова попапа редакитрования данных о пользователе--------->
+
 //создаем инстант и получаем данные имени пользователя и его работы
 const userInfo = new UserInfo({
   userNameSelector: ".profile__user-name",
   userJobSelector: ".profile__user-job",
+  userAvatarSelector: ".profile__user-avatar",
 });
+
 //инстант попапа редактирования данных пользователя
 const editProfilePopup = new PopupWithForm(
   "#edit-profile",
@@ -147,20 +179,52 @@ const editProfilePopup = new PopupWithForm(
 );
 editProfilePopup.setEventListener();
 
+
+function renderLoading(submitBtn, statusText, isLoading){
+  if(isLoading){
+    //передаем сабмит и текс для отображения
+    //к текущему тексту добавляем ...
+  }
+}
+
+//функция кнопки Сохранить информацию о пользователе
+function editProfileSubmitHandler(data) {
+  renderLoading(true);
+  api.updateUserData(data)
+    .then(data => {
+      userInfo.setUserInfo({data});
+    })
+/*    .then(() => {
+
+    })*/
+    .catch((err) => console.log(`Ошибка выгрузки данных пользователя: ${err.status} ${err.statusText}`))
+    .finally(() => {
+      renderLoading(false)
+      editProfilePopup.close();
+    })
+}
+
+
+
+/*
 //функция кнопки Сохранить информацию о пользователе
 function editProfileSubmitHandler(data) {
   userInfo.setUserInfo(data);
   editProfilePopup.close();
+}*/
+
+function setUserInputs (data) {
+  userNameInput.value = data.userName;
+  userJobInput.value = data.userJob;
 }
 
 //слушатель кнопки открытия попапа редактирования данных о пользователе
 openUserPopupBtn.addEventListener("click", () => {
   editProfilePopup.open();
-  userInfo.getUserInfo(userNameInput, userJobInput);
+  setUserInputs(userInfo.getUserInfo());
   handleDisableButton(formUser);
   handleInputErrorsHide(formUser);
 });
-
 
 
 //<----------- инстант поапа добавления аватара пользователя ------------->
@@ -207,3 +271,56 @@ popupElements.forEach((popupElement) => {
   validateFormElement(popupElement);
 });
 
+
+
+
+
+
+/*
+
+//получение данных о пользователе и вывод их на страницу
+api.getUserData()
+  .then((data) => {
+    userInfo.setUserInfo({
+      name: data.name,
+      about: data.about,
+      avatar: data.avatar,
+      userId: data._id,
+    })
+  })
+  .catch((err) => console.log(`Ошибка загрузки данных пользователя: ${err.status} ${err.statusText}`))
+
+//выводить исходный массив карточек на страницу
+api.getInitialCards()
+  .then((initialCards) => {
+    console.log(initialCards)
+    const cardList = new Section(
+      {
+        items: initialCards,
+        renderer: (data) => {
+          cardList.addItem(createCard(data), false);
+        },
+      },
+      cardListSection
+    );
+    cardList.renderItems();
+  })
+  .catch((err) => console.log(`Ошибка загрузки карточек: ${err.status} ${err.statusText}`))
+*/
+
+
+
+
+/*
+//обращаемся к классу section и выводим на страницу начальный массив данных
+const cardList = new Section(
+  {
+    items: initialCards,
+    renderer: (data) => {
+      cardList.addItem(createCard(data), false);
+    },
+  },
+  cardListSection
+);
+//вывели начальный массив карточек
+cardList.renderItems();*/

@@ -8,19 +8,53 @@
 */
 
 export default class UserInfo {
-  constructor({ userNameSelector, userJobSelector }) {
+  constructor({ userNameSelector, userJobSelector, userAvatarSelector, userId}) {
     this._userNameSelector = document.querySelector(userNameSelector);
     this._userJobSelector = document.querySelector(userJobSelector);
+    this._userAvatarSelector = document.querySelector(userAvatarSelector)
+    this._userId = userId;
   }
 
+/*
   getUserInfo = (userName, userJob) => {
     userName.value = this._userNameSelector.textContent;
     userJob.value = this._userJobSelector.textContent;
   };
+*/
+
+
+  getUserInfo() {
+    return {
+      userName: this._userNameSelector.textContent,
+      userJob: this._userJobSelector.textContent,
+      // userAvatar.style.backgroundImage = this._userAvatarSelector.style.backgroundImage,
+      userId: this._userId
+    }
+
+  };
+
+
+  // setUserInfo(data) {
+  //   const { userNameInput, userJobInput } = data;
+  //   this._userNameSelector.textContent = userNameInput;
+  //   this._userJobSelector.textContent = userJobInput;
+  // }
 
   setUserInfo(data) {
-    const { userNameInput, userJobInput } = data;
-    this._userNameSelector.textContent = userNameInput;
-    this._userJobSelector.textContent = userJobInput;
+    const { name, about, avatar, _id} = data;
+    if(name){
+      this._userNameSelector.textContent = name;
+    }
+    if(about){
+      this._userJobSelector.textContent = about;
+    }
+    if(avatar) {
+      this._userAvatarSelector.style.backgroundImage = `url(${avatar})`;
+    }
+    if(_id) {
+      this._userId = _id;
+    }
+    console.log(data)
   }
+
 }

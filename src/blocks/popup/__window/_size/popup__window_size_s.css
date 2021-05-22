@@ -1,5 +1,5 @@
 .popup__window_size_s {
-  min-width: 430px;
+  max-width: 430px;
   /*min-width: 282px;*/
   /*padding: 34px 36px 37px;*/
   /*border-radius: 10px;*/
@@ -7,7 +7,7 @@
 
 @media screen and (max-width: 767px) {
   .popup__window_size_s {
-    min-width: 282px;
+    max-width: 282px;
     padding: 25px 22px;
   }
 }

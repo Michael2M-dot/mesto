@@ -24,3 +24,4 @@ export const popupElements = document.querySelectorAll(".popup__window_size_s");
 export const avatarPopupBtn = document.querySelector('.profile__user-avatar');
 export const avatarForm = document.querySelector('#add-avatar')
 export const ESC = "Escape";
+export const formSubmitBtns = document.querySelectorAll('.form__submit-btn')

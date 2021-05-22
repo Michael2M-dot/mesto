@@ -3,12 +3,13 @@
 
 
 export default class Api {
-  constructor(serverUrl, headers) {
+  constructor({serverUrl, headers}) {
     this._serverUrl = serverUrl;
     this._headers = headers;
   }
 
   _checkStatus(res) {
+    // res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status} ${res.statusText}`)
     if (res.ok) {
       return res.json();
     }
@@ -16,7 +17,7 @@ export default class Api {
   }
 
   getUserData() {
-    return fetch(`${this._serverUrl}/user/me`, {
+    return fetch(`${this._serverUrl}/users/me`, {
       headers: this._headers,
     })
       .then((res) => this._checkStatus(res))
@@ -29,11 +30,15 @@ export default class Api {
       .then((res) => this._checkStatus(res))
   }
 
-  updateUserData() {
-    return fetch(`${this._serverUrl}/user/me`, {
+  updateUserData(data) {
+    return fetch(`${this._serverUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
-      body: JSON.stringify(data),
+      // body: JSON.stringify(data),
+      body: JSON.stringify({
+        name: data.userNameInput,
+        about: data.userJobInput,
+      }),
     })
       .then((res) => this._checkStatus(res))
   }
@@ -64,7 +69,7 @@ export default class Api {
   }
 
   updateAvatar(){
-    return fetch(`${this._serverUrl}/user/me`, {
+    return fetch(`${this._serverUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify(data),
