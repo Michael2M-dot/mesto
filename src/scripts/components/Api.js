@@ -43,11 +43,14 @@ export default class Api {
       .then((res) => this._checkStatus(res))
   }
 
-  addCard() {
+  addCard(data) {
     return fetch(`${this._serverUrl}/cards`, {
       method: 'POST',
       headers: this._headers,
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        name: data.placeNameInput,
+        link: data.placeLinkInput
+      }),
     })
       .then((res) => this._checkStatus(res))
   }

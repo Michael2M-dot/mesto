@@ -57,7 +57,7 @@ import "./index.css";
 
 import Card from "../scripts/components/Card.js";
 
-import { initialCards } from "../scripts/utils/initial-cards.js";
+// import { initialCards } from "../scripts/utils/initial-cards.js";
 
 import FormValidator from "../scripts/components/FormValidator.js";
 
@@ -105,21 +105,20 @@ Promise.all([api.getUserData(), api.getInitialCards()])
       userId: data._id,
     });
 
-    //обращаемся к классу section и выводим на страницу начальный массив данных
-    const cardList = new Section(
-      {
-        items: initialCards,
-        renderer: (data) => {
-          cardList.addItem(createCard(data), false);
-        },
-      },
-      cardListSection
-    );
-    cardList.renderItems();
+    cardList.renderItems(initialCards)
   })
   .catch((err) => console.log(`Ошибка начальной загрузки страницы: ${err.status} ${err.statusText}`))
 
 
+//обращаемся к классу section и выводим на страницу начальный массив данных
+const cardList = new Section({
+    renderer: (data) => {
+      cardList.addItem(createCard(data), false);
+    },
+  },
+  cardListSection
+);
+// cardList.renderItems();
 
 //создаем карточку из класса Card
 const createCard = (data) => {
@@ -146,6 +145,22 @@ addCardPopup.setEventListener();
 
 //Функция обработчик события на сабмите, которая добавляет элемент (карточка пользователя) в DOM
 function addPlaceSubmitHandler(data) {
+  api.addCard(data)
+    .then(data => {
+      cardList.addItem(createCard(data), true);
+      console.log(data)
+    })
+      .catch((err) => console.log(`Ошибка загрузки карточки пользователя: ${err.status} ${err.statusText}`))
+      .finally(() => addCardPopup.close())
+}
+
+
+
+
+
+/*
+//Функция обработчик события на сабмите, которая добавляет элемент (карточка пользователя) в DOM
+function addPlaceSubmitHandler(data) {
   const cardData = {
     name: data.placeNameInput,
     link: data.placeLinkInput,
@@ -153,7 +168,7 @@ function addPlaceSubmitHandler(data) {
 
   cardList.addItem(createCard(cardData), true);
   addCardPopup.close();
-}
+}*/
 
 // слушатели для попапа добавления карточек
 addUserCardBtn.addEventListener("click", () => {
@@ -161,6 +176,8 @@ addUserCardBtn.addEventListener("click", () => {
   handleDisableButton(formPlace);
   handleInputErrorsHide(formPlace);
 });
+
+
 
 
 //< ----------блок создания и вызова попапа редакитрования данных о пользователе--------->
