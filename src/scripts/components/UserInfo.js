@@ -34,7 +34,7 @@ export default class UserInfo {
       userName: this._userNameSelector.textContent,
       userJob: this._userJobSelector.textContent,
       userId: this._userId,
-      owner: this._owner,
+      // owner: this._owner,
     };
   }
 

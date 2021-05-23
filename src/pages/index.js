@@ -228,7 +228,6 @@ const userInfo = new UserInfo({
   userNameSelector: ".profile__user-name",
   userJobSelector: ".profile__user-job",
   userAvatarSelector: ".profile__user-avatar",
-  // userId: _id,
 });
 
 //инстант попапа редактирования данных пользователя
@@ -291,7 +290,7 @@ function addAvatarSubmitHandler(data) {
   api.updateAvatar(data)
     .then((data) => {
       userInfo.setUserInfo({
-        avatar: data.avatarLinkInput,
+        avatar: data.avatar,
       })
     })
     .catch((err) =>
@@ -300,8 +299,8 @@ function addAvatarSubmitHandler(data) {
       )
     )
     .finally(() => {
-      addAvatarPopup.renderLoading(false);;
-      addAvatarPopup.close();;
+      addAvatarPopup.renderLoading(false);
+      addAvatarPopup.close();
     });
 }
 
