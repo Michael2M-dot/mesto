@@ -18,6 +18,7 @@ export default class PopupWithForm extends Popup {
   constructor(popupSelector, submitHandler) {
     super(popupSelector);
     this._handleSubmit = submitHandler;
+    this._submitBtn = document.querySelector((this._popupSelector)).querySelector('.form__submit-btn')
   }
 
   _getInputValues() {
@@ -30,6 +31,16 @@ export default class PopupWithForm extends Popup {
 
     return formValues;
   }
+
+
+  //функция индикации загрузки
+  renderLoading(isLoading){
+    if(isLoading) {
+      const submitBtnText = this._submitBtn.textContent;
+      this._submitBtn.textContent = submitBtnText + "...";
+    }
+  }
+
 
   setEventListener = () => {
     super.setEventListener();

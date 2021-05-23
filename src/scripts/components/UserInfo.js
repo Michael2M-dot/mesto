@@ -12,13 +12,13 @@ export default class UserInfo {
     userNameSelector,
     userJobSelector,
     userAvatarSelector,
-    userId,
+    userID,
     owner
   }) {
     this._userNameSelector = document.querySelector(userNameSelector);
     this._userJobSelector = document.querySelector(userJobSelector);
     this._userAvatarSelector = document.querySelector(userAvatarSelector);
-    this._userId = userId;
+    this._userId = userID;
     this._owner = owner;
   }
 
@@ -33,7 +33,6 @@ export default class UserInfo {
     return {
       userName: this._userNameSelector.textContent,
       userJob: this._userJobSelector.textContent,
-      // userAvatar.style.backgroundImage = this._userAvatarSelector.style.backgroundImage,
       userId: this._userId,
       owner: this._owner,
     };
@@ -45,18 +44,17 @@ export default class UserInfo {
   //   this._userJobSelector.textContent = userJobInput;
   // }
 
-  setUserInfo(data) {
-    if (data.name) {
-      this._userNameSelector.textContent = data.name;
+  setUserInfo(data, userID) {
+    const{name, about, avatar} = data;
+    if (name) {
+      this._userNameSelector.textContent = name;
     }
-    if (data.about) {
-      this._userJobSelector.textContent = data.about;
+    if (about) {
+      this._userJobSelector.textContent = about;
     }
-    if (data.avatar) {
-      this._userAvatarSelector.style.backgroundImage = `url(${data.avatar})`;
+    if (avatar) {
+      this._userAvatarSelector.style.backgroundImage = `url(${avatar})`;
     }
-    if (data._id) {
-      this._userId = data._id;
+      this._userId = userID;
     }
-  }
 }

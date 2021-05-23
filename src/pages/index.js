@@ -57,8 +57,6 @@ import "./index.css";
 
 import Card from "../scripts/components/Card.js";
 
-// import { initialCards } from "../scripts/utils/initial-cards.js";
-
 import FormValidator from "../scripts/components/FormValidator.js";
 
 import Section from "../scripts/components/Section.js";
@@ -79,6 +77,7 @@ import {
   avatarForm,
   userProfileSubmitBtn,
   placeSubmitBtn,
+  avatarSubmitBtn
 } from "../scripts/utils/constants.js";
 
 import { hideInputError, handleDisableButton } from "../scripts/utils/utils.js";
@@ -86,7 +85,6 @@ import { hideInputError, handleDisableButton } from "../scripts/utils/utils.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import UserInfo from "../scripts/components/UserInfo.js";
-
 
 let user = null;
 
@@ -100,6 +98,7 @@ const api = new Api({
   },
 });
 
+
 //обращаемся к классу section и выводим на страницу начальный массив данных
 const cardList = new Section(
   {
@@ -110,12 +109,13 @@ const cardList = new Section(
   cardListSection
 );
 
+
 //создаем карточку из класса Card
 const createCard = (data) => {
   const card = new Card({
     data: {
       ...data,
-        currentUser: data.owner,
+        currentUserID: user._id,
   },
       handleCardClick,
       handleDeleteCardClick: () =>{
@@ -150,30 +150,31 @@ const createCard = (data) => {
     },
     "#cards-template"
     );
+
+  console.log(user._id)
   return card.generateCard();
 
 };
 
 
-
 //подгружаем на страницу данные пользователя и исходные карточки
 Promise.all([api.getUserData(), api.getInitialCards()])
-  .then(([data, initialCards]) => {
-    userInfo.setUserInfo({
-      name: data.name,
-      about: data.about,
-      avatar: data.avatar,
-      userId: data._id,
-      // owner: data.owner
-    });
-
+  //данные пользователя
+  .then(([userData, initialCards]) => {
+    user = userData;
+    userInfo.setUserInfo(
+      user,
+      user._id,
+    );
+  //исходные карточки
     cardList.renderItems(initialCards);
   })
   .catch((err) =>
     console.log(
       `Ошибка начальной загрузки страницы: ${err.status} ${err.statusText}`
     )
-  );
+  )
+  .finally(() => console.log(user));
 
 
 //инициализируем попап для картинки из класса PopupWithImage
@@ -187,17 +188,6 @@ function handleCardClick(link, name) {
 }
 
 
-//функция отображения ожидания загрузки
-function renderLoading(submitBtn, isLoading) {
-  if (isLoading) {
-    const submitBtnText = submitBtn.textContent;
-    submitBtn.textContent = submitBtnText + "...";
-  }
-}
-
-
-
-
 //< ----------блок создания попапа для добавления карточки-------->
 //инстант попап добавления карточки пользователя
 const addCardPopup = new PopupWithForm("#add-place", addPlaceSubmitHandler);
@@ -205,12 +195,12 @@ addCardPopup.setEventListener();
 
 //Функция обработчик события на сабмите, которая добавляет элемент (карточка пользователя) в DOM
 function addPlaceSubmitHandler(data) {
-  renderLoading(placeSubmitBtn, true);
+  addCardPopup.renderLoading(true);
   api
     .addCard({
       ...data,
-      user: data._id,
-      owner: data.owner,
+      user: user.name,
+      owner: user._id,
     })
     .then((data) => {
       cardList.addItem(createCard(data), true);
@@ -221,7 +211,7 @@ function addPlaceSubmitHandler(data) {
       )
     )
     .finally(() => {
-      renderLoading(placeSubmitBtn, false);
+      addCardPopup.renderLoading(false);
       addCardPopup.close();
     });
 }
@@ -252,7 +242,8 @@ editProfilePopup.setEventListener();
 
 //функция кнопки Сохранить информацию о пользователе
 function editProfileSubmitHandler(data) {
-  renderLoading(userProfileSubmitBtn, true);
+  // renderLoading(userProfileSubmitBtn, true)
+  editProfilePopup.renderLoading(true)
   api
     .updateUserData(data)
     .then((data) => {
@@ -269,7 +260,8 @@ function editProfileSubmitHandler(data) {
       )
     )
     .finally(() => {
-      renderLoading(userProfileSubmitBtn, false);
+      editProfilePopup.renderLoading(false)
+      // renderLoading(userProfileSubmitBtn, false);
       editProfilePopup.close();
     });
 }
@@ -288,6 +280,7 @@ openUserPopupBtn.addEventListener("click", () => {
   handleInputErrorsHide(formUser);
 });
 
+
 //<----------- инстант попапа добавления аватара пользователя ------------->
 
 const addAvatarPopup = new PopupWithForm("#add-avatar", addAvatarSubmitHandler);
@@ -295,8 +288,23 @@ const addAvatarPopup = new PopupWithForm("#add-avatar", addAvatarSubmitHandler);
 addAvatarPopup.setEventListener();
 
 function addAvatarSubmitHandler(data) {
-  //дописать функционал добавления аватара
-  addAvatarPopup.close();
+
+  console.log(data)
+  api.updateAvatar(data)
+    .then((data) => {
+      userInfo.setUserInfo({
+        avatar: data.avatarLinkInput,
+      })
+    })
+    .catch((err) =>
+      console.log(
+        `Ошибка загрузки аватара пользователя: ${err.status} ${err.statusText}`
+      )
+    )
+    .finally(() => {
+      addAvatarPopup.renderLoading(false);;
+      addAvatarPopup.close();;
+    });
 }
 
 avatarPopupBtn.addEventListener("click", () => {

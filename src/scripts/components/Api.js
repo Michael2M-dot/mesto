@@ -8,11 +8,11 @@ export default class Api {
   }
 
   _checkStatus(res) {
-    // res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status} ${res.statusText}`)
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status} ${res.statusText}`);
+    return  res.ok ? res.json() : Promise.reject(`${res.status} ${res.statusText}`)
+    // if (res.ok) {
+    //   return res.json();
+    // }
+    // return Promise.reject(`Ошибка: ${res.status} ${res.statusText}`);
   }
 
   getUserData() {
@@ -34,6 +34,8 @@ export default class Api {
       body: JSON.stringify({
         name: data.userNameInput,
         about: data.userJobInput,
+        _id: data._id,
+        avatar: data.avatar
       }),
     }).then((res) => this._checkStatus(res));
   }
@@ -45,8 +47,8 @@ export default class Api {
       body: JSON.stringify({
         name: data.placeNameInput,
         link: data.placeLinkInput,
-        owner: data.owner,
-        user: data.user
+        // owner: data.owner,
+        // user: data.user
       }),
     }).then((res) => this._checkStatus(res));
   }
@@ -73,11 +75,13 @@ export default class Api {
     }).then((res) => this._checkStatus(res));
   }
 
-  updateAvatar() {
-    return fetch(`${this._serverUrl}/users/me`, {
+  updateAvatar(data) {
+    return fetch(`${this._serverUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        avatar: data.avatarLinkInput,
+      }),
     }).then((res) => this._checkStatus(res));
   }
 }
