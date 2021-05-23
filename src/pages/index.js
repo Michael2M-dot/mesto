@@ -87,6 +87,10 @@ import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import UserInfo from "../scripts/components/UserInfo.js";
 
+
+let user = null;
+
+
 //создаем инстант Api
 const api = new Api({
   serverUrl: "https://mesto.nomoreparties.co/v1/cohort-24",
@@ -108,9 +112,49 @@ const cardList = new Section(
 
 //создаем карточку из класса Card
 const createCard = (data) => {
-  const card = new Card(data, "#cards-template", handleCardClick);
+  const card = new Card({
+    data: {
+      ...data,
+        currentUser: data.owner,
+  },
+      handleCardClick,
+      handleDeleteCardClick: () =>{
+        api.deleteCard(card.getId())
+          .then(() => card.deleteCard())
+          .catch((err) =>
+            console.log(
+              `Ошибка начальной загрузки страницы: ${err.status} ${err.statusText}`
+            ))
+      },
+      handleAddLike: () => {
+        api.likeCard('PUT', card.getId())
+          .then ((data) => {
+            card.getLikes({data}, true)
+          })
+          .catch((err) =>
+            console.log(
+              `Ошибка лайка карточки: ${err.status} ${err.statusText}`
+            ))
+      },
+      handleDeleteLike: () => {
+        api.likeCard('DELETE', card.getId())
+          .then ((data) => {
+            card.getLikes({data}, false)
+          })
+          .catch((err) =>
+            console.log(
+              `Ошибка лайка карточки: ${err.status} ${err.statusText}`
+            ))
+      },
+
+    },
+    "#cards-template"
+    );
   return card.generateCard();
+
 };
+
+
 
 //подгружаем на страницу данные пользователя и исходные карточки
 Promise.all([api.getUserData(), api.getInitialCards()])
@@ -120,6 +164,7 @@ Promise.all([api.getUserData(), api.getInitialCards()])
       about: data.about,
       avatar: data.avatar,
       userId: data._id,
+      // owner: data.owner
     });
 
     cardList.renderItems(initialCards);
@@ -131,21 +176,16 @@ Promise.all([api.getUserData(), api.getInitialCards()])
   );
 
 
-// api.likeCard('GET')
-//   .then((data) => {
-//     console.log(data.likes)
-//   })
-
-
-
 //инициализируем попап для картинки из класса PopupWithImage
 const popupWithImage = new PopupWithImage("#picture-popup");
 popupWithImage.setEventListener();
+
 
 // открываем попап с картинокй (передаем даннные изображения для его отображения в полном размере)
 function handleCardClick(link, name) {
   popupWithImage.open(link, name);
 }
+
 
 //функция отображения ожидания загрузки
 function renderLoading(submitBtn, isLoading) {
@@ -154,6 +194,9 @@ function renderLoading(submitBtn, isLoading) {
     submitBtn.textContent = submitBtnText + "...";
   }
 }
+
+
+
 
 //< ----------блок создания попапа для добавления карточки-------->
 //инстант попап добавления карточки пользователя
@@ -164,7 +207,11 @@ addCardPopup.setEventListener();
 function addPlaceSubmitHandler(data) {
   renderLoading(placeSubmitBtn, true);
   api
-    .addCard(data)
+    .addCard({
+      ...data,
+      user: data._id,
+      owner: data.owner,
+    })
     .then((data) => {
       cardList.addItem(createCard(data), true);
     })

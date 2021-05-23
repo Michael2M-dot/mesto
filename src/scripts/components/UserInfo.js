@@ -13,11 +13,13 @@ export default class UserInfo {
     userJobSelector,
     userAvatarSelector,
     userId,
+    owner
   }) {
     this._userNameSelector = document.querySelector(userNameSelector);
     this._userJobSelector = document.querySelector(userJobSelector);
     this._userAvatarSelector = document.querySelector(userAvatarSelector);
     this._userId = userId;
+    this._owner = owner;
   }
 
   /*
@@ -33,6 +35,7 @@ export default class UserInfo {
       userJob: this._userJobSelector.textContent,
       // userAvatar.style.backgroundImage = this._userAvatarSelector.style.backgroundImage,
       userId: this._userId,
+      owner: this._owner,
     };
   }
 

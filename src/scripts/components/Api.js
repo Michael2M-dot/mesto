@@ -31,7 +31,6 @@ export default class Api {
     return fetch(`${this._serverUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
-      // body: JSON.stringify(data),
       body: JSON.stringify({
         name: data.userNameInput,
         about: data.userJobInput,
@@ -46,6 +45,8 @@ export default class Api {
       body: JSON.stringify({
         name: data.placeNameInput,
         link: data.placeLinkInput,
+        owner: data.owner,
+        user: data.user
       }),
     }).then((res) => this._checkStatus(res));
   }
@@ -65,12 +66,12 @@ export default class Api {
   // }
 
 
-  /*likeCard(method, id) {
+  likeCard(method, id) {
     return fetch(`${this._serverUrl}/cards/likes/${id}`, {
       method: method,
       headers: this._headers,
     }).then((res) => this._checkStatus(res));
-  }*/
+  }
 
   updateAvatar() {
     return fetch(`${this._serverUrl}/users/me`, {

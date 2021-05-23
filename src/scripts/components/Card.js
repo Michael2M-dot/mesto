@@ -32,10 +32,14 @@ export default class Card {
     likeCountSelector: ".element__count"
   };
 
-  constructor(data, cardSelector, handleCardClick) {
-    const { name, link, likes } = data; //пример реструктуризации
+  constructor({data, handleCardClick, handleDeleteCardClick, handleAddLike, handleDeleteLike}, cardSelector) {
+    const { name, link, likes, owner, _id, currentUser} = data; //пример реструктуризации
     this._name = name;
     this._link = link;
+    this._likes = likes;
+    this._owner = owner;
+    this._cardId = _id;
+    this._currentUser = currentUser._id;
     this._handleCardClick = handleCardClick;
     this._cardSelector = cardSelector;
     this._element = this._getTemplate();
@@ -44,8 +48,9 @@ export default class Card {
     this._cardLike = this._element.querySelector(Card.selectors.likeSelector);
     this._likesCount = this._element.querySelector(Card.selectors.likeCountSelector);
     this._cardTrash = this._element.querySelector(Card.selectors.trashSelector);
-
-    this._likes = likes;
+    this._handleDeleteCardClick = handleDeleteCardClick;
+    this._handleAddLike = handleAddLike;
+    this._handleDeleteLike = handleDeleteLike;
   }
 
   _getTemplate() {
@@ -58,7 +63,14 @@ export default class Card {
   _setEventListeners() {
     this._cardLike.addEventListener("click", () => this._handleLikeClick());
 
-    this._cardTrash.addEventListener("click", () => this._handleDeleteClick());
+    // this._cardLike.addEventListener("click", ()  => {
+    //   this._handleCardLikeClick();
+    //   this._handleLikeClick()
+    // });
+
+    // this._cardTrash.addEventListener("click", () => this._handleDeleteClick());
+
+    this._cardTrash.addEventListener("click", this._handleDeleteCardClick);
 
     this._cardImage.addEventListener("click", () => {
       this._handlePreviewPopupOpen(this._link, this._name);
@@ -67,10 +79,16 @@ export default class Card {
 
   _handleLikeClick(data) {
     this._cardLike.classList.toggle("element__like_active");
+    this._cardLike.classList.contains("element__like_active") ? this._handleAddLike() : this._handleDeleteLike()
   }
 
-  _handleDeleteClick() {
-    this._element.remove();
+
+  deleteCard() {
+    this._element.remove()
+  }
+
+  getId(){
+    return this._cardId;
   }
 
   _handlePreviewPopupOpen = () => {
@@ -81,15 +99,26 @@ export default class Card {
     this._likesCount.textContent = this._likes.length;
   }
 
+  getLikes({data}, isLiked){
+    if(isLiked) {
+      this._likesCount.textContent = data.likes.length
+    }
+    this._likesCount.textContent = data.likes.length
+  }
+
   generateCard = () => {
     this._setEventListeners();
+
+    this._getLikes();
 
     this._cardImage.src = this._link;
     this._cardImage.alt = `Нам очень жаль что вы не можете увидеть эту 
 	красивую фотографию этого удивительного места ${this._name}`;
     this._cardName.textContent = this._name;
 
-    this._getLikes();
+    if(this._owner === this._currentUser) {
+      this._element.querySelector('.element__trash').classList.remove('element__trash_hidden')
+    }
 
     return this._element;
   };
