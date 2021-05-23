@@ -151,7 +151,6 @@ const createCard = (data) => {
     "#cards-template"
     );
 
-  console.log(user._id)
   return card.generateCard();
 
 };
@@ -173,8 +172,7 @@ Promise.all([api.getUserData(), api.getInitialCards()])
     console.log(
       `Ошибка начальной загрузки страницы: ${err.status} ${err.statusText}`
     )
-  )
-  .finally(() => console.log(user));
+  );
 
 
 //инициализируем попап для картинки из класса PopupWithImage

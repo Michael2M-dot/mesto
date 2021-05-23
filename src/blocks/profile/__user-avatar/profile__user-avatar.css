@@ -1,4 +1,5 @@
 .profile__user-avatar {
+  position: relative;
   width: 120px;
   height: 120px;
   background-image: url(../../../images/avatar.png);
@@ -6,4 +7,28 @@
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: calc(100% / 2);
+}
+
+
+.profile__user-avatar:before{
+  content: '';
+  background: var(--color__background);
+  opacity: .8;
+  background-image: url(../../../images/pen_vector.svg);
+  background-position: center;
+  background-size: auto;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -3;
+  transition: z-index .2s ease-in-out .2s;
+}
+
+
+
+.profile__user-avatar:hover:before{
+  z-index: 1;
 }
