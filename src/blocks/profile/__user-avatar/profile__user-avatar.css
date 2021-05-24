@@ -2,7 +2,8 @@
   position: relative;
   width: 120px;
   height: 120px;
-  background-image: url(../../../images/avatar.png);
+  background-image: url(../../../images/avatar_icon.svg);
+  color: white;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
