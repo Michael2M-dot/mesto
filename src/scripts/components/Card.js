@@ -29,11 +29,20 @@ export default class Card {
     trashSelector: ".element__trash",
     imageSelector: ".element__image",
     titleSelector: ".element__title",
-    likeCountSelector: ".element__count"
+    likeCountSelector: ".element__count",
   };
 
-  constructor({data, handleCardClick, handleDeleteCardClick, handleAddLike, handleDeleteLike}, cardSelector) {
-    const { name, link, likes, _id, owner, currentUserID} = data; //пример реструктуризации
+  constructor(
+    {
+      data,
+      handleCardClick,
+      handleDeleteCardClick,
+      handleAddLike,
+      handleDeleteLike,
+    },
+    cardSelector
+  ) {
+    const { name, link, likes, _id, owner, currentUserID } = data; //пример реструктуризации
     this._name = name;
     this._link = link;
     this._likes = likes;
@@ -46,7 +55,9 @@ export default class Card {
     this._cardImage = this._element.querySelector(Card.selectors.imageSelector);
     this._cardName = this._element.querySelector(Card.selectors.titleSelector);
     this._cardLike = this._element.querySelector(Card.selectors.likeSelector);
-    this._likesCount = this._element.querySelector(Card.selectors.likeCountSelector);
+    this._likesCount = this._element.querySelector(
+      Card.selectors.likeCountSelector
+    );
     this._cardTrash = this._element.querySelector(Card.selectors.trashSelector);
     this._handleDeleteCardClick = handleDeleteCardClick;
     this._handleAddLike = handleAddLike;
@@ -74,15 +85,16 @@ export default class Card {
 
   _handleLikeClick() {
     this._cardLike.classList.toggle("element__like_active");
-    this._cardLike.classList.contains("element__like_active") ? this._handleAddLike() : this._handleDeleteLike()
+    this._cardLike.classList.contains("element__like_active")
+      ? this._handleAddLike()
+      : this._handleDeleteLike();
   }
-
 
   deleteCard() {
-    this._element.remove()
+    this._element.remove();
   }
 
-  getId(){
+  getId() {
     return this._cardId;
   }
 
@@ -90,27 +102,24 @@ export default class Card {
     this._handleCardClick(this._link, this._name);
   };
 
-
   //проверяем лайки пользователя при загрузке карточек и делает лайк активным
   _getCardLikes() {
-    this._likes.forEach(like => {
-      if(like._id === this._currentUserID) {
-        this._cardLike.classList.add("element__like_active")
+    this._likes.forEach((like) => {
+      if (like._id === this._currentUserID) {
+        this._cardLike.classList.add("element__like_active");
       }
     });
-    // this._likesCount.textContent = this._likes.length;
+    this._likesCount.textContent = this._likes.length;
   }
-
 
   //публичный метод в который передается массив лайков и добавляет значение при
   //клике
-  getLikes({data}, isLiked){
-    if(isLiked) {
-      this._likesCount.textContent = data.likes.length
+  getLikes({ data }, isLiked) {
+    if (isLiked) {
+      this._likesCount.textContent = data.likes.length;
     }
-    this._likesCount.textContent = data.likes.length
+    this._likesCount.textContent = data.likes.length;
   }
-
 
   generateCard = () => {
     this._setEventListeners();
@@ -122,8 +131,10 @@ export default class Card {
 	красивую фотографию этого удивительного места ${this._name}`;
     this._cardName.textContent = this._name;
 
-    if(this._owner._id === this._currentUserID) {
-      this._element.querySelector('.element__trash').classList.remove('element__trash_hidden')
+    if (this._owner._id === this._currentUserID) {
+      this._element
+        .querySelector(".element__trash")
+        .classList.remove("element__trash_hidden");
     }
 
     return this._element;

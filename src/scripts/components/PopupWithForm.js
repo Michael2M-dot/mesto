@@ -18,7 +18,9 @@ export default class PopupWithForm extends Popup {
   constructor(popupSelector, submitHandler) {
     super(popupSelector);
     this._handleSubmit = submitHandler;
-    this._submitBtn = document.querySelector((this._popupSelector)).querySelector('.form__submit-btn')
+    this._submitBtn = document
+      .querySelector(this._popupSelector)
+      .querySelector(".form__submit-btn");
   }
 
   _getInputValues() {
@@ -32,18 +34,18 @@ export default class PopupWithForm extends Popup {
     return formValues;
   }
 
-
-  //функция индикации загрузки
-  renderLoading(isLoading){
-    const submitBtnText = this._submitBtn.textContent;
-    if(isLoading) {
-      // const submitBtnText = this._submitBtn.textContent;
-      this._submitBtn.textContent += "...";
-    }else {
-      this._submitBtn.textContent = submitBtnText;
+  //функция индикации загрузки улучшение UX
+  renderLoading(isLoading) {
+    const submitBtnText = "...";
+    if (isLoading) {
+      this._submitBtn.textContent += submitBtnText;
+    } else {
+      this._submitBtn.textContent = this._submitBtn.textContent.replace(
+        submitBtnText,
+        ""
+      );
     }
   }
-
 
   setEventListener = () => {
     super.setEventListener();

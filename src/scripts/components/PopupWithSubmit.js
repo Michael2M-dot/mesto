@@ -5,29 +5,43 @@
 и передает в качестве аргумента cardID
 */
 
-
 import Popup from "./Popup.js";
 
-export default class PopupWithSubmit extends Popup{
+export default class PopupWithSubmit extends Popup {
   constructor(popupSelector, handlerSubmit) {
     super(popupSelector);
-    this._handlerSubmit = handlerSubmit
+    this._handlerSubmit = handlerSubmit;
 
-    this._form = document.querySelector(popupSelector)
+    this._form = document.querySelector(popupSelector);
+    this._submitBtn = this._form.querySelector(".form__submit-btn");
   }
 
   //при открытии передаем Id карточки для ее опознания
-  open(cardId){
+  open(cardId) {
     this._cardId = cardId;
-    super.open()
+    super.open();
+  }
+
+  //функция индикации загрузки улучшение UX
+  renderLoading(isLoading) {
+    const submitBtnText = "...";
+    if (isLoading) {
+      this._submitBtn.textContent += submitBtnText;
+    } else {
+      this._submitBtn.textContent = this._submitBtn.textContent.replace(
+        submitBtnText,
+        ""
+      );
+      console.log(this._submitBtn.textContent);
+    }
   }
 
   //слушатель добавляем слушатель на сабмит формы для вызова колбэка
   setEventListener() {
-    super.setEventListener()
-    this._form.addEventListener('submit', (evt) => {
+    super.setEventListener();
+    this._form.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this._handlerSubmit(this._cardId)
-    })
+      this._handlerSubmit(this._cardId);
+    });
   }
 }

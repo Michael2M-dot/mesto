@@ -77,22 +77,17 @@ import {
   popupElements,
   avatarPopupBtn,
   avatarForm,
-  userProfileSubmitBtn,
-  placeSubmitBtn,
-  avatarSubmitBtn
 } from "../scripts/utils/constants.js";
 
 import { hideInputError, handleDisableButton } from "../scripts/utils/utils.js";
-
 
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import UserInfo from "../scripts/components/UserInfo.js";
 
-//перезаписываемые переменные для записи в них данных полученых с сервера.
+//перезаписываемые переменные для записи в них данных полученных с сервера.
 let user = null;
 let cardElement = null;
-
 
 //создаем инстант Api
 const api = new Api({
@@ -102,7 +97,6 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
-
 
 //обращаемся к классу section и выводим на страницу начальный массив данных
 const cardList = new Section(
@@ -114,124 +108,99 @@ const cardList = new Section(
   cardListSection
 );
 
+//инстант попапа подтверждения удаления карточки
+const deleteCardPopup = new PopupWithSubmit(
+  "#delete-card",
+  cardDeleteSubmitHandler
+);
+deleteCardPopup.setEventListener();
 
-
-/*
-
-const deleteCardPopup = new Popup('#delete-card', cardDeleteSubmitHandler)
-deleteCardPopup.setEventListener()
-
-function cardDeleteSubmitHandler(cardId){
-  // deleteCardPopup.renderLoading(true)
-  api.deleteCard(cardId)
+function cardDeleteSubmitHandler(cardId) {
+  deleteCardPopup.renderLoading(true);
+  api
+    .deleteCard(cardId)
     .then(() => {
       deleteCardPopup.open();
       cardElement.deleteCard();
     })
     .catch((err) =>
       console.log(
-        `Ошибка удаления карточки: ${err.status} ${err.statusText}`
-      ))
+        `Непредвиденная ошибка при удалении карточки: ${err.status} ${err.statusText}`
+      )
+    )
     .finally(() => {
       deleteCardPopup.close();
-      // deleteCardPopup.renderLoading(false)
-    })
-}
-*/
-
-
-const deleteCardPopup = new PopupWithSubmit('#delete-card', cardDeleteSubmitHandler)
-deleteCardPopup.setEventListener()
-
-function cardDeleteSubmitHandler(cardId){
-  // deleteCardPopup.renderLoading(true)
-  api.deleteCard(cardId)
-    .then(() => {
-      deleteCardPopup.open();
-      cardElement.deleteCard();
-    })
-    .catch((err) =>
-      console.log(
-        `Ошибка удаления карточки: ${err.status} ${err.statusText}`
-      ))
-    .finally(() => {
-      deleteCardPopup.close();
-      // deleteCardPopup.renderLoading(false)
-    })
+      deleteCardPopup.renderLoading(false);
+    });
 }
 
-
-
-//создаем карточку из класса Card
+//Функция создания карточку из класса Card
 const createCard = (data) => {
-  const card = new Card({
-    data: {
-      ...data,
+  const card = new Card(
+    {
+      data: {
+        ...data,
         currentUserID: user._id,
-  },
+      },
       handleCardClick,
-      handleDeleteCardClick: () =>{
+      handleDeleteCardClick: () => {
         cardElement = card;
-        deleteCardPopup.open(card.getId())
+        deleteCardPopup.open(card.getId());
       },
       handleAddLike: () => {
-        api.likeCard('PUT', card.getId())
-          .then ((data) => {
-            card.getLikes({data}, true)
+        api
+          .likeCard("PUT", card.getId())
+          .then((data) => {
+            card.getLikes({ data }, true);
           })
           .catch((err) =>
             console.log(
-              `Ошибка лайка карточки: ${err.status} ${err.statusText}`
-            ))
+              `Непредвиденная ошибка при передаче данных: ${err.status} ${err.statusText}`
+            )
+          );
       },
       handleDeleteLike: () => {
-        api.likeCard('DELETE', card.getId())
-          .then ((data) => {
-            card.getLikes({data}, false)
+        api
+          .likeCard("DELETE", card.getId())
+          .then((data) => {
+            card.getLikes({ data }, false);
           })
           .catch((err) =>
             console.log(
-              `Ошибка лайка карточки: ${err.status} ${err.statusText}`
-            ))
+              `Непредвиденная ошибка при удалении данных: ${err.status} ${err.statusText}`
+            )
+          );
       },
-
     },
     "#cards-template"
-    );
+  );
 
   return card.generateCard();
 };
-
 
 //подгружаем на страницу данные пользователя и исходные карточки
 Promise.all([api.getUserData(), api.getInitialCards()])
   //данные пользователя
   .then(([userData, initialCards]) => {
     user = userData;
-    userInfo.setUserInfo(
-      user,
-      user._id,
-    );
-  //исходные карточки
+    userInfo.setUserInfo(user, user._id);
+    //исходные карточки
     cardList.renderItems(initialCards);
   })
   .catch((err) =>
     console.log(
-      `Ошибка начальной загрузки страницы: ${err.status} ${err.statusText}`
+      `Непредвиденная ошибка при начальной загрузке страницы: ${err.status} ${err.statusText}`
     )
   );
-
 
 //инициализируем попап для картинки из класса PopupWithImage
 const popupWithImage = new PopupWithImage("#picture-popup");
 popupWithImage.setEventListener();
 
-
 // открываем попап с картинокй (передаем даннные изображения для его отображения в полном размере)
 function handleCardClick(link, name) {
   popupWithImage.open(link, name);
 }
-
 
 //< ----------блок создания попапа для добавления карточки-------->
 //инстант попап добавления карточки пользователя
@@ -252,7 +221,7 @@ function addPlaceSubmitHandler(data) {
     })
     .catch((err) =>
       console.log(
-        `Ошибка загрузки карточки пользователя: ${err.status} ${err.statusText}`
+        `Непредвиденная ошибка загрузки карточки пользователя: ${err.status} ${err.statusText}`
       )
     )
     .finally(() => {
@@ -286,7 +255,7 @@ editProfilePopup.setEventListener();
 
 //функция кнопки Сохранить информацию о пользователе
 function editProfileSubmitHandler(data) {
-  editProfilePopup.renderLoading(true)
+  editProfilePopup.renderLoading(true);
   api
     .updateUserData(data)
     .then((data) => {
@@ -299,12 +268,11 @@ function editProfileSubmitHandler(data) {
     })
     .catch((err) =>
       console.log(
-        `Ошибка выгрузки данных пользователя: ${err.status} ${err.statusText}`
+        `Непредвиденная ошибка при выгрузке данных пользователя: ${err.status} ${err.statusText}`
       )
     )
     .finally(() => {
-      editProfilePopup.renderLoading(false)
-      // renderLoading(userProfileSubmitBtn, false);
+      editProfilePopup.renderLoading(false);
       editProfilePopup.close();
     });
 }
@@ -323,8 +291,6 @@ openUserPopupBtn.addEventListener("click", () => {
   handleInputErrorsHide(formUser);
 });
 
-
-
 //<----------- инстант попапа добавления аватара пользователя ------------->
 
 const addAvatarPopup = new PopupWithForm("#add-avatar", addAvatarSubmitHandler);
@@ -332,16 +298,17 @@ const addAvatarPopup = new PopupWithForm("#add-avatar", addAvatarSubmitHandler);
 addAvatarPopup.setEventListener();
 
 function addAvatarSubmitHandler(data) {
-  addAvatarPopup.renderLoading(true)
-  api.updateAvatar(data)
+  addAvatarPopup.renderLoading(true);
+  api
+    .updateAvatar(data)
     .then((data) => {
       userInfo.setUserInfo({
         avatar: data.avatar,
-      })
+      });
     })
     .catch((err) =>
       console.log(
-        `Ошибка загрузки аватара пользователя: ${err.status} ${err.statusText}`
+        `Непредвиденная ошибка при загрузке аватара пользователя: ${err.status} ${err.statusText}`
       )
     )
     .finally(() => {
@@ -375,69 +342,3 @@ const validateFormElement = (formElement) => {
 popupElements.forEach((popupElement) => {
   validateFormElement(popupElement);
 });
-
-/*
-
-//получение данных о пользователе и вывод их на страницу
-api.getUserData()
-  .then((data) => {
-    userInfo.setUserInfo({
-      name: data.name,
-      about: data.about,
-      avatar: data.avatar,
-      userId: data._id,
-    })
-  })
-  .catch((err) => console.log(`Ошибка загрузки данных пользователя: ${err.status} ${err.statusText}`))
-
-//выводить исходный массив карточек на страницу
-api.getInitialCards()
-  .then((initialCards) => {
-    console.log(initialCards)
-    const cardList = new Section(
-      {
-        items: initialCards,
-        renderer: (data) => {
-          cardList.addItem(createCard(data), false);
-        },
-      },
-      cardListSection
-    );
-    cardList.renderItems();
-  })
-  .catch((err) => console.log(`Ошибка загрузки карточек: ${err.status} ${err.statusText}`))
-*/
-
-/*
-//обращаемся к классу section и выводим на страницу начальный массив данных
-const cardList = new Section(
-  {
-    items: initialCards,
-    renderer: (data) => {
-      cardList.addItem(createCard(data), false);
-    },
-  },
-  cardListSection
-);
-//вывели начальный массив карточек
-cardList.renderItems();*/
-
-/*
-
-//Функция обработчик события на сабмите, которая добавляет элемент (карточка пользователя) в DOM
-function addPlaceSubmitHandler(data) {
-  const cardData = {
-    name: data.placeNameInput,
-    link: data.placeLinkInput,
-  };
-
-  cardList.addItem(createCard(cardData), true);
-  addCardPopup.close();
-}*/
-
-/*
-//функция кнопки Сохранить информацию о пользователе
-function editProfileSubmitHandler(data) {
-  userInfo.setUserInfo(data);
-  editProfilePopup.close();
-}*/

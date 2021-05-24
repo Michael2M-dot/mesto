@@ -8,11 +8,9 @@ export default class Api {
   }
 
   _checkStatus(res) {
-    return  res.ok ? res.json() : Promise.reject(`${res.status} ${res.statusText}`)
-    // if (res.ok) {
-    //   return res.json();
-    // }
-    // return Promise.reject(`Ошибка: ${res.status} ${res.statusText}`);
+    return res.ok
+      ? res.json()
+      : Promise.reject(`${res.status} ${res.statusText}`);
   }
 
   getUserData() {
@@ -35,7 +33,7 @@ export default class Api {
         name: data.userNameInput,
         about: data.userJobInput,
         _id: data._id,
-        avatar: data.avatar
+        avatar: data.avatar,
       }),
     }).then((res) => this._checkStatus(res));
   }
@@ -60,14 +58,6 @@ export default class Api {
     }).then((res) => this._checkStatus(res));
   }
 
-  // likeCard() {
-  //   return fetch(`${this._serverUrl}/cards/likes/${id}`, {
-  //     method: method,
-  //     headers: this._headers,
-  //   }).then((res) => this._checkStatus(res));
-  // }
-
-
   likeCard(method, id) {
     return fetch(`${this._serverUrl}/cards/likes/${id}`, {
       method: method,
@@ -85,33 +75,3 @@ export default class Api {
     }).then((res) => this._checkStatus(res));
   }
 }
-
-// function getUsedData() {
-//   return fetch("https://nomoreparties.co/v1/cohort-24/users/me", {
-//     method: "GET",
-//     headers: {
-//       authorization: "99295e52-decf-4a30-8030-f17c65fb60b0",
-//     },
-//   });
-// }
-//
-// getUsedData()
-//   .then((res) => {
-//     if (res.ok) {
-//       return res.json();
-//     }
-//     return Promise.reject(res.status);
-//   })
-//   .then((data) => {
-//     console.log(data);
-//     renderUserData(data);
-//   })
-//   .catch((err) => {
-//     console.log("Error", err);
-//   });
-//
-// function renderUserData(data) {
-//   userName.textContent = data.name;
-//   userJob.textContent = data.about;
-//   userAvatar.style.backgroundImage = data.avatar;
-// }

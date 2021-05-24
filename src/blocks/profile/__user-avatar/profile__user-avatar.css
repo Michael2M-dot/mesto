@@ -9,11 +9,10 @@
   border-radius: calc(100% / 2);
 }
 
-
-.profile__user-avatar:before{
-  content: '';
+.profile__user-avatar:before {
+  content: "";
   background: var(--color__background);
-  opacity: .8;
+  opacity: 0.8;
   background-image: url(../../../images/pen_vector.svg);
   background-position: center;
   background-size: auto;
@@ -24,11 +23,9 @@
   left: 0;
   right: 0;
   z-index: -3;
-  transition: z-index .2s ease-in-out .2s;
+  transition: z-index 0.2s ease-in-out 0.2s;
 }
 
-
-
-.profile__user-avatar:hover:before{
+.profile__user-avatar:hover:before {
   z-index: 1;
 }

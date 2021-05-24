@@ -17,12 +17,12 @@ export const showInputError = (inputElement, errorMessage, selectors) => {
   );
   //указываем что в данное поле будет выводиться ошибка errorMessage
   errorElement.textContent = errorMessage;
-  errorElement.classList.add(selectors.inputErrorSelector); //добваляем класс отвечающий за отображение ошибки
+  errorElement.classList.add(selectors.inputErrorSelector); //добавляем класс отвечающий за отображение ошибки
 };
 
 //функция скрывающая ошибку
 export const hideInputError = (inputElement, selectors) => {
-  // const errorElement = formElement.querySelector(`#${inputElement.id}-error`); -варинат поиска по id
+  // const errorElement = formElement.querySelector(`#${inputElement.id}-error`); -вариант поиска по id
   const formSectionElement = inputElement.closest(selectors.formSection);
   const errorElement = formSectionElement.querySelector(
     selectors.errorsSelector

@@ -13,7 +13,7 @@ export default class UserInfo {
     userJobSelector,
     userAvatarSelector,
     userID,
-    owner
+    owner,
   }) {
     this._userNameSelector = document.querySelector(userNameSelector);
     this._userJobSelector = document.querySelector(userJobSelector);
@@ -45,7 +45,7 @@ export default class UserInfo {
   // }
 
   setUserInfo(data, userID) {
-    const{name, about, avatar} = data;
+    const { name, about, avatar } = data;
     if (name) {
       this._userNameSelector.textContent = name;
     }
@@ -55,6 +55,6 @@ export default class UserInfo {
     if (avatar) {
       this._userAvatarSelector.style.backgroundImage = `url(${avatar})`;
     }
-      this._userId = userID;
-    }
+    this._userId = userID;
+  }
 }
