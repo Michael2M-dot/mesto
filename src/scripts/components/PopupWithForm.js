@@ -35,9 +35,12 @@ export default class PopupWithForm extends Popup {
 
   //функция индикации загрузки
   renderLoading(isLoading){
+    const submitBtnText = this._submitBtn.textContent;
     if(isLoading) {
-      const submitBtnText = this._submitBtn.textContent;
-      this._submitBtn.textContent = submitBtnText + "...";
+      // const submitBtnText = this._submitBtn.textContent;
+      this._submitBtn.textContent += "...";
+    }else {
+      this._submitBtn.textContent = submitBtnText;
     }
   }
 

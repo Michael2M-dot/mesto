@@ -30,7 +30,6 @@ export default class Popup {
   }
 
   _handleEscClose(evt) {
-    // this._currentPopup = document.querySelector(".page__popup_visible");
     if (evt.key === ESC) {
       this.close(); //чтобы не потерять контекст, можно либо стрелочную либо черз bind
     }

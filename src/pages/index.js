@@ -63,6 +63,8 @@ import Section from "../scripts/components/Section.js";
 
 import Api from "../scripts/components/Api.js";
 
+import PopupWithSubmit from "../scripts/components/PopupWithSubmit.js";
+
 import {
   selectors,
   formUser,
@@ -82,11 +84,14 @@ import {
 
 import { hideInputError, handleDisableButton } from "../scripts/utils/utils.js";
 
+
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import UserInfo from "../scripts/components/UserInfo.js";
 
+//перезаписываемые переменные для записи в них данных полученых с сервера.
 let user = null;
+let cardElement = null;
 
 
 //создаем инстант Api
@@ -110,6 +115,53 @@ const cardList = new Section(
 );
 
 
+
+/*
+
+const deleteCardPopup = new Popup('#delete-card', cardDeleteSubmitHandler)
+deleteCardPopup.setEventListener()
+
+function cardDeleteSubmitHandler(cardId){
+  // deleteCardPopup.renderLoading(true)
+  api.deleteCard(cardId)
+    .then(() => {
+      deleteCardPopup.open();
+      cardElement.deleteCard();
+    })
+    .catch((err) =>
+      console.log(
+        `Ошибка удаления карточки: ${err.status} ${err.statusText}`
+      ))
+    .finally(() => {
+      deleteCardPopup.close();
+      // deleteCardPopup.renderLoading(false)
+    })
+}
+*/
+
+
+const deleteCardPopup = new PopupWithSubmit('#delete-card', cardDeleteSubmitHandler)
+deleteCardPopup.setEventListener()
+
+function cardDeleteSubmitHandler(cardId){
+  // deleteCardPopup.renderLoading(true)
+  api.deleteCard(cardId)
+    .then(() => {
+      deleteCardPopup.open();
+      cardElement.deleteCard();
+    })
+    .catch((err) =>
+      console.log(
+        `Ошибка удаления карточки: ${err.status} ${err.statusText}`
+      ))
+    .finally(() => {
+      deleteCardPopup.close();
+      // deleteCardPopup.renderLoading(false)
+    })
+}
+
+
+
 //создаем карточку из класса Card
 const createCard = (data) => {
   const card = new Card({
@@ -119,12 +171,8 @@ const createCard = (data) => {
   },
       handleCardClick,
       handleDeleteCardClick: () =>{
-        api.deleteCard(card.getId())
-          .then(() => card.deleteCard())
-          .catch((err) =>
-            console.log(
-              `Ошибка начальной загрузки страницы: ${err.status} ${err.statusText}`
-            ))
+        cardElement = card;
+        deleteCardPopup.open(card.getId())
       },
       handleAddLike: () => {
         api.likeCard('PUT', card.getId())
@@ -152,7 +200,6 @@ const createCard = (data) => {
     );
 
   return card.generateCard();
-
 };
 
 
@@ -239,7 +286,6 @@ editProfilePopup.setEventListener();
 
 //функция кнопки Сохранить информацию о пользователе
 function editProfileSubmitHandler(data) {
-  // renderLoading(userProfileSubmitBtn, true)
   editProfilePopup.renderLoading(true)
   api
     .updateUserData(data)
@@ -278,6 +324,7 @@ openUserPopupBtn.addEventListener("click", () => {
 });
 
 
+
 //<----------- инстант попапа добавления аватара пользователя ------------->
 
 const addAvatarPopup = new PopupWithForm("#add-avatar", addAvatarSubmitHandler);
@@ -285,8 +332,7 @@ const addAvatarPopup = new PopupWithForm("#add-avatar", addAvatarSubmitHandler);
 addAvatarPopup.setEventListener();
 
 function addAvatarSubmitHandler(data) {
-
-  console.log(data)
+  addAvatarPopup.renderLoading(true)
   api.updateAvatar(data)
     .then((data) => {
       userInfo.setUserInfo({
