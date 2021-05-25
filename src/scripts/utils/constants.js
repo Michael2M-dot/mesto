@@ -6,7 +6,7 @@ export const selectors = {
   errorsSelector: ".form__input-error",
   formSection: ".form__fieldset",
   inputErrorSelector: "form__input-error_active",
-  inputSelector: ".form__input"
+  inputSelector: ".form__input",
 };
 
 //переменные для использования в скрипте
@@ -20,7 +20,6 @@ export const cardListSection = document.querySelector(".elements__list"); // м�
 export const avatarPopupBtn = document.querySelector(".profile__user-avatar");
 export const ESC = "Escape";
 export const avatarForm = document.querySelector("#avatar-form");
-
 
 // export const placeName = formPlace.querySelector("#place-name-input");
 // export const popupPlace = document.querySelector("#add-place");

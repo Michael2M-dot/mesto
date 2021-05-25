@@ -29,7 +29,6 @@ export const hideInputError = (inputElement, selectors) => {
 };
 */
 
-
 /*
 
 //функция для отключения кнопки submit. переводит кнопку в disabled и убирает класс, делающий кнопу активной
@@ -52,8 +51,6 @@ export const handleSubmitButtonEnabled = (buttonElement, selectors) => {
   buttonElement.classList.remove(selectors.disabledBtnSelector);
 };
 */
-
-
 
 /*//функция снимающая действие по умолчанию при нажатии на кнопку submit: при нажатии страница не перезагружается
 export const handleDefaultSubmit = (evt) => {

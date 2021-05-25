@@ -41,19 +41,18 @@
  * email: darak.ltd@yandex.ru
  * */
 
-
 import { selectors } from "../utils/constants.js";
 
 export default class FormValidator {
-
   constructor(formElement, selectors) {
     this._submitBtnSelector = selectors.submitBtnSelector;
     this._formElement = formElement;
     this._inputElements = this._formElement.querySelectorAll(".form__input");
     this._inputList = Array.from(this._inputElements);
-    this._buttonElement = this._formElement.querySelector(this._submitBtnSelector);
+    this._buttonElement = this._formElement.querySelector(
+      this._submitBtnSelector
+    );
   }
-
 
   //проверяет валидность поля ввода. В качестве аргумента передаем само поле
   _checkInputValidity(inputElement) {
@@ -68,24 +67,25 @@ export default class FormValidator {
       : this._hideInputError(inputElement);
   }
 
-
   //приватный метод отображения ошибки поля ввода.
-  _showInputError (inputElement, errorMessage) {
-    const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
+  _showInputError(inputElement, errorMessage) {
+    const errorElement = this._formElement.querySelector(
+      `#${inputElement.id}-error`
+    );
 
     errorElement.textContent = errorMessage;
     errorElement.classList.add(selectors.inputErrorSelector); //добавляем класс отвечающий за отображение ошибки
-  };
-
+  }
 
   //приватный метод скрытия ошибки поля ввода.
-  _hideInputError (inputElement) {
-    const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
+  _hideInputError(inputElement) {
+    const errorElement = this._formElement.querySelector(
+      `#${inputElement.id}-error`
+    );
 
     errorElement.textContent = ""; //убираем отображение текста ошибки
     errorElement.classList.remove(selectors.inputErrorSelector); //удаляем класс отображающий ошибку
-  };
-
+  }
 
   /* функция меняющая состояние кнопки в зависимости от условия. В качестве аргументов передаем массив всех инпутов и
    * элемент кнопку, по которой будет происходить изменение состояния*/
@@ -105,27 +105,22 @@ export default class FormValidator {
       : this._handleSubmitButtonEnabled();
   }
 
-
   //публичный метод класса, который переводит submit формы в disabled
-  handleSubmitButtonDisabled () {
+  handleSubmitButtonDisabled() {
     this._buttonElement.setAttribute("disabled", true);
     this._buttonElement.classList.add(selectors.disabledBtnSelector);
-  };
-
+  }
 
   // приватный метод класса, который переводит submit формы в состояние active
-  _handleSubmitButtonEnabled (){
+  _handleSubmitButtonEnabled() {
     this._buttonElement.removeAttribute("disabled");
     this._buttonElement.classList.remove(selectors.disabledBtnSelector);
-  };
-
+  }
 
   //приватный метод для элементов формы. на каждый элемент вешает обработчики события
   _setEventListener() {
     //добавляет функцию на каждый элемент формы.
-    this._formElement.addEventListener("submit", (evt) =>
-      evt.preventDefault()
-    );
+    this._formElement.addEventListener("submit", (evt) => evt.preventDefault());
 
     //функция итератор, которая проходит по всем элементам массива
     /*на каждый инпут из элементов массива всех инпутов в данной форме добавляем обработчик события ввода input, в качестве
@@ -142,7 +137,9 @@ export default class FormValidator {
     };
 
     //используя метод forEach проходим по массиву инпутов и вешаем обработчик события на событие ввода - input
-    this._inputList.forEach((inputElement) => inputElementIterator(inputElement));
+    this._inputList.forEach((inputElement) =>
+      inputElementIterator(inputElement)
+    );
 
     /*передаем аргументом форму и кнопку, по которой нужно изменить состояние согласно функции для предварительной
      * проверки формы. Если при открытии формы уже имеются невалидные инпуты, передаем нужное состояние на кнопку.*/
@@ -150,12 +147,12 @@ export default class FormValidator {
     // this._toggleButtonState(this._inputList, this._buttonElement, selectors);
   }
 
-
   //публичный метод скрывающий ошибки валидации
   hideErrors() {
-    this._inputList.forEach((inputElement) => this._hideInputError(inputElement))
+    this._inputList.forEach((inputElement) =>
+      this._hideInputError(inputElement)
+    );
   }
-
 
   //проходим по всем формам и добавляет обработчик события setEventListener на каждую форму
   enableValidation() {

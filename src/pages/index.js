@@ -78,7 +78,6 @@ import {
   avatarForm,
 } from "../scripts/utils/constants.js";
 
-
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import UserInfo from "../scripts/components/UserInfo.js";
@@ -86,7 +85,6 @@ import UserInfo from "../scripts/components/UserInfo.js";
 //перезаписываемые переменные для записи в них данных полученных с сервера.
 let user = null;
 let cardElement = null;
-
 
 //создаем инстант Api
 const api = new Api({
@@ -96,7 +94,6 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
-
 
 //подгружаем на страницу данные пользователя и исходные карточки
 Promise.all([api.getUserData(), api.getInitialCards()])
@@ -112,8 +109,6 @@ Promise.all([api.getUserData(), api.getInitialCards()])
       `Непредвиденная ошибка при начальной загрузке страницы: ${err.status} ${err.statusText}`
     )
   );
-
-
 
 //< ----------блок создания карточки и еще ренедеринга в DOM-------->
 //Функция создания карточку из класса Card
@@ -134,7 +129,7 @@ const createCard = (data) => {
           .likeCard("PUT", card.getId())
           .then((data) => {
             card.getLikes({ data }, true);
-            card.toggleLikeClick()
+            card.toggleLikeClick();
           })
           .catch((err) =>
             console.log(
@@ -147,7 +142,7 @@ const createCard = (data) => {
           .likeCard("DELETE", card.getId())
           .then((data) => {
             card.getLikes({ data }, false);
-            card.toggleLikeClick()
+            card.toggleLikeClick();
           })
           .catch((err) =>
             console.log(
@@ -172,7 +167,6 @@ const cardList = new Section(
   cardListSection
 );
 
-
 //< ----------блок обработки данных о пользователе  -------->
 //создаем инстант и получаем данные имени пользователя и его работы
 const userInfo = new UserInfo({
@@ -180,8 +174,6 @@ const userInfo = new UserInfo({
   userJobSelector: ".profile__user-job",
   userAvatarSelector: ".profile__user-avatar",
 });
-
-
 
 //< ----------блок создания карточки попапа для просмотра изображения  -------->
 //инстант попап для картинки из класса PopupWithImage
@@ -192,8 +184,6 @@ popupWithImage.setEventListener();
 function handleCardClick(link, name) {
   popupWithImage.open(link, name);
 }
-
-
 
 //< ----------блок создания попапа для добавления карточки-------->
 //инстант попап добавления карточки пользователя
@@ -222,8 +212,6 @@ function addPlaceSubmitHandler(data) {
       addCardPopup.renderLoading(false);
     });
 }
-
-
 
 //< ----------блок создания и вызова попапа редакитрования данных о пользователе--------->
 //инстант попапа редактирования данных пользователя
@@ -255,7 +243,6 @@ function editProfileSubmitHandler(data) {
     )
     .finally(() => {
       editProfilePopup.renderLoading(false);
-
     });
 }
 
@@ -264,8 +251,6 @@ function setUserInputs(data) {
   userNameInput.value = data.userName;
   userJobInput.value = data.userJob;
 }
-
-
 
 //<----------- Блок создания попапа  добавления аватара пользователя ------------->
 //создаем инстант попапа добавления Аватара
@@ -292,8 +277,6 @@ function addAvatarSubmitHandler(data) {
       addAvatarPopup.renderLoading(false);
     });
 }
-
-
 
 // <---------Блок создания попапа подтверждения удаления карточки ---------->
 //инстант попапа подтверждения удаления карточки
@@ -322,8 +305,6 @@ function cardDeleteSubmitHandler(cardId) {
     });
 }
 
-
-
 // <---------Блок валадиции форм ---------->
 //функция проверки валидации формы пользователя.
 const editFormValidator = new FormValidator(formUser, selectors);
@@ -333,9 +314,6 @@ const addCardFormValidator = new FormValidator(formPlace, selectors);
 
 //функция проверки валидации формы добавления картинки.
 const addAvatarFormValidator = new FormValidator(avatarForm, selectors);
-
-
-
 
 // <---------Блок слушателей форм  ---------->
 //слушатель кнопки открытия попапа редактирования данных о пользователе

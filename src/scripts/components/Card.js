@@ -81,11 +81,9 @@ export default class Card {
     });
   }
 
-
   toggleLikeClick() {
-    this._cardLike.classList.toggle("element__like_active")
+    this._cardLike.classList.toggle("element__like_active");
   }
-
 
   _handleLikeClick() {
     !this._cardLike.classList.contains("element__like_active")
@@ -93,21 +91,17 @@ export default class Card {
       : this._handleDeleteLike();
   }
 
-
   deleteCard() {
     this._element.remove();
   }
-
 
   getId() {
     return this._cardId;
   }
 
-
   _handlePreviewPopupOpen = () => {
     this._handleCardClick(this._link, this._name);
   };
-
 
   //проверяем лайки пользователя при загрузке карточек и делает лайк активным
   _getCardLikes() {
@@ -119,17 +113,15 @@ export default class Card {
     this._likesCount.textContent = this._likes.length;
   }
 
-
   //публичный метод в который передается массив лайков и добавляет значение при
   //клике
   getLikes({ data }, isLiked) {
     if (isLiked) {
       this._likesCount.textContent = data.likes.length;
-    }else {
+    } else {
       this._likesCount.textContent = data.likes.length;
     }
   }
-
 
   generateCard = () => {
     this._setEventListeners();

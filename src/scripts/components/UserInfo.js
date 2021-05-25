@@ -20,7 +20,6 @@ export default class UserInfo {
     this._userId = userID;
   }
 
-
   getUserInfo() {
     return {
       userName: this._userNameSelector.textContent,
@@ -28,7 +27,6 @@ export default class UserInfo {
       userId: this._userId,
     };
   }
-
 
   setUserInfo(data, userID) {
     const { name, about, avatar } = data;
