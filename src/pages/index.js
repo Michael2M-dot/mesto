@@ -74,12 +74,10 @@ import {
   addUserCardBtn,
   cardListSection,
   formPlace,
-  popupElements,
   avatarPopupBtn,
   avatarForm,
 } from "../scripts/utils/constants.js";
 
-import { hideInputError, handleDisableButton } from "../scripts/utils/utils.js";
 
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
@@ -88,6 +86,7 @@ import UserInfo from "../scripts/components/UserInfo.js";
 //перезаписываемые переменные для записи в них данных полученных с сервера.
 let user = null;
 let cardElement = null;
+
 
 //создаем инстант Api
 const api = new Api({
@@ -98,41 +97,25 @@ const api = new Api({
   },
 });
 
-//обращаемся к классу section и выводим на страницу начальный массив данных
-const cardList = new Section(
-  {
-    renderer: (data) => {
-      cardList.addItem(createCard(data), false);
-    },
-  },
-  cardListSection
-);
 
-//инстант попапа подтверждения удаления карточки
-const deleteCardPopup = new PopupWithSubmit(
-  "#delete-card",
-  cardDeleteSubmitHandler
-);
-deleteCardPopup.setEventListener();
-
-function cardDeleteSubmitHandler(cardId) {
-  deleteCardPopup.renderLoading(true);
-  api
-    .deleteCard(cardId)
-    .then(() => {
-      cardElement.deleteCard();
-      deleteCardPopup.close();
-    })
-    .catch((err) =>
-      console.log(
-        `Непредвиденная ошибка при удалении карточки: ${err.status} ${err.statusText}`
-      )
+//подгружаем на страницу данные пользователя и исходные карточки
+Promise.all([api.getUserData(), api.getInitialCards()])
+  //данные пользователя
+  .then(([userData, initialCards]) => {
+    user = userData;
+    userInfo.setUserInfo(user, user._id);
+    //исходные карточки
+    cardList.renderItems(initialCards);
+  })
+  .catch((err) =>
+    console.log(
+      `Непредвиденная ошибка при начальной загрузке страницы: ${err.status} ${err.statusText}`
     )
-    .finally(() => {
-      deleteCardPopup.renderLoading(false);
-    });
-}
+  );
 
+
+
+//< ----------блок создания карточки и еще ренедеринга в DOM-------->
 //Функция создания карточку из класса Card
 const createCard = (data) => {
   const card = new Card(
@@ -151,6 +134,7 @@ const createCard = (data) => {
           .likeCard("PUT", card.getId())
           .then((data) => {
             card.getLikes({ data }, true);
+            card.toggleLikeClick()
           })
           .catch((err) =>
             console.log(
@@ -163,6 +147,7 @@ const createCard = (data) => {
           .likeCard("DELETE", card.getId())
           .then((data) => {
             card.getLikes({ data }, false);
+            card.toggleLikeClick()
           })
           .catch((err) =>
             console.log(
@@ -177,22 +162,29 @@ const createCard = (data) => {
   return card.generateCard();
 };
 
-//подгружаем на страницу данные пользователя и исходные карточки
-Promise.all([api.getUserData(), api.getInitialCards()])
-  //данные пользователя
-  .then(([userData, initialCards]) => {
-    user = userData;
-    userInfo.setUserInfo(user, user._id);
-    //исходные карточки
-    cardList.renderItems(initialCards);
-  })
-  .catch((err) =>
-    console.log(
-      `Непредвиденная ошибка при начальной загрузке страницы: ${err.status} ${err.statusText}`
-    )
-  );
+//обращаемся к классу section и выводим на страницу начальный массив данных
+const cardList = new Section(
+  {
+    renderer: (data) => {
+      cardList.addItem(createCard(data), false);
+    },
+  },
+  cardListSection
+);
 
-//инициализируем попап для картинки из класса PopupWithImage
+
+//< ----------блок обработки данных о пользователе  -------->
+//создаем инстант и получаем данные имени пользователя и его работы
+const userInfo = new UserInfo({
+  userNameSelector: ".profile__user-name",
+  userJobSelector: ".profile__user-job",
+  userAvatarSelector: ".profile__user-avatar",
+});
+
+
+
+//< ----------блок создания карточки попапа для просмотра изображения  -------->
+//инстант попап для картинки из класса PopupWithImage
 const popupWithImage = new PopupWithImage("#picture-popup");
 popupWithImage.setEventListener();
 
@@ -200,6 +192,8 @@ popupWithImage.setEventListener();
 function handleCardClick(link, name) {
   popupWithImage.open(link, name);
 }
+
+
 
 //< ----------блок создания попапа для добавления карточки-------->
 //инстант попап добавления карточки пользователя
@@ -229,27 +223,15 @@ function addPlaceSubmitHandler(data) {
     });
 }
 
-// слушатели для попапа добавления карточек
-addUserCardBtn.addEventListener("click", () => {
-  addCardPopup.open();
-  handleDisableButton(formPlace);
-  handleInputErrorsHide(formPlace);
-});
+
 
 //< ----------блок создания и вызова попапа редакитрования данных о пользователе--------->
-
-//создаем инстант и получаем данные имени пользователя и его работы
-const userInfo = new UserInfo({
-  userNameSelector: ".profile__user-name",
-  userJobSelector: ".profile__user-job",
-  userAvatarSelector: ".profile__user-avatar",
-});
-
 //инстант попапа редактирования данных пользователя
 const editProfilePopup = new PopupWithForm(
   "#edit-profile",
   editProfileSubmitHandler
 );
+
 editProfilePopup.setEventListener();
 
 //функция кнопки Сохранить информацию о пользователе
@@ -283,16 +265,10 @@ function setUserInputs(data) {
   userJobInput.value = data.userJob;
 }
 
-//слушатель кнопки открытия попапа редактирования данных о пользователе
-openUserPopupBtn.addEventListener("click", () => {
-  editProfilePopup.open();
-  setUserInputs(userInfo.getUserInfo());
-  handleDisableButton(formUser);
-  handleInputErrorsHide(formUser);
-});
 
-//<----------- инстант попапа добавления аватара пользователя ------------->
 
+//<----------- Блок создания попапа  добавления аватара пользователя ------------->
+//создаем инстант попапа добавления Аватара
 const addAvatarPopup = new PopupWithForm("#add-avatar", addAvatarSubmitHandler);
 
 addAvatarPopup.setEventListener();
@@ -317,28 +293,70 @@ function addAvatarSubmitHandler(data) {
     });
 }
 
-avatarPopupBtn.addEventListener("click", () => {
-  addAvatarPopup.open();
-  handleDisableButton(avatarForm);
-  handleInputErrorsHide(avatarForm);
-});
+
+
+// <---------Блок создания попапа подтверждения удаления карточки ---------->
+//инстант попапа подтверждения удаления карточки
+const deleteCardPopup = new PopupWithSubmit(
+  "#delete-card",
+  cardDeleteSubmitHandler
+);
+deleteCardPopup.setEventListener();
+
+//функция колбек инстанат попапа подтверждения удаления карточки
+function cardDeleteSubmitHandler(cardId) {
+  deleteCardPopup.renderLoading(true);
+  api
+    .deleteCard(cardId)
+    .then(() => {
+      cardElement.deleteCard();
+      deleteCardPopup.close();
+    })
+    .catch((err) =>
+      console.log(
+        `Непредвиденная ошибка при удалении карточки: ${err.status} ${err.statusText}`
+      )
+    )
+    .finally(() => {
+      deleteCardPopup.renderLoading(false);
+    });
+}
+
+
 
 // <---------Блок валадиции форм ---------->
-//вспомагательная функция которая повторно вызывает hideInputError и скрывает вывод ошибок, когда форма закрывается без сохранения значений
-const handleInputErrorsHide = (popup) => {
-  //обнуляем поля ошибки при закрытии формы через вызов универсально функции hideInputError
-  const inputElements = popup.querySelectorAll(selectors.formSection);
-  inputElements.forEach((input) => hideInputError(input, selectors));
-};
+//функция проверки валидации формы пользователя.
+const editFormValidator = new FormValidator(formUser, selectors);
 
-//функция проверки валидации полей формы.
-const validateFormElement = (formElement) => {
-  const formValidator = new FormValidator(formElement, selectors);
+//функция проверки валидации формы добавления картинки.
+const addCardFormValidator = new FormValidator(formPlace, selectors);
 
-  formValidator.enableValidation();
-};
+//функция проверки валидации формы добавления картинки.
+const addAvatarFormValidator = new FormValidator(avatarForm, selectors);
 
-//функции валидации попапов в глобально видимости
-popupElements.forEach((popupElement) => {
-  validateFormElement(popupElement);
+
+
+
+// <---------Блок слушателей форм  ---------->
+//слушатель кнопки открытия попапа редактирования данных о пользователе
+openUserPopupBtn.addEventListener("click", () => {
+  editProfilePopup.open();
+  setUserInputs(userInfo.getUserInfo());
+  editFormValidator.enableValidation();
+  editFormValidator.handleSubmitButtonDisabled();
+  editFormValidator.hideErrors();
+});
+
+// слушатели для попапа добавления карточек
+addUserCardBtn.addEventListener("click", () => {
+  addCardPopup.open();
+  addCardFormValidator.enableValidation();
+  addCardFormValidator.hideErrors();
+});
+
+//Слушатель открытия попапа добавления аватара
+avatarPopupBtn.addEventListener("click", () => {
+  addAvatarPopup.open();
+  addAvatarFormValidator.enableValidation();
+  addAvatarFormValidator.hideErrors();
 });

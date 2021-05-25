@@ -2,7 +2,7 @@
 
 import { selectors } from "./constants.js";
 
-
+/*
 //функция вывода ошибки в заданное поле.
 export const showInputError = (inputElement, errorMessage, selectors) => {
   // const errorElement = formElement.querySelector(`#${inputElement.id}-error`); - вариант поиска по id
@@ -27,6 +27,10 @@ export const hideInputError = (inputElement, selectors) => {
   errorElement.textContent = ""; //убираем отображение текста ошибки
   errorElement.classList.remove(selectors.inputErrorSelector); //удаляем класс отображающий ошибку
 };
+*/
+
+
+/*
 
 //функция для отключения кнопки submit. переводит кнопку в disabled и убирает класс, делающий кнопу активной
 export const handleDisableButton = (popup) => {
@@ -47,6 +51,7 @@ export const handleSubmitButtonEnabled = (buttonElement, selectors) => {
   buttonElement.removeAttribute("disabled");
   buttonElement.classList.remove(selectors.disabledBtnSelector);
 };
+*/
 
 
 
