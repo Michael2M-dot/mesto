@@ -306,19 +306,21 @@ function cardDeleteSubmitHandler(cardId) {
 // <---------Блок валадиции форм ---------->
 //функция проверки валидации формы пользователя.
 const editFormValidator = new FormValidator(formUser, selectors);
+editFormValidator.enableValidation();:
 
 //функция проверки валидации формы добавления картинки.
 const addCardFormValidator = new FormValidator(formPlace, selectors);
+addCardFormValidator.enableValidation();
 
 //функция проверки валидации формы добавления картинки.
 const addAvatarFormValidator = new FormValidator(avatarForm, selectors);
+addAvatarFormValidator.enableValidation();
 
 // <---------Блок слушателей форм  ---------->
 //слушатель кнопки открытия попапа редактирования данных о пользователе
 openUserPopupBtn.addEventListener("click", () => {
   editProfilePopup.open();
   setUserInputs(userInfo.getUserInfo());
-  editFormValidator.enableValidation();
   editFormValidator.handleSubmitButtonDisabled();
   editFormValidator.hideErrors();
 });
@@ -326,13 +328,11 @@ openUserPopupBtn.addEventListener("click", () => {
 // слушатели для попапа добавления карточек
 addUserCardBtn.addEventListener("click", () => {
   addCardPopup.open();
-  addCardFormValidator.enableValidation();
   addCardFormValidator.hideErrors();
 });
 
 //Слушатель открытия попапа добавления аватара
 avatarPopupBtn.addEventListener("click", () => {
   addAvatarPopup.open();
-  addAvatarFormValidator.enableValidation();
   addAvatarFormValidator.hideErrors();
 });
