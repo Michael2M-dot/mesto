@@ -2,10 +2,6 @@
 
 import { selectors } from "./constants.js";
 
-//функция снимающая действие по умолчанию при нажатии на кнопку submit: при нажатии страница не перезагружается
-export const handleDefaultSubmit = (evt) => {
-  evt.preventDefault();
-};
 
 //функция вывода ошибки в заданное поле.
 export const showInputError = (inputElement, errorMessage, selectors) => {
@@ -51,3 +47,10 @@ export const handleSubmitButtonEnabled = (buttonElement, selectors) => {
   buttonElement.removeAttribute("disabled");
   buttonElement.classList.remove(selectors.disabledBtnSelector);
 };
+
+
+
+/*//функция снимающая действие по умолчанию при нажатии на кнопку submit: при нажатии страница не перезагружается
+export const handleDefaultSubmit = (evt) => {
+  evt.preventDefault();
+};*/

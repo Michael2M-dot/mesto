@@ -120,8 +120,8 @@ function cardDeleteSubmitHandler(cardId) {
   api
     .deleteCard(cardId)
     .then(() => {
-      deleteCardPopup.open();
       cardElement.deleteCard();
+      deleteCardPopup.close();
     })
     .catch((err) =>
       console.log(
@@ -129,7 +129,6 @@ function cardDeleteSubmitHandler(cardId) {
       )
     )
     .finally(() => {
-      deleteCardPopup.close();
       deleteCardPopup.renderLoading(false);
     });
 }
@@ -218,6 +217,7 @@ function addPlaceSubmitHandler(data) {
     })
     .then((data) => {
       cardList.addItem(createCard(data), true);
+      addCardPopup.close();
     })
     .catch((err) =>
       console.log(
@@ -226,7 +226,6 @@ function addPlaceSubmitHandler(data) {
     )
     .finally(() => {
       addCardPopup.renderLoading(false);
-      addCardPopup.close();
     });
 }
 
@@ -265,6 +264,7 @@ function editProfileSubmitHandler(data) {
         avatar: data.avatar,
         _id: data._id,
       });
+      editProfilePopup.close();
     })
     .catch((err) =>
       console.log(
@@ -273,7 +273,7 @@ function editProfileSubmitHandler(data) {
     )
     .finally(() => {
       editProfilePopup.renderLoading(false);
-      editProfilePopup.close();
+
     });
 }
 
@@ -305,6 +305,7 @@ function addAvatarSubmitHandler(data) {
       userInfo.setUserInfo({
         avatar: data.avatar,
       });
+      addAvatarPopup.close();
     })
     .catch((err) =>
       console.log(
@@ -313,7 +314,6 @@ function addAvatarSubmitHandler(data) {
     )
     .finally(() => {
       addAvatarPopup.renderLoading(false);
-      addAvatarPopup.close();
     });
 }
 
