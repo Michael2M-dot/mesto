@@ -29,15 +29,15 @@ export default class PopupWithSubmit extends Popup {
         ".button__text"
       ).textContent = newSubmitText;
       this._submitBtn
-        .querySelector(".jumping-dots")
-        .classList.remove("jumping-dots_visibility_hidden");
+        .querySelector(".button__jumping-dots")
+        .classList.remove("button__jumping-dots_visibility_hidden");
     } else {
       this._submitBtn.querySelector(
         ".button__text"
       ).textContent = newSubmitText;
       this._submitBtn
-        .querySelector(".jumping-dots")
-        .classList.add("jumping-dots_visibility_hidden");
+        .querySelector(".button__jumping-dots")
+        .classList.add("button__jumping-dots_visibility_hidden");
     }
   }
 
