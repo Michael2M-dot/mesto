@@ -36,14 +36,14 @@ export default class PopupWithForm extends Popup {
 
   //функция индикации загрузки улучшение UX
   renderLoading(isLoading) {
-    const submitBtnText = "...";
     if (isLoading) {
-      this._submitBtn.textContent += submitBtnText;
+      this._submitBtn
+        .querySelector(".jumping-dots")
+        .classList.remove("jumping-dots_visibility_hidden");
     } else {
-      this._submitBtn.textContent = this._submitBtn.textContent.replace(
-        submitBtnText,
-        ""
-      );
+      this._submitBtn
+        .querySelector(".jumping-dots")
+        .classList.add("jumping-dots_visibility_hidden");
     }
   }
 

@@ -1,0 +1,28 @@
+@-webkit-keyframes jump {
+  0% {
+    bottom: 0;
+  }
+  25% {
+    bottom: 5px;
+  }
+  50% {
+    bottom: 0;
+  }
+}
+
+@keyframes jump {
+  0% {
+    bottom: 0;
+  }
+  25% {
+    bottom: 5px;
+  }
+  50% {
+    bottom: 0;
+  }
+}
+
+.jump {
+  -webkit-animation: jump 2s infinite;
+  animation: jump 2s infinite;
+}

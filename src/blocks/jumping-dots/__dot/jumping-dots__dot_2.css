@@ -1,0 +1,6 @@
+.jumping-dots__dot_2 {
+  position: relative;
+  bottom: 0;
+  -webkit-animation-delay: 400ms;
+  animation-delay: 400ms;
+}

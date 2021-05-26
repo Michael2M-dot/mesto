@@ -306,7 +306,7 @@ function cardDeleteSubmitHandler(cardId) {
 // <---------Блок валадиции форм ---------->
 //функция проверки валидации формы пользователя.
 const editFormValidator = new FormValidator(formUser, selectors);
-editFormValidator.enableValidation();:
+editFormValidator.enableValidation();
 
 //функция проверки валидации формы добавления картинки.
 const addCardFormValidator = new FormValidator(formPlace, selectors);
