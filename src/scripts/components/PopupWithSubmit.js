@@ -22,6 +22,25 @@ export default class PopupWithSubmit extends Popup {
     super.open();
   }
 
+  //функция индикации загрузки улучшение UX - прыгающие точки в ожидании загрузки
+  renderLoading(newSubmitText, isLoading) {
+    if (isLoading) {
+      this._submitBtn.querySelector(
+        ".button__text"
+      ).textContent = newSubmitText;
+      this._submitBtn
+        .querySelector(".jumping-dots")
+        .classList.remove("jumping-dots_visibility_hidden");
+    } else {
+      this._submitBtn.querySelector(
+        ".button__text"
+      ).textContent = newSubmitText;
+      this._submitBtn
+        .querySelector(".jumping-dots")
+        .classList.add("jumping-dots_visibility_hidden");
+    }
+  }
+
   //слушатель добавляем слушатель на сабмит формы для вызова колбэка
   setEventListener() {
     super.setEventListener();
