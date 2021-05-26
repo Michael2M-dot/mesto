@@ -16,6 +16,7 @@ export default class Popup {
     this._popupSelector = popupSelector;
     this._handleEscClose = this._handleEscClose.bind(this);
     this._popup = document.querySelector(this._popupSelector);
+    this._submitBtn = this._popup.querySelector(".form__submit-btn"); //переменная для общего метода ренедринга ожидания
   }
 
   setEventListener() {
@@ -32,6 +33,25 @@ export default class Popup {
   _handleEscClose(evt) {
     if (evt.key === ESC) {
       this.close(); //чтобы не потерять контекст, можно либо стрелочную либо черз bind
+    }
+  }
+
+  //функция индикации загрузки улучшение UX - прыгающие точки в ожидании загрузки
+  renderLoading(newSubmitText, isLoading) {
+    if (isLoading) {
+      this._submitBtn.querySelector(
+        ".button__text"
+      ).textContent = newSubmitText;
+      this._submitBtn
+        .querySelector(".jumping-dots")
+        .classList.remove("jumping-dots_visibility_hidden");
+    } else {
+      this._submitBtn.querySelector(
+        ".button__text"
+      ).textContent = newSubmitText;
+      this._submitBtn
+        .querySelector(".jumping-dots")
+        .classList.add("jumping-dots_visibility_hidden");
     }
   }
 

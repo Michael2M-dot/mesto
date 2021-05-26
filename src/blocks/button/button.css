@@ -1,5 +1,6 @@
 .button {
   display: inline-block;
+  flex-direction: row;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;

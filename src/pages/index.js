@@ -190,7 +190,7 @@ addCardPopup.setEventListener();
 
 //Функция обработчик события на сабмите, которая добавляет элемент (карточка пользователя) в DOM
 function addPlaceSubmitHandler(data) {
-  addCardPopup.renderLoading(true);
+  addCardPopup.renderLoading("Сохранение", true);
   api
     .addCard({
       ...data,
@@ -207,7 +207,7 @@ function addPlaceSubmitHandler(data) {
       )
     )
     .finally(() => {
-      addCardPopup.renderLoading(false);
+      addCardPopup.renderLoading("Создать", false);
     });
 }
 
@@ -222,7 +222,7 @@ editProfilePopup.setEventListener();
 
 //функция кнопки Сохранить информацию о пользователе
 function editProfileSubmitHandler(data) {
-  editProfilePopup.renderLoading(true);
+  editProfilePopup.renderLoading("Сохранение", true);
   api
     .updateUserData(data)
     .then((data) => {
@@ -240,7 +240,7 @@ function editProfileSubmitHandler(data) {
       )
     )
     .finally(() => {
-      editProfilePopup.renderLoading(false);
+      editProfilePopup.renderLoading("Сохранить", false);
     });
 }
 
@@ -257,7 +257,7 @@ const addAvatarPopup = new PopupWithForm("#add-avatar", addAvatarSubmitHandler);
 addAvatarPopup.setEventListener();
 
 function addAvatarSubmitHandler(data) {
-  addAvatarPopup.renderLoading(true);
+  addAvatarPopup.renderLoading("Сохранение", true);
   api
     .updateAvatar(data)
     .then((data) => {
@@ -272,7 +272,7 @@ function addAvatarSubmitHandler(data) {
       )
     )
     .finally(() => {
-      addAvatarPopup.renderLoading(false);
+      addAvatarPopup.renderLoading("Сохранить", false);
     });
 }
 
@@ -286,7 +286,7 @@ deleteCardPopup.setEventListener();
 
 //функция колбек инстанат попапа подтверждения удаления карточки
 function cardDeleteSubmitHandler(cardId) {
-  deleteCardPopup.renderLoading(true);
+  deleteCardPopup.renderLoading("Удаление", true);
   api
     .deleteCard(cardId)
     .then(() => {
@@ -299,7 +299,7 @@ function cardDeleteSubmitHandler(cardId) {
       )
     )
     .finally(() => {
-      deleteCardPopup.renderLoading(false);
+      deleteCardPopup.renderLoading("Да", false);
     });
 }
 

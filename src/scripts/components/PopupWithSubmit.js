@@ -22,20 +22,6 @@ export default class PopupWithSubmit extends Popup {
     super.open();
   }
 
-  //функция индикации загрузки улучшение UX
-  renderLoading(isLoading) {
-    const submitBtnText = "...";
-    if (isLoading) {
-      this._submitBtn.textContent += submitBtnText;
-    } else {
-      this._submitBtn.textContent = this._submitBtn.textContent.replace(
-        submitBtnText,
-        ""
-      );
-      console.log(this._submitBtn.textContent);
-    }
-  }
-
   //слушатель добавляем слушатель на сабмит формы для вызова колбэка
   setEventListener() {
     super.setEventListener();

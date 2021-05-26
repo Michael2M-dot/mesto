@@ -34,19 +34,6 @@ export default class PopupWithForm extends Popup {
     return formValues;
   }
 
-  //функция индикации загрузки улучшение UX
-  renderLoading(isLoading) {
-    if (isLoading) {
-      this._submitBtn
-        .querySelector(".jumping-dots")
-        .classList.remove("jumping-dots_visibility_hidden");
-    } else {
-      this._submitBtn
-        .querySelector(".jumping-dots")
-        .classList.add("jumping-dots_visibility_hidden");
-    }
-  }
-
   setEventListener = () => {
     super.setEventListener();
 
@@ -65,3 +52,18 @@ export default class PopupWithForm extends Popup {
     super.close();
   }
 }
+
+/*
+//функция индикации загрузки улучшение UX
+renderLoading(isLoading) {
+  if (isLoading) {
+    this._submitBtn
+      .querySelector(".jumping-dots")
+      .classList.remove("jumping-dots_visibility_hidden");
+
+  }else{
+    this._submitBtn
+      .querySelector(".jumping-dots")
+      .classList.add("jumping-dots_visibility_hidden");
+  }
+}*/
