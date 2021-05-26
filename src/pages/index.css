@@ -64,6 +64,6 @@
 @import url(../blocks/jump/jump.css);
 @import url(../blocks/jumping-dots/jumping-dots.css);
 @import url(../blocks/jumping-dots/_visability/jumping-dots_visibility_hidden.css);
-@import url(../blocks/jumping-dots/__dot/jumping-dots__dot_front.css);
-@import url(../blocks/jumping-dots/__dot/jumping-dots__dot_middle.css);
-@import url(../blocks/jumping-dots/__dot/jumping-dots__dot_rear.css);
+@import url(../blocks/jumping-dots/_dot/jumping-dots_dot_front.css);
+@import url(../blocks/jumping-dots/_dot/jumping-dots_dot_middle.css);
+@import url(../blocks/jumping-dots/_dot/jumping-dots_dot_rear.css);
