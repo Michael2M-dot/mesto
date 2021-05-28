@@ -328,11 +328,13 @@ openUserPopupBtn.addEventListener("click", () => {
 // слушатели для попапа добавления карточек
 addUserCardBtn.addEventListener("click", () => {
   addCardPopup.open();
+  addCardFormValidator.handleSubmitButtonDisabled();
   addCardFormValidator.hideErrors();
 });
 
 //Слушатель открытия попапа добавления аватара
 avatarPopupBtn.addEventListener("click", () => {
   addAvatarPopup.open();
+  addAvatarFormValidator.handleSubmitButtonDisabled();
   addAvatarFormValidator.hideErrors();
 });
